@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Local
 
-import { StartComponent } from './components/start/start.component';
+import { MainComponent } from './components/main/main.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: StartComponent
+    component: MainComponent,
+    children: [{
+      path: '', 
+      component: HomeComponent
+    }]
   }
 ];
 
