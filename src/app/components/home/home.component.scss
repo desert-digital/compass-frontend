@@ -1,0 +1,17 @@
+a {
+    margin: 1.0em;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: stretch;
+}
+
+.box {
+    margin: 1.0em;
+}

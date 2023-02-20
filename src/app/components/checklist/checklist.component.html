@@ -1,0 +1,7 @@
+<h2>{{ title }}</h2>
+<mat-selection-list #shoes>
+  <mat-list-option *ngFor="let shoe of typesOfShoes" (click)="onItemChecked(shoe)">
+    <span [ngClass]="shoe.selected ? 'finished' : 'todo' " >{{ shoe.name }}</span>
+  </mat-list-option>
+</mat-selection-list>
+<div class="completed" *ngIf="checklistCompleted"><b>Completed!</b></div>

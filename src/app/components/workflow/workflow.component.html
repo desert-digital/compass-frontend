@@ -1,0 +1,70 @@
+<mat-stepper orientation="vertical" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Charter Workflow Started</ng-template>
+      <h4>Vessel: {{ vessel }}, Charter starting: {{ starting | date: 'short' }}</h4>
+      <div>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Configure the Team Pre-charter Checklist</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Assign To</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Crew Member #1" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Configure the Captain Pre-charter Checklist</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Assign To</mat-label>
+        <input matInput formControlName="thirdCtrl" placeholder="Crew Member #1" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="fourthFormGroup">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Configure the Captain Post-Charter Checklist</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Assign To</mat-label>
+        <input matInput formControlName="fourthCtrl" placeholder="Crew Member #1" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="fifthFormGroup">
+    <form [formGroup]="fifthFormGroup">
+      <ng-template matStepLabel>Configure the Team Post-Charter Checklist</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Assign To</mat-label>
+        <input matInput formControlName="fifthCtrl" placeholder="Crew Member #1" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Charter Closing</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button>Start the Workflow</button>
+    </div>
+  </mat-step>
+</mat-stepper>
