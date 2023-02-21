@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-compassfrontend-dev-140154-authRole",
+      "UnauthRoleArn": "arn:aws:iam::706582252483:role/amplify-compassfrontend-dev-140154-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::706582252483:role/amplify-compassfrontend-dev-140154-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-compassfrontend-dev-140154-deployment",
+      "UnauthRoleName": "amplify-compassfrontend-dev-140154-unauthRole",
+      "StackName": "amplify-compassfrontend-dev-140154",
+      "StackId": "arn:aws:cloudformation:us-west-1:706582252483:stack/amplify-compassfrontend-dev-140154/31265980-b16a-11ed-92e8-02091fead521",
+      "AmplifyAppId": "dyej3e8at2mel"
+    }
+  }
+}

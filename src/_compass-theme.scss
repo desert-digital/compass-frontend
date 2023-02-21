@@ -1,0 +1,210 @@
+@import '@angular/material';
+@import '@angular/cdk/overlay-prebuilt.css';
+
+$primaryColor: #075d14;
+$secondaryColor: #2297bb;
+
+$backgroundColor: #EBE7E2;
+$warningColor: #cc0000;
+
+$buttonWidth: 210px;
+$formWidth: 450px;
+$thinFormWidth: 270px;
+
+$textFont: 'Roboto Condensed';
+$borderWidth: 2px;
+$borderRadius: 5px;
+
+body {
+  background-color: $backgroundColor;
+}
+
+mat-input {
+  background-color: #EBE7E2;
+}
+
+.container {
+  margin: 10px;
+}
+
+.list-container {
+  background-color: white;
+}
+
+@mixin text-fonts {
+  font-family: $textFont;
+  font-size: 1.0em;
+}
+
+@mixin title {
+  font-family: 'Arimo';
+  font-weight: 500;
+
+  @media screen and (max-width: 420px) {
+    font-size: 1.2em;
+  }
+
+  @media screen and (min-width: 421px) {
+    font-size: 1.75em;
+  }
+
+  color: $secondaryColor;
+}
+
+@mixin headers {
+  font-family: 'Roboto Condensed';
+  font-weight: 600;
+
+  @media screen and (max-width: 420px) {
+    font-size: 1.5em;
+  }
+
+  @media screen and (min-width: 421px) {
+    font-size: 2em;
+  }
+
+  color: $secondaryColor;
+}
+
+@mixin sub-header {
+  font-family: 'Roboto Condensed';
+  font-weight: 500;
+
+  @media screen and (max-width: 420px) {
+    font-size: 1.0em;
+  }
+
+  @media screen and (min-width: 421px) {
+    font-size: 1.2em;
+  }
+
+  color: $secondaryColor;
+}
+
+h4 {
+  @include sub-header;
+  text-align: left;
+  font-weight: bolder;
+  margin: 0 0 10px 0;
+}
+
+@mixin containers {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 2.5%;
+}
+
+@mixin buttons {
+  font-family: $textFont;
+  color: $primaryColor;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+@mixin paragraphs {
+  font-family: $textFont;
+
+  @media screen and (max-width: 420px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 421px) {
+    font-size: 18px;
+  }
+  margin: 5px;
+}
+
+@mixin forms {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: white;
+  border-radius: $borderRadius;
+}
+
+.list-container {
+  width: 95%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: $borderRadius;
+}
+
+.button-container {
+  @media screen and (max-width: 420px) {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 421px) {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+  }
+}
+
+.button-container button {
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.dialog-container {
+
+  @media screen and (max-width: 420px) {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    margin: 20px
+  }
+
+  @media screen and (min-width: 421px) {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 20px
+  }
+
+}
+
+.example-viewport {
+  height: 400px;
+  width: 95%;
+}
+
+.item {
+  @include text-fonts;
+  height: 24px;
+  width: 95%;
+  white-space: wrap;
+}
+
+.item-title {
+  font-family: $textFont;
+  color: $secondaryColor;
+  font-size: 20px;
+  font-weight: 400;
+  width: 95%; 
+  white-space: wrap;
+}
+
+.send-item {
+  @include text-fonts;
+  height: 24px;
+  color: red;
+}
+
+.dialog-p {
+  @include text-fonts;
+  margin-left: 10px;
+  justify-items: flex-start;
+}
+
+.dialog-p-indent {
+  @include text-fonts;
+  margin-left: 24px;
+  justify-items: flex-start;
+}

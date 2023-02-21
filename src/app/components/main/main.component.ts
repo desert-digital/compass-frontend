@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -17,5 +18,4 @@ export class MainComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-
 }

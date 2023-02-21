@@ -11,6 +11,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 export class WorkflowComponent {
 
   vessel: string = 'La Barca';
+  location: string = 'Downtown';
   starting: Date = new Date();
 
   firstFormGroup = this._formBuilder.group({
