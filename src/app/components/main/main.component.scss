@@ -1,17 +1,101 @@
-.sidenav-container {
-  height: 100%;
+@import 'src/compass-theme';
+
+.title {
+  @include title;
+  padding: 5px;
+  color: white;
+}
+
+h1 {
+  @include header;
+  margin-left: 15px;
 }
 
 .sidenav {
-  width: 200px;
+  width: 210px;
+}
+
+.sidenav-container {
+  height: 100vh;
+  background-color: $backgroundColor;
+}
+
+.sidenav-button-text {
+  @include text-fonts;
+  font-size: 1.8em;
+  margin-left: 15px;
+}
+
+button {
+  margin: 10px;
+}
+
+.double-sized {
+  transform: scale(2.0);
+}
+
+.sidenav-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px;
 }
 
 .sidenav .mat-toolbar {
   background: inherit;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logout-button {
+  font-family: 'Fredoka One';
+  font-weight: 500;
+
+  @media screen and (max-width: 420px) {
+    font-size: 1.1em;
+  }
+
+  @media screen and (min-width: 421px) {
+    font-size: 1.4em;
+  }
+}
+
+.mat-toolbar {
+  @include text-fonts;
+}
+
+.mat-toolbar button {
+  @include text-fonts;
+  color: white;
+  font-size: 1.3em;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.desktop {
+  @media screen and (max-width: 999px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.not-desktop {
+  @media screen and (max-width: 999px) {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: none;
+  }
 }

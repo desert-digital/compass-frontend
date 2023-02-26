@@ -1,17 +1,25 @@
-a {
-    margin: 1.0em;
+@import 'src/compass-theme';
+
+h4 {
+    @include sub-header;
+}
+
+.container {
+    @include containers;
 }
 
 .row {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
+    flex-flow: row wrap;
+    gap: 5px;
 }
 
-.box {
-    margin: 1.0em;
+.four-wide {
+    @include box;
+    flex-grow: 4;
+}
+
+.two-wide {
+    @include box;
+    flex-grow: 2;
 }

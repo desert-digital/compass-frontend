@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -14,25 +14,15 @@ export class WorkflowComponent {
   location: string = 'Downtown';
   starting: Date = new Date();
 
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],
-  });
-  fourthFormGroup = this._formBuilder.group({
-    fourthCtrl: ['', Validators.required],
-  });
-  fifthFormGroup = this._formBuilder.group({
-    fifthCtrl: ['', Validators.required],
-  });
-  sixthFormGroup = this._formBuilder.group({
-    sixthCtrl: ['', Validators.required],
-  });
-  isLinear = false;
+  precharterTeamSelectControl = new FormControl(['', Validators.required]);
+  precharterCaptainSelectControl = new FormControl(['', Validators.required]);
 
-  constructor(private _formBuilder: FormBuilder) {}
+  isLinear = true;
+
+  constructor(private _formBuilder: FormBuilder) { }
+
+  onStartWorkflowPressed() {
+    console.log('Precharter team member: ', this.precharterTeamSelectControl.value);
+    console.log('Precharter Captain: ', this.precharterCaptainSelectControl.value);
+  }
 }

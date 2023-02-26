@@ -1,0 +1,18 @@
+@import 'src/compass-theme';
+
+h4 {
+    @include sub-header;
+    margin: 10px;
+}
+
+.container {
+    @include containers;
+}
+
+.workflow-list-viewport {
+    @include viewport;
+}
+
+.green-status {
+    color: green;
+}

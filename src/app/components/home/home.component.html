@@ -1,4 +1,18 @@
-<div class="row">
-    <div class="box"><button mat-flat-button color="primary" (click)="onWorkflowButtonPressed()">Workflow</button></div>
-    <div class="box"><button mat-flat-button color="primary" (click)="onChecklistButtonPressed()">Checklist</button></div>
+<div class="container">
+    <div class="row">
+        <div class="four-wide">
+            <app-charter-chart></app-charter-chart>
+        </div>
+        <div class="two-wide">
+            <app-workflow-list></app-workflow-list>
+        </div>
+    </div>
+    <div class="row">
+        <div class="two-wide">
+            <app-available-fleet></app-available-fleet>
+        </div>
+        <div class="four-wide">
+            <app-service-order-table></app-service-order-table>
+        </div>
+    </div>
 </div>

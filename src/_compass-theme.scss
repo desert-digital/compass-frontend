@@ -1,8 +1,8 @@
 @import '@angular/material';
 @import '@angular/cdk/overlay-prebuilt.css';
 
-$primaryColor: #075d14;
-$secondaryColor: #2297bb;
+$primaryColor: #1A237E;
+$secondaryColor: #90ee02;
 
 $backgroundColor: #EBE7E2;
 $warningColor: #cc0000;
@@ -11,7 +11,7 @@ $buttonWidth: 210px;
 $formWidth: 450px;
 $thinFormWidth: 270px;
 
-$textFont: 'Roboto Condensed';
+$textFont: 'Lato';
 $borderWidth: 2px;
 $borderRadius: 5px;
 
@@ -31,13 +31,20 @@ mat-input {
   background-color: white;
 }
 
+@mixin box {
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+  border-radius: 5px;
+}
+
 @mixin text-fonts {
   font-family: $textFont;
   font-size: 1.0em;
 }
 
 @mixin title {
-  font-family: 'Arimo';
+  font-family: 'Fredoka One';
   font-weight: 500;
 
   @media screen and (max-width: 420px) {
@@ -47,13 +54,11 @@ mat-input {
   @media screen and (min-width: 421px) {
     font-size: 1.75em;
   }
-
-  color: $secondaryColor;
 }
 
-@mixin headers {
-  font-family: 'Roboto Condensed';
-  font-weight: 600;
+@mixin header {
+  font-family: 'Lato';
+  font-weight: bolder;
 
   @media screen and (max-width: 420px) {
     font-size: 1.5em;
@@ -62,23 +67,20 @@ mat-input {
   @media screen and (min-width: 421px) {
     font-size: 2em;
   }
-
   color: $secondaryColor;
 }
 
 @mixin sub-header {
-  font-family: 'Roboto Condensed';
-  font-weight: 500;
+  font-family: 'Lato';
+  font-weight: bold;
 
   @media screen and (max-width: 420px) {
-    font-size: 1.0em;
+    font-size: 1.2m;
   }
 
   @media screen and (min-width: 421px) {
-    font-size: 1.2em;
+    font-size: 1.5em;
   }
-
-  color: $secondaryColor;
 }
 
 h4 {
@@ -93,6 +95,7 @@ h4 {
   flex-direction: column;
   width: 95%;
   margin: 2.5%;
+  gap: 5px;
 }
 
 @mixin buttons {
@@ -124,6 +127,12 @@ h4 {
   padding: 10px;
   background-color: white;
   border-radius: $borderRadius;
+}
+
+@mixin viewport {
+  height: 300px;
+  width: 300px;
+  margin: 10px;
 }
 
 .list-container {
@@ -168,11 +177,6 @@ h4 {
     margin: 20px
   }
 
-}
-
-.example-viewport {
-  height: 400px;
-  width: 95%;
 }
 
 .item {

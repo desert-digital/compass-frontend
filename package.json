@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^15.1.4",
     "@angular/router": "^15.1.4",
     "@types/d3": "^7.4.0",
+    "chart.js": "^4.2.1",
     "d3": "^7.8.2",
     "npm-check-updates": "^16.7.5",
     "rxjs": "~7.5.0",

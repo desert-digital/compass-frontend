@@ -1,12 +1,25 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/main/home">Home</a>
-      <a mat-list-item routerLink="/main/fleet">Fleet</a>
-      <a mat-list-item routerLink="/main/staff">Staff</a>
-    </mat-nav-list>
+    <mat-toolbar></mat-toolbar>
+    <div class="sidenav-buttons">
+      <button mat-button color="primary">
+        <mat-icon class="double-sized">home</mat-icon>
+        <span class="sidenav-button-text">Home</span>
+      </button>
+      <button mat-button color="primary">
+        <mat-icon class="double-sized">sailing</mat-icon>
+        <span class="sidenav-button-text">Fleet</span>
+      </button>
+      <button matBadge="6" mat-button color="primary">
+        <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
+        <span class="sidenav-button-text">Pending</span>
+      </button>
+      <button mat-button color="primary">
+        <mat-icon class="double-sized">badge</mat-icon>
+        <span class="sidenav-button-text">Staff</span>
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -14,7 +27,12 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Compass</span>
+      <span class="title">Compass</span>
+      <span class="spacer"></span>
+      <button mat-button color="primary">
+        <mat-icon class="double-sized">logout</mat-icon>
+        <span class="logout-button">Logout</span>
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
