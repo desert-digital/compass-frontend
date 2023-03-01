@@ -1,22 +1,13 @@
-<div class="workflow-list-container">
+<div class="container">
   <h4>Pending Workflows</h4>
   <mat-list>
     <cdk-virtual-scroll-viewport [itemSize]="30" class="workflow-list-viewport">
       <div *cdkVirtualFor="let item of items">
         <h3>Charter: {{ item.name }}</h3>
         <p><b>Location:</b> Coronado, CA <b>Start:</b> 18 March 2023 at 1000</p>
-        <button matListItemMeta mat-icon-button (click)="onItemSelected(item)" [matMenuTriggerFor]="itemMenu">
-          <mat-icon>
-            more_vert
-          </mat-icon>
-        </button>
+        <button mat-raised-button color="primary">Configure</button>
         <mat-divider></mat-divider>
       </div>
     </cdk-virtual-scroll-viewport>
   </mat-list>
-  <mat-menu #itemMenu="matMenu">
-    <button mat-menu-item (click)="onListItemPressed()">
-      <mat-icon class="material-icons-outlined" color="primary">checkmark</mat-icon>Select
-    </button>
-  </mat-menu>
 </div>
