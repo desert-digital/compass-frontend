@@ -7,7 +7,7 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { PendingComponent } from './components/pending/pending.component';
+import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
 
 import { ChecklistComponent } from './components/checklist/checklist.component';
 
@@ -25,11 +25,15 @@ const routes: Routes = [
       component: StaffComponent
     },{
       path: 'pending',
-      component: PendingComponent
+      component: ManageWorkflowComponent
     },{
       path: 'checklist',
       component: ChecklistComponent
     }],
+  },
+  {
+    path: 'checklist',
+    component: ChecklistComponent
   },
   {
     path: '', redirectTo: '/main/home', pathMatch: 'full',

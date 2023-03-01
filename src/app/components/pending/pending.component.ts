@@ -18,5 +18,14 @@ export class PendingComponent {
       name: 'Charter 3',
       status: 'Late'
     }];
+
+
+    onItemSelected(item: any) {
+      console.log(item);
+    }
+  
+    async onListItemPressed() {
+      console.log('Select Pressed');
+    }
 }
 

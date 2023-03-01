@@ -10,9 +10,9 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angu
 
 export class WorkflowComponent {
 
-  vessel: string = 'La Barca';
-  location: string = 'Downtown';
-  starting: Date = new Date();
+  vessel: string = 'Charter 1';
+  location: string = 'Coronado';
+  starting: Date = new Date(2023, 3, 18, 10, 0, 0);
 
   precharterTeamSelectControl = new FormControl(['', Validators.required]);
   precharterCaptainSelectControl = new FormControl(['', Validators.required]);

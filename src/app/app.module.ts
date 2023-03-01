@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -42,6 +43,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { CharterChartComponent } from './components/charter-chart/charter-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { PendingComponent } from './components/pending/pending.component';
+import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { PendingComponent } from './components/pending/pending.component';
     AvailableFleetComponent,
     ServiceOrderTableComponent,
     CharterChartComponent,
-    PendingComponent
+    PendingComponent,
+    ManageWorkflowComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { PendingComponent } from './components/pending/pending.component';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatSidenavModule,
     MatSelectModule,
     MatToolbarModule,

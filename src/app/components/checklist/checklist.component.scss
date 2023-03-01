@@ -1,5 +1,8 @@
-h2 {
-    margin: 8px;
+@import 'src/compass-theme';
+
+h4 {
+    @include sub-header;
+    margin: 10px;
 }
 
 .finished {
@@ -9,8 +12,11 @@ h2 {
 
 .todo {
     color: black;
+    font-family: $textFont;
+    font-size: 1.5em;
 }
 
 .completed {
-    margin: 20px 8px;
+    font-family: $textFont;
+    margin: 25px 8px;
 }

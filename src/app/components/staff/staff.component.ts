@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class StaffComponent {
   longText: String[] = [
-    "Qualified in power boats, sail boats, and PWC. OUPV qualified", 
-    "Qualified in power boats, sail boats, and PWC",
-    "Qualified in PWC.\n"
+    "OUPV. Power boats, sail boats, and PWC qualified", 
+    "Power boats, sail boats, and PWC qualified",
+    "PWC qualified."
     ];
 }
