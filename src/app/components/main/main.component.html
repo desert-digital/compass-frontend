@@ -3,19 +3,19 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <div class="sidenav-buttons">
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="onHomePressed()">
         <mat-icon class="double-sized">home</mat-icon>
         <span class="sidenav-button-text">Home</span>
       </button>
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="onFleetPressed()">
         <mat-icon class="double-sized">sailing</mat-icon>
         <span class="sidenav-button-text">Fleet</span>
       </button>
-      <button matBadge="6" mat-button color="primary">
+      <button matBadge="3" mat-button color="primary" (click)="onPendingPressed()">
         <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
         <span class="sidenav-button-text">Pending</span>
       </button>
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="onStaffPressed()">
         <mat-icon class="double-sized">badge</mat-icon>
         <span class="sidenav-button-text">Staff</span>
       </button>

@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,7 +33,6 @@ import { WorkflowComponent } from './components/workflow/workflow.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
-import { ServiceOrdersChartComponent } from './components/service-orders-chart/service-orders-chart.component';
 import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 import { AvailableFleetComponent } from './components/available-fleet/available-fleet.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
@@ -40,6 +40,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CharterChartComponent } from './components/charter-chart/charter-chart.component';
+import { NgChartsModule } from 'ng2-charts';
+import { PendingComponent } from './components/pending/pending.component';
 
 @NgModule({
   declarations: [
@@ -50,11 +52,11 @@ import { CharterChartComponent } from './components/charter-chart/charter-chart.
     StaffComponent,
     FleetComponent,
     ChecklistComponent,
-    ServiceOrdersChartComponent,
     WorkflowListComponent,
     AvailableFleetComponent,
     ServiceOrderTableComponent,
-    CharterChartComponent
+    CharterChartComponent,
+    PendingComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,7 @@ import { CharterChartComponent } from './components/charter-chart/charter-chart.
     LayoutModule,
     MatBadgeModule,
     MatButtonModule,
+    MatCardModule,
     MatFormFieldModule, 
     MatIconModule,
     MatInputModule,
@@ -76,7 +79,8 @@ import { CharterChartComponent } from './components/charter-chart/charter-chart.
     ScrollingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

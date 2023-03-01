@@ -6,5 +6,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./workflow-list.component.scss']
 })
 export class WorkflowListComponent {
-  items = Array.from({length: 10}).map((_, i) => `Charter #${i}`);
+  items: any = [{
+    name: 'Charter 1',
+    status: 'On time'
+  },
+  {
+    name: 'Charter 2',
+    status: 'On time'
+  },
+  {
+    name: 'Charter 3',
+    status: 'Late'
+  }];
+
+  checkLateStatus(item: string): boolean {
+    if (item === 'Late') {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

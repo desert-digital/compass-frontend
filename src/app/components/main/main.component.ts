@@ -17,5 +17,23 @@ export class MainComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+    private _router: Router) { }
+
+
+  onHomePressed() {
+    this._router.navigate(['main/home']);
+  }
+
+  onFleetPressed() {
+    this._router.navigate(['main/fleet']);
+  }
+
+  onPendingPressed() {
+    this._router.navigate(['main/pending']);
+  }
+
+  onStaffPressed() {
+    this._router.navigate(['main/staff']);
+  }
 }

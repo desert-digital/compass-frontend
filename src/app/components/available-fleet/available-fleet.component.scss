@@ -1,12 +1,14 @@
 @import 'src/compass-theme';
 
-.container {
+.chart-container {
     @include containers;
+    width: 400px;
 }
 
 h4 {
     @include sub-header;
-    margin: 10px;
+    margin-top: 20px;
+    margin-left: 40px;
 }
 
 .buffer {

@@ -4,6 +4,12 @@
   @include containers;
 }
 
+h4 {
+  @include sub-header;
+  margin: 10px;
+}
+
 .full-width-table {
+  margin-top: 15px;
   width: 80%;
 }

@@ -7,25 +7,25 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { StaffComponent } from './components/staff/staff.component';
+import { PendingComponent } from './components/pending/pending.component';
 
 import { ChecklistComponent } from './components/checklist/checklist.component';
-import { WorkflowComponent } from './components/workflow/workflow.component';
 
 const routes: Routes = [
   {
     path: 'main', component: MainComponent,
     children: [{
+      path: 'home',
+      component: HomeComponent
+    },{
       path: 'fleet',
       component: FleetComponent
     },{
       path: 'staff',
       component: StaffComponent
     },{
-      path: 'home',
-      component: HomeComponent
-    },{
-      path: 'workflow',
-      component: WorkflowComponent
+      path: 'pending',
+      component: PendingComponent
     },{
       path: 'checklist',
       component: ChecklistComponent

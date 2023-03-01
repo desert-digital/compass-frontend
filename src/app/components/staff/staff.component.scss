@@ -1,0 +1,23 @@
+@import 'src/compass-theme';
+
+.container {
+    @include containers;
+    display: flex;
+    flex-direction: row;
+}
+
+h4 {
+    @include sub-header;
+}
+
+img {
+    object-fit: cover;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+.example-card {
+    width: 300px;
+    margin: 10px;
+}
