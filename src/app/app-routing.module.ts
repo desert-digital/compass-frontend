@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Local
 
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
@@ -36,12 +38,20 @@ const routes: Routes = [
     component: ChecklistComponent
   },
   {
-    path: '', redirectTo: '/main/home', pathMatch: 'full',
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
+    path: '', redirectTo: '/login', pathMatch: 'full',
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

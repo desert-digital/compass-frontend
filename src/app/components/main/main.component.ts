@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
+// Amplify
+
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +14,8 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
+
+  @Output() logoutEvent = new EventEmitter();
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -20,6 +26,10 @@ export class MainComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     private _router: Router) { }
 
+
+  ngOnInit() {
+    this.onHomePressed();
+  }
 
   onHomePressed() {
     this._router.navigate(['main/home']);
@@ -35,5 +45,15 @@ export class MainComponent {
 
   onStaffPressed() {
     this._router.navigate(['main/staff']);
+  }
+
+  async onLogoutPressed() {
+    try {
+      await Auth.signOut();
+      this._router.navigate(['/logout']);
+    }
+    catch (e) {
+      console.log(JSON.stringify(e));
+    }
   }
 }

@@ -25,6 +25,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+// Amplify 
+
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 // Local
 
@@ -44,6 +47,8 @@ import { CharterChartComponent } from './components/charter-chart/charter-chart.
 import { NgChartsModule } from 'ng2-charts';
 import { PendingComponent } from './components/pending/pending.component';
 import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -59,9 +64,12 @@ import { ManageWorkflowComponent } from './components/manage-workflow/manage-wor
     ServiceOrderTableComponent,
     CharterChartComponent,
     PendingComponent,
-    ManageWorkflowComponent
+    ManageWorkflowComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
+    AmplifyAuthenticatorModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -89,4 +97,7 @@ import { ManageWorkflowComponent } from './components/manage-workflow/manage-wor
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }
