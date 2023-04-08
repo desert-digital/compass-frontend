@@ -17,6 +17,9 @@
       },
       "api": {
         "compassfrontend": {}
+      },
+      "storage": {
+        "compass": {}
       }
     }
   }

@@ -6,7 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 // Amplify
 
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth, Storage } from 'aws-amplify';
 
 @Component({
   selector: 'app-main',

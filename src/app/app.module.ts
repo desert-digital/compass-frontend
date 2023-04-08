@@ -14,14 +14,18 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -29,26 +33,26 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
+// charts
+
+import { NgChartsModule } from 'ng2-charts';
+
 // Local
 
-import { HomeComponent } from './components/home/home.component';
-import { MainComponent } from './components/main/main.component';
-import { WorkflowComponent } from './components/workflow/workflow.component';
-import { StaffComponent } from './components/staff/staff.component';
-import { FleetComponent } from './components/fleet/fleet.component';
-import { ChecklistComponent } from './components/checklist/checklist.component';
-import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 import { AvailableFleetComponent } from './components/available-fleet/available-fleet.component';
-import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
 import { CharterChartComponent } from './components/charter-chart/charter-chart.component';
-import { NgChartsModule } from 'ng2-charts';
-import { PendingComponent } from './components/pending/pending.component';
-import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
+import { ChecklistComponent } from './components/checklist/checklist.component';
+import { HomeComponent } from './components/home/home.component';
+import { FleetComponent } from './components/fleet/fleet.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
+import { MainComponent } from './components/main/main.component';
+import { PendingComponent } from './components/pending/pending.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
+import { WorkflowComponent } from './components/workflow/workflow.component';
+import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +88,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatSidenavModule,
     MatSelectModule,
     MatToolbarModule,
