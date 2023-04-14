@@ -60,11 +60,6 @@
       "service": "Cognito"
     }
   },
-  "storage": {
-    "compass": {
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "S3"
-    }
-  }
+  "custom": {},
+  "storage": {}
 }

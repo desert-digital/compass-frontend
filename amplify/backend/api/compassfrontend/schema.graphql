@@ -2,7 +2,59 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Event @model {
+type Event @model{
   id: ID!
+  company: ID!
   body: String
+  start: String 
+  end: String
+  item: String
+  item_id: String
+  status: String
+}
+
+type Vessel @model {
+  id: ID!
+  company: ID!
+  name: String
+}
+
+type Contact @model {
+  id: ID!
+  company: ID!
+  name: String
+  email: String
+}
+
+type Action @model {
+  id: ID!
+  company: ID!
+  status: Boolean
+  description: String
+  notes: String 
+  duration: Int
+}
+
+type Step @model {
+  id: ID!
+  company: ID!
+  activity: Action @hasOne
+}
+
+type CheckList @model {
+  id: ID!
+  company: ID!
+  owner: Contact @hasOne
+  steps: [Step] @hasMany
+  start: AWSDate
+  end: AWSDate 
+}
+
+type Workflow @model {
+  id: ID!
+  company: ID!
+  owner: Contact @hasOne
+  steps: [CheckList] @hasMany
+  start: AWSDate
+  end: AWSDate 
 }
