@@ -1,25 +1,28 @@
+// Core
+
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PendingService {
-  items: any = [{
+  ITEMS: any = [{
     name: 'Charter 1',
     status: 'On time'
   },
   {
-    name: 'Charter 2',
+    name: 'Charter 2-1',
     status: 'On time'
   },
   {
-    name: 'Charter 3',
+    name: 'Charter 3A',
     status: 'Late'
   }];
 
   constructor() { }
 
-  getPendingItems() {
-    return this.items
+  getPendingItems(): Observable<any[]> {
+    return of(this.ITEMS);
   }
 }

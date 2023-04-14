@@ -11,16 +11,21 @@ import { PendingService } from 'src/app/services/pending.service';
 })
 export class PendingComponent {
 
-    constructor(private pending: PendingService) {}
+  items: any[] = [];
 
-    items = this.pending.getPendingItems();
+  constructor(private pendingService: PendingService) { }
 
-    onItemSelected(item: any) {
-      console.log(item);
-    }
-  
-    async onListItemPressed() {
-      console.log('Select Pressed');
-    }
+  ngOnInit() {
+    this.pendingService.getPendingItems()
+      .subscribe(items => this.items = items);
+  }
+
+  onItemSelected(item: any) {
+    console.log(item);
+  }
+
+  async onListItemPressed() {
+    console.log('Select Pressed');
+  }
 }
 
