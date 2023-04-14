@@ -1,24 +1,19 @@
 import { Component } from '@angular/core';
 
+// Local
+
+import { PendingService } from 'src/app/services/pending.service';
+
 @Component({
   selector: 'app-pending',
   templateUrl: './pending.component.html',
   styleUrls: ['./pending.component.scss']
 })
 export class PendingComponent {
-    items: any = [{
-      name: 'Charter 1',
-      status: 'On time'
-    },
-    {
-      name: 'Charter 2',
-      status: 'On time'
-    },
-    {
-      name: 'Charter 3',
-      status: 'Late'
-    }];
 
+    constructor(private pending: PendingService) {}
+
+    items = this.pending.getPendingItems();
 
     onItemSelected(item: any) {
       console.log(item);

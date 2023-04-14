@@ -10,7 +10,8 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angu
 
 export class WorkflowComponent {
 
-  vessel: string = 'Charter 1';
+  charter: string = 'Charter 1';
+  vessel: string = 'Vessel 1';
   location: string = 'Coronado';
   starting: Date = new Date(2023, 3, 18, 10, 0, 0);
 
