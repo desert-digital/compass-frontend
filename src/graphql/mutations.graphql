@@ -1,0 +1,646 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateEvent(
+  $input: CreateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  createEvent(input: $input, condition: $condition) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateEvent(
+  $input: UpdateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  updateEvent(input: $input, condition: $condition) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteEvent(
+  $input: DeleteEventInput!
+  $condition: ModelEventConditionInput
+) {
+  deleteEvent(input: $input, condition: $condition) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateVessel(
+  $input: CreateVesselInput!
+  $condition: ModelVesselConditionInput
+) {
+  createVessel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateVessel(
+  $input: UpdateVesselInput!
+  $condition: ModelVesselConditionInput
+) {
+  updateVessel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteVessel(
+  $input: DeleteVesselInput!
+  $condition: ModelVesselConditionInput
+) {
+  deleteVessel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateContact(
+  $input: CreateContactInput!
+  $condition: ModelContactConditionInput
+) {
+  createContact(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateContact(
+  $input: UpdateContactInput!
+  $condition: ModelContactConditionInput
+) {
+  updateContact(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteContact(
+  $input: DeleteContactInput!
+  $condition: ModelContactConditionInput
+) {
+  deleteContact(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateAction(
+  $input: CreateActionInput!
+  $condition: ModelActionConditionInput
+) {
+  createAction(input: $input, condition: $condition) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateAction(
+  $input: UpdateActionInput!
+  $condition: ModelActionConditionInput
+) {
+  updateAction(input: $input, condition: $condition) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteAction(
+  $input: DeleteActionInput!
+  $condition: ModelActionConditionInput
+) {
+  deleteAction(input: $input, condition: $condition) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateStep(
+  $input: CreateStepInput!
+  $condition: ModelStepConditionInput
+) {
+  createStep(input: $input, condition: $condition) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+mutation UpdateStep(
+  $input: UpdateStepInput!
+  $condition: ModelStepConditionInput
+) {
+  updateStep(input: $input, condition: $condition) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+mutation DeleteStep(
+  $input: DeleteStepInput!
+  $condition: ModelStepConditionInput
+) {
+  deleteStep(input: $input, condition: $condition) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+mutation CreateCheckList(
+  $input: CreateCheckListInput!
+  $condition: ModelCheckListConditionInput
+) {
+  createCheckList(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+mutation UpdateCheckList(
+  $input: UpdateCheckListInput!
+  $condition: ModelCheckListConditionInput
+) {
+  updateCheckList(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+mutation DeleteCheckList(
+  $input: DeleteCheckListInput!
+  $condition: ModelCheckListConditionInput
+) {
+  deleteCheckList(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+mutation CreateWorkflow(
+  $input: CreateWorkflowInput!
+  $condition: ModelWorkflowConditionInput
+) {
+  createWorkflow(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}
+mutation UpdateWorkflow(
+  $input: UpdateWorkflowInput!
+  $condition: ModelWorkflowConditionInput
+) {
+  updateWorkflow(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}
+mutation DeleteWorkflow(
+  $input: DeleteWorkflowInput!
+  $condition: ModelWorkflowConditionInput
+) {
+  deleteWorkflow(input: $input, condition: $condition) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}

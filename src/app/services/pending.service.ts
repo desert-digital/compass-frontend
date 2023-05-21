@@ -3,26 +3,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+// Amplify 
+
+import { APIService, Event } from '../API.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PendingService {
-  ITEMS: any = [{
-    name: 'Charter 1',
-    status: 'On time'
-  },
-  {
-    name: 'Charter 2-1',
-    status: 'On time'
-  },
-  {
-    name: 'Charter 3A',
-    status: 'Late'
-  }];
-
-  constructor() { }
+  constructor(private api: APIService) { }
 
   getPendingItems(): Observable<any[]> {
-    return of(this.ITEMS);
+    this.api.ListEvents().then((events) => {
+      return of (events.items);
+    });
   }
 }

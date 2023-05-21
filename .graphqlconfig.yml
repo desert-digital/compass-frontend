@@ -1,0 +1,15 @@
+projects:
+  compassfrontend:
+    schemaPath: amplify/backend/api/compassfrontend/build/schema.graphql
+    includes:
+      - src/graphql/**/*.graphql
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: angular
+        generatedFileName: src/app/API.service.ts
+        docsFilePath: src/graphql
+        region: us-west-1
+        apiId: null
+        maxDepth: 4

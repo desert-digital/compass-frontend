@@ -13,11 +13,11 @@ export class PendingComponent {
 
   items: any[] = [];
 
-  constructor(private pendingService: PendingService) { }
+  constructor(private _pendingService: PendingService) { }
 
   ngOnInit() {
-    this.pendingService.getPendingItems()
-      .subscribe(items => this.items = items);
+    this._pendingService.getPendingItems()
+      .subscribe((items: any) => this.items = items);
   }
 
   onItemSelected(item: any) {

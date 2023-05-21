@@ -1,0 +1,583 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
+  onCreateEvent(filter: $filter) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
+  onUpdateEvent(filter: $filter) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
+  onDeleteEvent(filter: $filter) {
+    id
+    company
+    body
+    start
+    end
+    item
+    item_id
+    status
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
+  onCreateVessel(filter: $filter) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
+  onUpdateVessel(filter: $filter) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
+  onDeleteVessel(filter: $filter) {
+    id
+    company
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
+  onCreateContact(filter: $filter) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
+  onUpdateContact(filter: $filter) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
+  onDeleteContact(filter: $filter) {
+    id
+    company
+    name
+    email
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
+  onCreateAction(filter: $filter) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
+  onUpdateAction(filter: $filter) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
+  onDeleteAction(filter: $filter) {
+    id
+    company
+    status
+    description
+    notes
+    duration
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateStep($filter: ModelSubscriptionStepFilterInput) {
+  onCreateStep(filter: $filter) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+subscription OnUpdateStep($filter: ModelSubscriptionStepFilterInput) {
+  onUpdateStep(filter: $filter) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+subscription OnDeleteStep($filter: ModelSubscriptionStepFilterInput) {
+  onDeleteStep(filter: $filter) {
+    id
+    company
+    activity {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    checkListStepsId
+    stepActivityId
+  }
+}
+subscription OnCreateCheckList($filter: ModelSubscriptionCheckListFilterInput) {
+  onCreateCheckList(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+subscription OnUpdateCheckList($filter: ModelSubscriptionCheckListFilterInput) {
+  onUpdateCheckList(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+subscription OnDeleteCheckList($filter: ModelSubscriptionCheckListFilterInput) {
+  onDeleteCheckList(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        activity {
+          id
+          company
+          status
+          description
+          notes
+          duration
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        checkListStepsId
+        stepActivityId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowStepsId
+    checkListOwnerId
+  }
+}
+subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
+  onCreateWorkflow(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}
+subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
+  onUpdateWorkflow(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}
+subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
+  onDeleteWorkflow(filter: $filter) {
+    id
+    company
+    owner {
+      id
+      company
+      name
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    steps {
+      items {
+        id
+        company
+        owner {
+          id
+          company
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        steps {
+          nextToken
+          startedAt
+        }
+        start
+        end
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowStepsId
+        checkListOwnerId
+      }
+      nextToken
+      startedAt
+    }
+    start
+    end
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    workflowOwnerId
+  }
+}
