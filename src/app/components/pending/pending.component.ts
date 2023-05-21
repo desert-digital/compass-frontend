@@ -15,9 +15,8 @@ export class PendingComponent {
 
   constructor(private _pendingService: PendingService) { }
 
-  ngOnInit() {
-    this._pendingService.getPendingItems()
-      .subscribe((items: any) => this.items = items);
+  async ngOnInit() {
+    await this._pendingService.getPendingItems().then(items => this.items = items);
   }
 
   onItemSelected(item: any) {

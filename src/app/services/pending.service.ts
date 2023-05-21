@@ -13,9 +13,8 @@ import { APIService, Event } from '../API.service';
 export class PendingService {
   constructor(private api: APIService) { }
 
-  getPendingItems(): Observable<any[]> {
-    this.api.ListEvents().then((events) => {
-      return of (events.items);
-    });
+  async getPendingItems(): Promise<Event[]> {
+    const events = await this.api.ListEvents()
+    return events.items as Event[];
   }
 }
