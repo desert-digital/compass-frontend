@@ -3,9 +3,9 @@
   <mat-list>
     <cdk-virtual-scroll-viewport [itemSize]="30" class="workflow-list-viewport">
       <div *cdkVirtualFor="let item of items">
-        <h3>Charter: {{ item.name }}</h3>
-        <p><b>Location:</b> Coronado, CA <b>Start:</b> 18 March 2023 at 1000</p>
-        <button mat-raised-button color="primary">Configure</button>
+        <h3>Charter: {{ item.item }}</h3>
+        <p><b>Start:</b> {{ item.start | date: 'short' }}</p>
+        <button mat-raised-button color="primary" (click)="onPendingItemSelected(item)">Configure</button>
         <mat-divider></mat-divider>
       </div>
     </cdk-virtual-scroll-viewport>

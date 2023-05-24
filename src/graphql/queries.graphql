@@ -11,9 +11,6 @@ query GetEvent($id: ID!) {
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListEvents(
@@ -33,43 +30,8 @@ query ListEvents(
       status
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncEvents(
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncEvents(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      body
-      start
-      end
-      item
-      item_id
-      status
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetVessel($id: ID!) {
@@ -79,9 +41,6 @@ query GetVessel($id: ID!) {
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListVessels(
@@ -96,38 +55,8 @@ query ListVessels(
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncVessels(
-  $filter: ModelVesselFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncVessels(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      name
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetContact($id: ID!) {
@@ -138,9 +67,6 @@ query GetContact($id: ID!) {
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListContacts(
@@ -156,39 +82,8 @@ query ListContacts(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncContacts(
-  $filter: ModelContactFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncContacts(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      name
-      email
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetAction($id: ID!) {
@@ -201,9 +96,6 @@ query GetAction($id: ID!) {
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListActions(
@@ -221,41 +113,8 @@ query ListActions(
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncActions(
-  $filter: ModelActionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncActions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      status
-      description
-      notes
-      duration
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetStep($id: ID!) {
@@ -271,15 +130,9 @@ query GetStep($id: ID!) {
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -302,60 +155,13 @@ query ListSteps(
         duration
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       checkListStepsId
       stepActivityId
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSteps(
-  $filter: ModelStepFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSteps(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      activity {
-        id
-        company
-        status
-        description
-        notes
-        duration
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      checkListStepsId
-      stepActivityId
-    }
-    nextToken
-    startedAt
   }
 }
 query GetCheckList($id: ID!) {
@@ -369,45 +175,22 @@ query GetCheckList($id: ID!) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -428,92 +211,18 @@ query ListCheckLists(
         email
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       steps {
-        items {
-          id
-          company
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          checkListStepsId
-          stepActivityId
-        }
         nextToken
-        startedAt
       }
       start
       end
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       workflowStepsId
       checkListOwnerId
     }
     nextToken
-    startedAt
-  }
-}
-query SyncCheckLists(
-  $filter: ModelCheckListFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCheckLists(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      owner {
-        id
-        company
-        name
-        email
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      steps {
-        items {
-          id
-          company
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          checkListStepsId
-          stepActivityId
-        }
-        nextToken
-        startedAt
-      }
-      start
-      end
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      workflowStepsId
-      checkListOwnerId
-    }
-    nextToken
-    startedAt
   }
 }
 query GetWorkflow($id: ID!) {
@@ -527,49 +236,24 @@ query GetWorkflow($id: ID!) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }
@@ -589,93 +273,16 @@ query ListWorkflows(
         email
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       steps {
-        items {
-          id
-          company
-          start
-          end
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          workflowStepsId
-          checkListOwnerId
-        }
         nextToken
-        startedAt
       }
       start
       end
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       workflowOwnerId
     }
     nextToken
-    startedAt
-  }
-}
-query SyncWorkflows(
-  $filter: ModelWorkflowFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncWorkflows(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      company
-      owner {
-        id
-        company
-        name
-        email
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      steps {
-        items {
-          id
-          company
-          start
-          end
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          workflowStepsId
-          checkListOwnerId
-        }
-        nextToken
-        startedAt
-      }
-      start
-      end
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      workflowOwnerId
-    }
-    nextToken
-    startedAt
   }
 }

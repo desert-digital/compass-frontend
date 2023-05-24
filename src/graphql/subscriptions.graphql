@@ -11,9 +11,6 @@ subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
@@ -28,9 +25,6 @@ subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
@@ -45,9 +39,6 @@ subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
@@ -57,9 +48,6 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
@@ -69,9 +57,6 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
@@ -81,9 +66,6 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
@@ -94,9 +76,6 @@ subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
@@ -107,9 +86,6 @@ subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
@@ -120,9 +96,6 @@ subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
@@ -135,9 +108,6 @@ subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
@@ -150,9 +120,6 @@ subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
@@ -165,9 +132,6 @@ subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateStep($filter: ModelSubscriptionStepFilterInput) {
@@ -183,15 +147,9 @@ subscription OnCreateStep($filter: ModelSubscriptionStepFilterInput) {
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -209,15 +167,9 @@ subscription OnUpdateStep($filter: ModelSubscriptionStepFilterInput) {
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -235,15 +187,9 @@ subscription OnDeleteStep($filter: ModelSubscriptionStepFilterInput) {
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -259,45 +205,22 @@ subscription OnCreateCheckList($filter: ModelSubscriptionCheckListFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -313,45 +236,22 @@ subscription OnUpdateCheckList($filter: ModelSubscriptionCheckListFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -367,45 +267,22 @@ subscription OnDeleteCheckList($filter: ModelSubscriptionCheckListFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -421,49 +298,24 @@ subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }
@@ -478,49 +330,24 @@ subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }
@@ -535,49 +362,24 @@ subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }

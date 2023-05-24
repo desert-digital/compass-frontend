@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+// Core
+
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -10,10 +12,7 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angu
 
 export class WorkflowComponent {
 
-  charter: string = 'Charter 1';
-  vessel: string = 'Vessel 1';
-  location: string = 'Coronado';
-  starting: Date = new Date(2023, 3, 18, 10, 0, 0);
+  @Input() workflow: any;
 
   precharterTeamSelectControl = new FormControl(['', Validators.required]);
   precharterCaptainSelectControl = new FormControl(['', Validators.required]);

@@ -42,7 +42,6 @@ export type CreateEventInput = {
   item?: string | null;
   item_id?: string | null;
   status?: string | null;
-  _version?: number | null;
 };
 
 export type ModelEventConditionInput = {
@@ -125,9 +124,6 @@ export type Event = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateEventInput = {
@@ -139,19 +135,16 @@ export type UpdateEventInput = {
   item?: string | null;
   item_id?: string | null;
   status?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteEventInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateVesselInput = {
   id?: string | null;
   company: string;
   name?: string | null;
-  _version?: number | null;
 };
 
 export type ModelVesselConditionInput = {
@@ -169,21 +162,16 @@ export type Vessel = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateVesselInput = {
   id: string;
   company?: string | null;
   name?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteVesselInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateContactInput = {
@@ -191,7 +179,6 @@ export type CreateContactInput = {
   company: string;
   name?: string | null;
   email?: string | null;
-  _version?: number | null;
 };
 
 export type ModelContactConditionInput = {
@@ -211,9 +198,6 @@ export type Contact = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateContactInput = {
@@ -221,12 +205,10 @@ export type UpdateContactInput = {
   company?: string | null;
   name?: string | null;
   email?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteContactInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateActionInput = {
@@ -236,7 +218,6 @@ export type CreateActionInput = {
   description?: string | null;
   notes?: string | null;
   duration?: number | null;
-  _version?: number | null;
 };
 
 export type ModelActionConditionInput = {
@@ -279,9 +260,6 @@ export type Action = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateActionInput = {
@@ -291,18 +269,15 @@ export type UpdateActionInput = {
   description?: string | null;
   notes?: string | null;
   duration?: number | null;
-  _version?: number | null;
 };
 
 export type DeleteActionInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateStepInput = {
   id?: string | null;
   company: string;
-  _version?: number | null;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -323,9 +298,6 @@ export type Step = {
   activity?: Action | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -333,14 +305,12 @@ export type Step = {
 export type UpdateStepInput = {
   id: string;
   company?: string | null;
-  _version?: number | null;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
 
 export type DeleteStepInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateCheckListInput = {
@@ -348,7 +318,6 @@ export type CreateCheckListInput = {
   company: string;
   start?: string | null;
   end?: string | null;
-  _version?: number | null;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -374,9 +343,6 @@ export type CheckList = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -385,7 +351,6 @@ export type ModelStepConnection = {
   __typename: "ModelStepConnection";
   items: Array<Step | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type UpdateCheckListInput = {
@@ -393,14 +358,12 @@ export type UpdateCheckListInput = {
   company?: string | null;
   start?: string | null;
   end?: string | null;
-  _version?: number | null;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
 
 export type DeleteCheckListInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateWorkflowInput = {
@@ -408,7 +371,6 @@ export type CreateWorkflowInput = {
   company: string;
   start?: string | null;
   end?: string | null;
-  _version?: number | null;
   workflowOwnerId?: string | null;
 };
 
@@ -432,9 +394,6 @@ export type Workflow = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -442,7 +401,6 @@ export type ModelCheckListConnection = {
   __typename: "ModelCheckListConnection";
   items: Array<CheckList | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type UpdateWorkflowInput = {
@@ -450,13 +408,11 @@ export type UpdateWorkflowInput = {
   company?: string | null;
   start?: string | null;
   end?: string | null;
-  _version?: number | null;
   workflowOwnerId?: string | null;
 };
 
 export type DeleteWorkflowInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type ModelEventFilterInput = {
@@ -477,7 +433,6 @@ export type ModelEventConnection = {
   __typename: "ModelEventConnection";
   items: Array<Event | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelVesselFilterInput = {
@@ -493,7 +448,6 @@ export type ModelVesselConnection = {
   __typename: "ModelVesselConnection";
   items: Array<Vessel | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelContactFilterInput = {
@@ -510,7 +464,6 @@ export type ModelContactConnection = {
   __typename: "ModelContactConnection";
   items: Array<Contact | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelActionFilterInput = {
@@ -529,7 +482,6 @@ export type ModelActionConnection = {
   __typename: "ModelActionConnection";
   items: Array<Action | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelStepFilterInput = {
@@ -569,7 +521,6 @@ export type ModelWorkflowConnection = {
   __typename: "ModelWorkflowConnection";
   items: Array<Workflow | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelSubscriptionEventFilterInput = {
@@ -697,9 +648,6 @@ export type CreateEventMutation = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateEventMutation = {
@@ -714,9 +662,6 @@ export type UpdateEventMutation = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type DeleteEventMutation = {
@@ -731,9 +676,6 @@ export type DeleteEventMutation = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type CreateVesselMutation = {
@@ -743,9 +685,6 @@ export type CreateVesselMutation = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateVesselMutation = {
@@ -755,9 +694,6 @@ export type UpdateVesselMutation = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type DeleteVesselMutation = {
@@ -767,9 +703,6 @@ export type DeleteVesselMutation = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type CreateContactMutation = {
@@ -780,9 +713,6 @@ export type CreateContactMutation = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateContactMutation = {
@@ -793,9 +723,6 @@ export type UpdateContactMutation = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type DeleteContactMutation = {
@@ -806,9 +733,6 @@ export type DeleteContactMutation = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type CreateActionMutation = {
@@ -821,9 +745,6 @@ export type CreateActionMutation = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type UpdateActionMutation = {
@@ -836,9 +757,6 @@ export type UpdateActionMutation = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type DeleteActionMutation = {
@@ -851,9 +769,6 @@ export type DeleteActionMutation = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type CreateStepMutation = {
@@ -870,15 +785,9 @@ export type CreateStepMutation = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -897,15 +806,9 @@ export type UpdateStepMutation = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -924,15 +827,9 @@ export type DeleteStepMutation = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -949,9 +846,6 @@ export type CreateCheckListMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -959,38 +853,17 @@ export type CreateCheckListMutation = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -1007,9 +880,6 @@ export type UpdateCheckListMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -1017,38 +887,17 @@ export type UpdateCheckListMutation = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -1065,9 +914,6 @@ export type DeleteCheckListMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -1075,38 +921,17 @@ export type DeleteCheckListMutation = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -1123,9 +948,6 @@ export type CreateWorkflowMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -1133,43 +955,19 @@ export type CreateWorkflowMutation = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -1185,9 +983,6 @@ export type UpdateWorkflowMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -1195,43 +990,19 @@ export type UpdateWorkflowMutation = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -1247,9 +1018,6 @@ export type DeleteWorkflowMutation = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -1257,43 +1025,19 @@ export type DeleteWorkflowMutation = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -1309,9 +1053,6 @@ export type GetEventQuery = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type ListEventsQuery = {
@@ -1328,34 +1069,8 @@ export type ListEventsQuery = {
     status?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncEventsQuery = {
-  __typename: "ModelEventConnection";
-  items: Array<{
-    __typename: "Event";
-    id: string;
-    company?: string | null;
-    body?: string | null;
-    start?: string | null;
-    end?: string | null;
-    item?: string | null;
-    item_id?: string | null;
-    status?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetVesselQuery = {
@@ -1365,9 +1080,6 @@ export type GetVesselQuery = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type ListVesselsQuery = {
@@ -1379,29 +1091,8 @@ export type ListVesselsQuery = {
     name?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncVesselsQuery = {
-  __typename: "ModelVesselConnection";
-  items: Array<{
-    __typename: "Vessel";
-    id: string;
-    company: string;
-    name?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetContactQuery = {
@@ -1412,9 +1103,6 @@ export type GetContactQuery = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type ListContactsQuery = {
@@ -1427,30 +1115,8 @@ export type ListContactsQuery = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncContactsQuery = {
-  __typename: "ModelContactConnection";
-  items: Array<{
-    __typename: "Contact";
-    id: string;
-    company: string;
-    name?: string | null;
-    email?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetActionQuery = {
@@ -1463,9 +1129,6 @@ export type GetActionQuery = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type ListActionsQuery = {
@@ -1480,32 +1143,8 @@ export type ListActionsQuery = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncActionsQuery = {
-  __typename: "ModelActionConnection";
-  items: Array<{
-    __typename: "Action";
-    id: string;
-    company: string;
-    status?: boolean | null;
-    description?: string | null;
-    notes?: string | null;
-    duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetStepQuery = {
@@ -1522,15 +1161,9 @@ export type GetStepQuery = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -1551,52 +1184,13 @@ export type ListStepsQuery = {
       duration?: number | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     checkListStepsId?: string | null;
     stepActivityId?: string | null;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncStepsQuery = {
-  __typename: "ModelStepConnection";
-  items: Array<{
-    __typename: "Step";
-    id: string;
-    company: string;
-    activity?: {
-      __typename: "Action";
-      id: string;
-      company: string;
-      status?: boolean | null;
-      description?: string | null;
-      notes?: string | null;
-      duration?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-    checkListStepsId?: string | null;
-    stepActivityId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetCheckListQuery = {
@@ -1611,9 +1205,6 @@ export type GetCheckListQuery = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -1621,38 +1212,17 @@ export type GetCheckListQuery = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -1671,88 +1241,19 @@ export type ListCheckListsQuery = {
       email?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     steps?: {
       __typename: "ModelStepConnection";
-      items: Array<{
-        __typename: "Step";
-        id: string;
-        company: string;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        checkListStepsId?: string | null;
-        stepActivityId?: string | null;
-      } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     start?: string | null;
     end?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     workflowStepsId?: string | null;
     checkListOwnerId?: string | null;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncCheckListsQuery = {
-  __typename: "ModelCheckListConnection";
-  items: Array<{
-    __typename: "CheckList";
-    id: string;
-    company: string;
-    owner?: {
-      __typename: "Contact";
-      id: string;
-      company: string;
-      name?: string | null;
-      email?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null;
-    steps?: {
-      __typename: "ModelStepConnection";
-      items: Array<{
-        __typename: "Step";
-        id: string;
-        company: string;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        checkListStepsId?: string | null;
-        stepActivityId?: string | null;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    start?: string | null;
-    end?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-    workflowStepsId?: string | null;
-    checkListOwnerId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type GetWorkflowQuery = {
@@ -1767,9 +1268,6 @@ export type GetWorkflowQuery = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -1777,43 +1275,19 @@ export type GetWorkflowQuery = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -1831,90 +1305,18 @@ export type ListWorkflowsQuery = {
       email?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     steps?: {
       __typename: "ModelCheckListConnection";
-      items: Array<{
-        __typename: "CheckList";
-        id: string;
-        company: string;
-        start?: string | null;
-        end?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        workflowStepsId?: string | null;
-        checkListOwnerId?: string | null;
-      } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     start?: string | null;
     end?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     workflowOwnerId?: string | null;
   } | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type SyncWorkflowsQuery = {
-  __typename: "ModelWorkflowConnection";
-  items: Array<{
-    __typename: "Workflow";
-    id: string;
-    company: string;
-    owner?: {
-      __typename: "Contact";
-      id: string;
-      company: string;
-      name?: string | null;
-      email?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null;
-    steps?: {
-      __typename: "ModelCheckListConnection";
-      items: Array<{
-        __typename: "CheckList";
-        id: string;
-        company: string;
-        start?: string | null;
-        end?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        workflowStepsId?: string | null;
-        checkListOwnerId?: string | null;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    start?: string | null;
-    end?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-    workflowOwnerId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type OnCreateEventSubscription = {
@@ -1929,9 +1331,6 @@ export type OnCreateEventSubscription = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnUpdateEventSubscription = {
@@ -1946,9 +1345,6 @@ export type OnUpdateEventSubscription = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnDeleteEventSubscription = {
@@ -1963,9 +1359,6 @@ export type OnDeleteEventSubscription = {
   status?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnCreateVesselSubscription = {
@@ -1975,9 +1368,6 @@ export type OnCreateVesselSubscription = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnUpdateVesselSubscription = {
@@ -1987,9 +1377,6 @@ export type OnUpdateVesselSubscription = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnDeleteVesselSubscription = {
@@ -1999,9 +1386,6 @@ export type OnDeleteVesselSubscription = {
   name?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnCreateContactSubscription = {
@@ -2012,9 +1396,6 @@ export type OnCreateContactSubscription = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnUpdateContactSubscription = {
@@ -2025,9 +1406,6 @@ export type OnUpdateContactSubscription = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnDeleteContactSubscription = {
@@ -2038,9 +1416,6 @@ export type OnDeleteContactSubscription = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnCreateActionSubscription = {
@@ -2053,9 +1428,6 @@ export type OnCreateActionSubscription = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnUpdateActionSubscription = {
@@ -2068,9 +1440,6 @@ export type OnUpdateActionSubscription = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnDeleteActionSubscription = {
@@ -2083,9 +1452,6 @@ export type OnDeleteActionSubscription = {
   duration?: number | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
 export type OnCreateStepSubscription = {
@@ -2102,15 +1468,9 @@ export type OnCreateStepSubscription = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -2129,15 +1489,9 @@ export type OnUpdateStepSubscription = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -2156,15 +1510,9 @@ export type OnDeleteStepSubscription = {
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   checkListStepsId?: string | null;
   stepActivityId?: string | null;
 };
@@ -2181,9 +1529,6 @@ export type OnCreateCheckListSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -2191,38 +1536,17 @@ export type OnCreateCheckListSubscription = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -2239,9 +1563,6 @@ export type OnUpdateCheckListSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -2249,38 +1570,17 @@ export type OnUpdateCheckListSubscription = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -2297,9 +1597,6 @@ export type OnDeleteCheckListSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelStepConnection";
@@ -2307,38 +1604,17 @@ export type OnDeleteCheckListSubscription = {
       __typename: "Step";
       id: string;
       company: string;
-      activity?: {
-        __typename: "Action";
-        id: string;
-        company: string;
-        status?: boolean | null;
-        description?: string | null;
-        notes?: string | null;
-        duration?: number | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       checkListStepsId?: string | null;
       stepActivityId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowStepsId?: string | null;
   checkListOwnerId?: string | null;
 };
@@ -2355,9 +1631,6 @@ export type OnCreateWorkflowSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -2365,43 +1638,19 @@ export type OnCreateWorkflowSubscription = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -2417,9 +1666,6 @@ export type OnUpdateWorkflowSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -2427,43 +1673,19 @@ export type OnUpdateWorkflowSubscription = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -2479,9 +1701,6 @@ export type OnDeleteWorkflowSubscription = {
     email?: string | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
   steps?: {
     __typename: "ModelCheckListConnection";
@@ -2489,43 +1708,19 @@ export type OnDeleteWorkflowSubscription = {
       __typename: "CheckList";
       id: string;
       company: string;
-      owner?: {
-        __typename: "Contact";
-        id: string;
-        company: string;
-        name?: string | null;
-        email?: string | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      steps?: {
-        __typename: "ModelStepConnection";
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
       start?: string | null;
       end?: string | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       workflowStepsId?: string | null;
       checkListOwnerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
   start?: string | null;
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   workflowOwnerId?: string | null;
 };
 
@@ -2550,9 +1745,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2583,9 +1775,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2616,9 +1805,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2644,9 +1830,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2672,9 +1855,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2700,9 +1880,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2729,9 +1906,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2758,9 +1932,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2787,9 +1958,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2818,9 +1986,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2849,9 +2014,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2880,9 +2042,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2915,15 +2074,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -2958,15 +2111,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -3001,15 +2148,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -3042,9 +2183,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3052,38 +2190,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -3116,9 +2233,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3126,38 +2240,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -3190,9 +2283,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3200,38 +2290,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -3264,9 +2333,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3274,43 +2340,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -3342,9 +2384,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3352,43 +2391,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -3420,9 +2435,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -3430,43 +2442,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -3495,9 +2483,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3528,12 +2513,8 @@ export class APIService {
             status
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3551,58 +2532,6 @@ export class APIService {
     )) as any;
     return <ListEventsQuery>response.data.listEvents;
   }
-  async SyncEvents(
-    filter?: ModelEventFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncEventsQuery> {
-    const statement = `query SyncEvents($filter: ModelEventFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncEvents(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            body
-            start
-            end
-            item
-            item_id
-            status
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncEventsQuery>response.data.syncEvents;
-  }
   async GetVessel(id: string): Promise<GetVesselQuery> {
     const statement = `query GetVessel($id: ID!) {
         getVessel(id: $id) {
@@ -3612,9 +2541,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3640,12 +2566,8 @@ export class APIService {
             name
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3663,53 +2585,6 @@ export class APIService {
     )) as any;
     return <ListVesselsQuery>response.data.listVessels;
   }
-  async SyncVessels(
-    filter?: ModelVesselFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncVesselsQuery> {
-    const statement = `query SyncVessels($filter: ModelVesselFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncVessels(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            name
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncVesselsQuery>response.data.syncVessels;
-  }
   async GetContact(id: string): Promise<GetContactQuery> {
     const statement = `query GetContact($id: ID!) {
         getContact(id: $id) {
@@ -3720,9 +2595,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3749,12 +2621,8 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3772,54 +2640,6 @@ export class APIService {
     )) as any;
     return <ListContactsQuery>response.data.listContacts;
   }
-  async SyncContacts(
-    filter?: ModelContactFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncContactsQuery> {
-    const statement = `query SyncContacts($filter: ModelContactFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncContacts(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            name
-            email
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncContactsQuery>response.data.syncContacts;
-  }
   async GetAction(id: string): Promise<GetActionQuery> {
     const statement = `query GetAction($id: ID!) {
         getAction(id: $id) {
@@ -3832,9 +2652,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3863,12 +2680,8 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3886,56 +2699,6 @@ export class APIService {
     )) as any;
     return <ListActionsQuery>response.data.listActions;
   }
-  async SyncActions(
-    filter?: ModelActionFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncActionsQuery> {
-    const statement = `query SyncActions($filter: ModelActionFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncActions(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            status
-            description
-            notes
-            duration
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncActionsQuery>response.data.syncActions;
-  }
   async GetStep(id: string): Promise<GetStepQuery> {
     const statement = `query GetStep($id: ID!) {
         getStep(id: $id) {
@@ -3952,15 +2715,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -3995,20 +2752,13 @@ export class APIService {
               duration
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             checkListStepsId
             stepActivityId
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4026,68 +2776,6 @@ export class APIService {
     )) as any;
     return <ListStepsQuery>response.data.listSteps;
   }
-  async SyncSteps(
-    filter?: ModelStepFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncStepsQuery> {
-    const statement = `query SyncSteps($filter: ModelStepFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncSteps(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            activity {
-              __typename
-              id
-              company
-              status
-              description
-              notes
-              duration
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            checkListStepsId
-            stepActivityId
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncStepsQuery>response.data.syncSteps;
-  }
   async GetCheckList(id: string): Promise<GetCheckListQuery> {
     const statement = `query GetCheckList($id: ID!) {
         getCheckList(id: $id) {
@@ -4102,9 +2790,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -4112,38 +2797,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -4176,39 +2840,19 @@ export class APIService {
               email
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             steps {
               __typename
-              items {
-                __typename
-                id
-                company
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                checkListStepsId
-                stepActivityId
-              }
               nextToken
-              startedAt
             }
             start
             end
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             workflowStepsId
             checkListOwnerId
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4226,85 +2870,6 @@ export class APIService {
     )) as any;
     return <ListCheckListsQuery>response.data.listCheckLists;
   }
-  async SyncCheckLists(
-    filter?: ModelCheckListFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncCheckListsQuery> {
-    const statement = `query SyncCheckLists($filter: ModelCheckListFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncCheckLists(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            owner {
-              __typename
-              id
-              company
-              name
-              email
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            steps {
-              __typename
-              items {
-                __typename
-                id
-                company
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                checkListStepsId
-                stepActivityId
-              }
-              nextToken
-              startedAt
-            }
-            start
-            end
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            workflowStepsId
-            checkListOwnerId
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncCheckListsQuery>response.data.syncCheckLists;
-  }
   async GetWorkflow(id: string): Promise<GetWorkflowQuery> {
     const statement = `query GetWorkflow($id: ID!) {
         getWorkflow(id: $id) {
@@ -4319,9 +2884,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -4329,43 +2891,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -4397,40 +2935,18 @@ export class APIService {
               email
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             steps {
               __typename
-              items {
-                __typename
-                id
-                company
-                start
-                end
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                workflowStepsId
-                checkListOwnerId
-              }
               nextToken
-              startedAt
             }
             start
             end
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             workflowOwnerId
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4447,86 +2963,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListWorkflowsQuery>response.data.listWorkflows;
-  }
-  async SyncWorkflows(
-    filter?: ModelWorkflowFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncWorkflowsQuery> {
-    const statement = `query SyncWorkflows($filter: ModelWorkflowFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncWorkflows(
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-          lastSync: $lastSync
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            owner {
-              __typename
-              id
-              company
-              name
-              email
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            steps {
-              __typename
-              items {
-                __typename
-                id
-                company
-                start
-                end
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                workflowStepsId
-                checkListOwnerId
-              }
-              nextToken
-              startedAt
-            }
-            start
-            end
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            workflowOwnerId
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncWorkflowsQuery>response.data.syncWorkflows;
   }
   OnCreateEventListener(
     filter?: ModelSubscriptionEventFilterInput
@@ -4546,9 +2982,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4580,9 +3013,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4614,9 +3044,6 @@ export class APIService {
           status
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4643,9 +3070,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4672,9 +3096,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4701,9 +3122,6 @@ export class APIService {
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4731,9 +3149,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4761,9 +3176,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4791,9 +3203,6 @@ export class APIService {
           email
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4823,9 +3232,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4855,9 +3261,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4887,9 +3290,6 @@ export class APIService {
           duration
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -4923,15 +3323,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -4967,15 +3361,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -5011,15 +3399,9 @@ export class APIService {
             duration
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkListStepsId
           stepActivityId
         }
@@ -5053,9 +3435,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5063,38 +3442,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -5128,9 +3486,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5138,38 +3493,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -5203,9 +3537,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5213,38 +3544,17 @@ export class APIService {
               __typename
               id
               company
-              activity {
-                __typename
-                id
-                company
-                status
-                description
-                notes
-                duration
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               checkListStepsId
               stepActivityId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowStepsId
           checkListOwnerId
         }
@@ -5278,9 +3588,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5288,43 +3595,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -5357,9 +3640,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5367,43 +3647,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;
@@ -5436,9 +3692,6 @@ export class APIService {
             email
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           steps {
             __typename
@@ -5446,43 +3699,19 @@ export class APIService {
               __typename
               id
               company
-              owner {
-                __typename
-                id
-                company
-                name
-                email
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              steps {
-                __typename
-                nextToken
-                startedAt
-              }
               start
               end
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               workflowStepsId
               checkListOwnerId
             }
             nextToken
-            startedAt
           }
           start
           end
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           workflowOwnerId
         }
       }`;

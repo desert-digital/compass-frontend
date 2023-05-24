@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "compassfrontend8115c7f8_identitypool_8115c7f8",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "compas8115c7f8",
-    "userPoolName": "compassfrontend8115c7f8_userpool_8115c7f8",
+    "identityPoolName": "compassfrontend5960eb69_identitypool_5960eb69",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "compas5960eb69",
+    "userPoolName": "compassfrontend5960eb69_userpool_5960eb69",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,29 +31,15 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "compas8115c7f8_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "compas5960eb69_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8115c7f8",
-    "resourceName": "compassfrontend8115c7f8",
+    "sharedId": "5960eb69",
+    "resourceName": "compassfrontend5960eb69",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": []
+    "useEnabledMfas": true
   }
 }

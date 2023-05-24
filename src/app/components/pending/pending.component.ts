@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+// Core
+
+import { Component, EventEmitter, Output } from '@angular/core';
 
 // Local
 
@@ -11,6 +13,8 @@ import { PendingService } from 'src/app/services/pending.service';
 })
 export class PendingComponent {
 
+  @Output() selectedEvent = new EventEmitter<String>();
+
   items: any[] = [];
 
   constructor(private _pendingService: PendingService) { }
@@ -19,12 +23,8 @@ export class PendingComponent {
     await this._pendingService.getPendingItems().then(items => this.items = items);
   }
 
-  onItemSelected(item: any) {
-    console.log(item);
-  }
-
-  async onListItemPressed() {
-    console.log('Select Pressed');
+  async onPendingItemSelected(evt: any) {
+    this.selectedEvent.emit(evt);
   }
 }
 

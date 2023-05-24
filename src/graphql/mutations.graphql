@@ -14,9 +14,6 @@ mutation CreateEvent(
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateEvent(
@@ -34,9 +31,6 @@ mutation UpdateEvent(
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteEvent(
@@ -54,9 +48,6 @@ mutation DeleteEvent(
     status
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateVessel(
@@ -69,9 +60,6 @@ mutation CreateVessel(
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateVessel(
@@ -84,9 +72,6 @@ mutation UpdateVessel(
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteVessel(
@@ -99,9 +84,6 @@ mutation DeleteVessel(
     name
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateContact(
@@ -115,9 +97,6 @@ mutation CreateContact(
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateContact(
@@ -131,9 +110,6 @@ mutation UpdateContact(
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteContact(
@@ -147,9 +123,6 @@ mutation DeleteContact(
     email
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateAction(
@@ -165,9 +138,6 @@ mutation CreateAction(
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateAction(
@@ -183,9 +153,6 @@ mutation UpdateAction(
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteAction(
@@ -201,9 +168,6 @@ mutation DeleteAction(
     duration
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateStep(
@@ -222,15 +186,9 @@ mutation CreateStep(
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -251,15 +209,9 @@ mutation UpdateStep(
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -280,15 +232,9 @@ mutation DeleteStep(
       duration
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     checkListStepsId
     stepActivityId
   }
@@ -307,45 +253,22 @@ mutation CreateCheckList(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -364,45 +287,22 @@ mutation UpdateCheckList(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -421,45 +321,22 @@ mutation DeleteCheckList(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        activity {
-          id
-          company
-          status
-          description
-          notes
-          duration
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkListStepsId
         stepActivityId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowStepsId
     checkListOwnerId
   }
@@ -478,49 +355,24 @@ mutation CreateWorkflow(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }
@@ -538,49 +390,24 @@ mutation UpdateWorkflow(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }
@@ -598,49 +425,24 @@ mutation DeleteWorkflow(
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     steps {
       items {
         id
         company
-        owner {
-          id
-          company
-          name
-          email
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        steps {
-          nextToken
-          startedAt
-        }
         start
         end
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         workflowStepsId
         checkListOwnerId
       }
       nextToken
-      startedAt
     }
     start
     end
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     workflowOwnerId
   }
 }

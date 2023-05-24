@@ -5,19 +5,14 @@
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authcompassfrontend8115c7f8"
-    },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
+      "cognitoUserPoolId": "authcompassfrontend5960eb69"
     },
     "additionalAuthTypes": [
       {
         "mode": "API_KEY",
         "expirationTime": 365,
-        "apiKeyExpirationDate": "2024-03-16T23:11:03.979Z",
-        "keyDescription": "Sandbox API Key"
+        "apiKeyExpirationDate": "2024-05-20T23:45:21.617Z",
+        "keyDescription": "public"
       }
     ]
   }

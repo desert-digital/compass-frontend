@@ -1,9 +1,7 @@
 <div class="container">
   <h4>Setup The Workflow</h4>
-  <h3 class="tight">Charter #: {{ charter }}</h3>
-  <h3 class="tight">Vessel: {{ vessel }}</h3>
-  <p class="tight">Charter starting on: {{ starting | date: 'short' }}</p>
-  <p class="tight">Location: {{ location }}</p>
+  <h3 class="tight">Charter #: {{ workflow.item }}</h3>
+  <p class="tight">Charter starting on: {{ workflow.start | date: 'short' }}</p>
   <form>
     <mat-stepper orientation="vertical" #stepper>
       <mat-step>

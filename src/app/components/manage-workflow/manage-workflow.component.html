@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
       <div class="two-wide">
-          <app-pending></app-pending>
+          <app-pending (selectedEvent)="onPendingItemSelect($event)"></app-pending>
       </div>
-      <div class="two-wide">
-          <app-workflow></app-workflow>
+      <div *ngIf="itemSelected" class="two-wide">
+          <app-workflow [workflow]="selectedItem"></app-workflow>
       </div>
   </div>
 </div>
