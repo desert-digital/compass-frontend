@@ -1,6 +1,13 @@
 // Core
 
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+
+// Amplify 
+
+// Core
+
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
 
 // Local
 
@@ -14,19 +21,36 @@ import { PendingService } from 'src/app/services/pending.service';
 export class PendingComponent {
 
   @Output() selectedEvent = new EventEmitter<String>();
-  @Output() pendingItems: number = 0;
 
   items: any[] = [];
 
   constructor(private _pendingService: PendingService) { }
 
   async ngOnInit() {
-    await this._pendingService.getPendingItems().then(items => this.items = items);
-    this.pendingItems = this.items.length;
+    this._getPendingItems();
+    this._createSubscription();
+    this._deleteSubscription();
   }
 
-  async onPendingItemSelected(evt: any) {
-    this.selectedEvent.emit(evt);
+  async onPendingItemSelected(item: any) {
+    this.selectedEvent.emit(item);
+  }
+
+  async onDeleteItemSelected(item: any) {
+    this._pendingService.deleteItem(item);
+    this._getPendingItems();
+  }
+
+  async _getPendingItems() {
+    await this._pendingService.getPendingItems().then(items => this.items = items);
+  }
+
+  _createSubscription() {
+    this._pendingService.createSubscription();
+  }
+
+  _deleteSubscription() {
+    this._pendingService.deleteSubscription();
   }
 }
 

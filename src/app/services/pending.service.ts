@@ -5,7 +5,8 @@ import { Observable, of } from 'rxjs';
 
 // Amplify 
 
-import { APIService, Event } from '../API.service';
+import { APIService, DeleteEventInput, Event } from '../API.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,22 @@ export class PendingService {
   async getPendingItems(): Promise<Event[]> {
     const events = await this.api.ListEvents()
     return events.items as Event[];
+  }
+
+  async getPendingItemsSize(): Promise<Observable<number>> {
+    const events = await this.api.ListEvents()
+    return of(events.items.length);    
+  }
+
+  async deleteItem(item: Event) {
+    await this.api.DeleteEvent({id: item.id});
+  }
+
+  createSubscription() {
+    const sub = this.api.OnCreateEventListener();
+  } 
+  
+  deleteSubscription() {
+    const sub = this.api.OnDeleteEventListener();
   }
 }

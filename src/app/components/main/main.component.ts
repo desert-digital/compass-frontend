@@ -35,11 +35,12 @@ export class MainComponent {
     private _router: Router) { }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.onHomePressed();
-    this._pendingService.getPendingItems().then(items => {
-      this.pendingItems = items.length;
-    });
+    
+    const items = await this._pendingService.getPendingItemsSize();
+    items.subscribe(number => 
+      this.pendingItems = number);
   }
 
   onHomePressed() {
