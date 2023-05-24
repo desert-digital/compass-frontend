@@ -14,6 +14,7 @@ import { PendingService } from 'src/app/services/pending.service';
 export class PendingComponent {
 
   @Output() selectedEvent = new EventEmitter<String>();
+  @Output() pendingItems: number = 0;
 
   items: any[] = [];
 
@@ -21,6 +22,7 @@ export class PendingComponent {
 
   async ngOnInit() {
     await this._pendingService.getPendingItems().then(items => this.items = items);
+    this.pendingItems = this.items.length;
   }
 
   async onPendingItemSelected(evt: any) {

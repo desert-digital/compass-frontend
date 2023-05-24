@@ -5,13 +5,9 @@ h4 {
     margin: 10px;
 }
 
-.workflow-list-container {
-    @include containers;
-}
-
 .workflow-list-viewport {
     @include viewport;
-    width: 560px;
+    width: 600px;
 }
 
 button {

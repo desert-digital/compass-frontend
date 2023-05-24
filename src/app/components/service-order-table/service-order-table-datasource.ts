@@ -16,11 +16,11 @@ const todaysDate = new Date();
 const EXAMPLE_DATA: ServiceOrderTableItem[] = [
   {boat: 'La Barca', date: todaysDate.toDateString(), repair: 'Fix it'},
   {boat: 'Velero', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Speedy', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Courageous', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Bruja', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Hexe', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Maggie', date: todaysDate.toDateString(), repair: 'New rudder'}
+  {boat: 'Speedy', date: todaysDate.toDateString(), repair: 'Thru-hulls need work'},
+  {boat: 'Courageous', date: todaysDate.toDateString(), repair: 'Engine Maintenance'},
+  {boat: 'Bruja', date: todaysDate.toDateString(), repair: 'Gelcoat touch-up'},
+  {boat: 'Hexe', date: todaysDate.toDateString(), repair: 'Mainsail repair'},
+  {boat: 'Maggie', date: todaysDate.toDateString(), repair: 'Install Electronics'}
 ];
 
 /**

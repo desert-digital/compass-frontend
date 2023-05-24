@@ -8,6 +8,11 @@ import { map, shareReplay } from 'rxjs/operators';
 
 import { Amplify, Auth, Storage } from 'aws-amplify';
 
+// Local
+
+import { PendingService } from 'src/app/services/pending.service';
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -17,6 +22,8 @@ export class MainComponent {
 
   @Output() logoutEvent = new EventEmitter();
 
+  pendingItems: number = 0;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -24,11 +31,15 @@ export class MainComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
+    private _pendingService: PendingService,
     private _router: Router) { }
 
 
   ngOnInit() {
     this.onHomePressed();
+    this._pendingService.getPendingItems().then(items => {
+      this.pendingItems = items.length;
+    });
   }
 
   onHomePressed() {
