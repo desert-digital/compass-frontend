@@ -53,6 +53,7 @@ import { StaffComponent } from './components/staff/staff.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
+import { PendingTableComponent } from './components/pending-table/pending-table.component';
 
 @NgModule({
   declarations: [
@@ -70,8 +71,9 @@ import { WorkflowListComponent } from './components/workflow-list/workflow-list.
     PendingComponent,
     ManageWorkflowComponent,
     LoginComponent,
-    LogoutComponent
-  ],
+    LogoutComponent,
+    PendingTableComponent
+    ],
   imports: [
     AmplifyAuthenticatorModule,
     BrowserModule,

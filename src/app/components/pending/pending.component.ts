@@ -1,13 +1,6 @@
 // Core
 
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-
-// Amplify 
-
-// Core
-
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
 
 // Local
 
