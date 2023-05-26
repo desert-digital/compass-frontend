@@ -9,9 +9,10 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
+import { WorkflowComponent } from './components/workflow/workflow.component';
 
 import { ChecklistComponent } from './components/checklist/checklist.component';
+import { PendingTableComponent } from './components/pending-table/pending-table.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
       component: StaffComponent
     },{
       path: 'pending',
-      component: ManageWorkflowComponent
+      component: PendingTableComponent
+    },{
+      path: 'workflow',
+      component: WorkflowComponent
     },{
       path: 'checklist',
       component: ChecklistComponent

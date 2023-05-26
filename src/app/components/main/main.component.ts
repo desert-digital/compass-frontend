@@ -37,9 +37,10 @@ export class MainComponent {
 
   async ngOnInit() {
     this.onHomePressed();
+
+    const items = this._pendingService.getPendingItems();
     
-    const items = await this._pendingService.getPendingItemsSize();
-    items.subscribe(number => 
+    this._pendingService.numberOfPendingEvents$.subscribe((number : any) => 
       this.pendingItems = number);
   }
 

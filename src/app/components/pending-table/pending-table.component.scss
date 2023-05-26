@@ -1,3 +1,9 @@
+@import 'src/compass-theme';
+
+.container {
+    @include containers;
+}
+
 .full-width-table {
   width: 100%;
 }

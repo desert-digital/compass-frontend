@@ -1,11 +1,11 @@
 // Core
 
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 
 // Amplify 
 
-import { APIService, DeleteEventInput, Event } from '../API.service';
+import { APIService, Event, ModelEventFilterInput } from '../API.service';
 
 
 @Injectable({
@@ -14,25 +14,36 @@ import { APIService, DeleteEventInput, Event } from '../API.service';
 export class PendingService {
   constructor(private api: APIService) { }
 
+  public numberOfPendingEvents$ = new Subject();
+
   async getPendingItems(): Promise<Event[]> {
-    const events = await this.api.ListEvents()
+    const today = new Date().toISOString();
+
+    const variables: ModelEventFilterInput = {
+      start: {ge: today}
+    };
+
+    const events = await this.api.ListEvents(variables);
+    this.numberOfPendingEvents$.next(events.items.length);
     return events.items as Event[];
   }
 
-  async getPendingItemsSize(): Promise<Observable<number>> {
-    const events = await this.api.ListEvents()
-    return of(events.items.length);    
-  }
-
   async deleteItem(item: Event) {
-    await this.api.DeleteEvent({id: item.id});
+    await this.api.DeleteEvent({ id: item.id });
+    this.getPendingItems();
   }
 
   createSubscription() {
-    const sub = this.api.OnCreateEventListener();
-  } 
-  
-  deleteSubscription() {
-    const sub = this.api.OnDeleteEventListener();
+    const sub = this.api.OnCreateEventListener().subscribe({
+      next: (value  => console.log(value))
+    });
+  }
+
+  async deleteSubscription() {
+    const sub = this.api.OnDeleteEventListener().subscribe({
+      next: (value  => {
+        console.log(value); this.getPendingItems();
+      })
+    });
   }
 }

@@ -80,7 +80,9 @@ export class PendingTableDataSource extends DataSource<Event> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'item': return compare(a.item, b.item, isAsc);
+        case 'start': return compare(a.start, b.start, isAsc);
+        case 'end': return compare(a.end, b.end, isAsc);
+        case 'status': return compare(a.status, b.status, isAsc);
         default: return 0;
       }
     });
