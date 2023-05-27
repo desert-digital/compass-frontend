@@ -26,7 +26,7 @@ export class AddChecklistComponent {
     'Episode IX – The Rise of Skywalker',
   ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  drop(e: CdkDragDrop<string[]>) {
+    moveItemInArray(this.movies, e.previousIndex, e.currentIndex);
   }
 }

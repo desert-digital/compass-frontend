@@ -10,9 +10,9 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
-  onCreateEvent: OnCreateEventSubscription;
-  onUpdateEvent: OnUpdateEventSubscription;
-  onDeleteEvent: OnDeleteEventSubscription;
+  onCreatePendingEvent: OnCreatePendingEventSubscription;
+  onUpdatePendingEvent: OnUpdatePendingEventSubscription;
+  onDeletePendingEvent: OnDeletePendingEventSubscription;
   onCreateVessel: OnCreateVesselSubscription;
   onUpdateVessel: OnUpdateVesselSubscription;
   onDeleteVessel: OnDeleteVesselSubscription;
@@ -36,7 +36,7 @@ export type __SubscriptionContainer = {
   onDeleteWorkflow: OnDeleteWorkflowSubscription;
 };
 
-export type CreateEventInput = {
+export type CreatePendingEventInput = {
   id?: string | null;
   company?: string | null;
   body?: string | null;
@@ -47,7 +47,7 @@ export type CreateEventInput = {
   status?: string | null;
 };
 
-export type ModelEventConditionInput = {
+export type ModelPendingEventConditionInput = {
   company?: ModelIDInput | null;
   body?: ModelStringInput | null;
   start?: ModelStringInput | null;
@@ -55,9 +55,9 @@ export type ModelEventConditionInput = {
   item?: ModelStringInput | null;
   item_id?: ModelStringInput | null;
   status?: ModelStringInput | null;
-  and?: Array<ModelEventConditionInput | null> | null;
-  or?: Array<ModelEventConditionInput | null> | null;
-  not?: ModelEventConditionInput | null;
+  and?: Array<ModelPendingEventConditionInput | null> | null;
+  or?: Array<ModelPendingEventConditionInput | null> | null;
+  not?: ModelPendingEventConditionInput | null;
 };
 
 export type ModelIDInput = {
@@ -115,8 +115,8 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null;
 };
 
-export type Event = {
-  __typename: "Event";
+export type PendingEvent = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -129,7 +129,7 @@ export type Event = {
   updatedAt: string;
 };
 
-export type UpdateEventInput = {
+export type UpdatePendingEventInput = {
   id: string;
   company?: string | null;
   body?: string | null;
@@ -140,7 +140,7 @@ export type UpdateEventInput = {
   status?: string | null;
 };
 
-export type DeleteEventInput = {
+export type DeletePendingEventInput = {
   id: string;
 };
 
@@ -461,7 +461,7 @@ export type DeleteWorkflowInput = {
   id: string;
 };
 
-export type ModelEventFilterInput = {
+export type ModelPendingEventFilterInput = {
   id?: ModelIDInput | null;
   company?: ModelIDInput | null;
   body?: ModelStringInput | null;
@@ -470,14 +470,14 @@ export type ModelEventFilterInput = {
   item?: ModelStringInput | null;
   item_id?: ModelStringInput | null;
   status?: ModelStringInput | null;
-  and?: Array<ModelEventFilterInput | null> | null;
-  or?: Array<ModelEventFilterInput | null> | null;
-  not?: ModelEventFilterInput | null;
+  and?: Array<ModelPendingEventFilterInput | null> | null;
+  or?: Array<ModelPendingEventFilterInput | null> | null;
+  not?: ModelPendingEventFilterInput | null;
 };
 
-export type ModelEventConnection = {
-  __typename: "ModelEventConnection";
-  items: Array<Event | null>;
+export type ModelPendingEventConnection = {
+  __typename: "ModelPendingEventConnection";
+  items: Array<PendingEvent | null>;
   nextToken?: string | null;
 };
 
@@ -586,7 +586,7 @@ export type ModelWorkflowConnection = {
   nextToken?: string | null;
 };
 
-export type ModelSubscriptionEventFilterInput = {
+export type ModelSubscriptionPendingEventFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
   body?: ModelSubscriptionStringInput | null;
@@ -595,8 +595,8 @@ export type ModelSubscriptionEventFilterInput = {
   item?: ModelSubscriptionStringInput | null;
   item_id?: ModelSubscriptionStringInput | null;
   status?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionEventFilterInput | null> | null;
-  or?: Array<ModelSubscriptionEventFilterInput | null> | null;
+  and?: Array<ModelSubscriptionPendingEventFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPendingEventFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
@@ -707,8 +707,8 @@ export type ModelSubscriptionWorkflowFilterInput = {
   or?: Array<ModelSubscriptionWorkflowFilterInput | null> | null;
 };
 
-export type CreateEventMutation = {
-  __typename: "Event";
+export type CreatePendingEventMutation = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -721,8 +721,8 @@ export type CreateEventMutation = {
   updatedAt: string;
 };
 
-export type UpdateEventMutation = {
-  __typename: "Event";
+export type UpdatePendingEventMutation = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -735,8 +735,8 @@ export type UpdateEventMutation = {
   updatedAt: string;
 };
 
-export type DeleteEventMutation = {
-  __typename: "Event";
+export type DeletePendingEventMutation = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -1214,8 +1214,8 @@ export type DeleteWorkflowMutation = {
   workflowStepsId?: string | null;
 };
 
-export type GetEventQuery = {
-  __typename: "Event";
+export type GetPendingEventQuery = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -1228,10 +1228,10 @@ export type GetEventQuery = {
   updatedAt: string;
 };
 
-export type ListEventsQuery = {
-  __typename: "ModelEventConnection";
+export type ListPendingEventsQuery = {
+  __typename: "ModelPendingEventConnection";
   items: Array<{
-    __typename: "Event";
+    __typename: "PendingEvent";
     id: string;
     company?: string | null;
     body?: string | null;
@@ -1552,8 +1552,8 @@ export type ListWorkflowsQuery = {
   nextToken?: string | null;
 };
 
-export type OnCreateEventSubscription = {
-  __typename: "Event";
+export type OnCreatePendingEventSubscription = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -1566,8 +1566,8 @@ export type OnCreateEventSubscription = {
   updatedAt: string;
 };
 
-export type OnUpdateEventSubscription = {
-  __typename: "Event";
+export type OnUpdatePendingEventSubscription = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -1580,8 +1580,8 @@ export type OnUpdateEventSubscription = {
   updatedAt: string;
 };
 
-export type OnDeleteEventSubscription = {
-  __typename: "Event";
+export type OnDeletePendingEventSubscription = {
+  __typename: "PendingEvent";
   id: string;
   company?: string | null;
   body?: string | null;
@@ -2063,12 +2063,12 @@ export type OnDeleteWorkflowSubscription = {
   providedIn: "root"
 })
 export class APIService {
-  async CreateEvent(
-    input: CreateEventInput,
-    condition?: ModelEventConditionInput
-  ): Promise<CreateEventMutation> {
-    const statement = `mutation CreateEvent($input: CreateEventInput!, $condition: ModelEventConditionInput) {
-        createEvent(input: $input, condition: $condition) {
+  async CreatePendingEvent(
+    input: CreatePendingEventInput,
+    condition?: ModelPendingEventConditionInput
+  ): Promise<CreatePendingEventMutation> {
+    const statement = `mutation CreatePendingEvent($input: CreatePendingEventInput!, $condition: ModelPendingEventConditionInput) {
+        createPendingEvent(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2091,14 +2091,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateEventMutation>response.data.createEvent;
+    return <CreatePendingEventMutation>response.data.createPendingEvent;
   }
-  async UpdateEvent(
-    input: UpdateEventInput,
-    condition?: ModelEventConditionInput
-  ): Promise<UpdateEventMutation> {
-    const statement = `mutation UpdateEvent($input: UpdateEventInput!, $condition: ModelEventConditionInput) {
-        updateEvent(input: $input, condition: $condition) {
+  async UpdatePendingEvent(
+    input: UpdatePendingEventInput,
+    condition?: ModelPendingEventConditionInput
+  ): Promise<UpdatePendingEventMutation> {
+    const statement = `mutation UpdatePendingEvent($input: UpdatePendingEventInput!, $condition: ModelPendingEventConditionInput) {
+        updatePendingEvent(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2121,14 +2121,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateEventMutation>response.data.updateEvent;
+    return <UpdatePendingEventMutation>response.data.updatePendingEvent;
   }
-  async DeleteEvent(
-    input: DeleteEventInput,
-    condition?: ModelEventConditionInput
-  ): Promise<DeleteEventMutation> {
-    const statement = `mutation DeleteEvent($input: DeleteEventInput!, $condition: ModelEventConditionInput) {
-        deleteEvent(input: $input, condition: $condition) {
+  async DeletePendingEvent(
+    input: DeletePendingEventInput,
+    condition?: ModelPendingEventConditionInput
+  ): Promise<DeletePendingEventMutation> {
+    const statement = `mutation DeletePendingEvent($input: DeletePendingEventInput!, $condition: ModelPendingEventConditionInput) {
+        deletePendingEvent(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2151,7 +2151,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteEventMutation>response.data.deleteEvent;
+    return <DeletePendingEventMutation>response.data.deletePendingEvent;
   }
   async CreateVessel(
     input: CreateVesselInput,
@@ -2954,9 +2954,9 @@ export class APIService {
     )) as any;
     return <DeleteWorkflowMutation>response.data.deleteWorkflow;
   }
-  async GetEvent(id: string): Promise<GetEventQuery> {
-    const statement = `query GetEvent($id: ID!) {
-        getEvent(id: $id) {
+  async GetPendingEvent(id: string): Promise<GetPendingEventQuery> {
+    const statement = `query GetPendingEvent($id: ID!) {
+        getPendingEvent(id: $id) {
           __typename
           id
           company
@@ -2976,15 +2976,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetEventQuery>response.data.getEvent;
+    return <GetPendingEventQuery>response.data.getPendingEvent;
   }
-  async ListEvents(
-    filter?: ModelEventFilterInput,
+  async ListPendingEvents(
+    filter?: ModelPendingEventFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListEventsQuery> {
-    const statement = `query ListEvents($filter: ModelEventFilterInput, $limit: Int, $nextToken: String) {
-        listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListPendingEventsQuery> {
+    const statement = `query ListPendingEvents($filter: ModelPendingEventFilterInput, $limit: Int, $nextToken: String) {
+        listPendingEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
@@ -3015,7 +3015,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListEventsQuery>response.data.listEvents;
+    return <ListPendingEventsQuery>response.data.listPendingEvents;
   }
   async GetVessel(id: string): Promise<GetVesselQuery> {
     const statement = `query GetVessel($id: ID!) {
@@ -3540,13 +3540,13 @@ export class APIService {
     )) as any;
     return <ListWorkflowsQuery>response.data.listWorkflows;
   }
-  OnCreateEventListener(
-    filter?: ModelSubscriptionEventFilterInput
+  OnCreatePendingEventListener(
+    filter?: ModelSubscriptionPendingEventFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateEvent">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreatePendingEvent">>
   > {
-    const statement = `subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
-        onCreateEvent(filter: $filter) {
+    const statement = `subscription OnCreatePendingEvent($filter: ModelSubscriptionPendingEventFilterInput) {
+        onCreatePendingEvent(filter: $filter) {
           __typename
           id
           company
@@ -3567,17 +3567,19 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateEvent">>
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreatePendingEvent">
+      >
     >;
   }
 
-  OnUpdateEventListener(
-    filter?: ModelSubscriptionEventFilterInput
+  OnUpdatePendingEventListener(
+    filter?: ModelSubscriptionPendingEventFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateEvent">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdatePendingEvent">>
   > {
-    const statement = `subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
-        onUpdateEvent(filter: $filter) {
+    const statement = `subscription OnUpdatePendingEvent($filter: ModelSubscriptionPendingEventFilterInput) {
+        onUpdatePendingEvent(filter: $filter) {
           __typename
           id
           company
@@ -3598,17 +3600,19 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateEvent">>
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdatePendingEvent">
+      >
     >;
   }
 
-  OnDeleteEventListener(
-    filter?: ModelSubscriptionEventFilterInput
+  OnDeletePendingEventListener(
+    filter?: ModelSubscriptionPendingEventFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteEvent">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeletePendingEvent">>
   > {
-    const statement = `subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
-        onDeleteEvent(filter: $filter) {
+    const statement = `subscription OnDeletePendingEvent($filter: ModelSubscriptionPendingEventFilterInput) {
+        onDeletePendingEvent(filter: $filter) {
           __typename
           id
           company
@@ -3629,7 +3633,9 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteEvent">>
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeletePendingEvent">
+      >
     >;
   }
 

@@ -1,1 +1,5 @@
-<p>add-workflow works!</p>
+<div class="container">
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag class="example-box" *ngFor="let movie of movies">{{movie}}</div>
+    </div>
+</div>

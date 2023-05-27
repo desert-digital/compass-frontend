@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-query GetEvent($id: ID!) {
-  getEvent(id: $id) {
+query GetPendingEvent($id: ID!) {
+  getPendingEvent(id: $id) {
     id
     company
     body
@@ -13,12 +13,12 @@ query GetEvent($id: ID!) {
     updatedAt
   }
 }
-query ListEvents(
-  $filter: ModelEventFilterInput
+query ListPendingEvents(
+  $filter: ModelPendingEventFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPendingEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       company

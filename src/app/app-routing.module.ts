@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Local
 
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
+import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,6 +36,9 @@ const routes: Routes = [
     },{
       path: 'workflow/:eventId',
       component: WorkflowComponent
+    },{
+      path: 'add-workflow',
+      component: AddWorkflowComponent
     },{
       path: 'workflows',
       component: ManageWorkflowsComponent

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 
 // Amplify 
 
-import { APIService, Event, ModelEventFilterInput } from '../API.service';
+import { APIService, PendingEvent, ModelPendingEventFilterInput } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,42 +15,42 @@ export class PendingService {
 
   public numberOfPendingEvents$ = new Subject();
 
-  async getPendingItems(): Promise<Event[]> {
+  async getPendingItems(): Promise<PendingEvent[]> {
     const today = new Date().toISOString();
 
-    const variables: ModelEventFilterInput = {
+    const variables: ModelPendingEventFilterInput = {
       start: {ge: today}
     };
 
-    const events = await this.api.ListEvents(variables);
+    const events = await this.api.ListPendingEvents(variables);
     this.numberOfPendingEvents$.next(events.items.length);
-    return events.items as Event[];
+    return events.items as PendingEvent[];
   }
 
-  async getPendingItem(id: string): Promise<Event> {
+  async getPendingItem(id: string): Promise<PendingEvent> {
     const today = new Date().toISOString();
 
-    const variables: ModelEventFilterInput = {
+    const variables: ModelPendingEventFilterInput = {
       start: {ge: today}
     };
 
-    const events = await this.api.ListEvents(variables);
-    return events.items[0] as Event;
+    const events = await this.api.ListPendingEvents(variables);
+    return events.items[0] as PendingEvent;
   }
 
-  async deleteItem(item: Event) {
-    await this.api.DeleteEvent({ id: item.id });
+  async deleteItem(item: PendingEvent) {
+    await this.api.DeletePendingEvent({ id: item.id });
     this.getPendingItems();
   }
 
   createSubscription() {
-    const sub = this.api.OnCreateEventListener().subscribe({
+    const sub = this.api.OnCreatePendingEventListener().subscribe({
       next: (value  => console.log(value))
     });
   }
 
   async deleteSubscription() {
-    const sub = this.api.OnDeleteEventListener().subscribe({
+    const sub = this.api.OnDeletePendingEventListener().subscribe({
       next: (value  => {
         console.log(value); this.getPendingItems();
       })

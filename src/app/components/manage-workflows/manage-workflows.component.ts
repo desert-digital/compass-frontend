@@ -25,6 +25,6 @@ export class ManageWorkflowsComponent {
   }
 
   onAddNewWorkflowPressed() {
-    // this.router.navigate(['/main/add-workflow']);
+    this.router.navigate(['/main/add-workflow']);
   }
 }

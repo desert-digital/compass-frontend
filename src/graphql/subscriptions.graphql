@@ -1,6 +1,8 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
-  onCreateEvent(filter: $filter) {
+subscription OnCreatePendingEvent(
+  $filter: ModelSubscriptionPendingEventFilterInput
+) {
+  onCreatePendingEvent(filter: $filter) {
     id
     company
     body
@@ -13,8 +15,10 @@ subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
     updatedAt
   }
 }
-subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
-  onUpdateEvent(filter: $filter) {
+subscription OnUpdatePendingEvent(
+  $filter: ModelSubscriptionPendingEventFilterInput
+) {
+  onUpdatePendingEvent(filter: $filter) {
     id
     company
     body
@@ -27,8 +31,10 @@ subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
     updatedAt
   }
 }
-subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
-  onDeleteEvent(filter: $filter) {
+subscription OnDeletePendingEvent(
+  $filter: ModelSubscriptionPendingEventFilterInput
+) {
+  onDeletePendingEvent(filter: $filter) {
     id
     company
     body

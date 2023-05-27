@@ -1,9 +1,9 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateEvent(
-  $input: CreateEventInput!
-  $condition: ModelEventConditionInput
+mutation CreatePendingEvent(
+  $input: CreatePendingEventInput!
+  $condition: ModelPendingEventConditionInput
 ) {
-  createEvent(input: $input, condition: $condition) {
+  createPendingEvent(input: $input, condition: $condition) {
     id
     company
     body
@@ -16,11 +16,11 @@ mutation CreateEvent(
     updatedAt
   }
 }
-mutation UpdateEvent(
-  $input: UpdateEventInput!
-  $condition: ModelEventConditionInput
+mutation UpdatePendingEvent(
+  $input: UpdatePendingEventInput!
+  $condition: ModelPendingEventConditionInput
 ) {
-  updateEvent(input: $input, condition: $condition) {
+  updatePendingEvent(input: $input, condition: $condition) {
     id
     company
     body
@@ -33,11 +33,11 @@ mutation UpdateEvent(
     updatedAt
   }
 }
-mutation DeleteEvent(
-  $input: DeleteEventInput!
-  $condition: ModelEventConditionInput
+mutation DeletePendingEvent(
+  $input: DeletePendingEventInput!
+  $condition: ModelPendingEventConditionInput
 ) {
-  deleteEvent(input: $input, condition: $condition) {
+  deletePendingEvent(input: $input, condition: $condition) {
     id
     company
     body
