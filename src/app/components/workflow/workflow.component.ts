@@ -2,6 +2,11 @@
 
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+// Local
+
+import { PendingService } from 'src/app/services/pending.service';
 
 
 @Component({
@@ -12,14 +17,26 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angu
 
 export class WorkflowComponent {
 
-  @Input() workflow: any;
+  workflow: any;
 
   precharterTeamSelectControl = new FormControl(['', Validators.required]);
   precharterCaptainSelectControl = new FormControl(['', Validators.required]);
 
   isLinear = true;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private _pendingService: PendingService,
+    private _formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const eventId = params.get('eventId');
+      if (eventId) {
+        this._pendingService.getPendingItem(eventId).then(evt => 
+          this.workflow = evt);
+      }
+    });
+  }
 
   onStartWorkflowPressed() {
     console.log('Precharter team member: ', this.precharterTeamSelectControl.value);

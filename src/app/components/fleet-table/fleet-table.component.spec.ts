@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageWorkflowComponent } from './manage-workflow.component';
+import { FleetTableComponent } from './fleet-table.component';
 
-describe('ManageWorkflowComponent', () => {
-  let component: ManageWorkflowComponent;
-  let fixture: ComponentFixture<ManageWorkflowComponent>;
+describe('FleetTableComponent', () => {
+  let component: FleetTableComponent;
+  let fixture: ComponentFixture<FleetTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageWorkflowComponent ]
+      declarations: [ FleetTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ManageWorkflowComponent);
+    fixture = TestBed.createComponent(FleetTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

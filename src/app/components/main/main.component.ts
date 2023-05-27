@@ -60,10 +60,22 @@ export class MainComponent {
     this._router.navigate(['main/staff']);
   }
 
+  onChecklistPressed() {
+    this._router.navigate(['main/checklists']);
+  }
+
+  onWorkflowPressed() {
+    this._router.navigate(['main/workflows']);
+  }
+
+  onServicesPressed() {
+    this._router.navigate(['main/services']);
+  }
+
   async onLogoutPressed() {
     try {
       await Auth.signOut();
-      this._router.navigate(['/logout']);
+      // add code to disable navigation
     }
     catch (e) {
       console.log(JSON.stringify(e));

@@ -46,7 +46,6 @@ import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { ManageWorkflowComponent } from './components/manage-workflow/manage-workflow.component';
 import { MainComponent } from './components/main/main.component';
 import { PendingComponent } from './components/pending/pending.component';
 import { StaffComponent } from './components/staff/staff.component';
@@ -54,6 +53,10 @@ import { ServiceOrderTableComponent } from './components/service-order-table/ser
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
+import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
+import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
+import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
+import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
 
 @NgModule({
   declarations: [
@@ -69,10 +72,13 @@ import { PendingTableComponent } from './components/pending-table/pending-table.
     ServiceOrderTableComponent,
     CharterChartComponent,
     PendingComponent,
-    ManageWorkflowComponent,
     LoginComponent,
     LogoutComponent,
-    PendingTableComponent
+    PendingTableComponent,
+    ManageChecklistsComponent,
+    ManageWorkflowsComponent,
+    ManageServiceOrdersComponent,
+    FleetTableComponent
     ],
   imports: [
     AmplifyAuthenticatorModule,

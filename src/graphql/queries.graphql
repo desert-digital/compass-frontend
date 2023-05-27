@@ -39,8 +39,18 @@ query GetVessel($id: ID!) {
     id
     company
     name
+    type
+    defaultWorkflow {
+      actions {
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
+    vesselDefaultWorkflowId
   }
 }
 query ListVessels(
@@ -53,8 +63,15 @@ query ListVessels(
       id
       company
       name
+      type
+      defaultWorkflow {
+        id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
+      vesselDefaultWorkflowId
     }
     nextToken
   }
@@ -96,6 +113,7 @@ query GetAction($id: ID!) {
     duration
     createdAt
     updatedAt
+    checkListStepsActionsId
   }
 }
 query ListActions(
@@ -113,40 +131,15 @@ query ListActions(
       duration
       createdAt
       updatedAt
+      checkListStepsActionsId
     }
     nextToken
   }
 }
-query GetStep($id: ID!) {
-  getStep(id: $id) {
-    id
-    company
-    activity {
-      id
-      company
-      status
-      description
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-    checkListStepsId
-    stepActivityId
-  }
-}
-query ListSteps(
-  $filter: ModelStepFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      company
-      activity {
+query GetCheckListSteps($id: ID!) {
+  getCheckListSteps(id: $id) {
+    actions {
+      items {
         id
         company
         status
@@ -155,11 +148,30 @@ query ListSteps(
         duration
         createdAt
         updatedAt
+        checkListStepsActionsId
       }
+      nextToken
+    }
+    id
+    createdAt
+    updatedAt
+    workflowStepsActionsId
+  }
+}
+query ListCheckListSteps(
+  $filter: ModelCheckListStepsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCheckListSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      actions {
+        nextToken
+      }
+      id
       createdAt
       updatedAt
-      checkListStepsId
-      stepActivityId
+      workflowStepsActionsId
     }
     nextToken
   }
@@ -177,22 +189,20 @@ query GetCheckList($id: ID!) {
       updatedAt
     }
     steps {
-      items {
-        id
-        company
-        createdAt
-        updatedAt
-        checkListStepsId
-        stepActivityId
+      actions {
+        nextToken
       }
-      nextToken
+      id
+      createdAt
+      updatedAt
+      workflowStepsActionsId
     }
     start
     end
     createdAt
     updatedAt
-    workflowStepsId
     checkListOwnerId
+    checkListStepsId
   }
 }
 query ListCheckLists(
@@ -213,14 +223,50 @@ query ListCheckLists(
         updatedAt
       }
       steps {
-        nextToken
+        id
+        createdAt
+        updatedAt
+        workflowStepsActionsId
       }
       start
       end
       createdAt
       updatedAt
-      workflowStepsId
       checkListOwnerId
+      checkListStepsId
+    }
+    nextToken
+  }
+}
+query GetWorkflowSteps($id: ID!) {
+  getWorkflowSteps(id: $id) {
+    actions {
+      items {
+        id
+        createdAt
+        updatedAt
+        workflowStepsActionsId
+      }
+      nextToken
+    }
+    id
+    createdAt
+    updatedAt
+  }
+}
+query ListWorkflowSteps(
+  $filter: ModelWorkflowStepsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWorkflowSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      actions {
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
     }
     nextToken
   }
@@ -238,23 +284,19 @@ query GetWorkflow($id: ID!) {
       updatedAt
     }
     steps {
-      items {
-        id
-        company
-        start
-        end
-        createdAt
-        updatedAt
-        workflowStepsId
-        checkListOwnerId
+      actions {
+        nextToken
       }
-      nextToken
+      id
+      createdAt
+      updatedAt
     }
     start
     end
     createdAt
     updatedAt
     workflowOwnerId
+    workflowStepsId
   }
 }
 query ListWorkflows(
@@ -275,13 +317,16 @@ query ListWorkflows(
         updatedAt
       }
       steps {
-        nextToken
+        id
+        createdAt
+        updatedAt
       }
       start
       end
       createdAt
       updatedAt
       workflowOwnerId
+      workflowStepsId
     }
     nextToken
   }

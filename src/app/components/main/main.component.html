@@ -7,17 +7,29 @@
         <mat-icon class="double-sized">home</mat-icon>
         <span class="sidenav-button-text">Home</span>
       </button>
-      <button mat-button color="primary" (click)="onFleetPressed()">
-        <mat-icon class="double-sized">sailing</mat-icon>
-        <span class="sidenav-button-text">Fleet</span>
-      </button>
       <button [matBadge]="pendingItems" matBadgeSize="large" mat-button color="primary" (click)="onPendingPressed()">
         <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
         <span class="sidenav-button-text">Pending</span>
       </button>
+      <button mat-button color="primary" (click)="onFleetPressed()">
+        <mat-icon class="double-sized">sailing</mat-icon>
+        <span class="sidenav-button-text">Fleet</span>
+      </button>
       <button mat-button color="primary" (click)="onStaffPressed()">
         <mat-icon class="double-sized">badge</mat-icon>
         <span class="sidenav-button-text">Staff</span>
+      </button>
+      <button mat-button color="primary" (click)="onWorkflowPressed()">
+        <mat-icon class="double-sized">rebase_edit</mat-icon>
+        <span class="sidenav-button-text">Workflows</span>
+      </button>
+      <button mat-button color="primary" (click)="onChecklistPressed()">
+        <mat-icon class="double-sized">checklist_rtl</mat-icon>
+        <span class="sidenav-button-text">Checklists</span>
+      </button>
+      <button mat-button color="primary" (click)="onServicesPressed()">
+        <mat-icon class="double-sized">home_repair_service</mat-icon>
+        <span class="sidenav-button-text">Service Orders</span>
       </button>
     </div>
   </mat-sidenav>

@@ -6,7 +6,7 @@ import { Router} from '@angular/router';
 // Material
 
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 
 // Local
@@ -39,10 +39,15 @@ export class PendingTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+
+    const sortState: Sort = {active: 'start', direction: 'asc'};
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
   }
 
   onAssignPressed(evt: any) {
-    this.router.navigate(['/main/workflow']);
+    this.router.navigate(['/main/workflow', evt.id]);
   }
 
   onDeletePressed(evt: any) {

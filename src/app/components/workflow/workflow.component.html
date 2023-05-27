@@ -1,6 +1,6 @@
 <div class="container">
   <h4>Assign The Workflow</h4>
-  <h3 class="tight">Charter #: {{ workflow.item }}</h3>
+  <h3 class="tight">Charter: {{ workflow.item }}</h3>
   <p class="tight">Charter starting on: {{ workflow.start | date: 'short' }}</p>
   <form>
     <mat-stepper orientation="vertical" #stepper>

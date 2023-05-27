@@ -10,9 +10,11 @@ import { HomeComponent } from './components/home/home.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
-
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
+import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
+import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
+import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 
 const routes: Routes = [
   {
@@ -30,11 +32,17 @@ const routes: Routes = [
       path: 'pending',
       component: PendingTableComponent
     },{
-      path: 'workflow',
+      path: 'workflow/:eventId',
       component: WorkflowComponent
     },{
-      path: 'checklist',
-      component: ChecklistComponent
+      path: 'workflows',
+      component: ManageWorkflowsComponent
+    },{
+      path: 'checklists',
+      component: ManageChecklistsComponent
+    },{
+      path: 'services',
+      component: ManageServiceOrdersComponent
     }],
   },
   {
@@ -55,7 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableTracing: false})],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -11,46 +11,50 @@ type Event @model @auth(rules: [{ allow: private }]){
 
 type Vessel @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID!
+  company: ID
   name: String
+  type: String
+  defaultWorkflow: WorkflowSteps @hasOne
 }
 
 type Contact @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID!
+  company: ID
   name: String
-  email: String
+  email: String 
 }
 
 type Action @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID!
+  company: ID
   status: Boolean
   description: String
   notes: String 
   duration: Int
 }
 
-type Step @model @auth(rules: [{ allow: private }]){
-  id: ID!
-  company: ID!
-  activity: Action @hasOne
+type CheckListSteps @model @auth(rules: [{allow: private}]) {
+  actions: [Action] @hasMany
 }
 
 type CheckList @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID!
   owner: Contact @hasOne
-  steps: [Step] @hasMany
+  steps: CheckListSteps @hasOne
   start: AWSDate
   end: AWSDate 
+}
+
+type WorkflowSteps @model @auth(rules: [{allow: private}]) {
+  actions: [CheckListSteps] @hasMany
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID!
   owner: Contact @hasOne
-  steps: [CheckList] @hasMany
+  steps: WorkflowSteps @hasOne
   start: AWSDate
   end: AWSDate 
 }

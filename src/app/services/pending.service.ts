@@ -28,6 +28,17 @@ export class PendingService {
     return events.items as Event[];
   }
 
+  async getPendingItem(id: string): Promise<Event> {
+    const today = new Date().toISOString();
+
+    const variables: ModelEventFilterInput = {
+      start: {ge: today}
+    };
+
+    const events = await this.api.ListEvents(variables);
+    return events.items[0] as Event;
+  }
+
   async deleteItem(item: Event) {
     await this.api.DeleteEvent({ id: item.id });
     this.getPendingItems();
