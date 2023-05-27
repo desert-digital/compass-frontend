@@ -1,12 +1,12 @@
 <div class="container">
-    <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Checklist</button>
+    <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Workflow</button>
     <div *ngIf="workflows.length > 0">
-        <h4>Checklists</h4>
+        <h4>Workflows</h4>
         <mat-list *ngFor="let workflow of workflows">
             <mat-list-item>{{ workflow.name }}</mat-list-item>
         </mat-list>
     </div>
     <div *ngIf="workflows.length == 0">
-        <h4>No Checklists Found</h4>
+        <h4>No Workflows Found</h4>
     </div>
 </div>

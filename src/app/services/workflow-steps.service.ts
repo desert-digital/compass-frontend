@@ -12,7 +12,7 @@ export class WorkflowStepsService {
 
   constructor(private api: APIService) { }
 
-  async getChecklistSteps(): Promise<WorkflowSteps[]> {
+  async getWorkflowSteps(): Promise<WorkflowSteps[]> {
     const events = await this.api.ListWorkflowSteps();
     return events.items as WorkflowSteps[];
   }

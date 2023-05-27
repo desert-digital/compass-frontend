@@ -1,10 +1,11 @@
 // Core
 
 import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 // Material
 
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-add-checklist',
@@ -25,7 +26,7 @@ export class AddChecklistComponent {
     'Episode IX – The Rise of Skywalker',
   ];
 
-  drop(event: any) {
+  drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 }

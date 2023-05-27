@@ -59,6 +59,7 @@ import { ManageWorkflowsComponent } from './components/manage-workflows/manage-w
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
+import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 
 @NgModule({
   declarations: [
@@ -81,13 +82,15 @@ import { AddChecklistComponent } from './components/add-checklist/add-checklist.
     ManageWorkflowsComponent,
     ManageServiceOrdersComponent,
     FleetTableComponent,
-    AddChecklistComponent
+    AddChecklistComponent,
+    AddWorkflowComponent
     ],
   imports: [
     AmplifyAuthenticatorModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    DragDropModule,
     FormsModule, 
     ReactiveFormsModule,
     LayoutModule,

@@ -1,5 +1,9 @@
 @import 'src/compass-theme';
 
+button {
+    @include buttons;
+}
+
 .container {
     @include containers;
 }

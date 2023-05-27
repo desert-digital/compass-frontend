@@ -15,16 +15,16 @@ import { WorkflowStepsService } from 'src/app/services/workflow-steps.service';
 })
 export class ManageWorkflowsComponent {
 
+  workflows: WorkflowSteps[] = [];
+
   constructor(private router: Router,
     private _workflowStepsService: WorkflowStepsService) {}
-
-  workflows: WorkflowSteps[] = [];
+  
   async ngOnInit() {
     this.workflows = await this._workflowStepsService.getWorkflowSteps();
   }
 
-  onAddNewChecklistPressed() {
-    this.router.navigate(['/main/add-checklist']);
+  onAddNewWorkflowPressed() {
+    // this.router.navigate(['/main/add-workflow']);
   }
-
 }
