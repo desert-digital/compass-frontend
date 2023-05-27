@@ -41,10 +41,11 @@ query GetVessel($id: ID!) {
     name
     type
     defaultWorkflow {
+      id
+      name
       actions {
         nextToken
       }
-      id
       createdAt
       updatedAt
     }
@@ -66,6 +67,7 @@ query ListVessels(
       type
       defaultWorkflow {
         id
+        name
         createdAt
         updatedAt
       }
@@ -113,7 +115,7 @@ query GetAction($id: ID!) {
     duration
     createdAt
     updatedAt
-    checkListStepsActionsId
+    checklistStepsActionsId
   }
 }
 query ListActions(
@@ -131,13 +133,15 @@ query ListActions(
       duration
       createdAt
       updatedAt
-      checkListStepsActionsId
+      checklistStepsActionsId
     }
     nextToken
   }
 }
-query GetCheckListSteps($id: ID!) {
-  getCheckListSteps(id: $id) {
+query GetChecklistSteps($id: ID!) {
+  getChecklistSteps(id: $id) {
+    id
+    name
     actions {
       items {
         id
@@ -148,27 +152,27 @@ query GetCheckListSteps($id: ID!) {
         duration
         createdAt
         updatedAt
-        checkListStepsActionsId
+        checklistStepsActionsId
       }
       nextToken
     }
-    id
     createdAt
     updatedAt
     workflowStepsActionsId
   }
 }
-query ListCheckListSteps(
-  $filter: ModelCheckListStepsFilterInput
+query ListChecklistSteps(
+  $filter: ModelChecklistStepsFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listCheckListSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listChecklistSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      id
+      name
       actions {
         nextToken
       }
-      id
       createdAt
       updatedAt
       workflowStepsActionsId
@@ -176,8 +180,8 @@ query ListCheckListSteps(
     nextToken
   }
 }
-query GetCheckList($id: ID!) {
-  getCheckList(id: $id) {
+query GetChecklist($id: ID!) {
+  getChecklist(id: $id) {
     id
     company
     owner {
@@ -189,10 +193,11 @@ query GetCheckList($id: ID!) {
       updatedAt
     }
     steps {
+      id
+      name
       actions {
         nextToken
       }
-      id
       createdAt
       updatedAt
       workflowStepsActionsId
@@ -201,16 +206,16 @@ query GetCheckList($id: ID!) {
     end
     createdAt
     updatedAt
-    checkListOwnerId
-    checkListStepsId
+    checklistOwnerId
+    checklistStepsId
   }
 }
-query ListCheckLists(
-  $filter: ModelCheckListFilterInput
+query ListChecklists(
+  $filter: ModelChecklistFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listCheckLists(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listChecklists(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       company
@@ -224,6 +229,7 @@ query ListCheckLists(
       }
       steps {
         id
+        name
         createdAt
         updatedAt
         workflowStepsActionsId
@@ -232,24 +238,26 @@ query ListCheckLists(
       end
       createdAt
       updatedAt
-      checkListOwnerId
-      checkListStepsId
+      checklistOwnerId
+      checklistStepsId
     }
     nextToken
   }
 }
 query GetWorkflowSteps($id: ID!) {
   getWorkflowSteps(id: $id) {
+    id
+    name
     actions {
       items {
         id
+        name
         createdAt
         updatedAt
         workflowStepsActionsId
       }
       nextToken
     }
-    id
     createdAt
     updatedAt
   }
@@ -261,10 +269,11 @@ query ListWorkflowSteps(
 ) {
   listWorkflowSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      id
+      name
       actions {
         nextToken
       }
-      id
       createdAt
       updatedAt
     }
@@ -284,10 +293,11 @@ query GetWorkflow($id: ID!) {
       updatedAt
     }
     steps {
+      id
+      name
       actions {
         nextToken
       }
-      id
       createdAt
       updatedAt
     }
@@ -318,6 +328,7 @@ query ListWorkflows(
       }
       steps {
         id
+        name
         createdAt
         updatedAt
       }

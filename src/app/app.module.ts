@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Material
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -57,6 +58,7 @@ import { ManageChecklistsComponent } from './components/manage-checklists/manage
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
+import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { FleetTableComponent } from './components/fleet-table/fleet-table.compon
     ManageChecklistsComponent,
     ManageWorkflowsComponent,
     ManageServiceOrdersComponent,
-    FleetTableComponent
+    FleetTableComponent,
+    AddChecklistComponent
     ],
   imports: [
     AmplifyAuthenticatorModule,

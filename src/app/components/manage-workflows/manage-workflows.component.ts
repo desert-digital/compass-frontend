@@ -1,4 +1,12 @@
+// Core
+
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+// Local
+
+import { WorkflowSteps } from 'src/app/API.service';
+import { WorkflowStepsService } from 'src/app/services/workflow-steps.service';
 
 @Component({
   selector: 'app-manage-workflows',
@@ -6,5 +14,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./manage-workflows.component.scss']
 })
 export class ManageWorkflowsComponent {
+
+  constructor(private router: Router,
+    private _workflowStepsService: WorkflowStepsService) {}
+
+  workflows: WorkflowSteps[] = [];
+  async ngOnInit() {
+    this.workflows = await this._workflowStepsService.getWorkflowSteps();
+  }
+
+  onAddNewChecklistPressed() {
+    this.router.navigate(['/main/add-checklist']);
+  }
 
 }

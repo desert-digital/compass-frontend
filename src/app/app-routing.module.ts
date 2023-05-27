@@ -3,18 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Local
 
+import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
+import { ChecklistComponent } from './components/checklist/checklist.component';
+import { FleetComponent } from './components/fleet/fleet.component';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
-import { HomeComponent } from './components/home/home.component';
-import { FleetComponent } from './components/fleet/fleet.component';
+import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
+import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
+import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
+import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
-import { ChecklistComponent } from './components/checklist/checklist.component';
-import { PendingTableComponent } from './components/pending-table/pending-table.component';
-import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
-import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
-import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,9 @@ const routes: Routes = [
     },{
       path: 'workflows',
       component: ManageWorkflowsComponent
+    },{
+      path: 'add-checklist',
+      component: AddChecklistComponent
     },{
       path: 'checklists',
       component: ManageChecklistsComponent

@@ -33,21 +33,25 @@ type Action @model @auth(rules: [{ allow: private }]){
   duration: Int
 }
 
-type CheckListSteps @model @auth(rules: [{allow: private}]) {
+type ChecklistSteps @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String
   actions: [Action] @hasMany
 }
 
-type CheckList @model @auth(rules: [{ allow: private }]){
+type Checklist @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID!
+  company: ID
   owner: Contact @hasOne
-  steps: CheckListSteps @hasOne
+  steps: ChecklistSteps @hasOne
   start: AWSDate
   end: AWSDate 
 }
 
 type WorkflowSteps @model @auth(rules: [{allow: private}]) {
-  actions: [CheckListSteps] @hasMany
+  id: ID!
+  name: String
+  actions: [ChecklistSteps] @hasMany
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){

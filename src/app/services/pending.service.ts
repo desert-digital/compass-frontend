@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 
 import { APIService, Event, ModelEventFilterInput } from '../API.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
