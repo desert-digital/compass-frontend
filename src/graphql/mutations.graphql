@@ -171,7 +171,6 @@ mutation CreateAction(
     duration
     createdAt
     updatedAt
-    checklistStepsActionsId
   }
 }
 mutation UpdateAction(
@@ -187,7 +186,6 @@ mutation UpdateAction(
     duration
     createdAt
     updatedAt
-    checklistStepsActionsId
   }
 }
 mutation DeleteAction(
@@ -203,7 +201,75 @@ mutation DeleteAction(
     duration
     createdAt
     updatedAt
+  }
+}
+mutation CreateActionStep(
+  $input: CreateActionStepInput!
+  $condition: ModelActionStepConditionInput
+) {
+  createActionStep(input: $input, condition: $condition) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
     checklistStepsActionsId
+    actionStepActionId
+  }
+}
+mutation UpdateActionStep(
+  $input: UpdateActionStepInput!
+  $condition: ModelActionStepConditionInput
+) {
+  updateActionStep(input: $input, condition: $condition) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
+    checklistStepsActionsId
+    actionStepActionId
+  }
+}
+mutation DeleteActionStep(
+  $input: DeleteActionStepInput!
+  $condition: ModelActionStepConditionInput
+) {
+  deleteActionStep(input: $input, condition: $condition) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
+    checklistStepsActionsId
+    actionStepActionId
   }
 }
 mutation CreateChecklistSteps(
@@ -215,15 +281,12 @@ mutation CreateChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }
@@ -241,15 +304,12 @@ mutation UpdateChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }
@@ -267,15 +327,12 @@ mutation DeleteChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }

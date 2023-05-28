@@ -28,10 +28,13 @@ export class PendingService {
   }
 
   async getPendingItem(id: string): Promise<PendingEvent> {
-    const today = new Date().toISOString();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const startOfDay = new Date(today).toISOString();
 
     const variables: ModelPendingEventFilterInput = {
-      start: {ge: today}
+      start: {ge: startOfDay}
     };
 
     const events = await this.api.ListPendingEvents(variables);

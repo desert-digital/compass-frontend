@@ -115,7 +115,6 @@ query GetAction($id: ID!) {
     duration
     createdAt
     updatedAt
-    checklistStepsActionsId
   }
 }
 query ListActions(
@@ -133,7 +132,53 @@ query ListActions(
       duration
       createdAt
       updatedAt
+    }
+    nextToken
+  }
+}
+query GetActionStep($id: ID!) {
+  getActionStep(id: $id) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
+    checklistStepsActionsId
+    actionStepActionId
+  }
+}
+query ListActionSteps(
+  $filter: ModelActionStepFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listActionSteps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      stepNumber
+      action {
+        id
+        company
+        status
+        description
+        notes
+        duration
+        createdAt
+        updatedAt
+      }
+      id
+      createdAt
+      updatedAt
       checklistStepsActionsId
+      actionStepActionId
     }
     nextToken
   }
@@ -144,15 +189,12 @@ query GetChecklistSteps($id: ID!) {
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }

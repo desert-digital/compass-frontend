@@ -33,10 +33,15 @@ type Action @model @auth(rules: [{ allow: private }]){
   duration: Int
 }
 
+type ActionStep @model @auth(rules: [{allow: private}]){
+  stepNumber: Int
+  action: Action @hasOne
+}
+
 type ChecklistSteps @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String
-  actions: [Action] @hasMany
+  actions: [ActionStep] @hasMany
 }
 
 type Checklist @model @auth(rules: [{ allow: private }]){

@@ -147,7 +147,6 @@ subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
-    checklistStepsActionsId
   }
 }
 subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
@@ -160,7 +159,6 @@ subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
-    checklistStepsActionsId
   }
 }
 subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
@@ -173,7 +171,72 @@ subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
     duration
     createdAt
     updatedAt
+  }
+}
+subscription OnCreateActionStep(
+  $filter: ModelSubscriptionActionStepFilterInput
+) {
+  onCreateActionStep(filter: $filter) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
     checklistStepsActionsId
+    actionStepActionId
+  }
+}
+subscription OnUpdateActionStep(
+  $filter: ModelSubscriptionActionStepFilterInput
+) {
+  onUpdateActionStep(filter: $filter) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
+    checklistStepsActionsId
+    actionStepActionId
+  }
+}
+subscription OnDeleteActionStep(
+  $filter: ModelSubscriptionActionStepFilterInput
+) {
+  onDeleteActionStep(filter: $filter) {
+    stepNumber
+    action {
+      id
+      company
+      status
+      description
+      notes
+      duration
+      createdAt
+      updatedAt
+    }
+    id
+    createdAt
+    updatedAt
+    checklistStepsActionsId
+    actionStepActionId
   }
 }
 subscription OnCreateChecklistSteps(
@@ -184,15 +247,12 @@ subscription OnCreateChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }
@@ -209,15 +269,12 @@ subscription OnUpdateChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }
@@ -234,15 +291,12 @@ subscription OnDeleteChecklistSteps(
     name
     actions {
       items {
+        stepNumber
         id
-        company
-        status
-        description
-        notes
-        duration
         createdAt
         updatedAt
         checklistStepsActionsId
+        actionStepActionId
       }
       nextToken
     }
