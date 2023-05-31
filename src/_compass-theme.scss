@@ -2,7 +2,7 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 
 $primaryColor: #1A237E;
-$secondaryColor: #90ee02;
+$secondaryColor: #4b8006;
 
 $backgroundColor: #EBE7E2;
 $warningColor: #cc0000;
@@ -83,10 +83,16 @@ mat-input {
   }
 }
 
+h3 {
+  @include header;
+  text-align: left;
+  font-weight: bolder;
+}
+
 h4 {
   @include sub-header;
   text-align: left;
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 @mixin containers {

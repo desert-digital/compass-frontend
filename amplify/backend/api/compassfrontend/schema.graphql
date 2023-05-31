@@ -17,11 +17,11 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   defaultWorkflow: WorkflowSteps @hasOne
 }
 
-type Contact @model @auth(rules: [{ allow: private }]){
+type Staff @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   name: String
-  email: String 
+  email: String
 }
 
 type Action @model @auth(rules: [{ allow: private }]){
@@ -47,7 +47,7 @@ type ChecklistSteps @model @auth(rules: [{allow: private}]) {
 type Checklist @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
-  owner: Contact @hasOne
+  owner: Staff @hasOne
   steps: ChecklistSteps @hasOne
   start: AWSDate
   end: AWSDate 
@@ -62,7 +62,7 @@ type WorkflowSteps @model @auth(rules: [{allow: private}]) {
 type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID!
-  owner: Contact @hasOne
+  owner: Staff @hasOne
   steps: WorkflowSteps @hasOne
   start: AWSDate
   end: AWSDate 

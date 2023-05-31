@@ -1,19 +1,27 @@
+// Core
+
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+
+// Local
+
+import { APIService, Staff } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
 
-  constructor() { }
   ITEMS: any = [
     "OUPV. Power boats, sail boats, and PWC qualified", 
     "Power boats, sail boats, and PWC qualified",
     "PWC qualified."
   ];
 
-  getStaff(): Observable<any[]> {
-    return of(this.ITEMS);
+  constructor(private api: APIService) { }
+
+  async Staff(): Promise<Staff[]> {
+    const events = await this.api.ListStaff();
+    return events.items as Staff[];
   }
 }

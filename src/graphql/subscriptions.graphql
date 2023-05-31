@@ -107,8 +107,8 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     vesselDefaultWorkflowId
   }
 }
-subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
-  onCreateContact(filter: $filter) {
+subscription OnCreateStaff($filter: ModelSubscriptionStaffFilterInput) {
+  onCreateStaff(filter: $filter) {
     id
     company
     name
@@ -117,8 +117,8 @@ subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
     updatedAt
   }
 }
-subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
-  onUpdateContact(filter: $filter) {
+subscription OnUpdateStaff($filter: ModelSubscriptionStaffFilterInput) {
+  onUpdateStaff(filter: $filter) {
     id
     company
     name
@@ -127,8 +127,8 @@ subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
     updatedAt
   }
 }
-subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
-  onDeleteContact(filter: $filter) {
+subscription OnDeleteStaff($filter: ModelSubscriptionStaffFilterInput) {
+  onDeleteStaff(filter: $filter) {
     id
     company
     name

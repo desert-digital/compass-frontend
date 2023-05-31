@@ -60,6 +60,7 @@ import { ManageServiceOrdersComponent } from './components/manage-service-orders
 import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
+import { AddActionComponent } from './components/add-action/add-action.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { AddWorkflowComponent } from './components/add-workflow/add-workflow.com
     ManageServiceOrdersComponent,
     FleetTableComponent,
     AddChecklistComponent,
-    AddWorkflowComponent
+    AddWorkflowComponent,
+    AddActionComponent
     ],
   imports: [
     AmplifyAuthenticatorModule,

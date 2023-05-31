@@ -1,9 +1,21 @@
+// Core
+
 import { Injectable } from '@angular/core';
+
+// Local
+
+import { APIService, Action } from '../API.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActionsService {
 
-  constructor() { }
+  constructor(private api: APIService) { }
+
+  async getChecklistSteps(): Promise<Action[]> {
+    const events = await this.api.ListActions();
+    return events.items as Action[];
+  }
 }

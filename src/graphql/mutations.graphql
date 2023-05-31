@@ -119,11 +119,11 @@ mutation DeleteVessel(
     vesselDefaultWorkflowId
   }
 }
-mutation CreateContact(
-  $input: CreateContactInput!
-  $condition: ModelContactConditionInput
+mutation CreateStaff(
+  $input: CreateStaffInput!
+  $condition: ModelStaffConditionInput
 ) {
-  createContact(input: $input, condition: $condition) {
+  createStaff(input: $input, condition: $condition) {
     id
     company
     name
@@ -132,11 +132,11 @@ mutation CreateContact(
     updatedAt
   }
 }
-mutation UpdateContact(
-  $input: UpdateContactInput!
-  $condition: ModelContactConditionInput
+mutation UpdateStaff(
+  $input: UpdateStaffInput!
+  $condition: ModelStaffConditionInput
 ) {
-  updateContact(input: $input, condition: $condition) {
+  updateStaff(input: $input, condition: $condition) {
     id
     company
     name
@@ -145,11 +145,11 @@ mutation UpdateContact(
     updatedAt
   }
 }
-mutation DeleteContact(
-  $input: DeleteContactInput!
-  $condition: ModelContactConditionInput
+mutation DeleteStaff(
+  $input: DeleteStaffInput!
+  $condition: ModelStaffConditionInput
 ) {
-  deleteContact(input: $input, condition: $condition) {
+  deleteStaff(input: $input, condition: $condition) {
     id
     company
     name

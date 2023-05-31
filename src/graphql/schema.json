@@ -139,7 +139,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "getContact",
+          "name" : "getStaff",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -157,20 +157,20 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "listContacts",
+          "name" : "listStaff",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactFilterInput",
+              "name" : "ModelStaffFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -195,7 +195,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelContactConnection",
+            "name" : "ModelStaffConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -2317,7 +2317,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "Contact",
+        "name" : "Staff",
         "description" : null,
         "fields" : [ {
           "name" : "id",
@@ -2404,7 +2404,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "ModelContactConnection",
+        "name" : "ModelStaffConnection",
         "description" : null,
         "fields" : [ {
           "name" : "items",
@@ -2418,7 +2418,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "OBJECT",
-                "name" : "Contact",
+                "name" : "Staff",
                 "ofType" : null
               }
             }
@@ -2443,7 +2443,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelContactFilterInput",
+        "name" : "ModelStaffFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -2490,7 +2490,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactFilterInput",
+              "name" : "ModelStaffFilterInput",
               "ofType" : null
             }
           },
@@ -2503,7 +2503,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactFilterInput",
+              "name" : "ModelStaffFilterInput",
               "ofType" : null
             }
           },
@@ -2513,7 +2513,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelContactFilterInput",
+            "name" : "ModelStaffFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2739,7 +2739,7 @@
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -3121,7 +3121,7 @@
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -3556,7 +3556,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "createContact",
+          "name" : "createStaff",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -3566,7 +3566,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "CreateContactInput",
+                "name" : "CreateStaffInput",
                 "ofType" : null
               }
             },
@@ -3576,20 +3576,20 @@
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactConditionInput",
+              "name" : "ModelStaffConditionInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "updateContact",
+          "name" : "updateStaff",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -3599,7 +3599,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "UpdateContactInput",
+                "name" : "UpdateStaffInput",
                 "ofType" : null
               }
             },
@@ -3609,20 +3609,20 @@
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactConditionInput",
+              "name" : "ModelStaffConditionInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "deleteContact",
+          "name" : "deleteStaff",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -3632,7 +3632,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "DeleteContactInput",
+                "name" : "DeleteStaffInput",
                 "ofType" : null
               }
             },
@@ -3642,14 +3642,14 @@
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactConditionInput",
+              "name" : "ModelStaffConditionInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -4764,7 +4764,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "CreateContactInput",
+        "name" : "CreateStaffInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -4809,7 +4809,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelContactConditionInput",
+        "name" : "ModelStaffConditionInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -4847,7 +4847,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactConditionInput",
+              "name" : "ModelStaffConditionInput",
               "ofType" : null
             }
           },
@@ -4860,7 +4860,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelContactConditionInput",
+              "name" : "ModelStaffConditionInput",
               "ofType" : null
             }
           },
@@ -4870,7 +4870,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelContactConditionInput",
+            "name" : "ModelStaffConditionInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -4880,7 +4880,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "UpdateContactInput",
+        "name" : "UpdateStaffInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -4929,7 +4929,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "DeleteContactInput",
+        "name" : "DeleteStaffInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -6281,61 +6281,61 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onCreateContact",
+          "name" : "onCreateStaff",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelSubscriptionContactFilterInput",
+              "name" : "ModelSubscriptionStaffFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onUpdateContact",
+          "name" : "onUpdateStaff",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelSubscriptionContactFilterInput",
+              "name" : "ModelSubscriptionStaffFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onDeleteContact",
+          "name" : "onDeleteStaff",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelSubscriptionContactFilterInput",
+              "name" : "ModelSubscriptionStaffFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Contact",
+            "name" : "Staff",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -7143,7 +7143,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelSubscriptionContactFilterInput",
+        "name" : "ModelSubscriptionStaffFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -7190,7 +7190,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelSubscriptionContactFilterInput",
+              "name" : "ModelSubscriptionStaffFilterInput",
               "ofType" : null
             }
           },
@@ -7203,7 +7203,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelSubscriptionContactFilterInput",
+              "name" : "ModelSubscriptionStaffFilterInput",
               "ofType" : null
             }
           },
@@ -8711,41 +8711,20 @@
         "onFragment" : false,
         "onField" : true
       }, {
-        "name" : "aws_cognito_user_pools",
-        "description" : "Tells the service this field/object has access authorized by a Cognito User Pools token.",
-        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
-        "args" : [ {
-          "name" : "cognito_groups",
-          "description" : "List of cognito user pool groups which have access on this field",
-          "type" : {
-            "kind" : "LIST",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "String",
-              "ofType" : null
-            }
-          },
-          "defaultValue" : null
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
-        "name" : "aws_oidc",
-        "description" : "Tells the service this field/object has access authorized by an OIDC token.",
+        "name" : "aws_lambda",
+        "description" : "Tells the service this field/object has access authorized by a Lambda Authorizer.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
         "args" : [ ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_publish",
-        "description" : "Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead.",
-        "locations" : [ "FIELD_DEFINITION" ],
+        "name" : "aws_cognito_user_pools",
+        "description" : "Tells the service this field/object has access authorized by a Cognito User Pools token.",
+        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
         "args" : [ {
-          "name" : "subscriptions",
-          "description" : "List of subscriptions which will be published to when this mutation is called.",
+          "name" : "cognito_groups",
+          "description" : "List of cognito user pool groups which have access on this field",
           "type" : {
             "kind" : "LIST",
             "name" : null,
@@ -8778,6 +8757,14 @@
           },
           "defaultValue" : null
         } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "aws_oidc",
+        "description" : "Tells the service this field/object has access authorized by an OIDC token.",
+        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
+        "args" : [ ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false
@@ -8836,10 +8823,23 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_lambda",
-        "description" : "Tells the service this field/object has access authorized by a Lambda Authorizer.",
-        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
-        "args" : [ ],
+        "name" : "aws_publish",
+        "description" : "Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead.",
+        "locations" : [ "FIELD_DEFINITION" ],
+        "args" : [ {
+          "name" : "subscriptions",
+          "description" : "List of subscriptions which will be published to when this mutation is called.",
+          "type" : {
+            "kind" : "LIST",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "String",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        } ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false

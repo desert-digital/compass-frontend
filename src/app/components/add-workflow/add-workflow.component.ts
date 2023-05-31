@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 // Material
 
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -13,7 +13,11 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./add-workflow.component.scss']
 })
 export class AddWorkflowComponent {
-  movies = [
+  workflow = [
+    ''
+  ];
+
+  checklists = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
     'Episode III - Revenge of the Sith',
@@ -25,8 +29,17 @@ export class AddWorkflowComponent {
     'Episode IX – The Rise of Skywalker',
   ];
 
-  drop(e: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, e.previousIndex, e.currentIndex);
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 
 }

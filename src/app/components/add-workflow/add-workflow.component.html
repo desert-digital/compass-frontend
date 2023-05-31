@@ -1,5 +1,21 @@
-<div class="container">
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div cdkDrag class="example-box" *ngFor="let movie of movies">{{movie}}</div>
+<div cdkDropListGroup>
+    <div class="container">
+        <h3>Add a New Workflow</h3>
+        <div class="example-container">
+            <h4>Movies</h4>
+            <div cdkDropList [cdkDropListData]="workflow" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div cdkDrag class="example-box" *ngFor="let item of workflow"> <mat-icon
+                        class="material-symbols-outlined">drag_handle</mat-icon>
+                    {{item}}</div>
+            </div>
+        </div>
+        <div class="example-container">
+            <h4>Watched</h4>
+            <div cdkDropList [cdkDropListData]="checklists" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div cdkDrag class="example-box" *ngFor="let item of checklists"> <mat-icon
+                        class="material-symbols-outlined">drag_handle</mat-icon>
+                    {{item}}</div>
+            </div>
+        </div>
     </div>
 </div>

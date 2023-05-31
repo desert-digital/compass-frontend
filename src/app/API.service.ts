@@ -16,9 +16,9 @@ export type __SubscriptionContainer = {
   onCreateVessel: OnCreateVesselSubscription;
   onUpdateVessel: OnUpdateVesselSubscription;
   onDeleteVessel: OnDeleteVesselSubscription;
-  onCreateContact: OnCreateContactSubscription;
-  onUpdateContact: OnUpdateContactSubscription;
-  onDeleteContact: OnDeleteContactSubscription;
+  onCreateStaff: OnCreateStaffSubscription;
+  onUpdateStaff: OnUpdateStaffSubscription;
+  onDeleteStaff: OnDeleteStaffSubscription;
   onCreateAction: OnCreateActionSubscription;
   onUpdateAction: OnUpdateActionSubscription;
   onDeleteAction: OnDeleteActionSubscription;
@@ -243,24 +243,24 @@ export type DeleteVesselInput = {
   id: string;
 };
 
-export type CreateContactInput = {
+export type CreateStaffInput = {
   id?: string | null;
   company?: string | null;
   name?: string | null;
   email?: string | null;
 };
 
-export type ModelContactConditionInput = {
+export type ModelStaffConditionInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  and?: Array<ModelContactConditionInput | null> | null;
-  or?: Array<ModelContactConditionInput | null> | null;
-  not?: ModelContactConditionInput | null;
+  and?: Array<ModelStaffConditionInput | null> | null;
+  or?: Array<ModelStaffConditionInput | null> | null;
+  not?: ModelStaffConditionInput | null;
 };
 
-export type Contact = {
-  __typename: "Contact";
+export type Staff = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -269,14 +269,14 @@ export type Contact = {
   updatedAt: string;
 };
 
-export type UpdateContactInput = {
+export type UpdateStaffInput = {
   id: string;
   company?: string | null;
   name?: string | null;
   email?: string | null;
 };
 
-export type DeleteContactInput = {
+export type DeleteStaffInput = {
   id: string;
 };
 
@@ -407,7 +407,7 @@ export type Checklist = {
   __typename: "Checklist";
   id: string;
   company?: string | null;
-  owner?: Contact | null;
+  owner?: Staff | null;
   steps?: ChecklistSteps | null;
   start?: string | null;
   end?: string | null;
@@ -475,7 +475,7 @@ export type Workflow = {
   __typename: "Workflow";
   id: string;
   company: string;
-  owner?: Contact | null;
+  owner?: Staff | null;
   steps?: WorkflowSteps | null;
   start?: string | null;
   end?: string | null;
@@ -535,19 +535,19 @@ export type ModelVesselConnection = {
   nextToken?: string | null;
 };
 
-export type ModelContactFilterInput = {
+export type ModelStaffFilterInput = {
   id?: ModelIDInput | null;
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  and?: Array<ModelContactFilterInput | null> | null;
-  or?: Array<ModelContactFilterInput | null> | null;
-  not?: ModelContactFilterInput | null;
+  and?: Array<ModelStaffFilterInput | null> | null;
+  or?: Array<ModelStaffFilterInput | null> | null;
+  not?: ModelStaffFilterInput | null;
 };
 
-export type ModelContactConnection = {
-  __typename: "ModelContactConnection";
-  items: Array<Contact | null>;
+export type ModelStaffConnection = {
+  __typename: "ModelStaffConnection";
+  items: Array<Staff | null>;
   nextToken?: string | null;
 };
 
@@ -689,13 +689,13 @@ export type ModelSubscriptionVesselFilterInput = {
   or?: Array<ModelSubscriptionVesselFilterInput | null> | null;
 };
 
-export type ModelSubscriptionContactFilterInput = {
+export type ModelSubscriptionStaffFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
   email?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionContactFilterInput | null> | null;
-  or?: Array<ModelSubscriptionContactFilterInput | null> | null;
+  and?: Array<ModelSubscriptionStaffFilterInput | null> | null;
+  or?: Array<ModelSubscriptionStaffFilterInput | null> | null;
 };
 
 export type ModelSubscriptionActionFilterInput = {
@@ -872,8 +872,8 @@ export type DeleteVesselMutation = {
   vesselDefaultWorkflowId?: string | null;
 };
 
-export type CreateContactMutation = {
-  __typename: "Contact";
+export type CreateStaffMutation = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -882,8 +882,8 @@ export type CreateContactMutation = {
   updatedAt: string;
 };
 
-export type UpdateContactMutation = {
-  __typename: "Contact";
+export type UpdateStaffMutation = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -892,8 +892,8 @@ export type UpdateContactMutation = {
   updatedAt: string;
 };
 
-export type DeleteContactMutation = {
-  __typename: "Contact";
+export type DeleteStaffMutation = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -1072,7 +1072,7 @@ export type CreateChecklistMutation = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1105,7 +1105,7 @@ export type UpdateChecklistMutation = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1138,7 +1138,7 @@ export type DeleteChecklistMutation = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1231,7 +1231,7 @@ export type CreateWorkflowMutation = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1263,7 +1263,7 @@ export type UpdateWorkflowMutation = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1295,7 +1295,7 @@ export type DeleteWorkflowMutation = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1398,8 +1398,8 @@ export type ListVesselsQuery = {
   nextToken?: string | null;
 };
 
-export type GetContactQuery = {
-  __typename: "Contact";
+export type GetStaffQuery = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -1408,10 +1408,10 @@ export type GetContactQuery = {
   updatedAt: string;
 };
 
-export type ListContactsQuery = {
-  __typename: "ModelContactConnection";
+export type ListStaffQuery = {
+  __typename: "ModelStaffConnection";
   items: Array<{
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1540,7 +1540,7 @@ export type GetChecklistQuery = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1575,7 +1575,7 @@ export type ListChecklistsQuery = {
     id: string;
     company?: string | null;
     owner?: {
-      __typename: "Contact";
+      __typename: "Staff";
       id: string;
       company?: string | null;
       name?: string | null;
@@ -1642,7 +1642,7 @@ export type GetWorkflowQuery = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -1676,7 +1676,7 @@ export type ListWorkflowsQuery = {
     id: string;
     company: string;
     owner?: {
-      __typename: "Contact";
+      __typename: "Staff";
       id: string;
       company?: string | null;
       name?: string | null;
@@ -1809,8 +1809,8 @@ export type OnDeleteVesselSubscription = {
   vesselDefaultWorkflowId?: string | null;
 };
 
-export type OnCreateContactSubscription = {
-  __typename: "Contact";
+export type OnCreateStaffSubscription = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -1819,8 +1819,8 @@ export type OnCreateContactSubscription = {
   updatedAt: string;
 };
 
-export type OnUpdateContactSubscription = {
-  __typename: "Contact";
+export type OnUpdateStaffSubscription = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -1829,8 +1829,8 @@ export type OnUpdateContactSubscription = {
   updatedAt: string;
 };
 
-export type OnDeleteContactSubscription = {
-  __typename: "Contact";
+export type OnDeleteStaffSubscription = {
+  __typename: "Staff";
   id: string;
   company?: string | null;
   name?: string | null;
@@ -2009,7 +2009,7 @@ export type OnCreateChecklistSubscription = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2042,7 +2042,7 @@ export type OnUpdateChecklistSubscription = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2075,7 +2075,7 @@ export type OnDeleteChecklistSubscription = {
   id: string;
   company?: string | null;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2168,7 +2168,7 @@ export type OnCreateWorkflowSubscription = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2200,7 +2200,7 @@ export type OnUpdateWorkflowSubscription = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2232,7 +2232,7 @@ export type OnDeleteWorkflowSubscription = {
   id: string;
   company: string;
   owner?: {
-    __typename: "Contact";
+    __typename: "Staff";
     id: string;
     company?: string | null;
     name?: string | null;
@@ -2467,12 +2467,12 @@ export class APIService {
     )) as any;
     return <DeleteVesselMutation>response.data.deleteVessel;
   }
-  async CreateContact(
-    input: CreateContactInput,
-    condition?: ModelContactConditionInput
-  ): Promise<CreateContactMutation> {
-    const statement = `mutation CreateContact($input: CreateContactInput!, $condition: ModelContactConditionInput) {
-        createContact(input: $input, condition: $condition) {
+  async CreateStaff(
+    input: CreateStaffInput,
+    condition?: ModelStaffConditionInput
+  ): Promise<CreateStaffMutation> {
+    const statement = `mutation CreateStaff($input: CreateStaffInput!, $condition: ModelStaffConditionInput) {
+        createStaff(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2491,14 +2491,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateContactMutation>response.data.createContact;
+    return <CreateStaffMutation>response.data.createStaff;
   }
-  async UpdateContact(
-    input: UpdateContactInput,
-    condition?: ModelContactConditionInput
-  ): Promise<UpdateContactMutation> {
-    const statement = `mutation UpdateContact($input: UpdateContactInput!, $condition: ModelContactConditionInput) {
-        updateContact(input: $input, condition: $condition) {
+  async UpdateStaff(
+    input: UpdateStaffInput,
+    condition?: ModelStaffConditionInput
+  ): Promise<UpdateStaffMutation> {
+    const statement = `mutation UpdateStaff($input: UpdateStaffInput!, $condition: ModelStaffConditionInput) {
+        updateStaff(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2517,14 +2517,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateContactMutation>response.data.updateContact;
+    return <UpdateStaffMutation>response.data.updateStaff;
   }
-  async DeleteContact(
-    input: DeleteContactInput,
-    condition?: ModelContactConditionInput
-  ): Promise<DeleteContactMutation> {
-    const statement = `mutation DeleteContact($input: DeleteContactInput!, $condition: ModelContactConditionInput) {
-        deleteContact(input: $input, condition: $condition) {
+  async DeleteStaff(
+    input: DeleteStaffInput,
+    condition?: ModelStaffConditionInput
+  ): Promise<DeleteStaffMutation> {
+    const statement = `mutation DeleteStaff($input: DeleteStaffInput!, $condition: ModelStaffConditionInput) {
+        deleteStaff(input: $input, condition: $condition) {
           __typename
           id
           company
@@ -2543,7 +2543,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteContactMutation>response.data.deleteContact;
+    return <DeleteStaffMutation>response.data.deleteStaff;
   }
   async CreateAction(
     input: CreateActionInput,
@@ -3391,9 +3391,9 @@ export class APIService {
     )) as any;
     return <ListVesselsQuery>response.data.listVessels;
   }
-  async GetContact(id: string): Promise<GetContactQuery> {
-    const statement = `query GetContact($id: ID!) {
-        getContact(id: $id) {
+  async GetStaff(id: string): Promise<GetStaffQuery> {
+    const statement = `query GetStaff($id: ID!) {
+        getStaff(id: $id) {
           __typename
           id
           company
@@ -3409,15 +3409,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetContactQuery>response.data.getContact;
+    return <GetStaffQuery>response.data.getStaff;
   }
-  async ListContacts(
-    filter?: ModelContactFilterInput,
+  async ListStaff(
+    filter?: ModelStaffFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListContactsQuery> {
-    const statement = `query ListContacts($filter: ModelContactFilterInput, $limit: Int, $nextToken: String) {
-        listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListStaffQuery> {
+    const statement = `query ListStaff($filter: ModelStaffFilterInput, $limit: Int, $nextToken: String) {
+        listStaff(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
@@ -3444,7 +3444,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListContactsQuery>response.data.listContacts;
+    return <ListStaffQuery>response.data.listStaff;
   }
   async GetAction(id: string): Promise<GetActionQuery> {
     const statement = `query GetAction($id: ID!) {
@@ -4127,13 +4127,13 @@ export class APIService {
     >;
   }
 
-  OnCreateContactListener(
-    filter?: ModelSubscriptionContactFilterInput
+  OnCreateStaffListener(
+    filter?: ModelSubscriptionStaffFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateContact">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateStaff">>
   > {
-    const statement = `subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
-        onCreateContact(filter: $filter) {
+    const statement = `subscription OnCreateStaff($filter: ModelSubscriptionStaffFilterInput) {
+        onCreateStaff(filter: $filter) {
           __typename
           id
           company
@@ -4150,17 +4150,17 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateContact">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateStaff">>
     >;
   }
 
-  OnUpdateContactListener(
-    filter?: ModelSubscriptionContactFilterInput
+  OnUpdateStaffListener(
+    filter?: ModelSubscriptionStaffFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateContact">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateStaff">>
   > {
-    const statement = `subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
-        onUpdateContact(filter: $filter) {
+    const statement = `subscription OnUpdateStaff($filter: ModelSubscriptionStaffFilterInput) {
+        onUpdateStaff(filter: $filter) {
           __typename
           id
           company
@@ -4177,17 +4177,17 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateContact">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateStaff">>
     >;
   }
 
-  OnDeleteContactListener(
-    filter?: ModelSubscriptionContactFilterInput
+  OnDeleteStaffListener(
+    filter?: ModelSubscriptionStaffFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteContact">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteStaff">>
   > {
-    const statement = `subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
-        onDeleteContact(filter: $filter) {
+    const statement = `subscription OnDeleteStaff($filter: ModelSubscriptionStaffFilterInput) {
+        onDeleteStaff(filter: $filter) {
           __typename
           id
           company
@@ -4204,7 +4204,7 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteContact">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteStaff">>
     >;
   }
 
