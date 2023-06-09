@@ -1,3 +1,5 @@
+// TO DO: make column widths fixed
+
 // Core
 
 import { Component, EventEmitter, Output } from '@angular/core';

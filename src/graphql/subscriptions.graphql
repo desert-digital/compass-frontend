@@ -141,8 +141,8 @@ subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
   onCreateAction(filter: $filter) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -153,8 +153,8 @@ subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
   onUpdateAction(filter: $filter) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -165,8 +165,8 @@ subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
   onDeleteAction(filter: $filter) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -181,13 +181,15 @@ subscription OnCreateActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -203,13 +205,15 @@ subscription OnUpdateActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -225,13 +229,15 @@ subscription OnDeleteActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -248,6 +254,8 @@ subscription OnCreateChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt
@@ -270,6 +278,8 @@ subscription OnUpdateChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt
@@ -292,6 +302,8 @@ subscription OnDeleteChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt

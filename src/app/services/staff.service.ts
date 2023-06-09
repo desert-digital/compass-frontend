@@ -20,7 +20,7 @@ export class StaffService {
 
   constructor(private api: APIService) { }
 
-  async Staff(): Promise<Staff[]> {
+  async getStaff(): Promise<Staff[]> {
     const events = await this.api.ListStaff();
     return events.items as Staff[];
   }

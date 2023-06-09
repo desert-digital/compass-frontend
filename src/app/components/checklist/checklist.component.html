@@ -1,5 +1,5 @@
 <div class="container">
-  <h4>{{ title }}</h4>
+  <h3>{{ title }}</h3>
   <mat-selection-list #shoes>
     <mat-list-option *ngFor="let step of steps" (click)="onItemChecked(step)">
       <span class="line-item" [ngClass]="step.selected ? 'finished' : 'todo' ">{{ step.name }}</span>

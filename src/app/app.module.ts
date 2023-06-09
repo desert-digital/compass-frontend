@@ -14,13 +14,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
@@ -61,6 +62,7 @@ import { FleetTableComponent } from './components/fleet-table/fleet-table.compon
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { AddActionComponent } from './components/add-action/add-action.component';
+import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,8 @@ import { AddActionComponent } from './components/add-action/add-action.component
     FleetTableComponent,
     AddChecklistComponent,
     AddWorkflowComponent,
-    AddActionComponent
+    AddActionComponent,
+    ManageActionsComponent
     ],
   imports: [
     AmplifyAuthenticatorModule,
@@ -104,6 +107,7 @@ import { AddActionComponent } from './components/add-action/add-action.component
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatRadioModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatSelectModule,

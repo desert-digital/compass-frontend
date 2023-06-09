@@ -14,7 +14,7 @@ export class ActionsService {
 
   constructor(private api: APIService) { }
 
-  async getChecklistSteps(): Promise<Action[]> {
+  async getActions(): Promise<Action[]> {
     const events = await this.api.ListActions();
     return events.items as Action[];
   }

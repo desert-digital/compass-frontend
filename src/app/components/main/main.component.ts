@@ -72,6 +72,10 @@ export class MainComponent {
     this._router.navigate(['main/services']);
   }
 
+  onActionsPressed() {
+    this._router.navigate(['main/actions', 'true']);
+  }
+
   async onLogoutPressed() {
     try {
       await Auth.signOut();

@@ -1,12 +1,12 @@
 <div class="container">
     <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Workflow</button>
     <div *ngIf="workflows.length > 0">
-        <h4>Workflows</h4>
+        <h3>Workflows</h3>
         <mat-list *ngFor="let workflow of workflows">
             <mat-list-item>{{ workflow.name }}</mat-list-item>
         </mat-list>
     </div>
     <div *ngIf="workflows.length == 0">
-        <h4>No Workflows Found</h4>
+        <h3>No Workflows Found</h3>
     </div>
 </div>

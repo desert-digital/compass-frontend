@@ -13,9 +13,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./add-workflow.component.scss']
 })
 export class AddWorkflowComponent {
-  workflow = [
-    ''
-  ];
+  workflow = [''];
 
   checklists = [
     'Episode I - The Phantom Menace',

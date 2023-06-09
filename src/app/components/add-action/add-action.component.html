@@ -1,1 +1,20 @@
-<p>add-action works!</p>
+<div class="container">
+    <h3>Add a new Action</h3>
+    <form [formGroup]="actionForm" (ngSubmit)="onAddNewActionPressed(actionForm.value)">
+        <div action="#" class="column">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput id="name" type="text" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Duration in minutes</mat-label>
+                <input matInput id="name" type="number" formControlName="duration">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Notes</mat-label>
+                <textarea matInput id="name" type="text" formControlName="notes"></textarea>
+            </mat-form-field>
+            <button mat-flat-button type="submit" color="primary">Add a New Workflow</button>
+        </div>
+    </form>
+</div>

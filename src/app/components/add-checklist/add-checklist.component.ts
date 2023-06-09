@@ -1,11 +1,18 @@
 // Core
 
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
 
 // Material
 
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
+// Amplify
+
+import { APIService, Action, Checklist } from '../../API.service';
+
+// Local
+
+import { ActionsService } from 'src/app/services/actions.service';
 
 @Component({
   selector: 'app-add-checklist',
@@ -13,20 +20,30 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./add-checklist.component.scss'],
 })
 export class AddChecklistComponent {
+  checklist = [];
 
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker',
-  ];
+  actions: Action[] = [];
 
-  drop(e: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, e.previousIndex, e.currentIndex);
+  constructor(private _actionsService: ActionsService) {}
+
+  async ngOnInit() {
+    this.actions = await this._actionsService.getActions();
+  }
+
+  drop(e: CdkDragDrop<Action[]>) {
+    if (e.previousContainer === e.container) {
+      moveItemInArray(e.container.data, e.previousIndex, e.currentIndex);
+    } else {
+      transferArrayItem(
+        e.previousContainer.data,
+        e.container.data,
+        e.previousIndex,
+        e.currentIndex,
+      );
+    }
+  }
+
+  onAddChecklistPressed() {
+    alert('New Checklist to Add');
   }
 }

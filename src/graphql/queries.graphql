@@ -109,8 +109,8 @@ query GetAction($id: ID!) {
   getAction(id: $id) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -126,8 +126,8 @@ query ListActions(
     items {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
@@ -142,13 +142,15 @@ query GetActionStep($id: ID!) {
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -167,13 +169,15 @@ query ListActionSteps(
       action {
         id
         company
+        name
         status
-        description
         notes
         duration
         createdAt
         updatedAt
       }
+      actualStart
+      actualEnd
       id
       createdAt
       updatedAt
@@ -190,6 +194,8 @@ query GetChecklistSteps($id: ID!) {
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt

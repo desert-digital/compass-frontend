@@ -16,7 +16,8 @@ export class StaffComponent {
   }
 
   ngOnInit() {
-    this._staffService.getStaff()
-      .subscribe(items => this.items = items);
+    this._staffService.getStaff().then(items => {
+      this.items = items;
+    });
   }
 }

@@ -38,7 +38,8 @@ export class PendingService {
     };
 
     const events = await this.api.ListPendingEvents(variables);
-    return events.items[0] as PendingEvent;
+    const eventById = events.items.find(itemToFind => itemToFind!.id = id);
+    return eventById as PendingEvent;
   }
 
   async deleteItem(item: PendingEvent) {

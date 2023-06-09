@@ -212,6 +212,8 @@ export type ActionStep = {
   __typename: "ActionStep";
   stepNumber?: number | null;
   action?: Action | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -223,8 +225,8 @@ export type Action = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -283,28 +285,21 @@ export type DeleteStaffInput = {
 export type CreateActionInput = {
   id?: string | null;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
 };
 
 export type ModelActionConditionInput = {
   company?: ModelIDInput | null;
-  status?: ModelBooleanInput | null;
-  description?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  status?: ModelStringInput | null;
   notes?: ModelStringInput | null;
   duration?: ModelIntInput | null;
   and?: Array<ModelActionConditionInput | null> | null;
   or?: Array<ModelActionConditionInput | null> | null;
   not?: ModelActionConditionInput | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
 };
 
 export type ModelIntInput = {
@@ -322,8 +317,8 @@ export type ModelIntInput = {
 export type UpdateActionInput = {
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
 };
@@ -334,6 +329,8 @@ export type DeleteActionInput = {
 
 export type CreateActionStepInput = {
   stepNumber?: number | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id?: string | null;
   checklistStepsActionsId?: string | null;
   actionStepActionId?: string | null;
@@ -341,6 +338,8 @@ export type CreateActionStepInput = {
 
 export type ModelActionStepConditionInput = {
   stepNumber?: ModelIntInput | null;
+  actualStart?: ModelStringInput | null;
+  actualEnd?: ModelStringInput | null;
   and?: Array<ModelActionStepConditionInput | null> | null;
   or?: Array<ModelActionStepConditionInput | null> | null;
   not?: ModelActionStepConditionInput | null;
@@ -350,6 +349,8 @@ export type ModelActionStepConditionInput = {
 
 export type UpdateActionStepInput = {
   stepNumber?: number | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   checklistStepsActionsId?: string | null;
   actionStepActionId?: string | null;
@@ -554,8 +555,8 @@ export type ModelStaffConnection = {
 export type ModelActionFilterInput = {
   id?: ModelIDInput | null;
   company?: ModelIDInput | null;
-  status?: ModelBooleanInput | null;
-  description?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  status?: ModelStringInput | null;
   notes?: ModelStringInput | null;
   duration?: ModelIntInput | null;
   and?: Array<ModelActionFilterInput | null> | null;
@@ -571,6 +572,8 @@ export type ModelActionConnection = {
 
 export type ModelActionStepFilterInput = {
   stepNumber?: ModelIntInput | null;
+  actualStart?: ModelStringInput | null;
+  actualEnd?: ModelStringInput | null;
   and?: Array<ModelActionStepFilterInput | null> | null;
   or?: Array<ModelActionStepFilterInput | null> | null;
   not?: ModelActionStepFilterInput | null;
@@ -701,17 +704,12 @@ export type ModelSubscriptionStaffFilterInput = {
 export type ModelSubscriptionActionFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
-  status?: ModelSubscriptionBooleanInput | null;
-  description?: ModelSubscriptionStringInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  status?: ModelSubscriptionStringInput | null;
   notes?: ModelSubscriptionStringInput | null;
   duration?: ModelSubscriptionIntInput | null;
   and?: Array<ModelSubscriptionActionFilterInput | null> | null;
   or?: Array<ModelSubscriptionActionFilterInput | null> | null;
-};
-
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
 };
 
 export type ModelSubscriptionIntInput = {
@@ -728,6 +726,8 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionActionStepFilterInput = {
   stepNumber?: ModelSubscriptionIntInput | null;
+  actualStart?: ModelSubscriptionStringInput | null;
+  actualEnd?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionActionStepFilterInput | null> | null;
   or?: Array<ModelSubscriptionActionStepFilterInput | null> | null;
 };
@@ -906,8 +906,8 @@ export type CreateActionMutation = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -918,8 +918,8 @@ export type UpdateActionMutation = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -930,8 +930,8 @@ export type DeleteActionMutation = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -945,13 +945,15 @@ export type CreateActionStepMutation = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -966,13 +968,15 @@ export type UpdateActionStepMutation = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -987,13 +991,15 @@ export type DeleteActionStepMutation = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -1010,6 +1016,8 @@ export type CreateChecklistStepsMutation = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1032,6 +1040,8 @@ export type UpdateChecklistStepsMutation = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1054,6 +1064,8 @@ export type DeleteChecklistStepsMutation = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1426,8 +1438,8 @@ export type GetActionQuery = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -1440,8 +1452,8 @@ export type ListActionsQuery = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
@@ -1457,13 +1469,15 @@ export type GetActionStepQuery = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -1480,13 +1494,15 @@ export type ListActionStepsQuery = {
       __typename: "Action";
       id: string;
       company?: string | null;
-      status?: boolean | null;
-      description?: string | null;
+      name?: string | null;
+      status?: string | null;
       notes?: string | null;
       duration?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
+    actualStart?: string | null;
+    actualEnd?: string | null;
     id: string;
     createdAt: string;
     updatedAt: string;
@@ -1505,6 +1521,8 @@ export type GetChecklistStepsQuery = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1843,8 +1861,8 @@ export type OnCreateActionSubscription = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -1855,8 +1873,8 @@ export type OnUpdateActionSubscription = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -1867,8 +1885,8 @@ export type OnDeleteActionSubscription = {
   __typename: "Action";
   id: string;
   company?: string | null;
-  status?: boolean | null;
-  description?: string | null;
+  name?: string | null;
+  status?: string | null;
   notes?: string | null;
   duration?: number | null;
   createdAt: string;
@@ -1882,13 +1900,15 @@ export type OnCreateActionStepSubscription = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -1903,13 +1923,15 @@ export type OnUpdateActionStepSubscription = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -1924,13 +1946,15 @@ export type OnDeleteActionStepSubscription = {
     __typename: "Action";
     id: string;
     company?: string | null;
-    status?: boolean | null;
-    description?: string | null;
+    name?: string | null;
+    status?: string | null;
     notes?: string | null;
     duration?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -1947,6 +1971,8 @@ export type OnCreateChecklistStepsSubscription = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1969,6 +1995,8 @@ export type OnUpdateChecklistStepsSubscription = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -1991,6 +2019,8 @@ export type OnDeleteChecklistStepsSubscription = {
     items: Array<{
       __typename: "ActionStep";
       stepNumber?: number | null;
+      actualStart?: string | null;
+      actualEnd?: string | null;
       id: string;
       createdAt: string;
       updatedAt: string;
@@ -2554,8 +2584,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -2582,8 +2612,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -2610,8 +2640,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -2641,13 +2671,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -2678,13 +2710,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -2715,13 +2749,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -2754,6 +2790,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -2792,6 +2830,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -2830,6 +2870,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -3452,8 +3494,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -3480,8 +3522,8 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
@@ -3514,13 +3556,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -3551,13 +3595,15 @@ export class APIService {
               __typename
               id
               company
+              name
               status
-              description
               notes
               duration
               createdAt
               updatedAt
             }
+            actualStart
+            actualEnd
             id
             createdAt
             updatedAt
@@ -3593,6 +3639,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -4218,8 +4266,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -4247,8 +4295,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -4276,8 +4324,8 @@ export class APIService {
           __typename
           id
           company
+          name
           status
-          description
           notes
           duration
           createdAt
@@ -4308,13 +4356,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -4346,13 +4396,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -4384,13 +4436,15 @@ export class APIService {
             __typename
             id
             company
+            name
             status
-            description
             notes
             duration
             createdAt
             updatedAt
           }
+          actualStart
+          actualEnd
           id
           createdAt
           updatedAt
@@ -4426,6 +4480,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -4469,6 +4525,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt
@@ -4512,6 +4570,8 @@ export class APIService {
             items {
               __typename
               stepNumber
+              actualStart
+              actualEnd
               id
               createdAt
               updatedAt

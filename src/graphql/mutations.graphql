@@ -165,8 +165,8 @@ mutation CreateAction(
   createAction(input: $input, condition: $condition) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -180,8 +180,8 @@ mutation UpdateAction(
   updateAction(input: $input, condition: $condition) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -195,8 +195,8 @@ mutation DeleteAction(
   deleteAction(input: $input, condition: $condition) {
     id
     company
+    name
     status
-    description
     notes
     duration
     createdAt
@@ -212,13 +212,15 @@ mutation CreateActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -235,13 +237,15 @@ mutation UpdateActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -258,13 +262,15 @@ mutation DeleteActionStep(
     action {
       id
       company
+      name
       status
-      description
       notes
       duration
       createdAt
       updatedAt
     }
+    actualStart
+    actualEnd
     id
     createdAt
     updatedAt
@@ -282,6 +288,8 @@ mutation CreateChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt
@@ -305,6 +313,8 @@ mutation UpdateChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt
@@ -328,6 +338,8 @@ mutation DeleteChecklistSteps(
     actions {
       items {
         stepNumber
+        actualStart
+        actualEnd
         id
         createdAt
         updatedAt

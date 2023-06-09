@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Local
 
+import { AddActionComponent } from './components/add-action/add-action.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
@@ -11,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
+import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
@@ -48,6 +50,12 @@ const routes: Routes = [
     },{
       path: 'checklists',
       component: ManageChecklistsComponent
+    },{
+      path: 'add-new-action',
+      component: AddActionComponent
+    },{
+      path: 'actions/:manage',
+      component: ManageActionsComponent
     },{
       path: 'services',
       component: ManageServiceOrdersComponent

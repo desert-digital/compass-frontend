@@ -27,8 +27,8 @@ type Staff @model @auth(rules: [{ allow: private }]){
 type Action @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
-  status: Boolean
-  description: String
+  name: String
+  status: String
   notes: String 
   duration: Int
 }
@@ -36,6 +36,8 @@ type Action @model @auth(rules: [{ allow: private }]){
 type ActionStep @model @auth(rules: [{allow: private}]){
   stepNumber: Int
   action: Action @hasOne
+  actualStart: String
+  actualEnd: String
 }
 
 type ChecklistSteps @model @auth(rules: [{allow: private}]) {
