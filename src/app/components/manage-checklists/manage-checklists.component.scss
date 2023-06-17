@@ -7,3 +7,14 @@ button {
 .container {
     @include containers;
 }
+
+.action-list-viewport {
+    @include viewport;
+    margin: 15px;
+}
+
+.spread {
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+}

@@ -1,5 +1,26 @@
 @import 'src/compass-theme';
 
+button {
+  @include buttons;
+  width: 100%;
+}
+
+mat-form-field {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.container {
+  @include containers;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
 .example-list {
   width: 500px;
   max-width: 100%;

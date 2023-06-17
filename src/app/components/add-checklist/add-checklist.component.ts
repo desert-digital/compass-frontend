@@ -1,17 +1,21 @@
 // Core
 
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Material
 
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { APIService, Action, Checklist } from '../../API.service';
+import { APIService, ActionModel, Action, ChecklistModel } from '../../API.service';
 
 // Local
 
+import { ActionModelsService } from 'src/app/services/action-models.service';
+import { ChecklistModelsService } from 'src/app/services/checklist-models.service';
 import { ActionsService } from 'src/app/services/actions.service';
 
 @Component({
@@ -20,14 +24,24 @@ import { ActionsService } from 'src/app/services/actions.service';
   styleUrls: ['./add-checklist.component.scss'],
 })
 export class AddChecklistComponent {
-  checklist = [];
 
-  actions: Action[] = [];
+  checklistForm: FormGroup;
 
-  constructor(private _actionsService: ActionsService) {}
+  checklist: ActionModel[] = [];
+  actions: ActionModel[] = [];
+
+  constructor(private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private _actionsService: ActionsService,
+    private _actionModelsService: ActionModelsService,
+    private _checklistModelsService: ChecklistModelsService) {
+    this.checklistForm = this.formBuilder.group({
+      name: ['', Validators.required],
+    });
+  }
 
   async ngOnInit() {
-    this.actions = await this._actionsService.getActions();
+    this.actions = await this._actionModelsService.getActionModels();
   }
 
   drop(e: CdkDragDrop<Action[]>) {
@@ -43,7 +57,9 @@ export class AddChecklistComponent {
     }
   }
 
-  onAddChecklistPressed() {
-    alert('New Checklist to Add');
+  async onAddChecklistPressed(model: ChecklistModel) {
+    this._checklistModelsService.createChecklistModel(model, this.checklist).then(() => {
+      this._snackBar.open('Created a new checklist', 'OK', { duration: 3000 });
+    });
   }
 }

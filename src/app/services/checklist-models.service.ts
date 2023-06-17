@@ -1,0 +1,30 @@
+// Core
+
+import { Injectable } from '@angular/core';
+
+// Local
+
+import { APIService, ChecklistModel, CreateChecklistModelInput } from '../API.service';
+import { ActionsService } from './actions.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ChecklistModelsService {
+
+  constructor(private api: APIService,
+    private _actionsService: ActionsService) { }
+
+   async getChecklistModels(): Promise<ChecklistModel[]> {
+    const models = await this.api.ListChecklistModels();
+    return models.items as ChecklistModel[];
+  };
+
+  async createChecklistModel(model: ChecklistModel, steps: any[]) {
+    const result = await this.api.CreateChecklistModel(model);
+
+    for (let index = 0; index < steps.length; index++) {
+      await this.api.CreateAction({checklistModelStepsId: result.id, actionModelId: steps[index].id})
+    }
+  }
+}

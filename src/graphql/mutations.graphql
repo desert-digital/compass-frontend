@@ -1,4 +1,5 @@
 # this is an auto generated file. This will be overwritten
+
 mutation CreatePendingEvent(
   $input: CreatePendingEventInput!
   $condition: ModelPendingEventConditionInput
@@ -14,8 +15,10 @@ mutation CreatePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdatePendingEvent(
   $input: UpdatePendingEventInput!
   $condition: ModelPendingEventConditionInput
@@ -31,8 +34,10 @@ mutation UpdatePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeletePendingEvent(
   $input: DeletePendingEventInput!
   $condition: ModelPendingEventConditionInput
@@ -48,8 +53,10 @@ mutation DeletePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateVessel(
   $input: CreateVesselInput!
   $condition: ModelVesselConditionInput
@@ -62,17 +69,23 @@ mutation CreateVessel(
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 mutation UpdateVessel(
   $input: UpdateVesselInput!
   $condition: ModelVesselConditionInput
@@ -85,17 +98,23 @@ mutation UpdateVessel(
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 mutation DeleteVessel(
   $input: DeleteVesselInput!
   $condition: ModelVesselConditionInput
@@ -108,17 +127,23 @@ mutation DeleteVessel(
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 mutation CreateStaff(
   $input: CreateStaffInput!
   $condition: ModelStaffConditionInput
@@ -130,8 +155,10 @@ mutation CreateStaff(
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateStaff(
   $input: UpdateStaffInput!
   $condition: ModelStaffConditionInput
@@ -143,8 +170,10 @@ mutation UpdateStaff(
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteStaff(
   $input: DeleteStaffInput!
   $condition: ModelStaffConditionInput
@@ -156,203 +185,262 @@ mutation DeleteStaff(
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
+mutation CreateActionModel(
+  $input: CreateActionModelInput!
+  $condition: ModelActionModelConditionInput
+) {
+  createActionModel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation UpdateActionModel(
+  $input: UpdateActionModelInput!
+  $condition: ModelActionModelConditionInput
+) {
+  updateActionModel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation DeleteActionModel(
+  $input: DeleteActionModelInput!
+  $condition: ModelActionModelConditionInput
+) {
+  deleteActionModel(input: $input, condition: $condition) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
 mutation CreateAction(
   $input: CreateActionInput!
   $condition: ModelActionConditionInput
 ) {
   createAction(input: $input, condition: $condition) {
     id
-    company
-    name
-    status
-    notes
-    duration
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
   }
 }
+
 mutation UpdateAction(
   $input: UpdateActionInput!
   $condition: ModelActionConditionInput
 ) {
   updateAction(input: $input, condition: $condition) {
     id
-    company
-    name
-    status
-    notes
-    duration
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
   }
 }
+
 mutation DeleteAction(
   $input: DeleteActionInput!
   $condition: ModelActionConditionInput
 ) {
   deleteAction(input: $input, condition: $condition) {
     id
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
+    createdAt
+    updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
+  }
+}
+
+mutation CreateChecklistModel(
+  $input: CreateChecklistModelInput!
+  $condition: ModelChecklistModelConditionInput
+) {
+  createChecklistModel(input: $input, condition: $condition) {
+    id
     company
     name
-    status
-    notes
-    duration
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateActionStep(
-  $input: CreateActionStepInput!
-  $condition: ModelActionStepConditionInput
-) {
-  createActionStep(input: $input, condition: $condition) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-mutation UpdateActionStep(
-  $input: UpdateActionStepInput!
-  $condition: ModelActionStepConditionInput
-) {
-  updateActionStep(input: $input, condition: $condition) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-mutation DeleteActionStep(
-  $input: DeleteActionStepInput!
-  $condition: ModelActionStepConditionInput
-) {
-  deleteActionStep(input: $input, condition: $condition) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-mutation CreateChecklistSteps(
-  $input: CreateChecklistStepsInput!
-  $condition: ModelChecklistStepsConditionInput
-) {
-  createChecklistSteps(input: $input, condition: $condition) {
-    id
-    name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
-mutation UpdateChecklistSteps(
-  $input: UpdateChecklistStepsInput!
-  $condition: ModelChecklistStepsConditionInput
+
+mutation UpdateChecklistModel(
+  $input: UpdateChecklistModelInput!
+  $condition: ModelChecklistModelConditionInput
 ) {
-  updateChecklistSteps(input: $input, condition: $condition) {
+  updateChecklistModel(input: $input, condition: $condition) {
     id
+    company
     name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
-mutation DeleteChecklistSteps(
-  $input: DeleteChecklistStepsInput!
-  $condition: ModelChecklistStepsConditionInput
+
+mutation DeleteChecklistModel(
+  $input: DeleteChecklistModelInput!
+  $condition: ModelChecklistModelConditionInput
 ) {
-  deleteChecklistSteps(input: $input, condition: $condition) {
+  deleteChecklistModel(input: $input, condition: $condition) {
     id
+    company
     name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
+
 mutation CreateChecklist(
   $input: CreateChecklistInput!
   $condition: ModelChecklistConditionInput
@@ -367,25 +455,31 @@ mutation CreateChecklist(
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
+
 mutation UpdateChecklist(
   $input: UpdateChecklistInput!
   $condition: ModelChecklistConditionInput
@@ -400,25 +494,31 @@ mutation UpdateChecklist(
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
+
 mutation DeleteChecklist(
   $input: DeleteChecklistInput!
   $condition: ModelChecklistConditionInput
@@ -433,88 +533,124 @@ mutation DeleteChecklist(
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
-mutation CreateWorkflowSteps(
-  $input: CreateWorkflowStepsInput!
-  $condition: ModelWorkflowStepsConditionInput
+
+mutation CreateWorkflowModel(
+  $input: CreateWorkflowModelInput!
+  $condition: ModelWorkflowModelConditionInput
 ) {
-  createWorkflowSteps(input: $input, condition: $condition) {
+  createWorkflowModel(input: $input, condition: $condition) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
-mutation UpdateWorkflowSteps(
-  $input: UpdateWorkflowStepsInput!
-  $condition: ModelWorkflowStepsConditionInput
+
+mutation UpdateWorkflowModel(
+  $input: UpdateWorkflowModelInput!
+  $condition: ModelWorkflowModelConditionInput
 ) {
-  updateWorkflowSteps(input: $input, condition: $condition) {
+  updateWorkflowModel(input: $input, condition: $condition) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
-mutation DeleteWorkflowSteps(
-  $input: DeleteWorkflowStepsInput!
-  $condition: ModelWorkflowStepsConditionInput
+
+mutation DeleteWorkflowModel(
+  $input: DeleteWorkflowModelInput!
+  $condition: ModelWorkflowModelConditionInput
 ) {
-  deleteWorkflowSteps(input: $input, condition: $condition) {
+  deleteWorkflowModel(input: $input, condition: $condition) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateWorkflow(
   $input: CreateWorkflowInput!
   $condition: ModelWorkflowConditionInput
@@ -529,15 +665,20 @@ mutation CreateWorkflow(
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -545,8 +686,10 @@ mutation CreateWorkflow(
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }
+
 mutation UpdateWorkflow(
   $input: UpdateWorkflowInput!
   $condition: ModelWorkflowConditionInput
@@ -561,15 +704,20 @@ mutation UpdateWorkflow(
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -577,8 +725,10 @@ mutation UpdateWorkflow(
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }
+
 mutation DeleteWorkflow(
   $input: DeleteWorkflowInput!
   $condition: ModelWorkflowConditionInput
@@ -593,15 +743,20 @@ mutation DeleteWorkflow(
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -609,5 +764,6 @@ mutation DeleteWorkflow(
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }

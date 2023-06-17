@@ -5,11 +5,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 // Amplify
 
-import { APIService, Action } from '../../API.service';
+import { APIService, ActionModel } from '../../API.service';
 
 // Local
 
-import { ActionsService } from 'src/app/services/actions.service';
+import { ActionModelsService } from 'src/app/services/action-models.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manage-actions',
@@ -19,19 +20,20 @@ import { ActionsService } from 'src/app/services/actions.service';
 export class ManageActionsComponent {
   manageActions: boolean = false;
   
-  actions: Action[] = [];
+  actions: ActionModel[] = [];
   selectedAction: any;
 
   constructor(private router: Router, 
     private route: ActivatedRoute,
-    private _actionService: ActionsService,
+    private _matSnackBar: MatSnackBar, 
+    private _actionModelsService: ActionModelsService,
     private api: APIService) { }
 
   async ngOnInit() {
     this.manageActions = Boolean(this.route.snapshot.paramMap.get('manage'))
-    await this._actionService.getActions().then(actions =>
-      this.actions = actions as Action[]);
-    this.actions.sort((a: Action, b: Action) => {
+    await this._actionModelsService.getActionModels().then(actions =>
+      this.actions = actions as ActionModel[]);
+    this.actions.sort((a: ActionModel, b: ActionModel) => {
       return a.name!.localeCompare(b.name!);
     });
   }
@@ -40,7 +42,7 @@ export class ManageActionsComponent {
     this.router.navigate(['main/add-new-action']);
   }
 
-  onItemSelected(item: Action) {
+  onItemSelected(item: ActionModel) {
     this.selectedAction = item;
   }
 
@@ -50,6 +52,10 @@ export class ManageActionsComponent {
   onEditActionPressed() {
   }
 
-  onDeleteActionPressed() {
+  async onDeleteActionPressed() {
+    const nameOfDeletedActionModel = this.selectedAction.name;
+    await this._actionModelsService.deleteModel(this.selectedAction).then(_ => {
+      this._matSnackBar.open(`Deleted ${nameOfDeletedActionModel}`);
+    });
   }
 }

@@ -1,4 +1,5 @@
 # this is an auto generated file. This will be overwritten
+
 subscription OnCreatePendingEvent(
   $filter: ModelSubscriptionPendingEventFilterInput
 ) {
@@ -13,8 +14,10 @@ subscription OnCreatePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnUpdatePendingEvent(
   $filter: ModelSubscriptionPendingEventFilterInput
 ) {
@@ -29,8 +32,10 @@ subscription OnUpdatePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnDeletePendingEvent(
   $filter: ModelSubscriptionPendingEventFilterInput
 ) {
@@ -45,8 +50,10 @@ subscription OnDeletePendingEvent(
     status
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
   onCreateVessel(filter: $filter) {
     id
@@ -56,17 +63,23 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
   onUpdateVessel(filter: $filter) {
     id
@@ -76,17 +89,23 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
   onDeleteVessel(filter: $filter) {
     id
@@ -96,17 +115,23 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     defaultWorkflow {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
     vesselDefaultWorkflowId
+    __typename
   }
 }
+
 subscription OnCreateStaff($filter: ModelSubscriptionStaffFilterInput) {
   onCreateStaff(filter: $filter) {
     id
@@ -115,8 +140,10 @@ subscription OnCreateStaff($filter: ModelSubscriptionStaffFilterInput) {
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnUpdateStaff($filter: ModelSubscriptionStaffFilterInput) {
   onUpdateStaff(filter: $filter) {
     id
@@ -125,8 +152,10 @@ subscription OnUpdateStaff($filter: ModelSubscriptionStaffFilterInput) {
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnDeleteStaff($filter: ModelSubscriptionStaffFilterInput) {
   onDeleteStaff(filter: $filter) {
     id
@@ -135,188 +164,247 @@ subscription OnDeleteStaff($filter: ModelSubscriptionStaffFilterInput) {
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
+subscription OnCreateActionModel(
+  $filter: ModelSubscriptionActionModelFilterInput
+) {
+  onCreateActionModel(filter: $filter) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnUpdateActionModel(
+  $filter: ModelSubscriptionActionModelFilterInput
+) {
+  onUpdateActionModel(filter: $filter) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnDeleteActionModel(
+  $filter: ModelSubscriptionActionModelFilterInput
+) {
+  onDeleteActionModel(filter: $filter) {
+    id
+    company
+    name
+    status
+    notes
+    duration
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
 subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
   onCreateAction(filter: $filter) {
     id
-    company
-    name
-    status
-    notes
-    duration
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
   }
 }
+
 subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
   onUpdateAction(filter: $filter) {
     id
-    company
-    name
-    status
-    notes
-    duration
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
   }
 }
+
 subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
   onDeleteAction(filter: $filter) {
     id
+    model {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklist {
+      id
+      company
+      name
+      steps {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    actualStart
+    actualEnd
+    createdAt
+    updatedAt
+    checklistModelStepsId
+    actionModelId
+    __typename
+  }
+}
+
+subscription OnCreateChecklistModel(
+  $filter: ModelSubscriptionChecklistModelFilterInput
+) {
+  onCreateChecklistModel(filter: $filter) {
+    id
     company
     name
-    status
-    notes
-    duration
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateActionStep(
-  $filter: ModelSubscriptionActionStepFilterInput
-) {
-  onCreateActionStep(filter: $filter) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-subscription OnUpdateActionStep(
-  $filter: ModelSubscriptionActionStepFilterInput
-) {
-  onUpdateActionStep(filter: $filter) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-subscription OnDeleteActionStep(
-  $filter: ModelSubscriptionActionStepFilterInput
-) {
-  onDeleteActionStep(filter: $filter) {
-    stepNumber
-    action {
-      id
-      company
-      name
-      status
-      notes
-      duration
-      createdAt
-      updatedAt
-    }
-    actualStart
-    actualEnd
-    id
-    createdAt
-    updatedAt
-    checklistStepsActionsId
-    actionStepActionId
-  }
-}
-subscription OnCreateChecklistSteps(
-  $filter: ModelSubscriptionChecklistStepsFilterInput
-) {
-  onCreateChecklistSteps(filter: $filter) {
-    id
-    name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
-subscription OnUpdateChecklistSteps(
-  $filter: ModelSubscriptionChecklistStepsFilterInput
+
+subscription OnUpdateChecklistModel(
+  $filter: ModelSubscriptionChecklistModelFilterInput
 ) {
-  onUpdateChecklistSteps(filter: $filter) {
+  onUpdateChecklistModel(filter: $filter) {
     id
+    company
     name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
-subscription OnDeleteChecklistSteps(
-  $filter: ModelSubscriptionChecklistStepsFilterInput
+
+subscription OnDeleteChecklistModel(
+  $filter: ModelSubscriptionChecklistModelFilterInput
 ) {
-  onDeleteChecklistSteps(filter: $filter) {
+  onDeleteChecklistModel(filter: $filter) {
     id
+    company
     name
-    actions {
+    steps {
       items {
-        stepNumber
+        id
         actualStart
         actualEnd
-        id
         createdAt
         updatedAt
-        checklistStepsActionsId
-        actionStepActionId
+        checklistModelStepsId
+        actionModelId
+        __typename
       }
       nextToken
+      __typename
     }
     createdAt
     updatedAt
-    workflowStepsActionsId
+    __typename
   }
 }
+
 subscription OnCreateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
   onCreateChecklist(filter: $filter) {
     id
@@ -328,25 +416,31 @@ subscription OnCreateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
+
 subscription OnUpdateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
   onUpdateChecklist(filter: $filter) {
     id
@@ -358,25 +452,31 @@ subscription OnUpdateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
+
 subscription OnDeleteChecklist($filter: ModelSubscriptionChecklistFilterInput) {
   onDeleteChecklist(filter: $filter) {
     id
@@ -388,85 +488,121 @@ subscription OnDeleteChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
-    steps {
+    model {
       id
+      company
       name
-      actions {
+      steps {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
-      workflowStepsActionsId
+      __typename
     }
     start
     end
     createdAt
     updatedAt
+    workflowModelChecklistsId
     checklistOwnerId
-    checklistStepsId
+    checklistModelId
+    __typename
   }
 }
-subscription OnCreateWorkflowSteps(
-  $filter: ModelSubscriptionWorkflowStepsFilterInput
+
+subscription OnCreateWorkflowModel(
+  $filter: ModelSubscriptionWorkflowModelFilterInput
 ) {
-  onCreateWorkflowSteps(filter: $filter) {
+  onCreateWorkflowModel(filter: $filter) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
-subscription OnUpdateWorkflowSteps(
-  $filter: ModelSubscriptionWorkflowStepsFilterInput
+
+subscription OnUpdateWorkflowModel(
+  $filter: ModelSubscriptionWorkflowModelFilterInput
 ) {
-  onUpdateWorkflowSteps(filter: $filter) {
+  onUpdateWorkflowModel(filter: $filter) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
-subscription OnDeleteWorkflowSteps(
-  $filter: ModelSubscriptionWorkflowStepsFilterInput
+
+subscription OnDeleteWorkflowModel(
+  $filter: ModelSubscriptionWorkflowModelFilterInput
 ) {
-  onDeleteWorkflowSteps(filter: $filter) {
+  onDeleteWorkflowModel(filter: $filter) {
     id
     name
-    actions {
+    checklists {
       items {
         id
-        name
+        company
+        start
+        end
         createdAt
         updatedAt
-        workflowStepsActionsId
+        workflowModelChecklistsId
+        checklistOwnerId
+        checklistModelId
+        __typename
       }
       nextToken
+      __typename
     }
+    actualStart
+    actualEnd
     createdAt
     updatedAt
+    __typename
   }
 }
+
 subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
   onCreateWorkflow(filter: $filter) {
     id
@@ -478,15 +614,20 @@ subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -494,8 +635,10 @@ subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }
+
 subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
   onUpdateWorkflow(filter: $filter) {
     id
@@ -507,15 +650,20 @@ subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -523,8 +671,10 @@ subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }
+
 subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
   onDeleteWorkflow(filter: $filter) {
     id
@@ -536,15 +686,20 @@ subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
       email
       createdAt
       updatedAt
+      __typename
     }
     steps {
       id
       name
-      actions {
+      checklists {
         nextToken
+        __typename
       }
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      __typename
     }
     start
     end
@@ -552,5 +707,6 @@ subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     updatedAt
     workflowOwnerId
     workflowStepsId
+    __typename
   }
 }

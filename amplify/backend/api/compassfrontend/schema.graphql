@@ -14,7 +14,7 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   company: ID
   name: String
   type: String
-  defaultWorkflow: WorkflowSteps @hasOne
+  defaultWorkflow: WorkflowModel @hasOne
 }
 
 type Staff @model @auth(rules: [{ allow: private }]){
@@ -24,7 +24,7 @@ type Staff @model @auth(rules: [{ allow: private }]){
   email: String
 }
 
-type Action @model @auth(rules: [{ allow: private }]){
+type ActionModel @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   name: String
@@ -33,39 +33,43 @@ type Action @model @auth(rules: [{ allow: private }]){
   duration: Int
 }
 
-type ActionStep @model @auth(rules: [{allow: private}]){
-  stepNumber: Int
-  action: Action @hasOne
+type Action @model @auth(rules: [{allow: private}]){
+  id: ID!
+  model: ActionModel @hasOne
+  checklist: ChecklistModel @belongsTo
   actualStart: String
   actualEnd: String
 }
 
-type ChecklistSteps @model @auth(rules: [{allow: private}]) {
+type ChecklistModel @model @auth(rules: [{ allow: private }]){
   id: ID!
+  company: ID
   name: String
-  actions: [ActionStep] @hasMany
+  steps: [Action] @hasMany
 }
 
 type Checklist @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   owner: Staff @hasOne
-  steps: ChecklistSteps @hasOne
+  model: ChecklistModel @hasOne
   start: AWSDate
   end: AWSDate 
 }
 
-type WorkflowSteps @model @auth(rules: [{allow: private}]) {
+type WorkflowModel @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String
-  actions: [ChecklistSteps] @hasMany
+  checklists: [Checklist] @hasMany
+  actualStart: String
+  actualEnd: String
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID!
   owner: Staff @hasOne
-  steps: WorkflowSteps @hasOne
+  steps: WorkflowModel @hasOne
   start: AWSDate
   end: AWSDate 
 }

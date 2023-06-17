@@ -1,10 +1,18 @@
 <div cdkDropListGroup>
     <div class="container">
-        <h3>Add a New Workflow</h3>
-        <button mat-flat-button color="primary" (click)="onAddChecklistPressed()">Add the new Checklist</button>
+        <h3>Add a New Checklist</h3>
+        <div class="one-wide">
+            <form [formGroup]="checklistForm" (ngSubmit)="onAddChecklistPressed(checklistForm.value)">
+                <button mat-flat-button type="submit" color="primary">Add a new Checklist</button>
+                <mat-form-field>
+                    <mat-label>Checklist name</mat-label>
+                    <input matInput id="name" formControlName="name" placeholder="New Checklist">
+                </mat-form-field>
+            </form>
+        </div>
         <div class="row">
             <div class="example-container two-wide">
-                <h4>New Checklist</h4>
+                <h4>New Checklist actions</h4>
                 <div cdkDropList [cdkDropListData]="checklist" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of checklist"> <mat-icon
                             class="material-symbols-outlined">drag_handle</mat-icon>
@@ -12,7 +20,7 @@
                 </div>
             </div>
             <div class="example-container two-wide">
-                <h4>All Actions</h4>
+                <h4>All actions</h4>
                 <div cdkDropList [cdkDropListData]="actions" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of actions"> <mat-icon
                             class="material-symbols-outlined">drag_handle</mat-icon>

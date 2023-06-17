@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 
 // Local
 
-import { WorkflowSteps } from 'src/app/API.service';
-import { WorkflowStepsService } from 'src/app/services/workflow-steps.service';
+import { WorkflowModel } from 'src/app/API.service';
+import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 
 @Component({
   selector: 'app-manage-workflows',
@@ -15,13 +15,13 @@ import { WorkflowStepsService } from 'src/app/services/workflow-steps.service';
 })
 export class ManageWorkflowsComponent {
 
-  workflows: WorkflowSteps[] = [];
+  workflows: WorkflowModel[] = [];
 
   constructor(private router: Router,
-    private _workflowStepsService: WorkflowStepsService) {}
+    private _workflowModelService: WorkflowModelsService) {}
   
   async ngOnInit() {
-    this.workflows = await this._workflowStepsService.getWorkflowSteps();
+    this.workflows = await this._workflowModelService.getWorkflowModels();
   }
 
   onAddNewWorkflowPressed() {

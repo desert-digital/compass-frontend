@@ -1,10 +1,36 @@
 <div class="container">
     <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Workflow</button>
     <div *ngIf="workflows.length > 0">
-        <h3>Workflows</h3>
-        <mat-list *ngFor="let workflow of workflows">
-            <mat-list-item>{{ workflow.name }}</mat-list-item>
+        <h3>Available Workflows</h3>
+        <mat-list role="list">
+            <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
+                <div *cdkVirtualFor="let workflow of workflows" class="spread">
+                    <div matListItemTitle class="item-title"><b>{{ workflow.name }}</b>
+                    </div>
+                    <div matListItemMeta>
+                        <button matListItemMeta mat-icon-button (click)="onItemSelected(action)"
+                            [matMenuTriggerFor]="itemMenu">
+                            <mat-icon>
+                                more_vert
+                            </mat-icon>
+                        </button>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </cdk-virtual-scroll-viewport>
         </mat-list>
+        <mat-menu #itemMenu="matMenu">
+            <button mat-menu-item (click)="onNotesPressed()">
+                <mat-icon class="material-icons-outlined" color="primary">comment</mat-icon>notes
+            </button>
+            <button mat-menu-item (click)="onEditActionPressed()">
+                <mat-icon class="material-icons-outlined" color="primary">edit</mat-icon>edit
+            </button>
+            <button mat-menu-item (click)="onDeleteActionPressed()">
+                <mat-icon class="material-icons-outlined" color="warn">clear</mat-icon>delete
+            </button>
+        </mat-menu>
+
     </div>
     <div *ngIf="workflows.length == 0">
         <h3>No Workflows Found</h3>

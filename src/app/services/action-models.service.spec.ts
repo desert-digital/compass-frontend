@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WorkflowStepsService } from './workflow-steps.service';
+import { ActionModelsService } from './action-models.service';
 
-describe('WorkflowStepsService', () => {
-  let service: WorkflowStepsService;
+describe('ActionModelsService', () => {
+  let service: ActionModelsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(WorkflowStepsService);
+    service = TestBed.inject(ActionModelsService);
   });
 
   it('should be created', () => {

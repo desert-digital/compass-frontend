@@ -49,7 +49,6 @@ import { FleetComponent } from './components/fleet/fleet.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
-import { PendingComponent } from './components/pending/pending.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
@@ -77,7 +76,6 @@ import { ManageActionsComponent } from './components/manage-actions/manage-actio
     AvailableFleetComponent,
     ServiceOrderTableComponent,
     CharterChartComponent,
-    PendingComponent,
     LoginComponent,
     LogoutComponent,
     PendingTableComponent,
@@ -88,7 +86,7 @@ import { ManageActionsComponent } from './components/manage-actions/manage-actio
     AddChecklistComponent,
     AddWorkflowComponent,
     AddActionComponent,
-    ManageActionsComponent
+    ManageActionsComponent,
     ],
   imports: [
     AmplifyAuthenticatorModule,

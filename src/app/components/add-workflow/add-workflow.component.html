@@ -1,20 +1,31 @@
 <div cdkDropListGroup>
     <div class="container">
         <h3>Add a New Workflow</h3>
-        <div class="example-container">
-            <h4>Movies</h4>
-            <div cdkDropList [cdkDropListData]="workflow" class="example-list" (cdkDropListDropped)="drop($event)">
-                <div cdkDrag class="example-box" *ngFor="let item of workflow"> <mat-icon
-                        class="material-symbols-outlined">drag_handle</mat-icon>
-                    {{item}}</div>
-            </div>
+        <div class="one-wide">
+            <form [formGroup]="workflowForm" (ngSubmit)="onAddWorkflowPressed(workflowForm.value)">
+                <button mat-flat-button type="submit" color="primary">Add a new Workflow</button>
+                <mat-form-field>
+                    <mat-label>Workflow name</mat-label>
+                    <input matInput id="name" formControlName="name" placeholder="New Checklist">
+                </mat-form-field>
+            </form>
         </div>
-        <div class="example-container">
-            <h4>Watched</h4>
-            <div cdkDropList [cdkDropListData]="checklists" class="example-list" (cdkDropListDropped)="drop($event)">
-                <div cdkDrag class="example-box" *ngFor="let item of checklists"> <mat-icon
-                        class="material-symbols-outlined">drag_handle</mat-icon>
-                    {{item}}</div>
+        <div class="row">
+            <div class="example-container two-wide">
+                <h4>New Checklist actions</h4>
+                <div cdkDropList [cdkDropListData]="workflow" class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div cdkDrag class="example-box" *ngFor="let item of workflow"> <mat-icon
+                            class="material-symbols-outlined">drag_handle</mat-icon>
+                        {{item.name}}</div>
+                </div>
+            </div>
+            <div class="example-container two-wide">
+                <h4>All Checklists</h4>
+                <div cdkDropList [cdkDropListData]="checklists" class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div cdkDrag class="example-box" *ngFor="let item of checklists"> <mat-icon
+                            class="material-symbols-outlined">drag_handle</mat-icon>
+                        {{item.name}}</div>
+                </div>
             </div>
         </div>
     </div>

@@ -19,11 +19,13 @@ export class PendingService {
     const today = new Date().toISOString();
 
     const variables: ModelPendingEventFilterInput = {
-      start: {ge: today}
+        start: {ge: today},
+        status: {ne: 'cancelled'}
     };
 
     const events = await this.api.ListPendingEvents(variables);
     this.numberOfPendingEvents$.next(events.items.length);
+    
     return events.items as PendingEvent[];
   }
 

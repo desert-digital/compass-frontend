@@ -5,8 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Amplify 
 
-import { APIService, Action } from '../../API.service';
+import { APIService, ActionModel } from '../../API.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActionModelsService } from 'src/app/services/action-models.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class AddActionComponent {
   actionForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private api: APIService,
+    private _actionModelService: ActionModelsService,
     private _snackBar: MatSnackBar) {
     this.actionForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -37,8 +38,8 @@ export class AddActionComponent {
   ngOnInit() {
   }
 
-  async onAddNewActionPressed(action: Action) {
-    await this.api.CreateAction(action);
+  async onAddNewActionPressed(action: ActionModel) {
+    await this._actionModelService.createActionModel(action);
     this._snackBar.open('Created a new action', 'OK', { duration: 3000 });
   }
 }
