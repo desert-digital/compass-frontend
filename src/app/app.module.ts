@@ -15,6 +15,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -62,6 +63,7 @@ import { AddChecklistComponent } from './components/add-checklist/add-checklist.
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { AddActionComponent } from './components/add-action/add-action.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
+import { DeleteActionDialogComponent } from './components/delete-action-dialog/delete-action-dialog.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { ManageActionsComponent } from './components/manage-actions/manage-actio
     AddWorkflowComponent,
     AddActionComponent,
     ManageActionsComponent,
+    DeleteActionDialogComponent,
     ],
   imports: [
     AmplifyAuthenticatorModule,
@@ -100,6 +103,7 @@ import { ManageActionsComponent } from './components/manage-actions/manage-actio
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule, 
     MatIconModule,
     MatInputModule,
