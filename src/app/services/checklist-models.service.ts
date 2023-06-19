@@ -27,4 +27,11 @@ export class ChecklistModelsService {
       await this.api.CreateAction({checklistModelStepsId: result.id, actionModelId: steps[index].id})
     }
   }
+
+  async deleteModel(checklist: ChecklistModel) {
+    await this.api.DeleteChecklistModel({id: checklist.id});
+
+    // Should also delete the _checklists_ that use this model, and then the workflow models
+    // that use the checklist
+  }
 }

@@ -1,7 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
 
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { APIService, ActionModel, Action, ChecklistModel } from '../../API.service';
+import { ActionModel, Action, ChecklistModel } from '../../API.service';
 
 // Local
 
@@ -41,6 +41,10 @@ export class AddChecklistComponent {
   }
 
   async ngOnInit() {
+    await this._getActions();
+  }
+
+  async _getActions() {
     this.actions = await this._actionModelsService.getActionModels();
   }
 
@@ -57,9 +61,17 @@ export class AddChecklistComponent {
     }
   }
 
-  async onAddChecklistPressed(model: ChecklistModel) {
-    this._checklistModelsService.createChecklistModel(model, this.checklist).then(() => {
-      this._snackBar.open('Created a new checklist', 'OK', { duration: 3000 });
-    });
+  async onAddChecklistPressed(model: ChecklistModel, formDirective: FormGroupDirective) {
+    try {
+      this._checklistModelsService.createChecklistModel(model, this.checklist).then(() => {
+        this._snackBar.open('Created a new checklist', 'OK', { duration: 3000 });
+        this.checklistForm.reset();
+        formDirective.resetForm();
+        this.checklist = [];
+        this._getActions();
+      });
+    } catch (error) {
+      this._snackBar.open('Error creating the checklist', 'OK', { duration: 3000 });
+    }
   }
 }

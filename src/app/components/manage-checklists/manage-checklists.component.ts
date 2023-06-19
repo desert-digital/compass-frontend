@@ -3,11 +3,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Material
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 // Local
 
 import { ChecklistModel } from '../../API.service';
 import { ChecklistModelsService } from 'src/app/services/checklist-models.service';
-
+import { DeleteActionDialogComponent } from '../delete-action-dialog/delete-action-dialog.component';
+import { DeleteChecklistDialogComponent } from '../delete-checklist-dialog/delete-checklist-dialog.component';
 
 @Component({
   selector: 'app-manage-checklists',
@@ -17,14 +23,19 @@ import { ChecklistModelsService } from 'src/app/services/checklist-models.servic
 export class ManageChecklistsComponent {
 
   checklists: ChecklistModel[] = [];
-  selectedAction: any;
+  selectedChecklist: any;
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar,
     private _checklistModelsService: ChecklistModelsService) {}
 
   async ngOnInit() {
+    await this._loadChecklists();
+  }
+
+  async _loadChecklists() {
     this.checklists = await this._checklistModelsService.getChecklistModels();
-    console.log(JSON.stringify(this.checklists));
   }
 
   onAddNewChecklistPressed() {
@@ -32,7 +43,7 @@ export class ManageChecklistsComponent {
   }
 
   onItemSelected(item: ChecklistModel) {
-    this.selectedAction = item;
+    this.selectedChecklist = item;
   }
 
   onNotesPressed() {
@@ -42,5 +53,16 @@ export class ManageChecklistsComponent {
   }
 
   onDeleteActionPressed() {
+    const dialogRef = this._dialog.open(DeleteChecklistDialogComponent);
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        const nameOfDeletedChecklistModel = this.selectedChecklist.name;
+        await this._checklistModelsService.deleteModel(this.selectedChecklist).then(() => {
+          this._snackBar.open(`Deleted "${nameOfDeletedChecklistModel}"`, 'OK', {duration: 3000});
+        });
+        this._loadChecklists();
+      }
+    });
   }
 }

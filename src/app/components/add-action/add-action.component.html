@@ -1,6 +1,6 @@
 <div class="container">
     <h3>Add a new Action</h3>
-    <form [formGroup]="actionForm" (ngSubmit)="onAddNewActionPressed(actionForm.value)">
+    <form [formGroup]="actionForm" #formDirective="ngForm" (ngSubmit)="onAddNewActionPressed(actionForm.value, formDirective)">
         <div action="#" class="column">
             <mat-form-field>
                 <mat-label>Name</mat-label>

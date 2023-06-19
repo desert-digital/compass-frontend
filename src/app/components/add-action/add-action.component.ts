@@ -1,11 +1,11 @@
 // Core
 
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Amplify 
 
-import { APIService, ActionModel } from '../../API.service';
+import { ActionModel } from '../../API.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActionModelsService } from 'src/app/services/action-models.service';
 
@@ -38,9 +38,16 @@ export class AddActionComponent {
   ngOnInit() {
   }
 
-  async onAddNewActionPressed(action: ActionModel) {
-    await this._actionModelService.createActionModel(action);
-    this._snackBar.open('Created a new action', 'OK', { duration: 3000 });
+  async onAddNewActionPressed(action: ActionModel, formDirective: FormGroupDirective) {
+    try {
+      await this._actionModelService.createActionModel(action).then(() =>{
+        this._snackBar.open('Created a new action', 'OK', { duration: 3000 });
+        this.actionForm.reset();
+        formDirective.resetForm();
+      });      
+    } catch (error) {
+      this._snackBar.open('Error creating the action', 'OK', { duration: 3000 });
+    }
   }
 }
 

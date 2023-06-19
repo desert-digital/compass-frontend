@@ -64,6 +64,7 @@ import { AddWorkflowComponent } from './components/add-workflow/add-workflow.com
 import { AddActionComponent } from './components/add-action/add-action.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 import { DeleteActionDialogComponent } from './components/delete-action-dialog/delete-action-dialog.component';
+import { DeleteChecklistDialogComponent } from './components/delete-checklist-dialog/delete-checklist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { DeleteActionDialogComponent } from './components/delete-action-dialog/d
     AddActionComponent,
     ManageActionsComponent,
     DeleteActionDialogComponent,
+    DeleteChecklistDialogComponent,
     ],
   imports: [
     AmplifyAuthenticatorModule,

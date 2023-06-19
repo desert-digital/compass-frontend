@@ -8,7 +8,7 @@
                     <div matListItemTitle class="item-title"><b>{{ checklist.name }}</b>
                     </div>
                     <div matListItemMeta>
-                        <button matListItemMeta mat-icon-button (click)="onItemSelected(action)"
+                        <button matListItemMeta mat-icon-button (click)="onItemSelected(checklist)"
                             [matMenuTriggerFor]="itemMenu">
                             <mat-icon>
                                 more_vert
