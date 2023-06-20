@@ -6,7 +6,7 @@
             <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
                 <div *cdkVirtualFor="let action of actions" class="spread">
                     <div matListItemTitle class="item-title"><b>{{ action.name }}</b> ({{action.duration}} minutes)</div>
-                    <div matListItemMeta *ngIf="manageActions">
+                    <div matListItemMeta>
                         <button matListItemMeta mat-icon-button (click)="onItemSelected(action)"
                             [matMenuTriggerFor]="itemMenu">
                             <mat-icon>

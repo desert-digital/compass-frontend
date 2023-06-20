@@ -234,6 +234,7 @@ subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -270,6 +271,7 @@ subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -306,6 +308,7 @@ subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -331,6 +334,7 @@ subscription OnCreateChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -358,6 +362,7 @@ subscription OnUpdateChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -385,6 +390,7 @@ subscription OnDeleteChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -422,6 +428,7 @@ subscription OnCreateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -458,6 +465,7 @@ subscription OnUpdateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -494,6 +502,7 @@ subscription OnDeleteChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename

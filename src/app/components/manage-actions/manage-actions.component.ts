@@ -13,6 +13,7 @@ import { ActionModelsService } from 'src/app/services/action-models.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteActionDialogComponent } from '../delete-action-dialog/delete-action-dialog.component';
+import { ShowActionNotesDialogComponent } from '../show-action-notes-dialog/show-action-notes-dialog.component';
 
 @Component({
   selector: 'app-manage-actions',
@@ -54,10 +55,12 @@ export class ManageActionsComponent {
   }
 
   onNotesPressed() {
-
+    const dialogRef = this._dialog.open(ShowActionNotesDialogComponent, 
+      {data: this.selectedAction });
   }
 
   onEditActionPressed() {
+    this.router.navigate(['main/edit-action',this.selectedAction.id]);
   }
 
   async onDeleteActionPressed() {

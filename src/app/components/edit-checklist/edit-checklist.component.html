@@ -3,8 +3,12 @@
         <h3>Add a New Checklist</h3>
         <div class="one-wide">
             <form [formGroup]="checklistForm" #formDirective="ngForm"
-                (ngSubmit)="onAddChecklistPressed(checklistForm.value, formDirective)">
+                (ngSubmit)="onUpdateChecklistPressed(checklistForm.value, formDirective)">
                 <button mat-flat-button type="submit" color="primary">Add a new Checklist</button>
+                <mat-form-field>
+                    <mat-label>ID</mat-label>
+                    <input matInput id="id" formControlName="id">
+                </mat-form-field>
                 <mat-form-field>
                     <mat-label>Checklist name</mat-label>
                     <input matInput id="name" formControlName="name" placeholder="New Checklist">

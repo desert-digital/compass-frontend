@@ -182,6 +182,7 @@ query GetAction($id: ID!) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -223,6 +224,7 @@ query ListActions(
         id
         company
         name
+        notes
         createdAt
         updatedAt
         __typename
@@ -245,6 +247,7 @@ query GetChecklistModel($id: ID!) {
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -275,6 +278,7 @@ query ListChecklistModels(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -305,6 +309,7 @@ query GetChecklist($id: ID!) {
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -346,6 +351,7 @@ query ListChecklists(
         id
         company
         name
+        notes
         createdAt
         updatedAt
         __typename

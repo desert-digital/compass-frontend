@@ -18,8 +18,17 @@ export class ActionModelsService {
     return events.items as ActionModel[];
   }
 
+  async getActionModelFromId(id: string): Promise<ActionModel> {
+    const action = await this.api.GetActionModel(id);
+    return action as ActionModel;
+  }
+
   async createActionModel(action: ActionModel) {
     await this.api.CreateActionModel(action);
+  }
+
+  async updateModel(action: ActionModel) {
+    await this.api.UpdateActionModel(action); 
   }
 
   async deleteModel(action: ActionModel) {

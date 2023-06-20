@@ -12,8 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ChecklistModel } from '../../API.service';
 import { ChecklistModelsService } from 'src/app/services/checklist-models.service';
-import { DeleteActionDialogComponent } from '../delete-action-dialog/delete-action-dialog.component';
 import { DeleteChecklistDialogComponent } from '../delete-checklist-dialog/delete-checklist-dialog.component';
+import { ShowChecklistNotesDialogComponent } from '../show-checklist-notes-dialog/show-checklist-notes-dialog.component';
 
 @Component({
   selector: 'app-manage-checklists',
@@ -28,7 +28,7 @@ export class ManageChecklistsComponent {
   constructor(private router: Router,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private _checklistModelsService: ChecklistModelsService) {}
+    private _checklistModelsService: ChecklistModelsService) { }
 
   async ngOnInit() {
     await this._loadChecklists();
@@ -47,9 +47,12 @@ export class ManageChecklistsComponent {
   }
 
   onNotesPressed() {
+    const dialogRef = this._dialog.open(ShowChecklistNotesDialogComponent,
+      { data: this.selectedChecklist });
   }
 
   onEditActionPressed() {
+    this.router.navigate(['main/edit-checklist', this.selectedChecklist.id])
   }
 
   onDeleteActionPressed() {
@@ -59,7 +62,7 @@ export class ManageChecklistsComponent {
       if (result) {
         const nameOfDeletedChecklistModel = this.selectedChecklist.name;
         await this._checklistModelsService.deleteModel(this.selectedChecklist).then(() => {
-          this._snackBar.open(`Deleted "${nameOfDeletedChecklistModel}"`, 'OK', {duration: 3000});
+          this._snackBar.open(`Deleted "${nameOfDeletedChecklistModel}"`, 'OK', { duration: 3000 });
         });
         this._loadChecklists();
       }

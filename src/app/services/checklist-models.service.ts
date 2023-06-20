@@ -19,7 +19,12 @@ export class ChecklistModelsService {
     const models = await this.api.ListChecklistModels();
     return models.items as ChecklistModel[];
   };
-
+ 
+  async getChecklistModelFromId(id: string): Promise<ChecklistModel> {
+    const checklist = await this.api.GetChecklistModel(id);
+    return checklist as ChecklistModel;
+  }
+ 
   async createChecklistModel(model: ChecklistModel, steps: any[]) {
     const result = await this.api.CreateChecklistModel(model);
 

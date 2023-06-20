@@ -73,7 +73,7 @@ export class MainComponent {
   }
 
   onActionsPressed() {
-    this._router.navigate(['main/actions', 'true']);
+    this._router.navigate(['main/actions']);
   }
 
   async onLogoutPressed() {

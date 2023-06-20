@@ -224,6 +224,7 @@ export type ChecklistModel = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: ModelActionConnection | null;
   createdAt: string;
   updatedAt: string;
@@ -378,11 +379,13 @@ export type CreateChecklistModelInput = {
   id?: string | null;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
 };
 
 export type ModelChecklistModelConditionInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
   and?: Array<ModelChecklistModelConditionInput | null> | null;
   or?: Array<ModelChecklistModelConditionInput | null> | null;
   not?: ModelChecklistModelConditionInput | null;
@@ -392,6 +395,7 @@ export type UpdateChecklistModelInput = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
 };
 
 export type DeleteChecklistModelInput = {
@@ -594,6 +598,7 @@ export type ModelChecklistModelFilterInput = {
   id?: ModelIDInput | null;
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
   and?: Array<ModelChecklistModelFilterInput | null> | null;
   or?: Array<ModelChecklistModelFilterInput | null> | null;
   not?: ModelChecklistModelFilterInput | null;
@@ -748,6 +753,7 @@ export type ModelSubscriptionChecklistModelFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
+  notes?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
   or?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
 };
@@ -978,6 +984,7 @@ export type CreateActionMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1012,6 +1019,7 @@ export type UpdateActionMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1046,6 +1054,7 @@ export type DeleteActionMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1066,6 +1075,7 @@ export type CreateChecklistModelMutation = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -1089,6 +1099,7 @@ export type UpdateChecklistModelMutation = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -1112,6 +1123,7 @@ export type DeleteChecklistModelMutation = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -1148,6 +1160,7 @@ export type CreateChecklistMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1182,6 +1195,7 @@ export type UpdateChecklistMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1216,6 +1230,7 @@ export type DeleteChecklistMutation = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1563,6 +1578,7 @@ export type GetActionQuery = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1599,6 +1615,7 @@ export type ListActionsQuery = {
       id: string;
       company?: string | null;
       name?: string | null;
+      notes?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1617,6 +1634,7 @@ export type GetChecklistModelQuery = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -1642,6 +1660,7 @@ export type ListChecklistModelsQuery = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1670,6 +1689,7 @@ export type GetChecklistQuery = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -1706,6 +1726,7 @@ export type ListChecklistsQuery = {
       id: string;
       company?: string | null;
       name?: string | null;
+      notes?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2031,6 +2052,7 @@ export type OnCreateActionSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2065,6 +2087,7 @@ export type OnUpdateActionSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2099,6 +2122,7 @@ export type OnDeleteActionSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2119,6 +2143,7 @@ export type OnCreateChecklistModelSubscription = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -2142,6 +2167,7 @@ export type OnUpdateChecklistModelSubscription = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -2165,6 +2191,7 @@ export type OnDeleteChecklistModelSubscription = {
   id: string;
   company?: string | null;
   name?: string | null;
+  notes?: string | null;
   steps?: {
     __typename: "ModelActionConnection";
     items: Array<{
@@ -2201,6 +2228,7 @@ export type OnCreateChecklistSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2235,6 +2263,7 @@ export type OnUpdateChecklistSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2269,6 +2298,7 @@ export type OnDeleteChecklistSubscription = {
     id: string;
     company?: string | null;
     name?: string | null;
+    notes?: string | null;
     steps?: {
       __typename: "ModelActionConnection";
       nextToken?: string | null;
@@ -2865,6 +2895,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -2915,6 +2946,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -2965,6 +2997,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3001,6 +3034,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -3040,6 +3074,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -3079,6 +3114,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -3131,6 +3167,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3181,6 +3218,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3231,6 +3269,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3811,6 +3850,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3861,6 +3901,7 @@ export class APIService {
               id
               company
               name
+              notes
               createdAt
               updatedAt
             }
@@ -3896,6 +3937,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -3935,6 +3977,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -3980,6 +4023,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -4030,6 +4074,7 @@ export class APIService {
               id
               company
               name
+              notes
               createdAt
               updatedAt
             }
@@ -4648,6 +4693,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -4699,6 +4745,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -4750,6 +4797,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -4789,6 +4837,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -4833,6 +4882,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -4877,6 +4927,7 @@ export class APIService {
           id
           company
           name
+          notes
           steps {
             __typename
             items {
@@ -4932,6 +4983,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -4983,6 +5035,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken
@@ -5034,6 +5087,7 @@ export class APIService {
             id
             company
             name
+            notes
             steps {
               __typename
               nextToken

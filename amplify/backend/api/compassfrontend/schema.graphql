@@ -45,6 +45,7 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   name: String
+  notes: String
   steps: [Action] @hasMany
 }
 

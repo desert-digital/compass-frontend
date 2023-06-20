@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddActionComponent } from './components/add-action/add-action.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
+import { EditActionComponent } from './components/edit-action/edit-action.component';
+import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { HomeComponent } from './components/home/home.component';
@@ -48,13 +50,19 @@ const routes: Routes = [
       path: 'add-checklist',
       component: AddChecklistComponent
     },{
+      path: 'edit-checklist/:id',
+      component: EditChecklistComponent
+    },{
       path: 'checklists',
       component: ManageChecklistsComponent
     },{
       path: 'add-new-action',
       component: AddActionComponent
     },{
-      path: 'actions/:manage',
+      path: 'edit-action/:id',
+      component: EditActionComponent
+    },{
+      path: 'actions',
       component: ManageActionsComponent
     },{
       path: 'services',

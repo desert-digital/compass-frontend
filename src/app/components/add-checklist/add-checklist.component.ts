@@ -37,6 +37,7 @@ export class AddChecklistComponent {
     private _checklistModelsService: ChecklistModelsService) {
     this.checklistForm = this.formBuilder.group({
       name: ['', Validators.required],
+      notes: ['']
     });
   }
 

@@ -261,6 +261,7 @@ mutation CreateAction(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -300,6 +301,7 @@ mutation UpdateAction(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -339,6 +341,7 @@ mutation DeleteAction(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -365,6 +368,7 @@ mutation CreateChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -393,6 +397,7 @@ mutation UpdateChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -421,6 +426,7 @@ mutation DeleteChecklistModel(
     id
     company
     name
+    notes
     steps {
       items {
         id
@@ -461,6 +467,7 @@ mutation CreateChecklist(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -500,6 +507,7 @@ mutation UpdateChecklist(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
@@ -539,6 +547,7 @@ mutation DeleteChecklist(
       id
       company
       name
+      notes
       steps {
         nextToken
         __typename
