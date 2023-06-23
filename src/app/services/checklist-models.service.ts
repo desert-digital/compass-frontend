@@ -28,9 +28,9 @@ export class ChecklistModelsService {
   async createChecklistModel(model: ChecklistModel, steps: any[]) {
     const result = await this.api.CreateChecklistModel(model);
 
-    for (let index = 0; index < steps.length; index++) {
-      await this.api.CreateAction({checklistModelStepsId: result.id, actionModelId: steps[index].id})
-    }
+    // for (let index = 0; index < steps.length; index++) {
+    //   await this.api.CreateAction({checklistModelStepsId: result.id, actionModelId: steps[index].id})
+    // }
   }
 
   async deleteModel(checklist: ChecklistModel) {

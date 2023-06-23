@@ -21,8 +21,8 @@ export class WorkflowModelsService {
   async createWorkflowModel(model: WorkflowModel, steps: any[]) {
     const result = await this.api.CreateWorkflowModel(model);
     
-    for (let index = 0; index < steps.length; index++) {
-      await this.api.CreateChecklist({workflowModelChecklistsId: result.id, checklistModelId: steps[index].id})
-    }
+    // for (let index = 0; index < steps.length; index++) {
+    //   await this.api.CreateChecklist({workflowModelChecklistsId: result.id, checklistModelId: steps[index].id})
+    // }
   }
 }

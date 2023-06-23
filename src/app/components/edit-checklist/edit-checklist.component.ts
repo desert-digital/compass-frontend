@@ -49,8 +49,7 @@ export class EditChecklistComponent {
       name: checklistModel.name,
       notes: checklistModel.notes
     });
-    console.log(JSON.stringify(checklistModel.steps.items));
-    this.checklist = checklistModel.steps.items;
+    console.log(JSON.stringify(checklistModel));
   }
 
   drop(e: CdkDragDrop<Action[]>) {
