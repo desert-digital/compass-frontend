@@ -53,8 +53,6 @@ query GetVessel($id: ID!) {
         nextToken
         __typename
       }
-      actualStart
-      actualEnd
       createdAt
       updatedAt
       __typename
@@ -80,8 +78,6 @@ query ListVessels(
       defaultWorkflow {
         id
         name
-        actualStart
-        actualEnd
         createdAt
         updatedAt
         __typename
@@ -136,6 +132,18 @@ query GetActionModel($id: ID!) {
     status
     notes
     duration
+    checklists {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -155,6 +163,118 @@ query ListActionModels(
       status
       notes
       duration
+      checklists {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetChecklistModel($id: ID!) {
+  getChecklistModel(id: $id) {
+    id
+    company
+    name
+    notes
+    actions {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    workflows {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListChecklistModels(
+  $filter: ModelChecklistModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChecklistModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      company
+      name
+      notes
+      actions {
+        nextToken
+        __typename
+      }
+      workflows {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetWorkflowModel($id: ID!) {
+  getWorkflowModel(id: $id) {
+    id
+    name
+    checklists {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListWorkflowModels(
+  $filter: ModelWorkflowModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWorkflowModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      checklists {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -174,16 +294,7 @@ query GetAction($id: ID!) {
       status
       notes
       duration
-      createdAt
-      updatedAt
-      __typename
-    }
-    checklist {
-      id
-      company
-      name
-      notes
-      steps {
+      checklists {
         nextToken
         __typename
       }
@@ -195,7 +306,6 @@ query GetAction($id: ID!) {
     actualEnd
     createdAt
     updatedAt
-    checklistModelStepsId
     actionModelId
     __typename
   }
@@ -220,71 +330,11 @@ query ListActions(
         updatedAt
         __typename
       }
-      checklist {
-        id
-        company
-        name
-        notes
-        createdAt
-        updatedAt
-        __typename
-      }
       actualStart
       actualEnd
       createdAt
       updatedAt
-      checklistModelStepsId
       actionModelId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-
-query GetChecklistModel($id: ID!) {
-  getChecklistModel(id: $id) {
-    id
-    company
-    name
-    notes
-    steps {
-      items {
-        id
-        actualStart
-        actualEnd
-        createdAt
-        updatedAt
-        checklistModelStepsId
-        actionModelId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-
-query ListChecklistModels(
-  $filter: ModelChecklistModelFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listChecklistModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      company
-      name
-      notes
-      steps {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
       __typename
     }
     nextToken
@@ -310,7 +360,11 @@ query GetChecklist($id: ID!) {
       company
       name
       notes
-      steps {
+      actions {
+        nextToken
+        __typename
+      }
+      workflows {
         nextToken
         __typename
       }
@@ -322,7 +376,6 @@ query GetChecklist($id: ID!) {
     end
     createdAt
     updatedAt
-    workflowModelChecklistsId
     checklistOwnerId
     checklistModelId
     __typename
@@ -360,61 +413,8 @@ query ListChecklists(
       end
       createdAt
       updatedAt
-      workflowModelChecklistsId
       checklistOwnerId
       checklistModelId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-
-query GetWorkflowModel($id: ID!) {
-  getWorkflowModel(id: $id) {
-    id
-    name
-    checklists {
-      items {
-        id
-        company
-        start
-        end
-        createdAt
-        updatedAt
-        workflowModelChecklistsId
-        checklistOwnerId
-        checklistModelId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-    actualStart
-    actualEnd
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-
-query ListWorkflowModels(
-  $filter: ModelWorkflowModelFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listWorkflowModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      checklists {
-        nextToken
-        __typename
-      }
-      actualStart
-      actualEnd
-      createdAt
-      updatedAt
       __typename
     }
     nextToken
@@ -442,8 +442,6 @@ query GetWorkflow($id: ID!) {
         nextToken
         __typename
       }
-      actualStart
-      actualEnd
       createdAt
       updatedAt
       __typename
@@ -479,8 +477,6 @@ query ListWorkflows(
       steps {
         id
         name
-        actualStart
-        actualEnd
         createdAt
         updatedAt
         __typename
@@ -491,6 +487,346 @@ query ListWorkflows(
       updatedAt
       workflowOwnerId
       workflowStepsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetChecklistActions($id: ID!) {
+  getChecklistActions(id: $id) {
+    id
+    actionModelId
+    checklistModelId
+    actionModel {
+      id
+      company
+      name
+      status
+      notes
+      duration
+      checklists {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    checklistModel {
+      id
+      company
+      name
+      notes
+      actions {
+        nextToken
+        __typename
+      }
+      workflows {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListChecklistActions(
+  $filter: ModelChecklistActionsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChecklistActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      actionModelId
+      checklistModelId
+      actionModel {
+        id
+        company
+        name
+        status
+        notes
+        duration
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetWorkflowChecklists($id: ID!) {
+  getWorkflowChecklists(id: $id) {
+    id
+    checklistModelId
+    workflowModelId
+    checklistModel {
+      id
+      company
+      name
+      notes
+      actions {
+        nextToken
+        __typename
+      }
+      workflows {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    workflowModel {
+      id
+      name
+      checklists {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListWorkflowChecklists(
+  $filter: ModelWorkflowChecklistsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWorkflowChecklists(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      checklistModelId
+      workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        name
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query ChecklistActionsByActionModelId(
+  $actionModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelChecklistActionsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  checklistActionsByActionModelId(
+    actionModelId: $actionModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      actionModelId
+      checklistModelId
+      actionModel {
+        id
+        company
+        name
+        status
+        notes
+        duration
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query ChecklistActionsByChecklistModelId(
+  $checklistModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelChecklistActionsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  checklistActionsByChecklistModelId(
+    checklistModelId: $checklistModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      actionModelId
+      checklistModelId
+      actionModel {
+        id
+        company
+        name
+        status
+        notes
+        duration
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query WorkflowChecklistsByChecklistModelId(
+  $checklistModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelWorkflowChecklistsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  workflowChecklistsByChecklistModelId(
+    checklistModelId: $checklistModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      checklistModelId
+      workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        name
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query WorkflowChecklistsByWorkflowModelId(
+  $workflowModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelWorkflowChecklistsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  workflowChecklistsByWorkflowModelId(
+    workflowModelId: $workflowModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      checklistModelId
+      workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        name
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
       __typename
     }
     nextToken

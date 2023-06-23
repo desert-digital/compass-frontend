@@ -31,14 +31,7 @@ type ActionModel @model @auth(rules: [{ allow: private }]){
   status: String
   notes: String 
   duration: Int
-}
-
-type Action @model @auth(rules: [{allow: private}]){
-  id: ID!
-  model: ActionModel @hasOne
-  checklist: ChecklistModel @belongsTo
-  actualStart: String
-  actualEnd: String
+  checklists: [ChecklistModel] @manyToMany(relationName: "ChecklistActions")
 }
 
 type ChecklistModel @model @auth(rules: [{ allow: private }]){
@@ -46,7 +39,21 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
   company: ID
   name: String
   notes: String
-  steps: [Action] @hasMany
+  actions: [ActionModel] @manyToMany(relationName: "ChecklistActions")
+  workflows: [WorkflowModel] @manyToMany(relationName: "WorkflowChecklists") 
+}
+
+type WorkflowModel @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String
+  checklists: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
+}
+
+type Action @model @auth(rules: [{allow: private}]){
+  id: ID!
+  model: ActionModel @hasOne
+  actualStart: String
+  actualEnd: String
 }
 
 type Checklist @model @auth(rules: [{ allow: private }]){
@@ -56,14 +63,6 @@ type Checklist @model @auth(rules: [{ allow: private }]){
   model: ChecklistModel @hasOne
   start: AWSDate
   end: AWSDate 
-}
-
-type WorkflowModel @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  name: String
-  checklists: [Checklist] @hasMany
-  actualStart: String
-  actualEnd: String
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){

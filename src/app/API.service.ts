@@ -22,21 +22,27 @@ export type __SubscriptionContainer = {
   onCreateActionModel: OnCreateActionModelSubscription;
   onUpdateActionModel: OnUpdateActionModelSubscription;
   onDeleteActionModel: OnDeleteActionModelSubscription;
-  onCreateAction: OnCreateActionSubscription;
-  onUpdateAction: OnUpdateActionSubscription;
-  onDeleteAction: OnDeleteActionSubscription;
   onCreateChecklistModel: OnCreateChecklistModelSubscription;
   onUpdateChecklistModel: OnUpdateChecklistModelSubscription;
   onDeleteChecklistModel: OnDeleteChecklistModelSubscription;
-  onCreateChecklist: OnCreateChecklistSubscription;
-  onUpdateChecklist: OnUpdateChecklistSubscription;
-  onDeleteChecklist: OnDeleteChecklistSubscription;
   onCreateWorkflowModel: OnCreateWorkflowModelSubscription;
   onUpdateWorkflowModel: OnUpdateWorkflowModelSubscription;
   onDeleteWorkflowModel: OnDeleteWorkflowModelSubscription;
+  onCreateAction: OnCreateActionSubscription;
+  onUpdateAction: OnUpdateActionSubscription;
+  onDeleteAction: OnDeleteActionSubscription;
+  onCreateChecklist: OnCreateChecklistSubscription;
+  onUpdateChecklist: OnUpdateChecklistSubscription;
+  onDeleteChecklist: OnDeleteChecklistSubscription;
   onCreateWorkflow: OnCreateWorkflowSubscription;
   onUpdateWorkflow: OnUpdateWorkflowSubscription;
   onDeleteWorkflow: OnDeleteWorkflowSubscription;
+  onCreateChecklistActions: OnCreateChecklistActionsSubscription;
+  onUpdateChecklistActions: OnUpdateChecklistActionsSubscription;
+  onDeleteChecklistActions: OnDeleteChecklistActionsSubscription;
+  onCreateWorkflowChecklists: OnCreateWorkflowChecklistsSubscription;
+  onUpdateWorkflowChecklists: OnUpdateWorkflowChecklistsSubscription;
+  onDeleteWorkflowChecklists: OnDeleteWorkflowChecklistsSubscription;
 };
 
 export type CreatePendingEventInput = {
@@ -181,40 +187,24 @@ export type WorkflowModel = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
-  checklists?: ModelChecklistConnection | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
+  checklists?: ModelWorkflowChecklistsConnection | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ModelChecklistConnection = {
-  __typename: "ModelChecklistConnection";
-  items: Array<Checklist | null>;
+export type ModelWorkflowChecklistsConnection = {
+  __typename: "ModelWorkflowChecklistsConnection";
+  items: Array<WorkflowChecklists | null>;
   nextToken?: string | null;
 };
 
-export type Checklist = {
-  __typename: "Checklist";
+export type WorkflowChecklists = {
+  __typename: "WorkflowChecklists";
   id: string;
-  company?: string | null;
-  owner?: Staff | null;
-  model?: ChecklistModel | null;
-  start?: string | null;
-  end?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  workflowModelChecklistsId?: string | null;
-  checklistOwnerId?: string | null;
-  checklistModelId?: string | null;
-};
-
-export type Staff = {
-  __typename: "Staff";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  email?: string | null;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: ChecklistModel;
+  workflowModel: WorkflowModel;
   createdAt: string;
   updatedAt: string;
 };
@@ -225,28 +215,27 @@ export type ChecklistModel = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
-  steps?: ModelActionConnection | null;
+  actions?: ModelChecklistActionsConnection | null;
+  workflows?: ModelWorkflowChecklistsConnection | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ModelActionConnection = {
-  __typename: "ModelActionConnection";
-  items: Array<Action | null>;
+export type ModelChecklistActionsConnection = {
+  __typename: "ModelChecklistActionsConnection";
+  items: Array<ChecklistActions | null>;
   nextToken?: string | null;
 };
 
-export type Action = {
-  __typename: "Action";
+export type ChecklistActions = {
+  __typename: "ChecklistActions";
   id: string;
-  model?: ActionModel | null;
-  checklist?: ChecklistModel | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: ActionModel;
+  checklistModel: ChecklistModel;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
-  actionModelId?: string | null;
 };
 
 export type ActionModel = {
@@ -257,6 +246,7 @@ export type ActionModel = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: ModelChecklistActionsConnection | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -287,6 +277,16 @@ export type ModelStaffConditionInput = {
   and?: Array<ModelStaffConditionInput | null> | null;
   or?: Array<ModelStaffConditionInput | null> | null;
   not?: ModelStaffConditionInput | null;
+};
+
+export type Staff = {
+  __typename: "Staff";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateStaffInput = {
@@ -345,36 +345,6 @@ export type DeleteActionModelInput = {
   id: string;
 };
 
-export type CreateActionInput = {
-  id?: string | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  checklistModelStepsId?: string | null;
-  actionModelId?: string | null;
-};
-
-export type ModelActionConditionInput = {
-  actualStart?: ModelStringInput | null;
-  actualEnd?: ModelStringInput | null;
-  and?: Array<ModelActionConditionInput | null> | null;
-  or?: Array<ModelActionConditionInput | null> | null;
-  not?: ModelActionConditionInput | null;
-  checklistModelStepsId?: ModelIDInput | null;
-  actionModelId?: ModelIDInput | null;
-};
-
-export type UpdateActionInput = {
-  id: string;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  checklistModelStepsId?: string | null;
-  actionModelId?: string | null;
-};
-
-export type DeleteActionInput = {
-  id: string;
-};
-
 export type CreateChecklistModelInput = {
   id?: string | null;
   company?: string | null;
@@ -402,12 +372,70 @@ export type DeleteChecklistModelInput = {
   id: string;
 };
 
+export type CreateWorkflowModelInput = {
+  id?: string | null;
+  name?: string | null;
+};
+
+export type ModelWorkflowModelConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelWorkflowModelConditionInput | null> | null;
+  or?: Array<ModelWorkflowModelConditionInput | null> | null;
+  not?: ModelWorkflowModelConditionInput | null;
+};
+
+export type UpdateWorkflowModelInput = {
+  id: string;
+  name?: string | null;
+};
+
+export type DeleteWorkflowModelInput = {
+  id: string;
+};
+
+export type CreateActionInput = {
+  id?: string | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
+  actionModelId?: string | null;
+};
+
+export type ModelActionConditionInput = {
+  actualStart?: ModelStringInput | null;
+  actualEnd?: ModelStringInput | null;
+  and?: Array<ModelActionConditionInput | null> | null;
+  or?: Array<ModelActionConditionInput | null> | null;
+  not?: ModelActionConditionInput | null;
+  actionModelId?: ModelIDInput | null;
+};
+
+export type Action = {
+  __typename: "Action";
+  id: string;
+  model?: ActionModel | null;
+  actualStart?: string | null;
+  actualEnd?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  actionModelId?: string | null;
+};
+
+export type UpdateActionInput = {
+  id: string;
+  actualStart?: string | null;
+  actualEnd?: string | null;
+  actionModelId?: string | null;
+};
+
+export type DeleteActionInput = {
+  id: string;
+};
+
 export type CreateChecklistInput = {
   id?: string | null;
   company?: string | null;
   start?: string | null;
   end?: string | null;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -419,9 +447,22 @@ export type ModelChecklistConditionInput = {
   and?: Array<ModelChecklistConditionInput | null> | null;
   or?: Array<ModelChecklistConditionInput | null> | null;
   not?: ModelChecklistConditionInput | null;
-  workflowModelChecklistsId?: ModelIDInput | null;
   checklistOwnerId?: ModelIDInput | null;
   checklistModelId?: ModelIDInput | null;
+};
+
+export type Checklist = {
+  __typename: "Checklist";
+  id: string;
+  company?: string | null;
+  owner?: Staff | null;
+  model?: ChecklistModel | null;
+  start?: string | null;
+  end?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  checklistOwnerId?: string | null;
+  checklistModelId?: string | null;
 };
 
 export type UpdateChecklistInput = {
@@ -429,39 +470,11 @@ export type UpdateChecklistInput = {
   company?: string | null;
   start?: string | null;
   end?: string | null;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
 
 export type DeleteChecklistInput = {
-  id: string;
-};
-
-export type CreateWorkflowModelInput = {
-  id?: string | null;
-  name?: string | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-};
-
-export type ModelWorkflowModelConditionInput = {
-  name?: ModelStringInput | null;
-  actualStart?: ModelStringInput | null;
-  actualEnd?: ModelStringInput | null;
-  and?: Array<ModelWorkflowModelConditionInput | null> | null;
-  or?: Array<ModelWorkflowModelConditionInput | null> | null;
-  not?: ModelWorkflowModelConditionInput | null;
-};
-
-export type UpdateWorkflowModelInput = {
-  id: string;
-  name?: string | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-};
-
-export type DeleteWorkflowModelInput = {
   id: string;
 };
 
@@ -509,6 +522,54 @@ export type UpdateWorkflowInput = {
 };
 
 export type DeleteWorkflowInput = {
+  id: string;
+};
+
+export type CreateChecklistActionsInput = {
+  id?: string | null;
+  actionModelId: string;
+  checklistModelId: string;
+};
+
+export type ModelChecklistActionsConditionInput = {
+  actionModelId?: ModelIDInput | null;
+  checklistModelId?: ModelIDInput | null;
+  and?: Array<ModelChecklistActionsConditionInput | null> | null;
+  or?: Array<ModelChecklistActionsConditionInput | null> | null;
+  not?: ModelChecklistActionsConditionInput | null;
+};
+
+export type UpdateChecklistActionsInput = {
+  id: string;
+  actionModelId?: string | null;
+  checklistModelId?: string | null;
+};
+
+export type DeleteChecklistActionsInput = {
+  id: string;
+};
+
+export type CreateWorkflowChecklistsInput = {
+  id?: string | null;
+  checklistModelId: string;
+  workflowModelId: string;
+};
+
+export type ModelWorkflowChecklistsConditionInput = {
+  checklistModelId?: ModelIDInput | null;
+  workflowModelId?: ModelIDInput | null;
+  and?: Array<ModelWorkflowChecklistsConditionInput | null> | null;
+  or?: Array<ModelWorkflowChecklistsConditionInput | null> | null;
+  not?: ModelWorkflowChecklistsConditionInput | null;
+};
+
+export type UpdateWorkflowChecklistsInput = {
+  id: string;
+  checklistModelId?: string | null;
+  workflowModelId?: string | null;
+};
+
+export type DeleteWorkflowChecklistsInput = {
   id: string;
 };
 
@@ -583,17 +644,6 @@ export type ModelActionModelConnection = {
   nextToken?: string | null;
 };
 
-export type ModelActionFilterInput = {
-  id?: ModelIDInput | null;
-  actualStart?: ModelStringInput | null;
-  actualEnd?: ModelStringInput | null;
-  and?: Array<ModelActionFilterInput | null> | null;
-  or?: Array<ModelActionFilterInput | null> | null;
-  not?: ModelActionFilterInput | null;
-  checklistModelStepsId?: ModelIDInput | null;
-  actionModelId?: ModelIDInput | null;
-};
-
 export type ModelChecklistModelFilterInput = {
   id?: ModelIDInput | null;
   company?: ModelIDInput | null;
@@ -610,24 +660,9 @@ export type ModelChecklistModelConnection = {
   nextToken?: string | null;
 };
 
-export type ModelChecklistFilterInput = {
-  id?: ModelIDInput | null;
-  company?: ModelIDInput | null;
-  start?: ModelStringInput | null;
-  end?: ModelStringInput | null;
-  and?: Array<ModelChecklistFilterInput | null> | null;
-  or?: Array<ModelChecklistFilterInput | null> | null;
-  not?: ModelChecklistFilterInput | null;
-  workflowModelChecklistsId?: ModelIDInput | null;
-  checklistOwnerId?: ModelIDInput | null;
-  checklistModelId?: ModelIDInput | null;
-};
-
 export type ModelWorkflowModelFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
-  actualStart?: ModelStringInput | null;
-  actualEnd?: ModelStringInput | null;
   and?: Array<ModelWorkflowModelFilterInput | null> | null;
   or?: Array<ModelWorkflowModelFilterInput | null> | null;
   not?: ModelWorkflowModelFilterInput | null;
@@ -636,6 +671,40 @@ export type ModelWorkflowModelFilterInput = {
 export type ModelWorkflowModelConnection = {
   __typename: "ModelWorkflowModelConnection";
   items: Array<WorkflowModel | null>;
+  nextToken?: string | null;
+};
+
+export type ModelActionFilterInput = {
+  id?: ModelIDInput | null;
+  actualStart?: ModelStringInput | null;
+  actualEnd?: ModelStringInput | null;
+  and?: Array<ModelActionFilterInput | null> | null;
+  or?: Array<ModelActionFilterInput | null> | null;
+  not?: ModelActionFilterInput | null;
+  actionModelId?: ModelIDInput | null;
+};
+
+export type ModelActionConnection = {
+  __typename: "ModelActionConnection";
+  items: Array<Action | null>;
+  nextToken?: string | null;
+};
+
+export type ModelChecklistFilterInput = {
+  id?: ModelIDInput | null;
+  company?: ModelIDInput | null;
+  start?: ModelStringInput | null;
+  end?: ModelStringInput | null;
+  and?: Array<ModelChecklistFilterInput | null> | null;
+  or?: Array<ModelChecklistFilterInput | null> | null;
+  not?: ModelChecklistFilterInput | null;
+  checklistOwnerId?: ModelIDInput | null;
+  checklistModelId?: ModelIDInput | null;
+};
+
+export type ModelChecklistConnection = {
+  __typename: "ModelChecklistConnection";
+  items: Array<Checklist | null>;
   nextToken?: string | null;
 };
 
@@ -656,6 +725,29 @@ export type ModelWorkflowConnection = {
   items: Array<Workflow | null>;
   nextToken?: string | null;
 };
+
+export type ModelChecklistActionsFilterInput = {
+  id?: ModelIDInput | null;
+  actionModelId?: ModelIDInput | null;
+  checklistModelId?: ModelIDInput | null;
+  and?: Array<ModelChecklistActionsFilterInput | null> | null;
+  or?: Array<ModelChecklistActionsFilterInput | null> | null;
+  not?: ModelChecklistActionsFilterInput | null;
+};
+
+export type ModelWorkflowChecklistsFilterInput = {
+  id?: ModelIDInput | null;
+  checklistModelId?: ModelIDInput | null;
+  workflowModelId?: ModelIDInput | null;
+  and?: Array<ModelWorkflowChecklistsFilterInput | null> | null;
+  or?: Array<ModelWorkflowChecklistsFilterInput | null> | null;
+  not?: ModelWorkflowChecklistsFilterInput | null;
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC"
+}
 
 export type ModelSubscriptionPendingEventFilterInput = {
   id?: ModelSubscriptionIDInput | null;
@@ -741,14 +833,6 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array<number | null> | null;
 };
 
-export type ModelSubscriptionActionFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  actualStart?: ModelSubscriptionStringInput | null;
-  actualEnd?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionActionFilterInput | null> | null;
-  or?: Array<ModelSubscriptionActionFilterInput | null> | null;
-};
-
 export type ModelSubscriptionChecklistModelFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
@@ -756,6 +840,21 @@ export type ModelSubscriptionChecklistModelFilterInput = {
   notes?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
   or?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
+};
+
+export type ModelSubscriptionWorkflowModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
+  or?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
+};
+
+export type ModelSubscriptionActionFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  actualStart?: ModelSubscriptionStringInput | null;
+  actualEnd?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionActionFilterInput | null> | null;
+  or?: Array<ModelSubscriptionActionFilterInput | null> | null;
 };
 
 export type ModelSubscriptionChecklistFilterInput = {
@@ -767,15 +866,6 @@ export type ModelSubscriptionChecklistFilterInput = {
   or?: Array<ModelSubscriptionChecklistFilterInput | null> | null;
 };
 
-export type ModelSubscriptionWorkflowModelFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  actualStart?: ModelSubscriptionStringInput | null;
-  actualEnd?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
-  or?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
-};
-
 export type ModelSubscriptionWorkflowFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   company?: ModelSubscriptionIDInput | null;
@@ -783,6 +873,22 @@ export type ModelSubscriptionWorkflowFilterInput = {
   end?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionWorkflowFilterInput | null> | null;
   or?: Array<ModelSubscriptionWorkflowFilterInput | null> | null;
+};
+
+export type ModelSubscriptionChecklistActionsFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  actionModelId?: ModelSubscriptionIDInput | null;
+  checklistModelId?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionChecklistActionsFilterInput | null> | null;
+  or?: Array<ModelSubscriptionChecklistActionsFilterInput | null> | null;
+};
+
+export type ModelSubscriptionWorkflowChecklistsFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  checklistModelId?: ModelSubscriptionIDInput | null;
+  workflowModelId?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionWorkflowChecklistsFilterInput | null> | null;
+  or?: Array<ModelSubscriptionWorkflowChecklistsFilterInput | null> | null;
 };
 
 export type CreatePendingEventMutation = {
@@ -838,11 +944,9 @@ export type CreateVesselMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -862,11 +966,9 @@ export type UpdateVesselMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -886,11 +988,9 @@ export type DeleteVesselMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -937,6 +1037,18 @@ export type CreateActionModelMutation = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -949,6 +1061,18 @@ export type UpdateActionModelMutation = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -961,6 +1085,180 @@ export type DeleteActionModelMutation = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateChecklistModelMutation = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateChecklistModelMutation = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteChecklistModelMutation = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateWorkflowModelMutation = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateWorkflowModelMutation = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteWorkflowModelMutation = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -976,17 +1274,8 @@ export type CreateActionMutation = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -996,7 +1285,6 @@ export type CreateActionMutation = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
 };
 
@@ -1011,17 +1299,8 @@ export type UpdateActionMutation = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1031,7 +1310,6 @@ export type UpdateActionMutation = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
 };
 
@@ -1046,17 +1324,8 @@ export type DeleteActionMutation = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1066,80 +1335,7 @@ export type DeleteActionMutation = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
-};
-
-export type CreateChecklistModelMutation = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateChecklistModelMutation = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteChecklistModelMutation = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type CreateChecklistMutation = {
@@ -1161,8 +1357,12 @@ export type CreateChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1172,7 +1372,6 @@ export type CreateChecklistMutation = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -1196,8 +1395,12 @@ export type UpdateChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1207,7 +1410,6 @@ export type UpdateChecklistMutation = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -1231,8 +1433,12 @@ export type DeleteChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1242,87 +1448,8 @@ export type DeleteChecklistMutation = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
-};
-
-export type CreateWorkflowModelMutation = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateWorkflowModelMutation = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteWorkflowModelMutation = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type CreateWorkflowMutation = {
@@ -1343,11 +1470,9 @@ export type CreateWorkflowMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1377,11 +1502,9 @@ export type UpdateWorkflowMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1411,11 +1534,9 @@ export type DeleteWorkflowMutation = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1425,6 +1546,240 @@ export type DeleteWorkflowMutation = {
   updatedAt: string;
   workflowOwnerId?: string | null;
   workflowStepsId?: string | null;
+};
+
+export type CreateChecklistActionsMutation = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateChecklistActionsMutation = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteChecklistActionsMutation = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateWorkflowChecklistsMutation = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateWorkflowChecklistsMutation = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteWorkflowChecklistsMutation = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type GetPendingEventQuery = {
@@ -1470,11 +1825,9 @@ export type GetVesselQuery = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1495,8 +1848,6 @@ export type ListVesselsQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
-      actualStart?: string | null;
-      actualEnd?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1539,6 +1890,18 @@ export type GetActionModelQuery = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1553,6 +1916,102 @@ export type ListActionModelsQuery = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetChecklistModelQuery = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListChecklistModelsQuery = {
+  __typename: "ModelChecklistModelConnection";
+  items: Array<{
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetWorkflowModelQuery = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListWorkflowModelsQuery = {
+  __typename: "ModelWorkflowModelConnection";
+  items: Array<{
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -1570,17 +2029,8 @@ export type GetActionQuery = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1590,7 +2040,6 @@ export type GetActionQuery = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
 };
 
@@ -1610,63 +2059,11 @@ export type ListActionsQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
-    checklist?: {
-      __typename: "ChecklistModel";
-      id: string;
-      company?: string | null;
-      name?: string | null;
-      notes?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
     actualStart?: string | null;
     actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
-    checklistModelStepsId?: string | null;
     actionModelId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetChecklistModelQuery = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListChecklistModelsQuery = {
-  __typename: "ModelChecklistModelConnection";
-  items: Array<{
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -1690,8 +2087,12 @@ export type GetChecklistQuery = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1701,7 +2102,6 @@ export type GetChecklistQuery = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -1734,53 +2134,8 @@ export type ListChecklistsQuery = {
     end?: string | null;
     createdAt: string;
     updatedAt: string;
-    workflowModelChecklistsId?: string | null;
     checklistOwnerId?: string | null;
     checklistModelId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetWorkflowModelQuery = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListWorkflowModelsQuery = {
-  __typename: "ModelWorkflowModelConnection";
-  items: Array<{
-    __typename: "WorkflowModel";
-    id: string;
-    name?: string | null;
-    checklists?: {
-      __typename: "ModelChecklistConnection";
-      nextToken?: string | null;
-    } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
-    createdAt: string;
-    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -1803,11 +2158,9 @@ export type GetWorkflowQuery = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1838,8 +2191,6 @@ export type ListWorkflowsQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
-      actualStart?: string | null;
-      actualEnd?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1849,6 +2200,270 @@ export type ListWorkflowsQuery = {
     updatedAt: string;
     workflowOwnerId?: string | null;
     workflowStepsId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetChecklistActionsQuery = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListChecklistActionsQuery = {
+  __typename: "ModelChecklistActionsConnection";
+  items: Array<{
+    __typename: "ChecklistActions";
+    id: string;
+    actionModelId: string;
+    checklistModelId: string;
+    actionModel: {
+      __typename: "ActionModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      status?: string | null;
+      notes?: string | null;
+      duration?: number | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetWorkflowChecklistsQuery = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListWorkflowChecklistsQuery = {
+  __typename: "ModelWorkflowChecklistsConnection";
+  items: Array<{
+    __typename: "WorkflowChecklists";
+    id: string;
+    checklistModelId: string;
+    workflowModelId: string;
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    workflowModel: {
+      __typename: "WorkflowModel";
+      id: string;
+      name?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type ChecklistActionsByActionModelIdQuery = {
+  __typename: "ModelChecklistActionsConnection";
+  items: Array<{
+    __typename: "ChecklistActions";
+    id: string;
+    actionModelId: string;
+    checklistModelId: string;
+    actionModel: {
+      __typename: "ActionModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      status?: string | null;
+      notes?: string | null;
+      duration?: number | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type ChecklistActionsByChecklistModelIdQuery = {
+  __typename: "ModelChecklistActionsConnection";
+  items: Array<{
+    __typename: "ChecklistActions";
+    id: string;
+    actionModelId: string;
+    checklistModelId: string;
+    actionModel: {
+      __typename: "ActionModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      status?: string | null;
+      notes?: string | null;
+      duration?: number | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type WorkflowChecklistsByChecklistModelIdQuery = {
+  __typename: "ModelWorkflowChecklistsConnection";
+  items: Array<{
+    __typename: "WorkflowChecklists";
+    id: string;
+    checklistModelId: string;
+    workflowModelId: string;
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    workflowModel: {
+      __typename: "WorkflowModel";
+      id: string;
+      name?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type WorkflowChecklistsByWorkflowModelIdQuery = {
+  __typename: "ModelWorkflowChecklistsConnection";
+  items: Array<{
+    __typename: "WorkflowChecklists";
+    id: string;
+    checklistModelId: string;
+    workflowModelId: string;
+    checklistModel: {
+      __typename: "ChecklistModel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      notes?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    workflowModel: {
+      __typename: "WorkflowModel";
+      id: string;
+      name?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    createdAt: string;
+    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -1906,11 +2521,9 @@ export type OnCreateVesselSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1930,11 +2543,9 @@ export type OnUpdateVesselSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1954,11 +2565,9 @@ export type OnDeleteVesselSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2005,6 +2614,18 @@ export type OnCreateActionModelSubscription = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2017,6 +2638,18 @@ export type OnUpdateActionModelSubscription = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2029,6 +2662,180 @@ export type OnDeleteActionModelSubscription = {
   status?: string | null;
   notes?: string | null;
   duration?: number | null;
+  checklists?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateChecklistModelSubscription = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateChecklistModelSubscription = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteChecklistModelSubscription = {
+  __typename: "ChecklistModel";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  notes?: string | null;
+  actions?: {
+    __typename: "ModelChecklistActionsConnection";
+    items: Array<{
+      __typename: "ChecklistActions";
+      id: string;
+      actionModelId: string;
+      checklistModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  workflows?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateWorkflowModelSubscription = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateWorkflowModelSubscription = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteWorkflowModelSubscription = {
+  __typename: "WorkflowModel";
+  id: string;
+  name?: string | null;
+  checklists?: {
+    __typename: "ModelWorkflowChecklistsConnection";
+    items: Array<{
+      __typename: "WorkflowChecklists";
+      id: string;
+      checklistModelId: string;
+      workflowModelId: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2044,17 +2851,8 @@ export type OnCreateActionSubscription = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2064,7 +2862,6 @@ export type OnCreateActionSubscription = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
 };
 
@@ -2079,17 +2876,8 @@ export type OnUpdateActionSubscription = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2099,7 +2887,6 @@ export type OnUpdateActionSubscription = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
 };
 
@@ -2114,17 +2901,8 @@ export type OnDeleteActionSubscription = {
     status?: string | null;
     notes?: string | null;
     duration?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  checklist?: {
-    __typename: "ChecklistModel";
-    id: string;
-    company?: string | null;
-    name?: string | null;
-    notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2134,80 +2912,7 @@ export type OnDeleteActionSubscription = {
   actualEnd?: string | null;
   createdAt: string;
   updatedAt: string;
-  checklistModelStepsId?: string | null;
   actionModelId?: string | null;
-};
-
-export type OnCreateChecklistModelSubscription = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateChecklistModelSubscription = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteChecklistModelSubscription = {
-  __typename: "ChecklistModel";
-  id: string;
-  company?: string | null;
-  name?: string | null;
-  notes?: string | null;
-  steps?: {
-    __typename: "ModelActionConnection";
-    items: Array<{
-      __typename: "Action";
-      id: string;
-      actualStart?: string | null;
-      actualEnd?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      checklistModelStepsId?: string | null;
-      actionModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnCreateChecklistSubscription = {
@@ -2229,8 +2934,12 @@ export type OnCreateChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2240,7 +2949,6 @@ export type OnCreateChecklistSubscription = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -2264,8 +2972,12 @@ export type OnUpdateChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2275,7 +2987,6 @@ export type OnUpdateChecklistSubscription = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
 };
@@ -2299,8 +3010,12 @@ export type OnDeleteChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
-    steps?: {
-      __typename: "ModelActionConnection";
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2310,87 +3025,8 @@ export type OnDeleteChecklistSubscription = {
   end?: string | null;
   createdAt: string;
   updatedAt: string;
-  workflowModelChecklistsId?: string | null;
   checklistOwnerId?: string | null;
   checklistModelId?: string | null;
-};
-
-export type OnCreateWorkflowModelSubscription = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateWorkflowModelSubscription = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteWorkflowModelSubscription = {
-  __typename: "WorkflowModel";
-  id: string;
-  name?: string | null;
-  checklists?: {
-    __typename: "ModelChecklistConnection";
-    items: Array<{
-      __typename: "Checklist";
-      id: string;
-      company?: string | null;
-      start?: string | null;
-      end?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      workflowModelChecklistsId?: string | null;
-      checklistOwnerId?: string | null;
-      checklistModelId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  actualStart?: string | null;
-  actualEnd?: string | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnCreateWorkflowSubscription = {
@@ -2411,11 +3047,9 @@ export type OnCreateWorkflowSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2445,11 +3079,9 @@ export type OnUpdateWorkflowSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2479,11 +3111,9 @@ export type OnDeleteWorkflowSubscription = {
     id: string;
     name?: string | null;
     checklists?: {
-      __typename: "ModelChecklistConnection";
+      __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
     } | null;
-    actualStart?: string | null;
-    actualEnd?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2493,6 +3123,240 @@ export type OnDeleteWorkflowSubscription = {
   updatedAt: string;
   workflowOwnerId?: string | null;
   workflowStepsId?: string | null;
+};
+
+export type OnCreateChecklistActionsSubscription = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateChecklistActionsSubscription = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteChecklistActionsSubscription = {
+  __typename: "ChecklistActions";
+  id: string;
+  actionModelId: string;
+  checklistModelId: string;
+  actionModel: {
+    __typename: "ActionModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    status?: string | null;
+    notes?: string | null;
+    duration?: number | null;
+    checklists?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateWorkflowChecklistsSubscription = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateWorkflowChecklistsSubscription = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteWorkflowChecklistsSubscription = {
+  __typename: "WorkflowChecklists";
+  id: string;
+  checklistModelId: string;
+  workflowModelId: string;
+  checklistModel: {
+    __typename: "ChecklistModel";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    notes?: string | null;
+    actions?: {
+      __typename: "ModelChecklistActionsConnection";
+      nextToken?: string | null;
+    } | null;
+    workflows?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  workflowModel: {
+    __typename: "WorkflowModel";
+    id: string;
+    name?: string | null;
+    checklists?: {
+      __typename: "ModelWorkflowChecklistsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 };
 
 @Injectable({
@@ -2608,8 +3472,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -2648,8 +3510,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -2688,8 +3548,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -2800,6 +3658,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2828,6 +3698,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2856,6 +3738,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2870,6 +3764,264 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteActionModelMutation>response.data.deleteActionModel;
+  }
+  async CreateChecklistModel(
+    input: CreateChecklistModelInput,
+    condition?: ModelChecklistModelConditionInput
+  ): Promise<CreateChecklistModelMutation> {
+    const statement = `mutation CreateChecklistModel($input: CreateChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
+        createChecklistModel(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          notes
+          actions {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateChecklistModelMutation>response.data.createChecklistModel;
+  }
+  async UpdateChecklistModel(
+    input: UpdateChecklistModelInput,
+    condition?: ModelChecklistModelConditionInput
+  ): Promise<UpdateChecklistModelMutation> {
+    const statement = `mutation UpdateChecklistModel($input: UpdateChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
+        updateChecklistModel(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          notes
+          actions {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateChecklistModelMutation>response.data.updateChecklistModel;
+  }
+  async DeleteChecklistModel(
+    input: DeleteChecklistModelInput,
+    condition?: ModelChecklistModelConditionInput
+  ): Promise<DeleteChecklistModelMutation> {
+    const statement = `mutation DeleteChecklistModel($input: DeleteChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
+        deleteChecklistModel(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          notes
+          actions {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteChecklistModelMutation>response.data.deleteChecklistModel;
+  }
+  async CreateWorkflowModel(
+    input: CreateWorkflowModelInput,
+    condition?: ModelWorkflowModelConditionInput
+  ): Promise<CreateWorkflowModelMutation> {
+    const statement = `mutation CreateWorkflowModel($input: CreateWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
+        createWorkflowModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateWorkflowModelMutation>response.data.createWorkflowModel;
+  }
+  async UpdateWorkflowModel(
+    input: UpdateWorkflowModelInput,
+    condition?: ModelWorkflowModelConditionInput
+  ): Promise<UpdateWorkflowModelMutation> {
+    const statement = `mutation UpdateWorkflowModel($input: UpdateWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
+        updateWorkflowModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateWorkflowModelMutation>response.data.updateWorkflowModel;
+  }
+  async DeleteWorkflowModel(
+    input: DeleteWorkflowModelInput,
+    condition?: ModelWorkflowModelConditionInput
+  ): Promise<DeleteWorkflowModelMutation> {
+    const statement = `mutation DeleteWorkflowModel($input: DeleteWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
+        deleteWorkflowModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteWorkflowModelMutation>response.data.deleteWorkflowModel;
   }
   async CreateAction(
     input: CreateActionInput,
@@ -2887,16 +4039,7 @@ export class APIService {
             status
             notes
             duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
+            checklists {
               __typename
               nextToken
             }
@@ -2907,7 +4050,6 @@ export class APIService {
           actualEnd
           createdAt
           updatedAt
-          checklistModelStepsId
           actionModelId
         }
       }`;
@@ -2938,16 +4080,7 @@ export class APIService {
             status
             notes
             duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
+            checklists {
               __typename
               nextToken
             }
@@ -2958,7 +4091,6 @@ export class APIService {
           actualEnd
           createdAt
           updatedAt
-          checklistModelStepsId
           actionModelId
         }
       }`;
@@ -2989,16 +4121,7 @@ export class APIService {
             status
             notes
             duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
+            checklists {
               __typename
               nextToken
             }
@@ -3009,7 +4132,6 @@ export class APIService {
           actualEnd
           createdAt
           updatedAt
-          checklistModelStepsId
           actionModelId
         }
       }`;
@@ -3023,126 +4145,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteActionMutation>response.data.deleteAction;
-  }
-  async CreateChecklistModel(
-    input: CreateChecklistModelInput,
-    condition?: ModelChecklistModelConditionInput
-  ): Promise<CreateChecklistModelMutation> {
-    const statement = `mutation CreateChecklistModel($input: CreateChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
-        createChecklistModel(input: $input, condition: $condition) {
-          __typename
-          id
-          company
-          name
-          notes
-          steps {
-            __typename
-            items {
-              __typename
-              id
-              actualStart
-              actualEnd
-              createdAt
-              updatedAt
-              checklistModelStepsId
-              actionModelId
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateChecklistModelMutation>response.data.createChecklistModel;
-  }
-  async UpdateChecklistModel(
-    input: UpdateChecklistModelInput,
-    condition?: ModelChecklistModelConditionInput
-  ): Promise<UpdateChecklistModelMutation> {
-    const statement = `mutation UpdateChecklistModel($input: UpdateChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
-        updateChecklistModel(input: $input, condition: $condition) {
-          __typename
-          id
-          company
-          name
-          notes
-          steps {
-            __typename
-            items {
-              __typename
-              id
-              actualStart
-              actualEnd
-              createdAt
-              updatedAt
-              checklistModelStepsId
-              actionModelId
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateChecklistModelMutation>response.data.updateChecklistModel;
-  }
-  async DeleteChecklistModel(
-    input: DeleteChecklistModelInput,
-    condition?: ModelChecklistModelConditionInput
-  ): Promise<DeleteChecklistModelMutation> {
-    const statement = `mutation DeleteChecklistModel($input: DeleteChecklistModelInput!, $condition: ModelChecklistModelConditionInput) {
-        deleteChecklistModel(input: $input, condition: $condition) {
-          __typename
-          id
-          company
-          name
-          notes
-          steps {
-            __typename
-            items {
-              __typename
-              id
-              actualStart
-              actualEnd
-              createdAt
-              updatedAt
-              checklistModelStepsId
-              actionModelId
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteChecklistModelMutation>response.data.deleteChecklistModel;
   }
   async CreateChecklist(
     input: CreateChecklistInput,
@@ -3168,7 +4170,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -3179,7 +4185,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -3219,7 +4224,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -3230,7 +4239,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -3270,7 +4278,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -3281,7 +4293,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -3296,132 +4307,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteChecklistMutation>response.data.deleteChecklist;
-  }
-  async CreateWorkflowModel(
-    input: CreateWorkflowModelInput,
-    condition?: ModelWorkflowModelConditionInput
-  ): Promise<CreateWorkflowModelMutation> {
-    const statement = `mutation CreateWorkflowModel($input: CreateWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
-        createWorkflowModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateWorkflowModelMutation>response.data.createWorkflowModel;
-  }
-  async UpdateWorkflowModel(
-    input: UpdateWorkflowModelInput,
-    condition?: ModelWorkflowModelConditionInput
-  ): Promise<UpdateWorkflowModelMutation> {
-    const statement = `mutation UpdateWorkflowModel($input: UpdateWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
-        updateWorkflowModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateWorkflowModelMutation>response.data.updateWorkflowModel;
-  }
-  async DeleteWorkflowModel(
-    input: DeleteWorkflowModelInput,
-    condition?: ModelWorkflowModelConditionInput
-  ): Promise<DeleteWorkflowModelMutation> {
-    const statement = `mutation DeleteWorkflowModel($input: DeleteWorkflowModelInput!, $condition: ModelWorkflowModelConditionInput) {
-        deleteWorkflowModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteWorkflowModelMutation>response.data.deleteWorkflowModel;
   }
   async CreateWorkflow(
     input: CreateWorkflowInput,
@@ -3449,8 +4334,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -3499,8 +4382,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -3549,8 +4430,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -3572,6 +4451,342 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteWorkflowMutation>response.data.deleteWorkflow;
+  }
+  async CreateChecklistActions(
+    input: CreateChecklistActionsInput,
+    condition?: ModelChecklistActionsConditionInput
+  ): Promise<CreateChecklistActionsMutation> {
+    const statement = `mutation CreateChecklistActions($input: CreateChecklistActionsInput!, $condition: ModelChecklistActionsConditionInput) {
+        createChecklistActions(input: $input, condition: $condition) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateChecklistActionsMutation>response.data.createChecklistActions;
+  }
+  async UpdateChecklistActions(
+    input: UpdateChecklistActionsInput,
+    condition?: ModelChecklistActionsConditionInput
+  ): Promise<UpdateChecklistActionsMutation> {
+    const statement = `mutation UpdateChecklistActions($input: UpdateChecklistActionsInput!, $condition: ModelChecklistActionsConditionInput) {
+        updateChecklistActions(input: $input, condition: $condition) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateChecklistActionsMutation>response.data.updateChecklistActions;
+  }
+  async DeleteChecklistActions(
+    input: DeleteChecklistActionsInput,
+    condition?: ModelChecklistActionsConditionInput
+  ): Promise<DeleteChecklistActionsMutation> {
+    const statement = `mutation DeleteChecklistActions($input: DeleteChecklistActionsInput!, $condition: ModelChecklistActionsConditionInput) {
+        deleteChecklistActions(input: $input, condition: $condition) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteChecklistActionsMutation>response.data.deleteChecklistActions;
+  }
+  async CreateWorkflowChecklists(
+    input: CreateWorkflowChecklistsInput,
+    condition?: ModelWorkflowChecklistsConditionInput
+  ): Promise<CreateWorkflowChecklistsMutation> {
+    const statement = `mutation CreateWorkflowChecklists($input: CreateWorkflowChecklistsInput!, $condition: ModelWorkflowChecklistsConditionInput) {
+        createWorkflowChecklists(input: $input, condition: $condition) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateWorkflowChecklistsMutation>(
+      response.data.createWorkflowChecklists
+    );
+  }
+  async UpdateWorkflowChecklists(
+    input: UpdateWorkflowChecklistsInput,
+    condition?: ModelWorkflowChecklistsConditionInput
+  ): Promise<UpdateWorkflowChecklistsMutation> {
+    const statement = `mutation UpdateWorkflowChecklists($input: UpdateWorkflowChecklistsInput!, $condition: ModelWorkflowChecklistsConditionInput) {
+        updateWorkflowChecklists(input: $input, condition: $condition) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateWorkflowChecklistsMutation>(
+      response.data.updateWorkflowChecklists
+    );
+  }
+  async DeleteWorkflowChecklists(
+    input: DeleteWorkflowChecklistsInput,
+    condition?: ModelWorkflowChecklistsConditionInput
+  ): Promise<DeleteWorkflowChecklistsMutation> {
+    const statement = `mutation DeleteWorkflowChecklists($input: DeleteWorkflowChecklistsInput!, $condition: ModelWorkflowChecklistsConditionInput) {
+        deleteWorkflowChecklists(input: $input, condition: $condition) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteWorkflowChecklistsMutation>(
+      response.data.deleteWorkflowChecklists
+    );
   }
   async GetPendingEvent(id: string): Promise<GetPendingEventQuery> {
     const statement = `query GetPendingEvent($id: ID!) {
@@ -3652,8 +4867,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -3688,8 +4901,6 @@ export class APIService {
               __typename
               id
               name
-              actualStart
-              actualEnd
               createdAt
               updatedAt
             }
@@ -3780,6 +4991,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -3808,6 +5031,10 @@ export class APIService {
             status
             notes
             duration
+            checklists {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -3829,6 +5056,160 @@ export class APIService {
     )) as any;
     return <ListActionModelsQuery>response.data.listActionModels;
   }
+  async GetChecklistModel(id: string): Promise<GetChecklistModelQuery> {
+    const statement = `query GetChecklistModel($id: ID!) {
+        getChecklistModel(id: $id) {
+          __typename
+          id
+          company
+          name
+          notes
+          actions {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetChecklistModelQuery>response.data.getChecklistModel;
+  }
+  async ListChecklistModels(
+    filter?: ModelChecklistModelFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListChecklistModelsQuery> {
+    const statement = `query ListChecklistModels($filter: ModelChecklistModelFilterInput, $limit: Int, $nextToken: String) {
+        listChecklistModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListChecklistModelsQuery>response.data.listChecklistModels;
+  }
+  async GetWorkflowModel(id: string): Promise<GetWorkflowModelQuery> {
+    const statement = `query GetWorkflowModel($id: ID!) {
+        getWorkflowModel(id: $id) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetWorkflowModelQuery>response.data.getWorkflowModel;
+  }
+  async ListWorkflowModels(
+    filter?: ModelWorkflowModelFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListWorkflowModelsQuery> {
+    const statement = `query ListWorkflowModels($filter: ModelWorkflowModelFilterInput, $limit: Int, $nextToken: String) {
+        listWorkflowModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListWorkflowModelsQuery>response.data.listWorkflowModels;
+  }
   async GetAction(id: string): Promise<GetActionQuery> {
     const statement = `query GetAction($id: ID!) {
         getAction(id: $id) {
@@ -3842,16 +5223,7 @@ export class APIService {
             status
             notes
             duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
+            checklists {
               __typename
               nextToken
             }
@@ -3862,7 +5234,6 @@ export class APIService {
           actualEnd
           createdAt
           updatedAt
-          checklistModelStepsId
           actionModelId
         }
       }`;
@@ -3896,20 +5267,10 @@ export class APIService {
               createdAt
               updatedAt
             }
-            checklist {
-              __typename
-              id
-              company
-              name
-              notes
-              createdAt
-              updatedAt
-            }
             actualStart
             actualEnd
             createdAt
             updatedAt
-            checklistModelStepsId
             actionModelId
           }
           nextToken
@@ -3929,79 +5290,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListActionsQuery>response.data.listActions;
-  }
-  async GetChecklistModel(id: string): Promise<GetChecklistModelQuery> {
-    const statement = `query GetChecklistModel($id: ID!) {
-        getChecklistModel(id: $id) {
-          __typename
-          id
-          company
-          name
-          notes
-          steps {
-            __typename
-            items {
-              __typename
-              id
-              actualStart
-              actualEnd
-              createdAt
-              updatedAt
-              checklistModelStepsId
-              actionModelId
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetChecklistModelQuery>response.data.getChecklistModel;
-  }
-  async ListChecklistModels(
-    filter?: ModelChecklistModelFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListChecklistModelsQuery> {
-    const statement = `query ListChecklistModels($filter: ModelChecklistModelFilterInput, $limit: Int, $nextToken: String) {
-        listChecklistModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListChecklistModelsQuery>response.data.listChecklistModels;
   }
   async GetChecklist(id: string): Promise<GetChecklistQuery> {
     const statement = `query GetChecklist($id: ID!) {
@@ -4024,7 +5312,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -4035,7 +5327,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -4082,7 +5373,6 @@ export class APIService {
             end
             createdAt
             updatedAt
-            workflowModelChecklistsId
             checklistOwnerId
             checklistModelId
           }
@@ -4103,81 +5393,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListChecklistsQuery>response.data.listChecklists;
-  }
-  async GetWorkflowModel(id: string): Promise<GetWorkflowModelQuery> {
-    const statement = `query GetWorkflowModel($id: ID!) {
-        getWorkflowModel(id: $id) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetWorkflowModelQuery>response.data.getWorkflowModel;
-  }
-  async ListWorkflowModels(
-    filter?: ModelWorkflowModelFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListWorkflowModelsQuery> {
-    const statement = `query ListWorkflowModels($filter: ModelWorkflowModelFilterInput, $limit: Int, $nextToken: String) {
-        listWorkflowModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            name
-            checklists {
-              __typename
-              nextToken
-            }
-            actualStart
-            actualEnd
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListWorkflowModelsQuery>response.data.listWorkflowModels;
   }
   async GetWorkflow(id: string): Promise<GetWorkflowQuery> {
     const statement = `query GetWorkflow($id: ID!) {
@@ -4202,8 +5417,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -4248,8 +5461,6 @@ export class APIService {
               __typename
               id
               name
-              actualStart
-              actualEnd
               createdAt
               updatedAt
             }
@@ -4277,6 +5488,476 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListWorkflowsQuery>response.data.listWorkflows;
+  }
+  async GetChecklistActions(id: string): Promise<GetChecklistActionsQuery> {
+    const statement = `query GetChecklistActions($id: ID!) {
+        getChecklistActions(id: $id) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetChecklistActionsQuery>response.data.getChecklistActions;
+  }
+  async ListChecklistActions(
+    filter?: ModelChecklistActionsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListChecklistActionsQuery> {
+    const statement = `query ListChecklistActions($filter: ModelChecklistActionsFilterInput, $limit: Int, $nextToken: String) {
+        listChecklistActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            actionModelId
+            checklistModelId
+            actionModel {
+              __typename
+              id
+              company
+              name
+              status
+              notes
+              duration
+              createdAt
+              updatedAt
+            }
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListChecklistActionsQuery>response.data.listChecklistActions;
+  }
+  async GetWorkflowChecklists(id: string): Promise<GetWorkflowChecklistsQuery> {
+    const statement = `query GetWorkflowChecklists($id: ID!) {
+        getWorkflowChecklists(id: $id) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetWorkflowChecklistsQuery>response.data.getWorkflowChecklists;
+  }
+  async ListWorkflowChecklists(
+    filter?: ModelWorkflowChecklistsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListWorkflowChecklistsQuery> {
+    const statement = `query ListWorkflowChecklists($filter: ModelWorkflowChecklistsFilterInput, $limit: Int, $nextToken: String) {
+        listWorkflowChecklists(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            checklistModelId
+            workflowModelId
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            workflowModel {
+              __typename
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListWorkflowChecklistsQuery>response.data.listWorkflowChecklists;
+  }
+  async ChecklistActionsByActionModelId(
+    actionModelId: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelChecklistActionsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ChecklistActionsByActionModelIdQuery> {
+    const statement = `query ChecklistActionsByActionModelId($actionModelId: ID!, $sortDirection: ModelSortDirection, $filter: ModelChecklistActionsFilterInput, $limit: Int, $nextToken: String) {
+        checklistActionsByActionModelId(
+          actionModelId: $actionModelId
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            actionModelId
+            checklistModelId
+            actionModel {
+              __typename
+              id
+              company
+              name
+              status
+              notes
+              duration
+              createdAt
+              updatedAt
+            }
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      actionModelId
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ChecklistActionsByActionModelIdQuery>(
+      response.data.checklistActionsByActionModelId
+    );
+  }
+  async ChecklistActionsByChecklistModelId(
+    checklistModelId: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelChecklistActionsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ChecklistActionsByChecklistModelIdQuery> {
+    const statement = `query ChecklistActionsByChecklistModelId($checklistModelId: ID!, $sortDirection: ModelSortDirection, $filter: ModelChecklistActionsFilterInput, $limit: Int, $nextToken: String) {
+        checklistActionsByChecklistModelId(
+          checklistModelId: $checklistModelId
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            actionModelId
+            checklistModelId
+            actionModel {
+              __typename
+              id
+              company
+              name
+              status
+              notes
+              duration
+              createdAt
+              updatedAt
+            }
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      checklistModelId
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ChecklistActionsByChecklistModelIdQuery>(
+      response.data.checklistActionsByChecklistModelId
+    );
+  }
+  async WorkflowChecklistsByChecklistModelId(
+    checklistModelId: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelWorkflowChecklistsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<WorkflowChecklistsByChecklistModelIdQuery> {
+    const statement = `query WorkflowChecklistsByChecklistModelId($checklistModelId: ID!, $sortDirection: ModelSortDirection, $filter: ModelWorkflowChecklistsFilterInput, $limit: Int, $nextToken: String) {
+        workflowChecklistsByChecklistModelId(
+          checklistModelId: $checklistModelId
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            checklistModelId
+            workflowModelId
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            workflowModel {
+              __typename
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      checklistModelId
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <WorkflowChecklistsByChecklistModelIdQuery>(
+      response.data.workflowChecklistsByChecklistModelId
+    );
+  }
+  async WorkflowChecklistsByWorkflowModelId(
+    workflowModelId: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelWorkflowChecklistsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<WorkflowChecklistsByWorkflowModelIdQuery> {
+    const statement = `query WorkflowChecklistsByWorkflowModelId($workflowModelId: ID!, $sortDirection: ModelSortDirection, $filter: ModelWorkflowChecklistsFilterInput, $limit: Int, $nextToken: String) {
+        workflowChecklistsByWorkflowModelId(
+          workflowModelId: $workflowModelId
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            checklistModelId
+            workflowModelId
+            checklistModel {
+              __typename
+              id
+              company
+              name
+              notes
+              createdAt
+              updatedAt
+            }
+            workflowModel {
+              __typename
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      workflowModelId
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <WorkflowChecklistsByWorkflowModelIdQuery>(
+      response.data.workflowChecklistsByWorkflowModelId
+    );
   }
   OnCreatePendingEventListener(
     filter?: ModelSubscriptionPendingEventFilterInput
@@ -4397,8 +6078,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -4438,8 +6117,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -4479,8 +6156,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -4595,6 +6270,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -4624,6 +6311,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -4653,6 +6352,18 @@ export class APIService {
           status
           notes
           duration
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              actionModelId
+              checklistModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -4665,162 +6376,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteActionModel">>
-    >;
-  }
-
-  OnCreateActionListener(
-    filter?: ModelSubscriptionActionFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAction">>
-  > {
-    const statement = `subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
-        onCreateAction(filter: $filter) {
-          __typename
-          id
-          model {
-            __typename
-            id
-            company
-            name
-            status
-            notes
-            duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-          checklistModelStepsId
-          actionModelId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAction">>
-    >;
-  }
-
-  OnUpdateActionListener(
-    filter?: ModelSubscriptionActionFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAction">>
-  > {
-    const statement = `subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
-        onUpdateAction(filter: $filter) {
-          __typename
-          id
-          model {
-            __typename
-            id
-            company
-            name
-            status
-            notes
-            duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-          checklistModelStepsId
-          actionModelId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAction">>
-    >;
-  }
-
-  OnDeleteActionListener(
-    filter?: ModelSubscriptionActionFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAction">>
-  > {
-    const statement = `subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
-        onDeleteAction(filter: $filter) {
-          __typename
-          id
-          model {
-            __typename
-            id
-            company
-            name
-            status
-            notes
-            duration
-            createdAt
-            updatedAt
-          }
-          checklist {
-            __typename
-            id
-            company
-            name
-            notes
-            steps {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-          checklistModelStepsId
-          actionModelId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAction">>
     >;
   }
 
@@ -4838,17 +6393,27 @@ export class APIService {
           company
           name
           notes
-          steps {
+          actions {
             __typename
             items {
               __typename
               id
-              actualStart
-              actualEnd
+              actionModelId
+              checklistModelId
               createdAt
               updatedAt
-              checklistModelStepsId
-              actionModelId
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
             }
             nextToken
           }
@@ -4883,17 +6448,27 @@ export class APIService {
           company
           name
           notes
-          steps {
+          actions {
             __typename
             items {
               __typename
               id
-              actualStart
-              actualEnd
+              actionModelId
+              checklistModelId
               createdAt
               updatedAt
-              checklistModelStepsId
-              actionModelId
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
             }
             nextToken
           }
@@ -4928,17 +6503,27 @@ export class APIService {
           company
           name
           notes
-          steps {
+          actions {
             __typename
             items {
               __typename
               id
-              actualStart
-              actualEnd
+              actionModelId
+              checklistModelId
               createdAt
               updatedAt
-              checklistModelStepsId
-              actionModelId
+            }
+            nextToken
+          }
+          workflows {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
             }
             nextToken
           }
@@ -4956,6 +6541,249 @@ export class APIService {
       SubscriptionResponse<
         Pick<__SubscriptionContainer, "onDeleteChecklistModel">
       >
+    >;
+  }
+
+  OnCreateWorkflowModelListener(
+    filter?: ModelSubscriptionWorkflowModelFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateWorkflowModel">>
+  > {
+    const statement = `subscription OnCreateWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
+        onCreateWorkflowModel(filter: $filter) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateWorkflowModel">
+      >
+    >;
+  }
+
+  OnUpdateWorkflowModelListener(
+    filter?: ModelSubscriptionWorkflowModelFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateWorkflowModel">>
+  > {
+    const statement = `subscription OnUpdateWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
+        onUpdateWorkflowModel(filter: $filter) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateWorkflowModel">
+      >
+    >;
+  }
+
+  OnDeleteWorkflowModelListener(
+    filter?: ModelSubscriptionWorkflowModelFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteWorkflowModel">>
+  > {
+    const statement = `subscription OnDeleteWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
+        onDeleteWorkflowModel(filter: $filter) {
+          __typename
+          id
+          name
+          checklists {
+            __typename
+            items {
+              __typename
+              id
+              checklistModelId
+              workflowModelId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteWorkflowModel">
+      >
+    >;
+  }
+
+  OnCreateActionListener(
+    filter?: ModelSubscriptionActionFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAction">>
+  > {
+    const statement = `subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
+        onCreateAction(filter: $filter) {
+          __typename
+          id
+          model {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          actionModelId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAction">>
+    >;
+  }
+
+  OnUpdateActionListener(
+    filter?: ModelSubscriptionActionFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAction">>
+  > {
+    const statement = `subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
+        onUpdateAction(filter: $filter) {
+          __typename
+          id
+          model {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          actionModelId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAction">>
+    >;
+  }
+
+  OnDeleteActionListener(
+    filter?: ModelSubscriptionActionFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAction">>
+  > {
+    const statement = `subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
+        onDeleteAction(filter: $filter) {
+          __typename
+          id
+          model {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          actionModelId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAction">>
     >;
   }
 
@@ -4984,7 +6812,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -4995,7 +6827,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -5036,7 +6867,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -5047,7 +6882,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -5088,7 +6922,11 @@ export class APIService {
             company
             name
             notes
-            steps {
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
               __typename
               nextToken
             }
@@ -5099,7 +6937,6 @@ export class APIService {
           end
           createdAt
           updatedAt
-          workflowModelChecklistsId
           checklistOwnerId
           checklistModelId
         }
@@ -5112,141 +6949,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteChecklist">>
-    >;
-  }
-
-  OnCreateWorkflowModelListener(
-    filter?: ModelSubscriptionWorkflowModelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateWorkflowModel">>
-  > {
-    const statement = `subscription OnCreateWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
-        onCreateWorkflowModel(filter: $filter) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onCreateWorkflowModel">
-      >
-    >;
-  }
-
-  OnUpdateWorkflowModelListener(
-    filter?: ModelSubscriptionWorkflowModelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateWorkflowModel">>
-  > {
-    const statement = `subscription OnUpdateWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
-        onUpdateWorkflowModel(filter: $filter) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onUpdateWorkflowModel">
-      >
-    >;
-  }
-
-  OnDeleteWorkflowModelListener(
-    filter?: ModelSubscriptionWorkflowModelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteWorkflowModel">>
-  > {
-    const statement = `subscription OnDeleteWorkflowModel($filter: ModelSubscriptionWorkflowModelFilterInput) {
-        onDeleteWorkflowModel(filter: $filter) {
-          __typename
-          id
-          name
-          checklists {
-            __typename
-            items {
-              __typename
-              id
-              company
-              start
-              end
-              createdAt
-              updatedAt
-              workflowModelChecklistsId
-              checklistOwnerId
-              checklistModelId
-            }
-            nextToken
-          }
-          actualStart
-          actualEnd
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onDeleteWorkflowModel">
-      >
     >;
   }
 
@@ -5277,8 +6979,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -5328,8 +7028,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -5379,8 +7077,6 @@ export class APIService {
               __typename
               nextToken
             }
-            actualStart
-            actualEnd
             createdAt
             updatedAt
           }
@@ -5400,6 +7096,366 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteWorkflow">>
+    >;
+  }
+
+  OnCreateChecklistActionsListener(
+    filter?: ModelSubscriptionChecklistActionsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateChecklistActions">
+    >
+  > {
+    const statement = `subscription OnCreateChecklistActions($filter: ModelSubscriptionChecklistActionsFilterInput) {
+        onCreateChecklistActions(filter: $filter) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateChecklistActions">
+      >
+    >;
+  }
+
+  OnUpdateChecklistActionsListener(
+    filter?: ModelSubscriptionChecklistActionsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateChecklistActions">
+    >
+  > {
+    const statement = `subscription OnUpdateChecklistActions($filter: ModelSubscriptionChecklistActionsFilterInput) {
+        onUpdateChecklistActions(filter: $filter) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateChecklistActions">
+      >
+    >;
+  }
+
+  OnDeleteChecklistActionsListener(
+    filter?: ModelSubscriptionChecklistActionsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteChecklistActions">
+    >
+  > {
+    const statement = `subscription OnDeleteChecklistActions($filter: ModelSubscriptionChecklistActionsFilterInput) {
+        onDeleteChecklistActions(filter: $filter) {
+          __typename
+          id
+          actionModelId
+          checklistModelId
+          actionModel {
+            __typename
+            id
+            company
+            name
+            status
+            notes
+            duration
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteChecklistActions">
+      >
+    >;
+  }
+
+  OnCreateWorkflowChecklistsListener(
+    filter?: ModelSubscriptionWorkflowChecklistsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateWorkflowChecklists">
+    >
+  > {
+    const statement = `subscription OnCreateWorkflowChecklists($filter: ModelSubscriptionWorkflowChecklistsFilterInput) {
+        onCreateWorkflowChecklists(filter: $filter) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateWorkflowChecklists">
+      >
+    >;
+  }
+
+  OnUpdateWorkflowChecklistsListener(
+    filter?: ModelSubscriptionWorkflowChecklistsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateWorkflowChecklists">
+    >
+  > {
+    const statement = `subscription OnUpdateWorkflowChecklists($filter: ModelSubscriptionWorkflowChecklistsFilterInput) {
+        onUpdateWorkflowChecklists(filter: $filter) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateWorkflowChecklists">
+      >
+    >;
+  }
+
+  OnDeleteWorkflowChecklistsListener(
+    filter?: ModelSubscriptionWorkflowChecklistsFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteWorkflowChecklists">
+    >
+  > {
+    const statement = `subscription OnDeleteWorkflowChecklists($filter: ModelSubscriptionWorkflowChecklistsFilterInput) {
+        onDeleteWorkflowChecklists(filter: $filter) {
+          __typename
+          id
+          checklistModelId
+          workflowModelId
+          checklistModel {
+            __typename
+            id
+            company
+            name
+            notes
+            actions {
+              __typename
+              nextToken
+            }
+            workflows {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          workflowModel {
+            __typename
+            id
+            name
+            checklists {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteWorkflowChecklists">
+      >
     >;
   }
 }
