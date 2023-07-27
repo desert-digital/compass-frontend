@@ -15,6 +15,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,20 +45,25 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { AddActionComponent } from './components/add-action/add-action.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
+import { AddOwnerComponent } from './components/add-owner/add-owner.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
+import { AddVesselComponent } from './components/add-vessel/add-vessel.component';
 import { AvailableFleetComponent } from './components/available-fleet/available-fleet.component';
 import { CharterChartComponent } from './components/charter-chart/charter-chart.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { DeleteActionDialogComponent } from './components/delete-action-dialog/delete-action-dialog.component';
 import { DeleteChecklistDialogComponent } from './components/delete-checklist-dialog/delete-checklist-dialog.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
-import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
+import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
+import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
 import { FleetComponent } from './components/fleet/fleet.component';
+import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
+import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
@@ -68,7 +74,8 @@ import { WorkflowComponent } from './components/workflow/workflow.component';
 import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 import { ShowActionNotesDialogComponent } from './components/show-action-notes-dialog/show-action-notes-dialog.component';
 import { ShowChecklistNotesDialogComponent } from './components/show-checklist-notes-dialog/show-checklist-notes-dialog.component';
-import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
+import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-notes-dialog/show-workflow-notes-dialog.component';
+import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +96,6 @@ import { EditChecklistComponent } from './components/edit-checklist/edit-checkli
     ManageChecklistsComponent,
     ManageWorkflowsComponent,
     ManageServiceOrdersComponent,
-    FleetTableComponent,
     AddChecklistComponent,
     AddWorkflowComponent,
     AddActionComponent,
@@ -100,21 +106,29 @@ import { EditChecklistComponent } from './components/edit-checklist/edit-checkli
     ShowActionNotesDialogComponent,
     ShowChecklistNotesDialogComponent,
     EditChecklistComponent,
-    ],
+    ShowWorkflowNotesDialogComponent,
+    FleetTableComponent,
+    EditWorkflowComponent,
+    AddVesselComponent,
+    AddOwnerComponent,
+    ManageOwnersComponent,
+    EditOwnerComponent,
+  ],
   imports: [
     AmplifyAuthenticatorModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     DragDropModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatDialogModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,

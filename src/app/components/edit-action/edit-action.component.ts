@@ -58,13 +58,12 @@ export class EditActionComponent {
   async onUpdateActionPressed(action: ActionModel, formDirective: FormGroupDirective) {
     try {
       await this._actionModelService.updateModel(action).then(() => {
-        this._snackBar.open(`Update ${action.name}`, 'OK', {duration: 3000})
+        this._snackBar.open(`Updated ${action.name}`, 'OK', {duration: 3000})
         this.actionForm.reset();
         formDirective.resetForm();
       })
     } catch (error) {
       this._snackBar.open('An error occured when updating the action', 'OK', {duration: 3000})
-      console.log(JSON.stringify(error));
     }
   }
 }

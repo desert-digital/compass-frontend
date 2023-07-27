@@ -66,9 +66,26 @@ mutation CreateVessel(
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -79,6 +96,8 @@ mutation CreateVessel(
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -93,9 +112,26 @@ mutation UpdateVessel(
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -106,6 +142,8 @@ mutation UpdateVessel(
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -120,9 +158,26 @@ mutation DeleteVessel(
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -133,6 +188,8 @@ mutation DeleteVessel(
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -177,6 +234,105 @@ mutation DeleteStaff(
     company
     name
     email
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation CreateOwner(
+  $input: CreateOwnerInput!
+  $condition: ModelOwnerConditionInput
+) {
+  createOwner(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation UpdateOwner(
+  $input: UpdateOwnerInput!
+  $condition: ModelOwnerConditionInput
+) {
+  updateOwner(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation DeleteOwner(
+  $input: DeleteOwnerInput!
+  $condition: ModelOwnerConditionInput
+) {
+  deleteOwner(input: $input, condition: $condition) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -279,6 +435,8 @@ mutation CreateChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -318,6 +476,8 @@ mutation UpdateChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -357,6 +517,8 @@ mutation DeleteChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -394,6 +556,8 @@ mutation CreateWorkflowModel(
   createWorkflowModel(input: $input, condition: $condition) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -419,6 +583,8 @@ mutation UpdateWorkflowModel(
   updateWorkflowModel(input: $input, condition: $condition) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -444,6 +610,8 @@ mutation DeleteWorkflowModel(
   deleteWorkflowModel(input: $input, condition: $condition) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -468,6 +636,7 @@ mutation CreateAction(
 ) {
   createAction(input: $input, condition: $condition) {
     id
+    status
     model {
       id
       company
@@ -498,6 +667,7 @@ mutation UpdateAction(
 ) {
   updateAction(input: $input, condition: $condition) {
     id
+    status
     model {
       id
       company
@@ -528,6 +698,7 @@ mutation DeleteAction(
 ) {
   deleteAction(input: $input, condition: $condition) {
     id
+    status
     model {
       id
       company
@@ -573,6 +744,8 @@ mutation CreateChecklist(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -616,6 +789,8 @@ mutation UpdateChecklist(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -659,6 +834,8 @@ mutation DeleteChecklist(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -700,6 +877,8 @@ mutation CreateWorkflow(
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -737,6 +916,8 @@ mutation UpdateWorkflow(
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -774,6 +955,8 @@ mutation DeleteWorkflow(
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -820,6 +1003,8 @@ mutation CreateChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -866,6 +1051,8 @@ mutation UpdateChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -912,6 +1099,8 @@ mutation DeleteChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -943,6 +1132,8 @@ mutation CreateWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -958,6 +1149,8 @@ mutation CreateWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -985,6 +1178,8 @@ mutation UpdateWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -1000,6 +1195,8 @@ mutation UpdateWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -1027,6 +1224,8 @@ mutation DeleteWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -1042,6 +1241,8 @@ mutation DeleteWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename

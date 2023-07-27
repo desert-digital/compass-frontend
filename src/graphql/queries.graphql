@@ -46,9 +46,26 @@ query GetVessel($id: ID!) {
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -59,6 +76,8 @@ query GetVessel($id: ID!) {
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -75,15 +94,30 @@ query ListVessels(
       company
       name
       type
+      documentNumber
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         name
+        notes
+        duration
         createdAt
         updatedAt
         __typename
       }
       createdAt
       updatedAt
+      ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -115,6 +149,61 @@ query ListStaff(
       company
       name
       email
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetOwner($id: ID!) {
+  getOwner(id: $id) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListOwners(
+  $filter: ModelOwnerFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOwners(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -182,6 +271,8 @@ query GetChecklistModel($id: ID!) {
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -223,6 +314,8 @@ query ListChecklistModels(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -244,6 +337,8 @@ query GetWorkflowModel($id: ID!) {
   getWorkflowModel(id: $id) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -271,6 +366,8 @@ query ListWorkflowModels(
     items {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -287,6 +384,7 @@ query ListWorkflowModels(
 query GetAction($id: ID!) {
   getAction(id: $id) {
     id
+    status
     model {
       id
       company
@@ -319,6 +417,7 @@ query ListActions(
   listActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      status
       model {
         id
         company
@@ -360,6 +459,8 @@ query GetChecklist($id: ID!) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -405,6 +506,8 @@ query ListChecklists(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -438,6 +541,8 @@ query GetWorkflow($id: ID!) {
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -477,6 +582,8 @@ query ListWorkflows(
       steps {
         id
         name
+        notes
+        duration
         createdAt
         updatedAt
         __typename
@@ -519,6 +626,8 @@ query GetChecklistActions($id: ID!) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -563,6 +672,8 @@ query ListChecklistActions(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -586,6 +697,8 @@ query GetWorkflowChecklists($id: ID!) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -601,6 +714,8 @@ query GetWorkflowChecklists($id: ID!) {
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -634,6 +749,8 @@ query ListWorkflowChecklists(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -641,6 +758,8 @@ query ListWorkflowChecklists(
       workflowModel {
         id
         name
+        notes
+        duration
         createdAt
         updatedAt
         __typename
@@ -688,6 +807,8 @@ query ChecklistActionsByActionModelId(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -735,6 +856,8 @@ query ChecklistActionsByChecklistModelId(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -771,6 +894,8 @@ query WorkflowChecklistsByChecklistModelId(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -778,6 +903,8 @@ query WorkflowChecklistsByChecklistModelId(
       workflowModel {
         id
         name
+        notes
+        duration
         createdAt
         updatedAt
         __typename
@@ -814,6 +941,8 @@ query WorkflowChecklistsByWorkflowModelId(
         company
         name
         notes
+        duration
+        preCharter
         createdAt
         updatedAt
         __typename
@@ -821,6 +950,8 @@ query WorkflowChecklistsByWorkflowModelId(
       workflowModel {
         id
         name
+        notes
+        duration
         createdAt
         updatedAt
         __typename

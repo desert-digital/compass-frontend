@@ -2,17 +2,30 @@
     <div class="container">
         <h3>Add a New Workflow</h3>
         <div class="one-wide">
-            <form [formGroup]="workflowForm" (ngSubmit)="onAddWorkflowPressed(workflowForm.value)">
-                <button mat-flat-button type="submit" color="primary">Add a new Workflow</button>
-                <mat-form-field>
-                    <mat-label>Workflow name</mat-label>
-                    <input matInput id="name" formControlName="name" placeholder="New Checklist">
-                </mat-form-field>
+            <form [formGroup]="workflowForm" #formDirective="ngForm"
+                (ngSubmit)="onAddWorkflowPressed(workflowForm.value, formDirective)">
+                <button mat-flat-button type="submit" color="primary">Add a new Checklist</button>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Workflow name</mat-label>
+                        <input matInput id="name" formControlName="name" placeholder="New Checklist">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Duration in Minutes</mat-label>
+                        <input matInput id="duration" type="text" readonly formControlName="duration">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
+                    </mat-form-field>
+                </div>
             </form>
         </div>
         <div class="row">
             <div class="example-container two-wide">
-                <h4>New Checklist actions</h4>
+                <h4>Workflow Checklists</h4>
                 <div cdkDropList [cdkDropListData]="workflow" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of workflow"> <mat-icon
                             class="material-symbols-outlined">drag_handle</mat-icon>

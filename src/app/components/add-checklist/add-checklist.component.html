@@ -5,18 +5,27 @@
             <form [formGroup]="checklistForm" #formDirective="ngForm"
                 (ngSubmit)="onAddChecklistPressed(checklistForm.value, formDirective)">
                 <button mat-flat-button type="submit" color="primary">Add a new Checklist</button>
-                <mat-form-field>
-                    <mat-label>Checklist name</mat-label>
-                    <input matInput id="name" formControlName="name" placeholder="New Checklist">
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Notes</mat-label>
-                    <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
-                </mat-form-field>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Checklist name</mat-label>
+                        <input matInput id="name" formControlName="name" placeholder="New Checklist">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Duration in Minutes</mat-label>
+                        <input matInput id="duration" type="text" readonly formControlName="duration">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
+                    </mat-form-field>
+
+                </div>
             </form>
         </div>
         <div class="row">
-            <div class="example-container two-wide">
+            <div class="example-container">
                 <h4>New Checklist actions</h4>
                 <div cdkDropList [cdkDropListData]="checklist" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of checklist"> <mat-icon
@@ -24,7 +33,7 @@
                         {{item.name}}</div>
                 </div>
             </div>
-            <div class="example-container two-wide">
+            <div class="example-container">
                 <h4>All actions</h4>
                 <div cdkDropList [cdkDropListData]="actions" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of actions"> <mat-icon

@@ -29,9 +29,8 @@ export class FleetComponent {
     private _snackBar: MatSnackBar) {
   }
 
-  ngOnInit() {
-    this._fleetService.getFleet()
-      .subscribe(items => this.items = items);
+  async ngOnInit() {
+    this.items = await this._fleetService.getVessels()
   }
 
   async onFileSelected(event: any) {
@@ -52,6 +51,6 @@ export class FleetComponent {
     }
     catch (e: any) {
       this._snackBar.open(`An error occured ${e.message} saving the media item. Please contact support`, 'OK');
+    }
   }
-}
 }

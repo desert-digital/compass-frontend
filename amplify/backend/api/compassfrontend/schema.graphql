@@ -14,6 +14,9 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   company: ID
   name: String
   type: String
+  documentNumber: String
+  owner: Owner @hasOne 
+  type: String
   defaultWorkflow: WorkflowModel @hasOne
 }
 
@@ -22,6 +25,15 @@ type Staff @model @auth(rules: [{ allow: private }]){
   company: ID
   name: String
   email: String
+}
+
+type Owner @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: ID
+  name: String
+  email: String
+  phone: String
+  boats: [Vessel] @hasMany
 }
 
 type ActionModel @model @auth(rules: [{ allow: private }]){
@@ -39,6 +51,8 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
   company: ID
   name: String
   notes: String
+  duration: Int
+  preCharter: Boolean
   actions: [ActionModel] @manyToMany(relationName: "ChecklistActions")
   workflows: [WorkflowModel] @manyToMany(relationName: "WorkflowChecklists") 
 }
@@ -46,11 +60,14 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
 type WorkflowModel @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String
+  notes: String
+  duration: Int
   checklists: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
 }
 
 type Action @model @auth(rules: [{allow: private}]){
   id: ID!
+  status: Boolean
   model: ActionModel @hasOne
   actualStart: String
   actualEnd: String

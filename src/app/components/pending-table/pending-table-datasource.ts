@@ -18,7 +18,7 @@ import { PendingService } from 'src/app/services/pending.service';
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class PendingTableDataSource extends DataSource<Event> {
+export class PendingTableDataSource extends DataSource<any> {
   public numberOfEvents: number = 0;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;

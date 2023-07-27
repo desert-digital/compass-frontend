@@ -1,7 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -11,12 +11,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { ChecklistModel, Checklist, Action } from '../../API.service';
+import { ChecklistModel, ActionModel } from '../../API.service';
 
 // Local
 
 import { ChecklistModelsService } from 'src/app/services/checklist-models.service';
-import { ActionsService } from 'src/app/services/actions.service';
+import { ActionModelsService } from 'src/app/services/action-models.service';
 
 @Component({
   selector: 'app-edit-checklist',
@@ -26,16 +26,19 @@ import { ActionsService } from 'src/app/services/actions.service';
 export class EditChecklistComponent {
   checklistForm: FormGroup;
 
-  checklist: Action[] = [];
-  actions: Action[] = [];
+  checklist: ActionModel[] = [];
+  actions: ActionModel[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
+    private _actionModelsService: ActionModelsService,
     private _checklistModelsService: ChecklistModelsService) {
     this.checklistForm = this.formBuilder.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
+      duration: [''],
       notes: ['']
     });
   }
@@ -47,12 +50,21 @@ export class EditChecklistComponent {
     this.checklistForm.setValue({
       id: checklistModel.id,
       name: checklistModel.name,
+      duration: checklistModel.duration,
       notes: checklistModel.notes
     });
-    console.log(JSON.stringify(checklistModel));
+    for (let item of checklistModel.actions.items) {
+      const action = await this._actionModelsService.getActionModelFromId(item.actionModelId);
+      this.checklist.push(action);
+    }
+    this.actions = await this._actionModelsService.getActionModels();
   }
 
-  drop(e: CdkDragDrop<Action[]>) {
+  onCancelEdit() {
+    this.router.navigate(['main/checklists']);
+  }
+
+  drop(e: CdkDragDrop<ActionModel[]>) {
     if (e.previousContainer === e.container) {
       moveItemInArray(e.container.data, e.previousIndex, e.currentIndex);
     } else {
@@ -63,9 +75,30 @@ export class EditChecklistComponent {
         e.currentIndex,
       );
     }
+    this._updateDuration();
   }
 
-  onUpdateChecklistPressed(checklist: ChecklistModel, formDirective: FormGroupDirective) {
-    console.log(JSON.stringify(checklist));
+  onDeleteAction(item: any) {
+    const itemToRemove = this.checklist.findIndex(element => element.id === item.id);
+    this.checklist.splice(itemToRemove, 1);
+    this._updateDuration();
+  }
+
+  onUpdateChecklistPressed(model: ChecklistModel, formDirective: FormGroupDirective) {
+    try {
+      this._checklistModelsService.updateChecklistModel(model, this.checklist); 
+      this._snackBar.open(`Updated ${model.name}`, 'OK', {duration: 3000});
+    } catch (error) {
+      this._snackBar.open(`Unable to update ${model.name}`, 'OK', {duration: 3000});
+    }
+  }
+
+  _updateDuration() {
+    const newDuration = this.checklist.reduce(function (totalDuration, item) {
+      return totalDuration + item.duration;
+    }, 0);
+    this.checklistForm.patchValue({
+      duration: newDuration
+    });
   }
 }

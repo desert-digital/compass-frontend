@@ -60,6 +60,10 @@ export class MainComponent {
     this._router.navigate(['main/staff']);
   }
 
+  onOwnersPressed() {
+    this._router.navigate(['main/owners']);
+  }
+
   onChecklistPressed() {
     this._router.navigate(['main/checklists']);
   }

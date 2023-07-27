@@ -1,0 +1,12 @@
+@import 'src/compass-theme';
+
+button { 
+    @include buttons;
+    width: 400px;
+    margin: 10px;
+}
+
+.dialog-container {
+    @include containers;
+    width: 600px;
+}

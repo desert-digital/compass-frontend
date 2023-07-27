@@ -60,9 +60,26 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -73,6 +90,8 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -84,9 +103,26 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -97,6 +133,8 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -108,9 +146,26 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     company
     name
     type
+    documentNumber
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -121,6 +176,8 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     }
     createdAt
     updatedAt
+    ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -156,6 +213,96 @@ subscription OnDeleteStaff($filter: ModelSubscriptionStaffFilterInput) {
     company
     name
     email
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnCreateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+  onCreateOwner(filter: $filter) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnUpdateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+  onUpdateOwner(filter: $filter) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnDeleteOwner($filter: ModelSubscriptionOwnerFilterInput) {
+  onDeleteOwner(filter: $filter) {
+    id
+    company
+    name
+    email
+    phone
+    boats {
+      items {
+        id
+        company
+        name
+        type
+        documentNumber
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselOwnerId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -254,6 +401,8 @@ subscription OnCreateChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -292,6 +441,8 @@ subscription OnUpdateChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -330,6 +481,8 @@ subscription OnDeleteChecklistModel(
     company
     name
     notes
+    duration
+    preCharter
     actions {
       items {
         id
@@ -366,6 +519,8 @@ subscription OnCreateWorkflowModel(
   onCreateWorkflowModel(filter: $filter) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -390,6 +545,8 @@ subscription OnUpdateWorkflowModel(
   onUpdateWorkflowModel(filter: $filter) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -414,6 +571,8 @@ subscription OnDeleteWorkflowModel(
   onDeleteWorkflowModel(filter: $filter) {
     id
     name
+    notes
+    duration
     checklists {
       items {
         id
@@ -435,6 +594,7 @@ subscription OnDeleteWorkflowModel(
 subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
   onCreateAction(filter: $filter) {
     id
+    status
     model {
       id
       company
@@ -462,6 +622,7 @@ subscription OnCreateAction($filter: ModelSubscriptionActionFilterInput) {
 subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
   onUpdateAction(filter: $filter) {
     id
+    status
     model {
       id
       company
@@ -489,6 +650,7 @@ subscription OnUpdateAction($filter: ModelSubscriptionActionFilterInput) {
 subscription OnDeleteAction($filter: ModelSubscriptionActionFilterInput) {
   onDeleteAction(filter: $filter) {
     id
+    status
     model {
       id
       company
@@ -531,6 +693,8 @@ subscription OnCreateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -571,6 +735,8 @@ subscription OnUpdateChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -611,6 +777,8 @@ subscription OnDeleteChecklist($filter: ModelSubscriptionChecklistFilterInput) {
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -649,6 +817,8 @@ subscription OnCreateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -683,6 +853,8 @@ subscription OnUpdateWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -717,6 +889,8 @@ subscription OnDeleteWorkflow($filter: ModelSubscriptionWorkflowFilterInput) {
     steps {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -762,6 +936,8 @@ subscription OnCreateChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -807,6 +983,8 @@ subscription OnUpdateChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -852,6 +1030,8 @@ subscription OnDeleteChecklistActions(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -882,6 +1062,8 @@ subscription OnCreateWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -897,6 +1079,8 @@ subscription OnCreateWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -923,6 +1107,8 @@ subscription OnUpdateWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -938,6 +1124,8 @@ subscription OnUpdateWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename
@@ -964,6 +1152,8 @@ subscription OnDeleteWorkflowChecklists(
       company
       name
       notes
+      duration
+      preCharter
       actions {
         nextToken
         __typename
@@ -979,6 +1169,8 @@ subscription OnDeleteWorkflowChecklists(
     workflowModel {
       id
       name
+      notes
+      duration
       checklists {
         nextToken
         __typename

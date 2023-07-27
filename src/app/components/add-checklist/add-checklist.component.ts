@@ -29,6 +29,7 @@ export class AddChecklistComponent {
 
   checklist: ActionModel[] = [];
   actions: ActionModel[] = [];
+  duration: number = 0;
 
   constructor(private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -37,7 +38,8 @@ export class AddChecklistComponent {
     private _checklistModelsService: ChecklistModelsService) {
     this.checklistForm = this.formBuilder.group({
       name: ['', Validators.required],
-      notes: ['']
+      notes: [''], 
+      duration: ['']
     });
   }
 
@@ -49,7 +51,7 @@ export class AddChecklistComponent {
     this.actions = await this._actionModelsService.getActionModels();
   }
 
-  drop(e: CdkDragDrop<Action[]>) {
+  drop(e: CdkDragDrop<ActionModel[]>) {
     if (e.previousContainer === e.container) {
       moveItemInArray(e.container.data, e.previousIndex, e.currentIndex);
     } else {
@@ -60,6 +62,12 @@ export class AddChecklistComponent {
         e.currentIndex,
       );
     }
+    this.duration = this.checklist.reduce(function (totalDuration, item) {
+      return totalDuration + item.duration;
+    }, 0);
+    this.checklistForm.patchValue({
+      duration: this.duration
+    });
   }
 
   async onAddChecklistPressed(model: ChecklistModel, formDirective: FormGroupDirective) {

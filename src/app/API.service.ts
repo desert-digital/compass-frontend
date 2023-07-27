@@ -19,6 +19,9 @@ export type __SubscriptionContainer = {
   onCreateStaff: OnCreateStaffSubscription;
   onUpdateStaff: OnUpdateStaffSubscription;
   onDeleteStaff: OnDeleteStaffSubscription;
+  onCreateOwner: OnCreateOwnerSubscription;
+  onUpdateOwner: OnUpdateOwnerSubscription;
+  onDeleteOwner: OnDeleteOwnerSubscription;
   onCreateActionModel: OnCreateActionModelSubscription;
   onUpdateActionModel: OnUpdateActionModelSubscription;
   onDeleteActionModel: OnDeleteActionModelSubscription;
@@ -158,6 +161,9 @@ export type CreateVesselInput = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -165,9 +171,12 @@ export type ModelVesselConditionInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   type?: ModelStringInput | null;
+  documentNumber?: ModelStringInput | null;
   and?: Array<ModelVesselConditionInput | null> | null;
   or?: Array<ModelVesselConditionInput | null> | null;
   not?: ModelVesselConditionInput | null;
+  ownerBoatsId?: ModelIDInput | null;
+  vesselOwnerId?: ModelIDInput | null;
   vesselDefaultWorkflowId?: ModelIDInput | null;
 };
 
@@ -177,16 +186,40 @@ export type Vessel = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: Owner | null;
   defaultWorkflow?: WorkflowModel | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
+};
+
+export type Owner = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: ModelVesselConnection | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ModelVesselConnection = {
+  __typename: "ModelVesselConnection";
+  items: Array<Vessel | null>;
+  nextToken?: string | null;
 };
 
 export type WorkflowModel = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: ModelWorkflowChecklistsConnection | null;
   createdAt: string;
   updatedAt: string;
@@ -215,6 +248,8 @@ export type ChecklistModel = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: ModelChecklistActionsConnection | null;
   workflows?: ModelWorkflowChecklistsConnection | null;
   createdAt: string;
@@ -256,6 +291,9 @@ export type UpdateVesselInput = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -297,6 +335,36 @@ export type UpdateStaffInput = {
 };
 
 export type DeleteStaffInput = {
+  id: string;
+};
+
+export type CreateOwnerInput = {
+  id?: string | null;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+};
+
+export type ModelOwnerConditionInput = {
+  company?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  and?: Array<ModelOwnerConditionInput | null> | null;
+  or?: Array<ModelOwnerConditionInput | null> | null;
+  not?: ModelOwnerConditionInput | null;
+};
+
+export type UpdateOwnerInput = {
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+};
+
+export type DeleteOwnerInput = {
   id: string;
 };
 
@@ -350,15 +418,26 @@ export type CreateChecklistModelInput = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
 };
 
 export type ModelChecklistModelConditionInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   notes?: ModelStringInput | null;
+  duration?: ModelIntInput | null;
+  preCharter?: ModelBooleanInput | null;
   and?: Array<ModelChecklistModelConditionInput | null> | null;
   or?: Array<ModelChecklistModelConditionInput | null> | null;
   not?: ModelChecklistModelConditionInput | null;
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
 };
 
 export type UpdateChecklistModelInput = {
@@ -366,6 +445,8 @@ export type UpdateChecklistModelInput = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
 };
 
 export type DeleteChecklistModelInput = {
@@ -375,10 +456,14 @@ export type DeleteChecklistModelInput = {
 export type CreateWorkflowModelInput = {
   id?: string | null;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
 };
 
 export type ModelWorkflowModelConditionInput = {
   name?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
+  duration?: ModelIntInput | null;
   and?: Array<ModelWorkflowModelConditionInput | null> | null;
   or?: Array<ModelWorkflowModelConditionInput | null> | null;
   not?: ModelWorkflowModelConditionInput | null;
@@ -387,6 +472,8 @@ export type ModelWorkflowModelConditionInput = {
 export type UpdateWorkflowModelInput = {
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
 };
 
 export type DeleteWorkflowModelInput = {
@@ -395,12 +482,14 @@ export type DeleteWorkflowModelInput = {
 
 export type CreateActionInput = {
   id?: string | null;
+  status?: boolean | null;
   actualStart?: string | null;
   actualEnd?: string | null;
   actionModelId?: string | null;
 };
 
 export type ModelActionConditionInput = {
+  status?: ModelBooleanInput | null;
   actualStart?: ModelStringInput | null;
   actualEnd?: ModelStringInput | null;
   and?: Array<ModelActionConditionInput | null> | null;
@@ -412,6 +501,7 @@ export type ModelActionConditionInput = {
 export type Action = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: ActionModel | null;
   actualStart?: string | null;
   actualEnd?: string | null;
@@ -422,6 +512,7 @@ export type Action = {
 
 export type UpdateActionInput = {
   id: string;
+  status?: boolean | null;
   actualStart?: string | null;
   actualEnd?: string | null;
   actionModelId?: string | null;
@@ -598,16 +689,13 @@ export type ModelVesselFilterInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   type?: ModelStringInput | null;
+  documentNumber?: ModelStringInput | null;
   and?: Array<ModelVesselFilterInput | null> | null;
   or?: Array<ModelVesselFilterInput | null> | null;
   not?: ModelVesselFilterInput | null;
+  ownerBoatsId?: ModelIDInput | null;
+  vesselOwnerId?: ModelIDInput | null;
   vesselDefaultWorkflowId?: ModelIDInput | null;
-};
-
-export type ModelVesselConnection = {
-  __typename: "ModelVesselConnection";
-  items: Array<Vessel | null>;
-  nextToken?: string | null;
 };
 
 export type ModelStaffFilterInput = {
@@ -623,6 +711,23 @@ export type ModelStaffFilterInput = {
 export type ModelStaffConnection = {
   __typename: "ModelStaffConnection";
   items: Array<Staff | null>;
+  nextToken?: string | null;
+};
+
+export type ModelOwnerFilterInput = {
+  id?: ModelIDInput | null;
+  company?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  and?: Array<ModelOwnerFilterInput | null> | null;
+  or?: Array<ModelOwnerFilterInput | null> | null;
+  not?: ModelOwnerFilterInput | null;
+};
+
+export type ModelOwnerConnection = {
+  __typename: "ModelOwnerConnection";
+  items: Array<Owner | null>;
   nextToken?: string | null;
 };
 
@@ -649,6 +754,8 @@ export type ModelChecklistModelFilterInput = {
   company?: ModelIDInput | null;
   name?: ModelStringInput | null;
   notes?: ModelStringInput | null;
+  duration?: ModelIntInput | null;
+  preCharter?: ModelBooleanInput | null;
   and?: Array<ModelChecklistModelFilterInput | null> | null;
   or?: Array<ModelChecklistModelFilterInput | null> | null;
   not?: ModelChecklistModelFilterInput | null;
@@ -663,6 +770,8 @@ export type ModelChecklistModelConnection = {
 export type ModelWorkflowModelFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
+  duration?: ModelIntInput | null;
   and?: Array<ModelWorkflowModelFilterInput | null> | null;
   or?: Array<ModelWorkflowModelFilterInput | null> | null;
   not?: ModelWorkflowModelFilterInput | null;
@@ -676,6 +785,7 @@ export type ModelWorkflowModelConnection = {
 
 export type ModelActionFilterInput = {
   id?: ModelIDInput | null;
+  status?: ModelBooleanInput | null;
   actualStart?: ModelStringInput | null;
   actualEnd?: ModelStringInput | null;
   and?: Array<ModelActionFilterInput | null> | null;
@@ -797,6 +907,7 @@ export type ModelSubscriptionVesselFilterInput = {
   company?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
   type?: ModelSubscriptionStringInput | null;
+  documentNumber?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionVesselFilterInput | null> | null;
   or?: Array<ModelSubscriptionVesselFilterInput | null> | null;
 };
@@ -808,6 +919,16 @@ export type ModelSubscriptionStaffFilterInput = {
   email?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionStaffFilterInput | null> | null;
   or?: Array<ModelSubscriptionStaffFilterInput | null> | null;
+};
+
+export type ModelSubscriptionOwnerFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  company?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  email?: ModelSubscriptionStringInput | null;
+  phone?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionOwnerFilterInput | null> | null;
+  or?: Array<ModelSubscriptionOwnerFilterInput | null> | null;
 };
 
 export type ModelSubscriptionActionModelFilterInput = {
@@ -838,19 +959,29 @@ export type ModelSubscriptionChecklistModelFilterInput = {
   company?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
   notes?: ModelSubscriptionStringInput | null;
+  duration?: ModelSubscriptionIntInput | null;
+  preCharter?: ModelSubscriptionBooleanInput | null;
   and?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
   or?: Array<ModelSubscriptionChecklistModelFilterInput | null> | null;
+};
+
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
 };
 
 export type ModelSubscriptionWorkflowModelFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
+  notes?: ModelSubscriptionStringInput | null;
+  duration?: ModelSubscriptionIntInput | null;
   and?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
   or?: Array<ModelSubscriptionWorkflowModelFilterInput | null> | null;
 };
 
 export type ModelSubscriptionActionFilterInput = {
   id?: ModelSubscriptionIDInput | null;
+  status?: ModelSubscriptionBooleanInput | null;
   actualStart?: ModelSubscriptionStringInput | null;
   actualEnd?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionActionFilterInput | null> | null;
@@ -939,10 +1070,27 @@ export type CreateVesselMutation = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -952,6 +1100,8 @@ export type CreateVesselMutation = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -961,10 +1111,27 @@ export type UpdateVesselMutation = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -974,6 +1141,8 @@ export type UpdateVesselMutation = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -983,10 +1152,27 @@ export type DeleteVesselMutation = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -996,6 +1182,8 @@ export type DeleteVesselMutation = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -1025,6 +1213,90 @@ export type DeleteStaffMutation = {
   company?: string | null;
   name?: string | null;
   email?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateOwnerMutation = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateOwnerMutation = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteOwnerMutation = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1107,6 +1379,8 @@ export type CreateChecklistModelMutation = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -1141,6 +1415,8 @@ export type UpdateChecklistModelMutation = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -1175,6 +1451,8 @@ export type DeleteChecklistModelMutation = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -1207,6 +1485,8 @@ export type CreateWorkflowModelMutation = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -1227,6 +1507,8 @@ export type UpdateWorkflowModelMutation = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -1247,6 +1529,8 @@ export type DeleteWorkflowModelMutation = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -1266,6 +1550,7 @@ export type DeleteWorkflowModelMutation = {
 export type CreateActionMutation = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -1291,6 +1576,7 @@ export type CreateActionMutation = {
 export type UpdateActionMutation = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -1316,6 +1602,7 @@ export type UpdateActionMutation = {
 export type DeleteActionMutation = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -1357,6 +1644,8 @@ export type CreateChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1395,6 +1684,8 @@ export type UpdateChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1433,6 +1724,8 @@ export type DeleteChecklistMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1469,6 +1762,8 @@ export type CreateWorkflowMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1501,6 +1796,8 @@ export type UpdateWorkflowMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1533,6 +1830,8 @@ export type DeleteWorkflowMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1574,6 +1873,8 @@ export type CreateChecklistActionsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1615,6 +1916,8 @@ export type UpdateChecklistActionsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1656,6 +1959,8 @@ export type DeleteChecklistActionsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1682,6 +1987,8 @@ export type CreateWorkflowChecklistsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1697,6 +2004,8 @@ export type CreateWorkflowChecklistsMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1719,6 +2028,8 @@ export type UpdateWorkflowChecklistsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1734,6 +2045,8 @@ export type UpdateWorkflowChecklistsMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1756,6 +2069,8 @@ export type DeleteWorkflowChecklistsMutation = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1771,6 +2086,8 @@ export type DeleteWorkflowChecklistsMutation = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1820,10 +2137,27 @@ export type GetVesselQuery = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -1833,6 +2167,8 @@ export type GetVesselQuery = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -1844,15 +2180,30 @@ export type ListVesselsQuery = {
     company?: string | null;
     name?: string | null;
     type?: string | null;
+    documentNumber?: string | null;
+    owner?: {
+      __typename: "Owner";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      email?: string | null;
+      phone?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
     defaultWorkflow?: {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
+      notes?: string | null;
+      duration?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
     createdAt: string;
     updatedAt: string;
+    ownerBoatsId?: string | null;
+    vesselOwnerId?: string | null;
     vesselDefaultWorkflowId?: string | null;
   } | null>;
   nextToken?: string | null;
@@ -1876,6 +2227,53 @@ export type ListStaffQuery = {
     company?: string | null;
     name?: string | null;
     email?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetOwnerQuery = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListOwnersQuery = {
+  __typename: "ModelOwnerConnection";
+  items: Array<{
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -1932,6 +2330,8 @@ export type GetChecklistModelQuery = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -1968,6 +2368,8 @@ export type ListChecklistModelsQuery = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -1986,6 +2388,8 @@ export type GetWorkflowModelQuery = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -2008,6 +2412,8 @@ export type ListWorkflowModelsQuery = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2021,6 +2427,7 @@ export type ListWorkflowModelsQuery = {
 export type GetActionQuery = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -2048,6 +2455,7 @@ export type ListActionsQuery = {
   items: Array<{
     __typename: "Action";
     id: string;
+    status?: boolean | null;
     model?: {
       __typename: "ActionModel";
       id: string;
@@ -2087,6 +2495,8 @@ export type GetChecklistQuery = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -2127,6 +2537,8 @@ export type ListChecklistsQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2157,6 +2569,8 @@ export type GetWorkflowQuery = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2191,6 +2605,8 @@ export type ListWorkflowsQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
+      notes?: string | null;
+      duration?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2230,6 +2646,8 @@ export type GetChecklistActionsQuery = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -2269,6 +2687,8 @@ export type ListChecklistActionsQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2289,6 +2709,8 @@ export type GetWorkflowChecklistsQuery = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -2304,6 +2726,8 @@ export type GetWorkflowChecklistsQuery = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2328,6 +2752,8 @@ export type ListWorkflowChecklistsQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2335,6 +2761,8 @@ export type ListWorkflowChecklistsQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
+      notes?: string | null;
+      duration?: number | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2368,6 +2796,8 @@ export type ChecklistActionsByActionModelIdQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2401,6 +2831,8 @@ export type ChecklistActionsByChecklistModelIdQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2423,6 +2855,8 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2430,6 +2864,8 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
+      notes?: string | null;
+      duration?: number | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2452,6 +2888,8 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
       company?: string | null;
       name?: string | null;
       notes?: string | null;
+      duration?: number | null;
+      preCharter?: boolean | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2459,6 +2897,8 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
       __typename: "WorkflowModel";
       id: string;
       name?: string | null;
+      notes?: string | null;
+      duration?: number | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2516,10 +2956,27 @@ export type OnCreateVesselSubscription = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2529,6 +2986,8 @@ export type OnCreateVesselSubscription = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -2538,10 +2997,27 @@ export type OnUpdateVesselSubscription = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2551,6 +3027,8 @@ export type OnUpdateVesselSubscription = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -2560,10 +3038,27 @@ export type OnDeleteVesselSubscription = {
   company?: string | null;
   name?: string | null;
   type?: string | null;
+  documentNumber?: string | null;
+  owner?: {
+    __typename: "Owner";
+    id: string;
+    company?: string | null;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    boats?: {
+      __typename: "ModelVesselConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   defaultWorkflow?: {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -2573,6 +3068,8 @@ export type OnDeleteVesselSubscription = {
   } | null;
   createdAt: string;
   updatedAt: string;
+  ownerBoatsId?: string | null;
+  vesselOwnerId?: string | null;
   vesselDefaultWorkflowId?: string | null;
 };
 
@@ -2602,6 +3099,90 @@ export type OnDeleteStaffSubscription = {
   company?: string | null;
   name?: string | null;
   email?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateOwnerSubscription = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateOwnerSubscription = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteOwnerSubscription = {
+  __typename: "Owner";
+  id: string;
+  company?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  boats?: {
+    __typename: "ModelVesselConnection";
+    items: Array<{
+      __typename: "Vessel";
+      id: string;
+      company?: string | null;
+      name?: string | null;
+      type?: string | null;
+      documentNumber?: string | null;
+      createdAt: string;
+      updatedAt: string;
+      ownerBoatsId?: string | null;
+      vesselOwnerId?: string | null;
+      vesselDefaultWorkflowId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2684,6 +3265,8 @@ export type OnCreateChecklistModelSubscription = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -2718,6 +3301,8 @@ export type OnUpdateChecklistModelSubscription = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -2752,6 +3337,8 @@ export type OnDeleteChecklistModelSubscription = {
   company?: string | null;
   name?: string | null;
   notes?: string | null;
+  duration?: number | null;
+  preCharter?: boolean | null;
   actions?: {
     __typename: "ModelChecklistActionsConnection";
     items: Array<{
@@ -2784,6 +3371,8 @@ export type OnCreateWorkflowModelSubscription = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -2804,6 +3393,8 @@ export type OnUpdateWorkflowModelSubscription = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -2824,6 +3415,8 @@ export type OnDeleteWorkflowModelSubscription = {
   __typename: "WorkflowModel";
   id: string;
   name?: string | null;
+  notes?: string | null;
+  duration?: number | null;
   checklists?: {
     __typename: "ModelWorkflowChecklistsConnection";
     items: Array<{
@@ -2843,6 +3436,7 @@ export type OnDeleteWorkflowModelSubscription = {
 export type OnCreateActionSubscription = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -2868,6 +3462,7 @@ export type OnCreateActionSubscription = {
 export type OnUpdateActionSubscription = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -2893,6 +3488,7 @@ export type OnUpdateActionSubscription = {
 export type OnDeleteActionSubscription = {
   __typename: "Action";
   id: string;
+  status?: boolean | null;
   model?: {
     __typename: "ActionModel";
     id: string;
@@ -2934,6 +3530,8 @@ export type OnCreateChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -2972,6 +3570,8 @@ export type OnUpdateChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3010,6 +3610,8 @@ export type OnDeleteChecklistSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3046,6 +3648,8 @@ export type OnCreateWorkflowSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3078,6 +3682,8 @@ export type OnUpdateWorkflowSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3110,6 +3716,8 @@ export type OnDeleteWorkflowSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3151,6 +3759,8 @@ export type OnCreateChecklistActionsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3192,6 +3802,8 @@ export type OnUpdateChecklistActionsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3233,6 +3845,8 @@ export type OnDeleteChecklistActionsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3259,6 +3873,8 @@ export type OnCreateWorkflowChecklistsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3274,6 +3890,8 @@ export type OnCreateWorkflowChecklistsSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3296,6 +3914,8 @@ export type OnUpdateWorkflowChecklistsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3311,6 +3931,8 @@ export type OnUpdateWorkflowChecklistsSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3333,6 +3955,8 @@ export type OnDeleteWorkflowChecklistsSubscription = {
     company?: string | null;
     name?: string | null;
     notes?: string | null;
+    duration?: number | null;
+    preCharter?: boolean | null;
     actions?: {
       __typename: "ModelChecklistActionsConnection";
       nextToken?: string | null;
@@ -3348,6 +3972,8 @@ export type OnDeleteWorkflowChecklistsSubscription = {
     __typename: "WorkflowModel";
     id: string;
     name?: string | null;
+    notes?: string | null;
+    duration?: number | null;
     checklists?: {
       __typename: "ModelWorkflowChecklistsConnection";
       nextToken?: string | null;
@@ -3464,10 +4090,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -3477,6 +4120,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -3502,10 +4147,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -3515,6 +4177,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -3540,10 +4204,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -3553,6 +4234,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -3644,6 +4327,138 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteStaffMutation>response.data.deleteStaff;
+  }
+  async CreateOwner(
+    input: CreateOwnerInput,
+    condition?: ModelOwnerConditionInput
+  ): Promise<CreateOwnerMutation> {
+    const statement = `mutation CreateOwner($input: CreateOwnerInput!, $condition: ModelOwnerConditionInput) {
+        createOwner(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateOwnerMutation>response.data.createOwner;
+  }
+  async UpdateOwner(
+    input: UpdateOwnerInput,
+    condition?: ModelOwnerConditionInput
+  ): Promise<UpdateOwnerMutation> {
+    const statement = `mutation UpdateOwner($input: UpdateOwnerInput!, $condition: ModelOwnerConditionInput) {
+        updateOwner(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateOwnerMutation>response.data.updateOwner;
+  }
+  async DeleteOwner(
+    input: DeleteOwnerInput,
+    condition?: ModelOwnerConditionInput
+  ): Promise<DeleteOwnerMutation> {
+    const statement = `mutation DeleteOwner($input: DeleteOwnerInput!, $condition: ModelOwnerConditionInput) {
+        deleteOwner(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteOwnerMutation>response.data.deleteOwner;
   }
   async CreateActionModel(
     input: CreateActionModelInput,
@@ -3776,6 +4591,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -3826,6 +4643,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -3876,6 +4695,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -3924,6 +4745,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -3960,6 +4783,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -3996,6 +4821,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -4031,6 +4858,7 @@ export class APIService {
         createAction(input: $input, condition: $condition) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -4072,6 +4900,7 @@ export class APIService {
         updateAction(input: $input, condition: $condition) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -4113,6 +4942,7 @@ export class APIService {
         deleteAction(input: $input, condition: $condition) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -4170,6 +5000,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4224,6 +5056,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4278,6 +5112,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4330,6 +5166,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4378,6 +5216,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4426,6 +5266,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4483,6 +5325,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4540,6 +5384,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4597,6 +5443,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4639,6 +5487,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4654,6 +5504,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4694,6 +5546,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4709,6 +5563,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4749,6 +5605,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -4764,6 +5622,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4859,10 +5719,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -4872,6 +5749,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -4897,15 +5776,30 @@ export class APIService {
             company
             name
             type
+            documentNumber
+            owner {
+              __typename
+              id
+              company
+              name
+              email
+              phone
+              createdAt
+              updatedAt
+            }
             defaultWorkflow {
               __typename
               id
               name
+              notes
+              duration
               createdAt
               updatedAt
             }
             createdAt
             updatedAt
+            ownerBoatsId
+            vesselOwnerId
             vesselDefaultWorkflowId
           }
           nextToken
@@ -4980,6 +5874,84 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListStaffQuery>response.data.listStaff;
+  }
+  async GetOwner(id: string): Promise<GetOwnerQuery> {
+    const statement = `query GetOwner($id: ID!) {
+        getOwner(id: $id) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetOwnerQuery>response.data.getOwner;
+  }
+  async ListOwners(
+    filter?: ModelOwnerFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListOwnersQuery> {
+    const statement = `query ListOwners($filter: ModelOwnerFilterInput, $limit: Int, $nextToken: String) {
+        listOwners(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListOwnersQuery>response.data.listOwners;
   }
   async GetActionModel(id: string): Promise<GetActionModelQuery> {
     const statement = `query GetActionModel($id: ID!) {
@@ -5064,6 +6036,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -5114,6 +6088,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -5149,6 +6125,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -5185,6 +6163,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -5215,6 +6195,7 @@ export class APIService {
         getAction(id: $id) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -5256,6 +6237,7 @@ export class APIService {
           items {
             __typename
             id
+            status
             model {
               __typename
               id
@@ -5312,6 +6294,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -5366,6 +6350,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5413,6 +6399,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -5461,6 +6449,8 @@ export class APIService {
               __typename
               id
               name
+              notes
+              duration
               createdAt
               updatedAt
             }
@@ -5517,6 +6507,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -5570,6 +6562,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5607,6 +6601,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -5622,6 +6618,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -5660,6 +6658,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5667,6 +6667,8 @@ export class APIService {
               __typename
               id
               name
+              notes
+              duration
               createdAt
               updatedAt
             }
@@ -5729,6 +6731,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5798,6 +6802,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5856,6 +6862,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5863,6 +6871,8 @@ export class APIService {
               __typename
               id
               name
+              notes
+              duration
               createdAt
               updatedAt
             }
@@ -5921,6 +6931,8 @@ export class APIService {
               company
               name
               notes
+              duration
+              preCharter
               createdAt
               updatedAt
             }
@@ -5928,6 +6940,8 @@ export class APIService {
               __typename
               id
               name
+              notes
+              duration
               createdAt
               updatedAt
             }
@@ -6070,10 +7084,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -6083,6 +7114,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -6109,10 +7142,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -6122,6 +7172,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -6148,10 +7200,27 @@ export class APIService {
           company
           name
           type
+          documentNumber
+          owner {
+            __typename
+            id
+            company
+            name
+            email
+            phone
+            boats {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           defaultWorkflow {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -6161,6 +7230,8 @@ export class APIService {
           }
           createdAt
           updatedAt
+          ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
         }
       }`;
@@ -6253,6 +7324,141 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteStaff">>
+    >;
+  }
+
+  OnCreateOwnerListener(
+    filter?: ModelSubscriptionOwnerFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOwner">>
+  > {
+    const statement = `subscription OnCreateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+        onCreateOwner(filter: $filter) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOwner">>
+    >;
+  }
+
+  OnUpdateOwnerListener(
+    filter?: ModelSubscriptionOwnerFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOwner">>
+  > {
+    const statement = `subscription OnUpdateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+        onUpdateOwner(filter: $filter) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOwner">>
+    >;
+  }
+
+  OnDeleteOwnerListener(
+    filter?: ModelSubscriptionOwnerFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOwner">>
+  > {
+    const statement = `subscription OnDeleteOwner($filter: ModelSubscriptionOwnerFilterInput) {
+        onDeleteOwner(filter: $filter) {
+          __typename
+          id
+          company
+          name
+          email
+          phone
+          boats {
+            __typename
+            items {
+              __typename
+              id
+              company
+              name
+              type
+              documentNumber
+              createdAt
+              updatedAt
+              ownerBoatsId
+              vesselOwnerId
+              vesselDefaultWorkflowId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOwner">>
     >;
   }
 
@@ -6393,6 +7599,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -6448,6 +7656,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -6503,6 +7713,8 @@ export class APIService {
           company
           name
           notes
+          duration
+          preCharter
           actions {
             __typename
             items {
@@ -6554,6 +7766,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -6593,6 +7807,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -6632,6 +7848,8 @@ export class APIService {
           __typename
           id
           name
+          notes
+          duration
           checklists {
             __typename
             items {
@@ -6670,6 +7888,7 @@ export class APIService {
         onCreateAction(filter: $filter) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -6712,6 +7931,7 @@ export class APIService {
         onUpdateAction(filter: $filter) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -6754,6 +7974,7 @@ export class APIService {
         onDeleteAction(filter: $filter) {
           __typename
           id
+          status
           model {
             __typename
             id
@@ -6812,6 +8033,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -6867,6 +8090,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -6922,6 +8147,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -6975,6 +8202,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -7024,6 +8253,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -7073,6 +8304,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -7133,6 +8366,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7195,6 +8430,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7257,6 +8494,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7304,6 +8543,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7319,6 +8560,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -7362,6 +8605,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7377,6 +8622,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken
@@ -7420,6 +8667,8 @@ export class APIService {
             company
             name
             notes
+            duration
+            preCharter
             actions {
               __typename
               nextToken
@@ -7435,6 +8684,8 @@ export class APIService {
             __typename
             id
             name
+            notes
+            duration
             checklists {
               __typename
               nextToken

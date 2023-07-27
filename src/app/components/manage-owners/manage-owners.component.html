@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <button mat-flat-button color="primary" (click)="onAddOwnerPressed()">Add a New Owner</button>
+    </div>
+    <div class="row">
+        <div *ngFor="let owner of owners">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-subtitle>
+                        <h4>{{ owner.name }}</h4>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ owner.phone }}</p>
+                    <p>{{ owner.email }}</p>
+                    <mat-divider></mat-divider>
+                    <div class="chips">
+                        <mat-chip-listbox aria-label="Fish selection">
+                            <mat-chip-option>Speedy</mat-chip-option>
+                            <mat-chip-option>Courageous</mat-chip-option>
+                            <mat-chip-option color="accent">Bruja</mat-chip-option>
+                            <mat-chip-option color="warn">Hexe</mat-chip-option>
+                        </mat-chip-listbox>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-flat-button color="primary" (click)="onEditOwnerPressed(owner)">EDIT</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

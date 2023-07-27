@@ -19,6 +19,10 @@
         <mat-icon class="double-sized">badge</mat-icon>
         <span class="sidenav-button-text">Staff</span>
       </button>
+      <button mat-button color="primary" (click)="onOwnersPressed()">
+        <mat-icon class="double-sized">person</mat-icon>
+        <span class="sidenav-button-text">Owners</span>
+      </button>
       <button mat-button color="primary" (click)="onWorkflowPressed()">
         <mat-icon class="double-sized">schema</mat-icon>
         <span class="sidenav-button-text">Workflows</span>
@@ -43,7 +47,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span class="title">Compass</span>
+      <span class="title">Compass Operations</span>
       <span class="spacer"></span>
       <button (click)="onLogoutPressed()" mat-button color="primary">
         <mat-icon class="double-sized">logout</mat-icon>

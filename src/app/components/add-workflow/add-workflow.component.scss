@@ -16,9 +16,17 @@ mat-form-field {
 
 .row {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
   gap: 20px;
   justify-content: space-between;
+}
+
+.one-wide {
+  flex-grow: 1;
+}
+
+.two-wide {
+  flex-grow: 2;
 }
 
 .example-list {

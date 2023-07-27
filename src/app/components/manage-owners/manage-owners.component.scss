@@ -1,0 +1,32 @@
+@import 'src/compass-theme';
+
+.container {
+    @include containers;
+    display: flex;
+    flex-direction: column;
+}
+
+h4 {
+    @include sub-header;
+}
+
+button {
+    @include buttons;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.chips { 
+    margin-top: 10px;
+}
+
+.example-card {
+    width: 270px;
+    margin: 10px;
+}

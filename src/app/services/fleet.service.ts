@@ -1,19 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+
+// Local
+
+import { APIService, Vessel, Owner, WorkflowModel, ModelActionFilterInput } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FleetService {
-  ITEMS: any = [
-      `37 foot monohull sloop-rigged sailboat. Max crew of 10`, 
-      `37 foot powerboat with twin outboard engines. Max crew of 8`,
-      `30 foot monohull sloop-rigged sailboat. Max crew of 10`
-  ];
 
-  constructor() { }
+  constructor(private api: APIService) { }
 
-  getFleet(): Observable<any[]> {
-    return of(this.ITEMS);
+  async getVessels(): Promise<Vessel[]> {
+    const vessels = await this.api.ListVessels();
+    return vessels.items as Vessel[];
+  }
+
+  async getVesselById(id: string): Promise<Vessel> {
+    const variables: ModelActionFilterInput = {
+      id: { eq: id }
+    };
+
+    const vessels = await this.api.ListVessels(variables);
+    return vessels.items[0] as Vessel;
+  }
+
+  async getVesselsForOwner(ownerId: string) {
+    const vessels = await this.api.ListVessels();
+    const vesselsForOwner = vessels.items.filter(item => item.owner.id === ownerId);
+
+    return vesselsForOwner;
+  }
+
+  async createVessel(vessel: Vessel, workflow: WorkflowModel, owner: Owner) {
+    console.log(JSON.stringify(vessel));
+    console.log(JSON.stringify(workflow));
+    console.log(JSON.stringify(owner));
+    
+    await this.api.CreateVessel(vessel);
   }
 }
