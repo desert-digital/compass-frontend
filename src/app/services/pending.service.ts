@@ -5,61 +5,68 @@ import { Subject } from 'rxjs';
 
 // Amplify 
 
-import { APIService, PendingEvent, ModelPendingEventFilterInput } from '../API.service';
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
+
+import { GraphQLQuery } from '@aws-amplify/api';
+import { ListPendingEventsQuery, ListPendingEventsQueryVariables, GetPendingEventQuery, DeletePendingEventMutation } from '../API.service';
+
+// Local
+
+import { PendingEvent } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PendingService {
-  constructor(private api: APIService) { }
+  constructor() { }
 
   public numberOfPendingEvents$ = new Subject();
 
   async getPendingItems(): Promise<PendingEvent[]> {
     const today = new Date().toISOString();
 
-    const variables: ModelPendingEventFilterInput = {
-        start: {ge: today},
-        status: {ne: 'cancelled'}
+    const variables: ListPendingEventsQueryVariables = {
+      filter: {
+        and: [{start: { ge: today }}, {status: { ne: 'cancelled' }}]
+      }
     };
+    const events = await API.graphql<GraphQLQuery<ListPendingEventsQuery>>(
+      graphqlOperation(queries.listPendingEvents, variables)
+    );
+    const pendingEvents = events.data.listPendingEvents.items;
 
-    const events = await this.api.ListPendingEvents(variables);
-    this.numberOfPendingEvents$.next(events.items.length);
-    
-    return events.items as PendingEvent[];
+    this.numberOfPendingEvents$.next(pendingEvents.length) //events.length);
+    return pendingEvents as PendingEvent[];
   }
 
   async getPendingItem(id: string): Promise<PendingEvent> {
-    const today = new Date();
-    today.setHours(0,0,0,0);
+    const events = await API.graphql<GraphQLQuery<GetPendingEventQuery>>(
+      graphqlOperation(queries.getPendingEvent, id)
+    );
+    const eventById = events.data.getPendingEvent;
 
-    const startOfDay = new Date(today).toISOString();
-
-    const variables: ModelPendingEventFilterInput = {
-      start: {ge: startOfDay}
-    };
-
-    const events = await this.api.ListPendingEvents(variables);
-    const eventById = events.items.find(itemToFind => itemToFind!.id = id);
     return eventById as PendingEvent;
   }
 
   async deleteItem(item: PendingEvent) {
-    await this.api.DeletePendingEvent({ id: item.id });
-    this.getPendingItems();
+    const events = await API.graphql<GraphQLQuery<DeletePendingEventMutation>>(
+      graphqlOperation(mutations.deletePendingEvent, item.id)
+    );
   }
 
   createSubscription() {
-    const sub = this.api.OnCreatePendingEventListener().subscribe({
-      next: (value  => console.log(value))
-    });
+    // const sub = this.api.OnCreatePendingEventListener().subscribe({
+    //   next: (value  => console.log(value))
+    // });
   }
 
   async deleteSubscription() {
-    const sub = this.api.OnDeletePendingEventListener().subscribe({
-      next: (value  => {
-        console.log(value); this.getPendingItems();
-      })
-    });
+    // const sub = this.api.OnDeletePendingEventListener().subscribe({
+    //   next: (value  => {
+    //     console.log(value); this.getPendingItems();
+    //   })
+    // });
   }
 }

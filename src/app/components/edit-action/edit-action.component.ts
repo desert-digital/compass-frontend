@@ -24,9 +24,9 @@ import { ActionModelsService } from 'src/app/services/action-models.service';
 export class EditActionComponent {
 
   actionName: String = '';
+  actionCompany: String = '';
   actionDuration: Number = 0;
   actionNotes: String = '';
-  actionStatus: boolean = false;
 
   actionForm: FormGroup;
   constructor(private route: ActivatedRoute,
@@ -35,10 +35,10 @@ export class EditActionComponent {
     private _snackBar: MatSnackBar) {
     this.actionForm = this.formBuilder.group({
       id: ['', Validators.required],
+      company: ['', Validators.required],
       name: ['', Validators.required],
       duration: ['', Validators.required],
-      notes: ['',],
-      status: ['open', Validators.required]
+      notes: ['',]
     });
   }
 
@@ -49,20 +49,21 @@ export class EditActionComponent {
     this.actionForm.setValue({
       id: actionModel.id,
       name: actionModel.name,
+      company: actionModel.company,
       duration: actionModel.duration,
       notes: actionModel.notes,
-      status: actionModel.status
     }); 
   }
 
-  async onUpdateActionPressed(action: ActionModel, formDirective: FormGroupDirective) {
+  async onUpdateActionPressed(actionModel: ActionModel, formDirective: FormGroupDirective) {
     try {
-      await this._actionModelService.updateModel(action).then(() => {
-        this._snackBar.open(`Updated ${action.name}`, 'OK', {duration: 3000})
+      await this._actionModelService.updateModel(actionModel).then(() => {
+        this._snackBar.open(`Updated ${actionModel.name}`, 'OK', {duration: 3000})
         this.actionForm.reset();
         formDirective.resetForm();
       })
     } catch (error) {
+      console.log(error.errors);
       this._snackBar.open('An error occured when updating the action', 'OK', {duration: 3000})
     }
   }

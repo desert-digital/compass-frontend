@@ -15,8 +15,6 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   name: String
   type: String
   documentNumber: String
-  owner: Owner @hasOne 
-  type: String
   defaultWorkflow: WorkflowModel @hasOne
 }
 
@@ -40,7 +38,6 @@ type ActionModel @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   name: String
-  status: String
   notes: String 
   duration: Int
   checklists: [ChecklistModel] @manyToMany(relationName: "ChecklistActions")

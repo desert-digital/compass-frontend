@@ -61,20 +61,6 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -91,7 +77,6 @@ subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -104,20 +89,6 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -134,7 +105,6 @@ subscription OnUpdateVessel($filter: ModelSubscriptionVesselFilterInput) {
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -147,20 +117,6 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -177,7 +133,6 @@ subscription OnDeleteVessel($filter: ModelSubscriptionVesselFilterInput) {
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -236,7 +191,6 @@ subscription OnCreateOwner($filter: ModelSubscriptionOwnerFilterInput) {
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -266,7 +220,6 @@ subscription OnUpdateOwner($filter: ModelSubscriptionOwnerFilterInput) {
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -296,7 +249,6 @@ subscription OnDeleteOwner($filter: ModelSubscriptionOwnerFilterInput) {
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }

@@ -4,8 +4,13 @@ h4 {
     @include sub-header;
 }
 
-button { 
+button {
     @include buttons;
+    width: 100%;
+}
+
+mat-form-field {
+    margin-top: 15px;
     width: 100%;
 }
 
@@ -18,4 +23,12 @@ button {
     flex-flow: column nowrap;
     margin-left: 15px;
     gap: 10px;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
 }

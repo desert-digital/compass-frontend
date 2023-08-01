@@ -29,7 +29,7 @@ export class FleetTableComponent implements AfterViewInit {
   dataSource: FleetTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['name', 'documentNumber', 'owner', 'actions'];
+  displayedColumns = ['name', 'type', 'documentNumber', 'owner', 'actions'];
 
   fileName: string = '';
   percentComplete: number = 0;
@@ -38,7 +38,6 @@ export class FleetTableComponent implements AfterViewInit {
     private _snackBar: MatSnackBar,
     private _fleetService: FleetService) {
     this.dataSource = new FleetTableDataSource(_fleetService);
-
   }
 
   ngAfterViewInit(): void {

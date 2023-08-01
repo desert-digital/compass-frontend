@@ -26,14 +26,13 @@ export class AddVesselComponent {
 
   vesselForm: FormGroup;
 
-  owners: Owner[] = [];
-  workflows: WorkflowModel[] = [];
-
-  workflowFormControl = new FormControl(this.workflows);
-  ownerFormControl = new FormControl(this.owners);
-
-  defaultWorkflow: WorkflowModel;
   owner: Owner;
+  owners: Owner[] = [];
+
+  workflows: WorkflowModel[] = [];
+  defaultWorkflow: WorkflowModel;
+
+  vesselTypes: string[] = ['Sail', 'Power', 'Paddle'];
 
   constructor(private formBuilder: FormBuilder,
     private _workflowModelService: WorkflowModelsService,
@@ -42,7 +41,8 @@ export class AddVesselComponent {
     private _snackBar: MatSnackBar) {
     this.vesselForm = this.formBuilder.group({
       name: ['', Validators.required],
-      documentNumber: ['', Validators.required]
+      documentNumber: ['', Validators.required],
+      vesselType: ['', Validators.required]
     });
   }
 

@@ -48,14 +48,14 @@ export class EditOwnerComponent {
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     const owner = await this._ownersService.getOwnerFromId(id);
-    const vessels = await this._fleetService.getVesselsForOwner(id);
+    // const vessels = await this._fleetService.getVesselsForOwner(id);
 
-    this.ownerForm.setValue({
-      id: owner.id,
-      name: owner.name,
-      phone: owner.phone,
-      email: owner.email
-    }); 
+    // this.ownerForm.setValue({
+    //   id: owner.id,
+    //   name: owner.name,
+    //   phone: owner.phone,
+    //   email: owner.email
+    // }); 
   }
 
   onUpdateOwnerPressed(owner: Owner, formDirective: FormGroupDirective) {

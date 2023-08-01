@@ -2,9 +2,16 @@
 
 import { Injectable } from '@angular/core';
 
+// Amplify
+
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import { GraphQLQuery } from '@aws-amplify/api';
+import { GetActionQuery, ListActionsQuery } from '../API.service';
+
 // Local
 
-import { APIService, Action, ModelActionFilterInput } from '../API.service';
+import { Action } from '../API.service';
 
 
 @Injectable({
@@ -12,19 +19,19 @@ import { APIService, Action, ModelActionFilterInput } from '../API.service';
 })
 export class ActionsService {
 
-  constructor(private api: APIService) { }
+  constructor() { }
 
   async getActions(): Promise<Action[]> {
-    const events = await this.api.ListActions();
-    return events.items as Action[];
+    const actions = await API.graphql<GraphQLQuery<ListActionsQuery>>(
+      graphqlOperation(queries.listActions)
+    );
+    return actions as Action[];
   }
 
   async getActionById(id: string): Promise<Action> {
-    const variables: ModelActionFilterInput = {
-      id: { eq: id }
-    };
-
-    const events = await this.api.ListActions(variables);
-    return events.items[0] as Action;
+    const action = await API.graphql<GraphQLQuery<GetActionQuery>>(
+      graphqlOperation(queries.getAction, {id: id})
+    );   
+    return action as Action;
   }
 }

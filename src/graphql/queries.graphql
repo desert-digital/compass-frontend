@@ -47,20 +47,6 @@ query GetVessel($id: ID!) {
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -77,7 +63,6 @@ query GetVessel($id: ID!) {
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -95,16 +80,6 @@ query ListVessels(
       name
       type
       documentNumber
-      owner {
-        id
-        company
-        name
-        email
-        phone
-        createdAt
-        updatedAt
-        __typename
-      }
       defaultWorkflow {
         id
         name
@@ -117,7 +92,6 @@ query ListVessels(
       createdAt
       updatedAt
       ownerBoatsId
-      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -175,7 +149,6 @@ query GetOwner($id: ID!) {
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }

@@ -2,9 +2,16 @@
 
 import { Injectable } from '@angular/core';
 
+// Amplify
+
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import { GraphQLQuery } from '@aws-amplify/api';
+import { ListChecklistsQuery, GetChecklistQuery } from '../API.service';
+
 // Local
 
-import { APIService, Checklist } from '../API.service';
+import { Checklist } from '../API.service';
 
 
 @Injectable({
@@ -12,15 +19,19 @@ import { APIService, Checklist } from '../API.service';
 })
 export class ChecklistsService {
 
-  constructor(private api: APIService) { }
+  constructor() { }
 
-  async getChecklists(): Promise<Checklist[]> {
-    const checklists = await this.api.ListChecklists();
-    return checklists.items as Checklist[];
+  async getChecklists(): Promise<any> {
+    const checklists = await API.graphql<GraphQLQuery<ListChecklistsQuery>>(
+      graphqlOperation(queries.listVessels)
+    );
+    console.log(checklists);
+
+    return checklists;
   };
 
   async createChecklist(item: any) {
-    await this.api.CreateChecklist(item);
+    // await this.api.CreateChecklist(item);
   }
 }
 

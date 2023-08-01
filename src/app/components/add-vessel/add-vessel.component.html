@@ -7,13 +7,23 @@
         <mat-label>Name</mat-label>
         <input matInput id="name" type="text" formControlName="name">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Document Number</mat-label>
-        <input matInput id="documentNumber" type="number" formControlName="documentNumber">
-      </mat-form-field>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Document Number</mat-label>
+          <input matInput id="documentNumber" type="number" formControlName="documentNumber">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select id="vesselType" formControlName="vesselType" value="Sail">
+            <mat-option *ngFor="let type of vesselTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <mat-form-field>
         <mat-label>Default Workflow</mat-label>
-        <mat-select (selectionChange)="onWorkflowChanged($event)" formControlName="workflowFormControl">
+        <mat-select (selectionChange)="onWorkflowChanged($event)">
           <mat-option *ngFor="let workflow of workflows" [value]="workflow.id">
             {{ workflow.name }}
           </mat-option>
@@ -21,7 +31,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Owner</mat-label>
-        <mat-select (selectionChange)="onOwnerChanged($event)" formControlName="ownerFormControl">
+        <mat-select (selectionChange)="onOwnerChanged($event)">
           <mat-option *ngFor="let owner of owners" [value]="owner.id">
             {{ owner.name }}
           </mat-option>

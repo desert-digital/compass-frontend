@@ -3,9 +3,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+// Amplify 
+
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import { GraphQLQuery } from '@aws-amplify/api';
+import { ListStaffQuery } from '../API.service';
+
 // Local
 
-import { APIService, Staff } from '../API.service';
+import { Staff } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +25,14 @@ export class StaffService {
     "PWC qualified."
   ];
 
-  constructor(private api: APIService) { }
+  constructor() { }
 
-  async getStaff(): Promise<Staff[]> {
-    const events = await this.api.ListStaff();
-    return events.items as Staff[];
+  async getStaff(): Promise<any> {
+    const staff = await API.graphql<GraphQLQuery<ListStaffQuery>>(
+      graphqlOperation(queries.listVessels)
+    );
+    console.log(staff);
+
+    return staff;
   }
 }

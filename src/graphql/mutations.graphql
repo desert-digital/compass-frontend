@@ -67,20 +67,6 @@ mutation CreateVessel(
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -97,7 +83,6 @@ mutation CreateVessel(
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -113,20 +98,6 @@ mutation UpdateVessel(
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -143,7 +114,6 @@ mutation UpdateVessel(
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -159,20 +129,6 @@ mutation DeleteVessel(
     name
     type
     documentNumber
-    owner {
-      id
-      company
-      name
-      email
-      phone
-      boats {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
     defaultWorkflow {
       id
       name
@@ -189,7 +145,6 @@ mutation DeleteVessel(
     createdAt
     updatedAt
     ownerBoatsId
-    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -260,7 +215,6 @@ mutation CreateOwner(
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -293,7 +247,6 @@ mutation UpdateOwner(
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -326,7 +279,6 @@ mutation DeleteOwner(
         createdAt
         updatedAt
         ownerBoatsId
-        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }

@@ -43,12 +43,13 @@ export class AddActionComponent {
 
   async onAddNewActionPressed(action: ActionModel, formDirective: FormGroupDirective) {
     try {
-      await this._actionModelService.createActionModel(action).then(() =>{
+      await this._actionModelService.createActionModel(action).then(() => {
         this._snackBar.open('Created a new action', 'OK', { duration: 3000 });
         this.actionForm.reset();
         formDirective.resetForm();
-      });      
+      });
     } catch (error) {
+      console.log(JSON.stringify(error.errors));
       this._snackBar.open('Error creating the action', 'OK', { duration: 3000 });
     }
   }

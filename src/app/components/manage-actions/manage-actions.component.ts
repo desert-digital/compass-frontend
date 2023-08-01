@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 // Amplify
 
-import { APIService, ActionModel } from '../../API.service';
+import { ActionModel } from '../../API.service';
 
 // Local
 
@@ -30,8 +30,7 @@ export class ManageActionsComponent {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar, 
     private _dialog: MatDialog,
-    private _actionModelsService: ActionModelsService,
-    private api: APIService) { }
+    private _actionModelsService: ActionModelsService) { }
 
   async ngOnInit() {
     this.manageActions = Boolean(this.route.snapshot.paramMap.get('manage'))
