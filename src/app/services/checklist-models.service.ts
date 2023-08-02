@@ -14,6 +14,7 @@ import {
   GetChecklistModelQuery,
   DeleteChecklistModelMutation,
   CreateChecklistModelMutation,
+  ListChecklistActionsQuery,
 } from '../API.service';
 
 // Local
@@ -77,15 +78,20 @@ export class ChecklistModelsService {
   }
 
   async deleteModel(checklistModel: ChecklistModel) {
-    const checklistModelDetails = {
+    const checklistModelId = {
       input: {
-        id: checklistModel.id
+        checklistModelId: checklistModel.id
       }
     }
 
-    await API.graphql<GraphQLQuery<DeleteChecklistModelMutation>>(
-      graphqlOperation(mutations.deleteChecklistModel, checklistModelDetails)
-    );
+    const checklistActions = await API.graphql<GraphQLQuery<ListChecklistActionsQuery>>(
+      graphqlOperation(queries.checklistActionsByChecklistModelId, checklistModelId)
+    )
+
+    console.log(JSON.stringify(checklistActions));
+    // await API.graphql<GraphQLQuery<DeleteChecklistModelMutation>>(
+    //   graphqlOperation(mutations.deleteChecklistModel, checklistModelId)
+    // );
 
     // TO DO: should also delete the _checklists_ that use this model, and 
     // then the workflow models that use the _checklist_

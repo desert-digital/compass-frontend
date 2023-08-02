@@ -7,11 +7,10 @@ import { Injectable } from '@angular/core';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { GraphQLQuery } from '@aws-amplify/api';
-import { GetVesselQuery } from '../API.service';
 
 // Local
 
-import { Vessel, Owner, WorkflowModel, ModelActionFilterInput, ListVesselsQuery } from '../API.service';
+import { Vessel, Owner, WorkflowModel, ListVesselsQuery } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
