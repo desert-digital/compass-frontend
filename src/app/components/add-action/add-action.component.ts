@@ -1,6 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -27,7 +28,8 @@ export class AddActionComponent {
 
   actionForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
     private _actionModelService: ActionModelsService,
     private _snackBar: MatSnackBar) {
     this.actionForm = this.formBuilder.group({
@@ -52,6 +54,10 @@ export class AddActionComponent {
       console.log(JSON.stringify(error.errors));
       this._snackBar.open('Error creating the action', 'OK', { duration: 3000 });
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/actions']);
   }
 }
 

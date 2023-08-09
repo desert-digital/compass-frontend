@@ -2,6 +2,8 @@
     <h3>Add a new Owner</h3>
     <form [formGroup]="ownerForm" #formDirective="ngForm" (ngSubmit)="onAddNewOwnerPressed(ownerForm.value, formDirective)">
         <div action="#" class="column">
+            <button mat-flat-button type="submit" color="primary">Add a new Owner</button>
+            <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input matInput id="name" type="text" formControlName="name">
@@ -14,7 +16,6 @@
                 <mat-label>Email</mat-label>
                 <input matInput id="email" type="email" formControlName="email">
             </mat-form-field>
-            <button mat-flat-button type="submit" color="primary">Add a new Owner</button>
         </div>
     </form>
 </div>

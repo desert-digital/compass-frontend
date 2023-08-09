@@ -1,7 +1,8 @@
 // Core
 
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
 
@@ -34,7 +35,10 @@ export class AddVesselComponent {
 
   vesselTypes: string[] = ['Sail', 'Power', 'Paddle'];
 
-  constructor(private formBuilder: FormBuilder,
+  ownerType: string = 'new';
+
+  constructor(private router: Router, 
+    private formBuilder: FormBuilder,
     private _workflowModelService: WorkflowModelsService,
     private _ownersService: OwnersService,
     private _fleetService: FleetService,
@@ -62,6 +66,12 @@ export class AddVesselComponent {
     this.owner = event.value;
   }
 
+  onOwnerTypeChanged(event: any) {
+    this.ownerType = event.value;
+    console.log(this.ownerType);
+    console.log(event.value);
+  }
+
   async onAddNewVesselPressed(item: Vessel, formDirective: FormGroupDirective) {
     await this._fleetService.createVessel(item, this.defaultWorkflow, this.owner).then(() => {
       this._snackBar.open('Created a new vessel', 'OK', { duration: 3000 });
@@ -70,5 +80,9 @@ export class AddVesselComponent {
     });
   } catch(error) {
     this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/fleet']);
   }
 }

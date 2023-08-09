@@ -150,6 +150,7 @@ export type Vessel = {
 export type WorkflowModel = {
   __typename: "WorkflowModel",
   id: string,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
@@ -401,12 +402,14 @@ export type DeleteChecklistModelInput = {
 
 export type CreateWorkflowModelInput = {
   id?: string | null,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
 };
 
 export type ModelWorkflowModelConditionInput = {
+  company?: ModelIDInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -417,6 +420,7 @@ export type ModelWorkflowModelConditionInput = {
 
 export type UpdateWorkflowModelInput = {
   id: string,
+  company?: string | null,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
@@ -713,6 +717,7 @@ export type ModelChecklistModelConnection = {
 
 export type ModelWorkflowModelFilterInput = {
   id?: ModelIDInput | null,
+  company?: ModelIDInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -916,6 +921,7 @@ export type ModelSubscriptionBooleanInput = {
 
 export type ModelSubscriptionWorkflowModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
@@ -1045,6 +1051,7 @@ export type CreateVesselMutation = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -1086,6 +1093,7 @@ export type UpdateVesselMutation = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -1127,6 +1135,7 @@ export type DeleteVesselMutation = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -1228,6 +1237,7 @@ export type CreateOwnerMutation = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1271,6 +1281,7 @@ export type UpdateOwnerMutation = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1314,6 +1325,7 @@ export type DeleteOwnerMutation = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1553,6 +1565,7 @@ export type CreateChecklistModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1637,6 +1650,7 @@ export type UpdateChecklistModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1721,6 +1735,7 @@ export type DeleteChecklistModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1746,6 +1761,7 @@ export type CreateWorkflowModelMutation = {
   createWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1770,6 +1786,7 @@ export type CreateWorkflowModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1795,6 +1812,7 @@ export type UpdateWorkflowModelMutation = {
   updateWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1819,6 +1837,7 @@ export type UpdateWorkflowModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1844,6 +1863,7 @@ export type DeleteWorkflowModelMutation = {
   deleteWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1868,6 +1888,7 @@ export type DeleteWorkflowModelMutation = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -2215,6 +2236,7 @@ export type CreateWorkflowMutation = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2264,6 +2286,7 @@ export type UpdateWorkflowMutation = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2313,6 +2336,7 @@ export type DeleteWorkflowMutation = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2608,6 +2632,7 @@ export type CreateWorkflowChecklistsMutation = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2680,6 +2705,7 @@ export type UpdateWorkflowChecklistsMutation = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2752,6 +2778,7 @@ export type DeleteWorkflowChecklistsMutation = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2836,6 +2863,7 @@ export type GetVesselQuery = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2880,6 +2908,7 @@ export type ListVesselsQuery = {
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -2961,6 +2990,7 @@ export type GetOwnerQuery = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3170,6 +3200,7 @@ export type GetChecklistModelQuery = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3242,6 +3273,7 @@ export type GetWorkflowModelQuery = {
   getWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -3266,6 +3298,7 @@ export type GetWorkflowModelQuery = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3294,6 +3327,7 @@ export type ListWorkflowModelsQuery = {
     items:  Array< {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3527,6 +3561,7 @@ export type GetWorkflowQuery = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3579,6 +3614,7 @@ export type ListWorkflowsQuery = {
       steps?:  {
         __typename: "WorkflowModel",
         id: string,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3774,6 +3810,7 @@ export type GetWorkflowChecklistsQuery = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3833,6 +3870,7 @@ export type ListWorkflowChecklistsQuery = {
       workflowModel:  {
         __typename: "WorkflowModel",
         id: string,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4000,6 +4038,7 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
       workflowModel:  {
         __typename: "WorkflowModel",
         id: string,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4055,6 +4094,7 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
       workflowModel:  {
         __typename: "WorkflowModel",
         id: string,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4147,6 +4187,7 @@ export type OnCreateVesselSubscription = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -4187,6 +4228,7 @@ export type OnUpdateVesselSubscription = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -4227,6 +4269,7 @@ export type OnDeleteVesselSubscription = {
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -4324,6 +4367,7 @@ export type OnCreateOwnerSubscription = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4366,6 +4410,7 @@ export type OnUpdateOwnerSubscription = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4408,6 +4453,7 @@ export type OnDeleteOwnerSubscription = {
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4643,6 +4689,7 @@ export type OnCreateChecklistModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4726,6 +4773,7 @@ export type OnUpdateChecklistModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4809,6 +4857,7 @@ export type OnDeleteChecklistModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4833,6 +4882,7 @@ export type OnCreateWorkflowModelSubscription = {
   onCreateWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4857,6 +4907,7 @@ export type OnCreateWorkflowModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4881,6 +4932,7 @@ export type OnUpdateWorkflowModelSubscription = {
   onUpdateWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4905,6 +4957,7 @@ export type OnUpdateWorkflowModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4929,6 +4982,7 @@ export type OnDeleteWorkflowModelSubscription = {
   onDeleteWorkflowModel?:  {
     __typename: "WorkflowModel",
     id: string,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4953,6 +5007,7 @@ export type OnDeleteWorkflowModelSubscription = {
         workflowModel:  {
           __typename: "WorkflowModel",
           id: string,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -5293,6 +5348,7 @@ export type OnCreateWorkflowSubscription = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5341,6 +5397,7 @@ export type OnUpdateWorkflowSubscription = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5389,6 +5446,7 @@ export type OnDeleteWorkflowSubscription = {
     steps?:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5680,6 +5738,7 @@ export type OnCreateWorkflowChecklistsSubscription = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5751,6 +5810,7 @@ export type OnUpdateWorkflowChecklistsSubscription = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5822,6 +5882,7 @@ export type OnDeleteWorkflowChecklistsSubscription = {
     workflowModel:  {
       __typename: "WorkflowModel",
       id: string,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,

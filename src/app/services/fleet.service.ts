@@ -6,11 +6,15 @@ import { Injectable } from '@angular/core';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
+
 import { GraphQLQuery } from '@aws-amplify/api';
+
+import { ListVesselsQuery, GetVesselQuery, CreateVesselMutation, UpdateVesselMutation } from '../API.service';
 
 // Local
 
-import { Vessel, Owner, WorkflowModel, ListVesselsQuery } from '../API.service';
+import { Vessel, Owner, WorkflowModel, } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,39 +23,60 @@ export class FleetService {
 
   constructor() { }
 
-  async getVessels(): Promise<any> {
-    const vessels = await API.graphql<GraphQLQuery<ListVesselsQuery>>(
-      graphqlOperation(queries.listVessels)
-    );
-    console.log(vessels);
+  async getVessels(): Promise<Vessel[]> {
+    const vesselResult = await API.graphql<GraphQLQuery<ListVesselsQuery>>(
+      graphqlOperation(queries.listVessels));
 
-    return vessels;
+    return vesselResult.data.listVessels.items as Vessel[];
   }
 
   async getVesselById(id: string): Promise<any> {
-    // const variables: ModelActionFilterInput = {
-    //   id: { eq: id }
-    // };
+    const vesselResult = await API.graphql<GraphQLQuery<GetVesselQuery>>(
+      graphqlOperation(queries.getVessel, { id: id })
+    )
 
-  //   const vessels = await this.api.ListVessels(variables);
-  //   return vessels.items[0] as Vessel;
-  }
-
-  async getVesselsForOwner(ownerId: string): Promise<any> {
-    // const vessels = await this.api.ListVessels();
-    // const vesselsForOwner = vessels.items.filter(item => item.owner.id === ownerId);
-
-    // return vesselsForOwner;
+    return vesselResult.data.getVessel as Vessel;
   }
 
   async createVessel(vessel: Vessel, workflow: WorkflowModel, owner: Owner) {
-  //   console.log(JSON.stringify(vessel));
-    
-  //   await this.api.CreateVessel({
-  //     name: vessel.name,
-  //     type: vessel.type,
-  //     documentNumber: vessel.documentNumber,
-  //     vesselDefaultWorkflowId: workflow.id
-  //   });
+    const vesselDetails = {
+      input: {
+        company: '0',
+        name: vessel.name,
+        type: vessel.type,
+        documentNumber: vessel.documentNumber,
+        vesselDefaultWorkflowId: workflow.id
+      }
+    }
+
+    await API.graphql<GraphQLQuery<CreateVesselMutation>> (
+      graphqlOperation(mutations.createVessel, vesselDetails)
+    )
+  }
+
+  async updateVessel(vessel: Vessel) {
+    const vesselDetails = {
+      id: vessel.id,
+      compay: vessel.company,
+      name: vessel.name,
+      documentNubmer: vessel.documentNumber,
+      type: vessel.type,
+      vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId
+    }
+
+    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
+      graphqlOperation(mutations.updateVessel, vesselDetails)
+    )
+  }
+
+  async updateVesselWithOwner(id: String, ownerId: String) {
+    const vesselOwnerDetails = {
+      id: id,
+      ownerBoatsId: ownerId
+    }
+
+    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
+      graphqlOperation(mutations.updateVessel, vesselOwnerDetails)
+    )
   }
 }

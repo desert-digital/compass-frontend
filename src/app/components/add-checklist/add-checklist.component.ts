@@ -1,6 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -31,7 +32,8 @@ export class AddChecklistComponent {
   actions: ActionModel[] = [];
   duration: number = 0;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private _actionsService: ActionsService,
     private _actionModelsService: ActionModelsService,
@@ -82,5 +84,9 @@ export class AddChecklistComponent {
     } catch (error) {
       this._snackBar.open('Error creating the checklist', 'OK', { duration: 3000 });
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/checklists']);
   }
 }

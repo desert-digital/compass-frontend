@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -23,7 +24,8 @@ export class AddOwnerComponent {
 
   ownerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
     private _ownersService: OwnersService, 
     private _snackBar: MatSnackBar) {
     this.ownerForm = this.formBuilder.group({
@@ -43,5 +45,9 @@ export class AddOwnerComponent {
     } catch (error) {
       this._snackBar.open('Error creating the owner', 'OK', { duration: 3000 });
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/owner']);
   }
 }

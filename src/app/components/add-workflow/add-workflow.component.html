@@ -1,10 +1,10 @@
 <div cdkDropListGroup>
     <div class="container">
-        <h3>Add a New Workflow</h3>
         <div class="one-wide">
             <form [formGroup]="workflowForm" #formDirective="ngForm"
                 (ngSubmit)="onAddWorkflowPressed(workflowForm.value, formDirective)">
-                <button mat-flat-button type="submit" color="primary">Add a new Checklist</button>
+                <button mat-flat-button type="submit" color="primary">Add the new Workflow</button>
+                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
                 <div class="row">
                     <mat-form-field>
                         <mat-label>Workflow name</mat-label>

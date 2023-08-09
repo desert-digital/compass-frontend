@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -29,7 +30,8 @@ export class AddWorkflowComponent {
   checklists: ChecklistModel[] = [];
   duration: number = 0;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private _checklistsService: ChecklistsService,
     private _checklistModelsService: ChecklistModelsService,
@@ -82,5 +84,9 @@ export class AddWorkflowComponent {
       this._snackBar.open('Error creating the checklist', 'OK', { duration: 3000 });
 
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/workflows']);
   }
 }

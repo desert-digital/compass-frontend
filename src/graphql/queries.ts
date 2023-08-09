@@ -54,6 +54,7 @@ export const getVessel = /* GraphQL */ `
       documentNumber
       defaultWorkflow {
         id
+        company
         name
         notes
         duration
@@ -96,6 +97,7 @@ export const listVessels = /* GraphQL */ `
         documentNumber
         defaultWorkflow {
           id
+          company
           name
           notes
           duration
@@ -169,6 +171,7 @@ export const getOwner = /* GraphQL */ `
           documentNumber
           defaultWorkflow {
             id
+            company
             name
             notes
             duration
@@ -370,6 +373,7 @@ export const getChecklistModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -441,6 +445,7 @@ export const getWorkflowModel = /* GraphQL */ `
   query GetWorkflowModel($id: ID!) {
     getWorkflowModel(id: $id) {
       id
+      company
       name
       notes
       duration
@@ -462,6 +467,7 @@ export const getWorkflowModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -491,6 +497,7 @@ export const listWorkflowModels = /* GraphQL */ `
     listWorkflowModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        company
         name
         notes
         duration
@@ -713,6 +720,7 @@ export const getWorkflow = /* GraphQL */ `
       }
       steps {
         id
+        company
         name
         notes
         duration
@@ -763,6 +771,7 @@ export const listWorkflows = /* GraphQL */ `
         }
         steps {
           id
+          company
           name
           notes
           duration
@@ -956,6 +965,7 @@ export const getWorkflowChecklists = /* GraphQL */ `
       }
       workflowModel {
         id
+        company
         name
         notes
         duration
@@ -1017,6 +1027,7 @@ export const listWorkflowChecklists = /* GraphQL */ `
         }
         workflowModel {
           id
+          company
           name
           notes
           duration
@@ -1199,6 +1210,7 @@ export const workflowChecklistsByChecklistModelId = /* GraphQL */ `
         }
         workflowModel {
           id
+          company
           name
           notes
           duration
@@ -1259,6 +1271,7 @@ export const workflowChecklistsByWorkflowModelId = /* GraphQL */ `
         }
         workflowModel {
           id
+          company
           name
           notes
           duration

@@ -69,6 +69,7 @@ export const onCreateVessel = /* GraphQL */ `
       documentNumber
       defaultWorkflow {
         id
+        company
         name
         notes
         duration
@@ -106,6 +107,7 @@ export const onUpdateVessel = /* GraphQL */ `
       documentNumber
       defaultWorkflow {
         id
+        company
         name
         notes
         duration
@@ -143,6 +145,7 @@ export const onDeleteVessel = /* GraphQL */ `
       documentNumber
       defaultWorkflow {
         id
+        company
         name
         notes
         duration
@@ -226,6 +229,7 @@ export const onCreateOwner = /* GraphQL */ `
           documentNumber
           defaultWorkflow {
             id
+            company
             name
             notes
             duration
@@ -265,6 +269,7 @@ export const onUpdateOwner = /* GraphQL */ `
           documentNumber
           defaultWorkflow {
             id
+            company
             name
             notes
             duration
@@ -304,6 +309,7 @@ export const onDeleteOwner = /* GraphQL */ `
           documentNumber
           defaultWorkflow {
             id
+            company
             name
             notes
             duration
@@ -535,6 +541,7 @@ export const onCreateChecklistModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -617,6 +624,7 @@ export const onUpdateChecklistModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -699,6 +707,7 @@ export const onDeleteChecklistModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -725,6 +734,7 @@ export const onCreateWorkflowModel = /* GraphQL */ `
   ) {
     onCreateWorkflowModel(filter: $filter) {
       id
+      company
       name
       notes
       duration
@@ -746,6 +756,7 @@ export const onCreateWorkflowModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -772,6 +783,7 @@ export const onUpdateWorkflowModel = /* GraphQL */ `
   ) {
     onUpdateWorkflowModel(filter: $filter) {
       id
+      company
       name
       notes
       duration
@@ -793,6 +805,7 @@ export const onUpdateWorkflowModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -819,6 +832,7 @@ export const onDeleteWorkflowModel = /* GraphQL */ `
   ) {
     onDeleteWorkflowModel(filter: $filter) {
       id
+      company
       name
       notes
       duration
@@ -840,6 +854,7 @@ export const onDeleteWorkflowModel = /* GraphQL */ `
           }
           workflowModel {
             id
+            company
             name
             notes
             duration
@@ -1167,6 +1182,7 @@ export const onCreateWorkflow = /* GraphQL */ `
       }
       steps {
         id
+        company
         name
         notes
         duration
@@ -1212,6 +1228,7 @@ export const onUpdateWorkflow = /* GraphQL */ `
       }
       steps {
         id
+        company
         name
         notes
         duration
@@ -1257,6 +1274,7 @@ export const onDeleteWorkflow = /* GraphQL */ `
       }
       steps {
         id
+        company
         name
         notes
         duration
@@ -1544,6 +1562,7 @@ export const onCreateWorkflowChecklists = /* GraphQL */ `
       }
       workflowModel {
         id
+        company
         name
         notes
         duration
@@ -1614,6 +1633,7 @@ export const onUpdateWorkflowChecklists = /* GraphQL */ `
       }
       workflowModel {
         id
+        company
         name
         notes
         duration
@@ -1684,6 +1704,7 @@ export const onDeleteWorkflowChecklists = /* GraphQL */ `
       }
       workflowModel {
         id
+        company
         name
         notes
         duration

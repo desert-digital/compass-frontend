@@ -1,5 +1,9 @@
 @import 'src/compass-theme';
 
+h4 {
+    @include sub-header;
+}
+
 button {
   @include buttons;
   width: 100%;

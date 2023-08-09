@@ -1,8 +1,9 @@
 <div class="container">
-  <h3>Add a new Vessel</h3>
-  <form [formGroup]="vesselForm" #formDirective="ngForm"
+  <form [formGroup]="vesselForm" action="#" #formDirective="ngForm"
     (ngSubmit)="onAddNewVesselPressed(vesselForm.value, formDirective)">
-    <div action="#" class="column">
+    <div class="column">
+      <button mat-flat-button type="submit" color="primary">Add the new Vessel</button>
+      <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput id="name" type="text" formControlName="name">
@@ -29,15 +30,20 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Owner</mat-label>
-        <mat-select (selectionChange)="onOwnerChanged($event)">
-          <mat-option *ngFor="let owner of owners" [value]="owner.id">
-            {{ owner.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-flat-button type="submit" color="primary">Add the new Vessel</button>
+      <mat-radio-group [value]="ownerType" aria-label="Select an option" (change)="onOwnerTypeChanged($event)">
+        <mat-radio-button value="existing">Existing Owner</mat-radio-button>
+        <mat-radio-button value="new">New Owner</mat-radio-button>
+      </mat-radio-group>
+      <div *ngIf="ownerType === 'existing'">
+        <mat-form-field>
+          <mat-label>Owner</mat-label>
+          <mat-select (selectionChange)="onOwnerChanged($event)">
+            <mat-option *ngFor="let owner of owners" [value]="owner.id">
+              {{ owner.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
   </form>
 </div>

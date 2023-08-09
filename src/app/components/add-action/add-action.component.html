@@ -1,20 +1,23 @@
 <div class="container">
-    <h3>Add a new Action</h3>
-    <form [formGroup]="actionForm" #formDirective="ngForm" (ngSubmit)="onAddNewActionPressed(actionForm.value, formDirective)">
-        <div action="#" class="column">
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput id="name" type="text" formControlName="name">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Duration in minutes</mat-label>
-                <input matInput id="duration" type="number" formControlName="duration">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Notes</mat-label>
-                <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
-            </mat-form-field>
-            <button mat-flat-button type="submit" color="primary">Add a new Action</button>
-        </div>
-    </form>
+    <div class="one-wide">
+        <form [formGroup]="actionForm" action="#" #formDirective="ngForm"
+            (ngSubmit)="onAddNewActionPressed(actionForm.value, formDirective)">
+            <div class="column">
+                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
+                <button mat-flat-button type="submit" color="primary">Add the new Action</button>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput id="name" type="text" formControlName="name">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Duration in minutes</mat-label>
+                    <input matInput id="duration" type="number" formControlName="duration">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Notes</mat-label>
+                    <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
 </div>

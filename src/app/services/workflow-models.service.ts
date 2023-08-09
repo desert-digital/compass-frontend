@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
 import { GraphQLQuery } from '@aws-amplify/api';
-import { ListWorkflowModelsQuery } from '../API.service';
+import { CreateWorkflowModelMutation, DeleteWorkflowChecklistsInput, GetWorkflowModelQuery, ListWorkflowModelsQuery } from '../API.service';
 
 // Local
 
-import { Workflow, WorkflowModel } from '../API.service';
+import { ChecklistModel, WorkflowModel } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,37 +21,80 @@ export class WorkflowModelsService {
 
   constructor() { }
 
-  async getWorkflowModels(): Promise<any> {
+  async getWorkflowModels(): Promise<WorkflowModel[]> {
     const workflowModels = await API.graphql<GraphQLQuery<ListWorkflowModelsQuery>>(
-      graphqlOperation(queries.listVessels)
+      graphqlOperation(queries.listWorkflowModels)
     );
-    console.log(workflowModels);
 
-    return workflowModels;
+    return workflowModels.data.listWorkflowModels.items as WorkflowModel[];
   };
 
 
-  async getWorkflowModelFromId(id: string): Promise<any> {
-    // const workflow = await this.api.GetWorkflowModel(id);
-    // return workflow as WorkflowModel;
+  async getWorkflowModelFromId(id: string): Promise<WorkflowModel> {
+    const workflowModel = await API.graphql<GraphQLQuery<GetWorkflowModelQuery>>(
+      graphqlOperation(queries.getWorkflowModel, { id: id })
+    );    
+    
+    return workflowModel.data.getWorkflowModel as WorkflowModel;
   }
 
-  async createWorkflowModel(model: WorkflowModel, checklists: any[]) {
-    // const result = await this.api.CreateWorkflowModel(model);
+  async createWorkflowModel(workflowModel: WorkflowModel, checklistModels: ChecklistModel[]) {
+    const workflowModelDetails = {
+      input: {
+        company: '0',
+        name: workflowModel.name,
+        duration: workflowModel.duration,
+        notes: workflowModel.notes
+      }
+    }
 
-    // for (let index = 0; index < checklists.length; index++) {
-    //   await this.api.CreateWorkflowChecklists({ workflowModelId: result.id, checklistModelId: checklists[index].id })
-    // } 
+    const workflowMutationResult = await API.graphql<GraphQLQuery<CreateWorkflowModelMutation>>(
+      graphqlOperation(mutations.createWorkflowModel, workflowModelDetails)
+    )
+    const workflow = workflowMutationResult.data.createWorkflowModel;
+
+    for (let checklist of checklistModels) {
+      const workflowChecklistDetails = {
+        input: {
+          checklistModelId: checklist.id,
+          workflowModelId: workflow.id
+        }
+      }
+      await API.graphql(graphqlOperation(mutations.createWorkflowChecklists, workflowChecklistDetails))
+
+    }
   }
 
   async updateWorkflowModel(model: WorkflowModel, checklists: any[]) {
-    // await this.deleteModel(model);
-    // delete model.id;
-    // await this.createWorkflowModel(model, checklists);
+    await this.deleteModel(model);
+    await this.createWorkflowModel(model, checklists);
   }
 
+  async deleteModel(workflowModel: WorkflowModel) {
+    const workflowModelId = {
+      workflowModelId: workflowModel.id
+    }
 
-  async deleteModel(workflow: WorkflowModel) {
-    // const result = await this.api.DeleteWorkflowModel({id: workflow.id});
+    const workflowChecklistResult = await API.graphql<GraphQLQuery<any>>(
+      graphqlOperation(queries.workflowChecklistsByWorkflowModelId, {workflowModelId: workflowModel.id})
+    )
+
+    const workflowChecklists = workflowChecklistResult.data.workflowChecklistsByWorkflowModelId.items;
+  
+    for (let workflowChecklist of workflowChecklists) {
+      const workflowChecklistId = {
+        input: {
+          id: workflowChecklist.id
+        }
+      }
+      await API.graphql<GraphQLQuery<DeleteWorkflowChecklistsInput>>(
+        graphqlOperation(mutations.deleteWorkflowChecklists, workflowChecklistId)
+      );
+    }
+
+    await API.graphql<GraphQLQuery<DeleteWorkflowChecklistsInput>>(
+      graphqlOperation(mutations.deleteWorkflowModel, {input: {id: workflowModel.id}})
+    );
+  
   }
 }
