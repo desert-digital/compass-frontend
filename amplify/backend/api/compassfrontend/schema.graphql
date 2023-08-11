@@ -13,7 +13,7 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: ID
   name: String
-  type: String
+  vesselType: String
   documentNumber: String
   defaultWorkflow: WorkflowModel @hasOne
 }

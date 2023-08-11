@@ -25,61 +25,97 @@ export class AddVesselComponent {
   vesselName: String = '';
   vesselDocumentNumber: String = '';
 
+  compositeForm: FormGroup;
   vesselForm: FormGroup;
+  ownerForm: FormGroup;
 
-  owner: Owner;
+  owner: String;
   owners: Owner[] = [];
 
   workflows: WorkflowModel[] = [];
-  defaultWorkflow: WorkflowModel;
+  defaultWorkflow: String;
 
+  vesselType: string; 
   vesselTypes: string[] = ['Sail', 'Power', 'Paddle'];
 
   ownerType: string = 'new';
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private formBuilder: FormBuilder,
     private _workflowModelService: WorkflowModelsService,
     private _ownersService: OwnersService,
     private _fleetService: FleetService,
     private _snackBar: MatSnackBar) {
-    this.vesselForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      documentNumber: ['', Validators.required],
-      vesselType: ['', Validators.required]
+    this.compositeForm = this.formBuilder.group({
+      vesselForm: this.formBuilder.group({
+        name: ['', Validators.required],
+        documentNumber: ['', Validators.required],
+        vesselType: ['', Validators.required]
+      }), ownerForm: this.formBuilder.group({
+        ownerName: [''],
+        ownerEmail: [''],
+        ownerPhone: ['']
+      })
     });
   }
 
   async ngOnInit() {
-    this.workflows = await this._workflowModelService.getWorkflowModels(); 
-    this.owners = await this._ownersService.getOwners(); 
+    this.workflows = await this._workflowModelService.getWorkflowModels();
+    this.owners = await this._ownersService.getOwners();
   }
 
   ngAfterViewInit() {
   }
 
-  onWorkflowChanged(event: any){
+  onVesselTypeChanged(event: any) {
+    this.compositeForm.patchValue({ vesselForm: { vesselType: event.value }} );
+  }
+
+  onWorkflowChanged(event: any) {
     this.defaultWorkflow = event.value;
   }
 
-  onOwnerChanged(event: any){
+  onOwnerChanged(event: any) {
     this.owner = event.value;
   }
 
   onOwnerTypeChanged(event: any) {
     this.ownerType = event.value;
-    console.log(this.ownerType);
-    console.log(event.value);
   }
 
-  async onAddNewVesselPressed(item: Vessel, formDirective: FormGroupDirective) {
-    await this._fleetService.createVessel(item, this.defaultWorkflow, this.owner).then(() => {
-      this._snackBar.open('Created a new vessel', 'OK', { duration: 3000 });
-      this.vesselForm.reset();
-      formDirective.resetForm();
-    });
-  } catch(error) {
-    this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
+  async onAddNewVesselPressed(formDirective: FormGroupDirective) {
+    if (this.ownerType === 'new') {
+      try {
+        const newOwner = await this._ownersService.createOwner(this.compositeForm.value.ownerForm);
+
+        await this._fleetService.createVessel(
+          this.compositeForm.value.vesselForm,
+          newOwner.id,
+          this.defaultWorkflow).then(() => {
+            this._snackBar.open('Created a new vessel', 'OK', { duration: 3000 });
+            this.compositeForm.reset();
+            formDirective.resetForm();
+          });
+      } catch (error) {
+        console.log(JSON.stringify(error));
+        this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
+      }
+    }
+    else {
+      try {
+        await this._fleetService.createVessel(
+          this.compositeForm.value.vesselForm,
+          this.owner,
+          this.defaultWorkflow,).then(() => {
+            this._snackBar.open('Created a new vessel', 'OK', { duration: 3000 });
+            this.compositeForm.reset();
+            formDirective.resetForm();
+          });
+      } catch (error) {
+        console.log(JSON.stringify(error));
+        this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
+      }
+    }
   }
 
   onCancelPressed() {

@@ -77,6 +77,8 @@ import { ShowChecklistNotesDialogComponent } from './components/show-checklist-n
 import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-notes-dialog/show-workflow-notes-dialog.component';
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
 
+import { OwnerNamePipe } from './pipes/owner-name.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +115,7 @@ import { EditOwnerComponent } from './components/edit-owner/edit-owner.component
     AddOwnerComponent,
     ManageOwnersComponent,
     EditOwnerComponent,
+    OwnerNamePipe,
   ],
   imports: [
     AmplifyAuthenticatorModule,

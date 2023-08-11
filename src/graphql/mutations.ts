@@ -71,7 +71,7 @@ export const createVessel = /* GraphQL */ `
       id
       company
       name
-      type
+      vesselType
       documentNumber
       defaultWorkflow {
         id
@@ -112,7 +112,7 @@ export const updateVessel = /* GraphQL */ `
       id
       company
       name
-      type
+      vesselType
       documentNumber
       defaultWorkflow {
         id
@@ -153,7 +153,7 @@ export const deleteVessel = /* GraphQL */ `
       id
       company
       name
-      type
+      vesselType
       documentNumber
       defaultWorkflow {
         id
@@ -249,7 +249,7 @@ export const createOwner = /* GraphQL */ `
           id
           company
           name
-          type
+          vesselType
           documentNumber
           defaultWorkflow {
             id
@@ -292,7 +292,7 @@ export const updateOwner = /* GraphQL */ `
           id
           company
           name
-          type
+          vesselType
           documentNumber
           defaultWorkflow {
             id
@@ -335,7 +335,7 @@ export const deleteOwner = /* GraphQL */ `
           id
           company
           name
-          type
+          vesselType
           documentNumber
           defaultWorkflow {
             id

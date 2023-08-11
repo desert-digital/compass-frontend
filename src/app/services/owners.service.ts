@@ -50,20 +50,22 @@ export class OwnersService {
     return ownerWithVessels.boats.items as Vessel[];
   }
 
-  async createOwner(owner: Owner) {
+  async createOwner(owner: any): Promise<Owner> {
     const ownerDetails = {
       input: 
       {
         company: '0', 
-        name: owner.name,
-        email: owner.email,
-        phone: owner.phone,
+        name: owner.ownerName,
+        email: owner.ownerEmail,
+        phone: owner.ownerPhone,
       }
     }
 
-    await API.graphql<GraphQLQuery<CreateOwnerMutation>>(
+    const newOwner = await API.graphql<GraphQLQuery<CreateOwnerMutation>>(
       graphqlOperation(mutations.createOwner, ownerDetails)
-    )
+    );
+
+    return newOwner.data.createOwner as Owner;
   }
 
   async updateOwner(owner: Owner, boats: Vessel[]) {

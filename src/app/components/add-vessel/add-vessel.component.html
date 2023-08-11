@@ -1,7 +1,6 @@
 <div class="container">
-  <form [formGroup]="vesselForm" action="#" #formDirective="ngForm"
-    (ngSubmit)="onAddNewVesselPressed(vesselForm.value, formDirective)">
-    <div class="column">
+  <form [formGroup]="compositeForm" action="#" #formDirective="ngForm" (ngSubmit)="onAddNewVesselPressed(formDirective)">
+    <div formGroupName="vesselForm" class="column">
       <button mat-flat-button type="submit" color="primary">Add the new Vessel</button>
       <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
       <mat-form-field>
@@ -15,7 +14,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Type</mat-label>
-          <mat-select id="vesselType" formControlName="vesselType" value="Sail">
+          <mat-select id="vesselType" formControlName="vesselType" value="Sail" (selectionChange)="onVesselTypeChanged($event)">
             <mat-option *ngFor="let type of vesselTypes" [value]="type">
               {{ type }}
             </mat-option>
@@ -42,6 +41,22 @@
               {{ owner.name }}
             </mat-option>
           </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="ownerType === 'new'">
+      <div formGroupName="ownerForm" class="column">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput id="ownerName" type="text" formControlName="ownerName">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input matInput id="ownerPhone" type="phone" formControlName="ownerPhone">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput id="ownerEmail" type="email" formControlName="ownerEmail">
         </mat-form-field>
       </div>
     </div>

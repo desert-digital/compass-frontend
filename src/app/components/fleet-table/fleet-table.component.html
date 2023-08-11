@@ -16,7 +16,7 @@
       <!-- Type Column -->
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type </th>
-        <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.vesselType }}</td>
       </ng-container>
 
       <!-- Type Column -->
@@ -28,7 +28,7 @@
       <!-- Owner Column -->
       <ng-container matColumnDef="owner">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
-        <td mat-cell *matCellDef="let row">{{ row.owner }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.ownerBoatsId | ownerName | async }}</td>
       </ng-container>
 
       <!-- Actions Column -->
@@ -37,6 +37,9 @@
         <td mat-cell *matCellDef="let row">
           <button mat-icon-button (click)="onEditVesselPressed(row)">
             <mat-icon class="material-icons-outlined" color="primary">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDeleteVesselPressed(row)">
+            <mat-icon class="material-icons-outlined" color="warn">cancel</mat-icon>
           </button>
         </td>
       </ng-container>

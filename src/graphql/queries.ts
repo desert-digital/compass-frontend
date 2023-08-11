@@ -50,7 +50,7 @@ export const getVessel = /* GraphQL */ `
       id
       company
       name
-      type
+      vesselType
       documentNumber
       defaultWorkflow {
         id
@@ -93,7 +93,7 @@ export const listVessels = /* GraphQL */ `
         id
         company
         name
-        type
+        vesselType
         documentNumber
         defaultWorkflow {
           id
@@ -167,7 +167,7 @@ export const getOwner = /* GraphQL */ `
           id
           company
           name
-          type
+          vesselType
           documentNumber
           defaultWorkflow {
             id
@@ -212,7 +212,7 @@ export const listOwners = /* GraphQL */ `
             id
             company
             name
-            type
+            vesselType
             documentNumber
             createdAt
             updatedAt

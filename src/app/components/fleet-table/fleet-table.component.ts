@@ -5,17 +5,16 @@ import { Router } from '@angular/router';
 
 // Material 
 
-
-import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTable } from '@angular/material/table';
 
 // Local
 
 import { Vessel } from '../../API.service';
 import { FleetService } from 'src/app/services/fleet.service';
 import { FleetTableDataSource } from './fleet-table-datasource';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-fleet-table',
@@ -41,6 +40,10 @@ export class FleetTableComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this._setup();
+  }
+
+  _setup() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
@@ -53,7 +56,7 @@ export class FleetTableComponent implements AfterViewInit {
       console.log('Uploading the file');
     }
     catch (e: any) {
-      this._snackBar.open(`An error occured ${e.message} saving the media item. Please contact support`, 'OK');
+      this._snackBar.open(`An error occured ${e.message} saving the vessel. Please contact support`, 'OK');
     }
   }
 
@@ -63,5 +66,11 @@ export class FleetTableComponent implements AfterViewInit {
 
   onEditVesselPressed() {
     alert('Edit Pressed');
+  }
+
+  async onDeleteVesselPressed(item: Vessel) {
+    await this._fleetService.deleteVessel(item.id).then(_ => {
+      this._snackBar.open(`Deleted ${item.name}`, 'OK', {duration: 3000});
+    });
   }
 }

@@ -9,12 +9,11 @@ import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
 import { GraphQLQuery } from '@aws-amplify/api';
-
-import { ListVesselsQuery, GetVesselQuery, CreateVesselMutation, UpdateVesselMutation } from '../API.service';
+import { ListVesselsQuery, GetVesselQuery, CreateVesselMutation, UpdateVesselMutation, DeleteVesselMutation } from '../API.service';
 
 // Local
 
-import { Vessel, Owner, WorkflowModel, } from '../API.service';
+import { Vessel } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,18 +37,19 @@ export class FleetService {
     return vesselResult.data.getVessel as Vessel;
   }
 
-  async createVessel(vessel: Vessel, workflow: WorkflowModel, owner: Owner) {
+  async createVessel(vessel: Vessel, ownerId: String, workflowId: String) {
     const vesselDetails = {
       input: {
         company: '0',
         name: vessel.name,
-        type: vessel.type,
+        vesselType: vessel.vesselType,
         documentNumber: vessel.documentNumber,
-        vesselDefaultWorkflowId: workflow.id
+        vesselDefaultWorkflowId: workflowId,
+        ownerBoatsId: ownerId
       }
     }
 
-    await API.graphql<GraphQLQuery<CreateVesselMutation>> (
+    await API.graphql<GraphQLQuery<CreateVesselMutation>>(
       graphqlOperation(mutations.createVessel, vesselDetails)
     )
   }
@@ -60,7 +60,7 @@ export class FleetService {
       compay: vessel.company,
       name: vessel.name,
       documentNubmer: vessel.documentNumber,
-      type: vessel.type,
+      type: vessel.vesselType,
       vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId
     }
 
@@ -77,6 +77,18 @@ export class FleetService {
 
     await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
       graphqlOperation(mutations.updateVessel, vesselOwnerDetails)
+    )
+  }
+
+  async deleteVessel(id: String) {
+    const vesselOwnerDetails = {
+      input: {
+        id: id
+      }
+    }
+
+    await API.graphql<GraphQLQuery<DeleteVesselMutation>>(
+      graphqlOperation(mutations.deleteVessel, vesselOwnerDetails)
     )
   }
 }

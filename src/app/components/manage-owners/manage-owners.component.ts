@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 // Local
 
-import { Owner } from 'src/app/API.service';
+import { Owner, Vessel } from 'src/app/API.service';
 import { OwnersService } from 'src/app/services/owners.service';
 
 @Component({
@@ -15,7 +15,8 @@ import { OwnersService } from 'src/app/services/owners.service';
 })
 export class ManageOwnersComponent {
 
-  owners: any[] = [];
+  owners: Owner[] = [];
+  boats: Map<string, Vessel[]> = new Map();
 
   selectedOwner: Owner;
 
@@ -24,6 +25,10 @@ export class ManageOwnersComponent {
 
   async ngOnInit() {
     this.owners = await this._ownerService.getOwners();
+    for (let owner of this.owners) {
+      const ownersBoats = await this._ownerService.getVesselsForOwner(owner.id);
+      this.boats.set(owner.id, ownersBoats);
+    }
   }
 
   onAddOwnerPressed() {
