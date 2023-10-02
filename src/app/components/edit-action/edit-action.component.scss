@@ -1,21 +1,32 @@
 @import 'src/compass-theme';
 
-h4 {
-    @include sub-header;
+button {
+  @include buttons;
+  width: 100%;
+  margin: 10px;
 }
 
-button { 
-    @include buttons;
-    width: 100%;
+mat-form-field {
+  margin-top: 15px;
+  width: 100%;
 }
 
 .container {
-    @include containers;
+  @include containers;
 }
 
-.column {
-    display: flex;
-    flex-flow: column nowrap;
-    margin-left: 15px;
-    gap: 10px;
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
 }
+
+.one-wide {
+  flex-grow: 1;
+}
+
+.two-wide {
+  flex-grow: 2;
+}
+

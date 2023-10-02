@@ -10,6 +10,7 @@ import * as mutations from '../../graphql/mutations';
 
 import { GraphQLQuery } from '@aws-amplify/api';
 import { CreateOwnerMutation, 
+  DeleteOwnerMutation, 
   GetOwnerQuery,
   ListOwnersQuery, 
   UpdateOwnerMutation
@@ -55,9 +56,9 @@ export class OwnersService {
       input: 
       {
         company: '0', 
-        name: owner.ownerName,
-        email: owner.ownerEmail,
-        phone: owner.ownerPhone,
+        name: owner.name,
+        email: owner.email,
+        phone: owner.phone,
       }
     }
 
@@ -85,5 +86,17 @@ export class OwnersService {
       console.log(JSON.stringify(boat));
       this._fleetService.updateVesselWithOwner(boat.id, owner.id);
     }
+  }
+
+  async deleteOwner(owner: Owner) {
+    const ownerDetails = {
+      input: {
+        id: owner.id
+      }
+    }
+
+    await API.graphql<GraphQLQuery<DeleteOwnerMutation>>(
+      graphqlOperation(mutations.deleteOwner, ownerDetails)
+    );
   }
 }

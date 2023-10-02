@@ -3,8 +3,8 @@
         <form [formGroup]="actionForm" action="#" #formDirective="ngForm"
             (ngSubmit)="onAddNewActionPressed(actionForm.value, formDirective)">
             <div class="column">
-                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
                 <button mat-flat-button type="submit" color="primary">Add the new Action</button>
+                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
                 <mat-form-field>
                     <mat-label>Name</mat-label>
                     <input matInput id="name" type="text" formControlName="name">

@@ -64,13 +64,13 @@ export class FleetTableComponent implements AfterViewInit {
     this.router.navigate(['/main/add-vessel']);
   }
 
-  onEditVesselPressed() {
-    alert('Edit Pressed');
+  onEditVesselPressed(vessel: Vessel) {
+    this.router.navigate(['/main/edit-vessel', vessel.id]);
   }
 
-  async onDeleteVesselPressed(item: Vessel) {
-    await this._fleetService.deleteVessel(item.id).then(_ => {
-      this._snackBar.open(`Deleted ${item.name}`, 'OK', {duration: 3000});
+  async onDeleteVesselPressed(vessel: Vessel) {
+    await this._fleetService.deleteVessel(vessel.id).then(_ => {
+      this._snackBar.open(`Deleted ${vessel.name}`, 'OK', {duration: 3000});
     });
   }
 }

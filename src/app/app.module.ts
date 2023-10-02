@@ -78,6 +78,7 @@ import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-not
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
 
 import { OwnerNamePipe } from './pipes/owner-name.pipe';
+import { EditVesselComponent } from './components/edit-vessel/edit-vessel.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { OwnerNamePipe } from './pipes/owner-name.pipe';
     ManageOwnersComponent,
     EditOwnerComponent,
     OwnerNamePipe,
+    EditVesselComponent,
   ],
   imports: [
     AmplifyAuthenticatorModule,

@@ -3,6 +3,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Material
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 // Local
 
 import { Owner, Vessel } from 'src/app/API.service';
@@ -21,9 +25,14 @@ export class ManageOwnersComponent {
   selectedOwner: Owner;
 
   constructor(private _ownerService: OwnersService,
+    private _snackBar: MatSnackBar,
     private router: Router) {}
 
   async ngOnInit() {
+    await this._getOwners();
+  }
+
+  async _getOwners() {
     this.owners = await this._ownerService.getOwners();
     for (let owner of this.owners) {
       const ownersBoats = await this._ownerService.getVesselsForOwner(owner.id);
@@ -37,5 +46,11 @@ export class ManageOwnersComponent {
 
   onEditOwnerPressed(owner: Owner) {
     this.router.navigate(['main/edit-owner', owner.id]);
+  }
+
+  async onDeleteOwnerPressed(owner: Owner) {
+    await this._ownerService.deleteOwner(owner);
+    this._snackBar.open(`Deleted ${owner.name}`, 'OK', {duration: 3000});
+    this._getOwners();
   }
 }

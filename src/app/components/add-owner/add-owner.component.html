@@ -1,5 +1,4 @@
 <div class="container">
-    <h3>Add a new Owner</h3>
     <form [formGroup]="ownerForm" #formDirective="ngForm" (ngSubmit)="onAddNewOwnerPressed(ownerForm.value, formDirective)">
         <div action="#" class="column">
             <button mat-flat-button type="submit" color="primary">Add a new Owner</button>

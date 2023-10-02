@@ -1,7 +1,8 @@
 <div class="container">
-    <h3>Edit an Owner</h3>
+    <h3>Edit the Owner</h3>
     <form [formGroup]="ownerForm" #formDirective="ngForm"
         (ngSubmit)="onUpdateOwnerPressed(ownerForm.value, formDirective)">
+        <button mat-flat-button type="submit" color="primary">Update the Owner</button>
         <div action="#" class="column">
             <div *ngIf="false">
                 <mat-form-field>
@@ -22,12 +23,11 @@
                 <input matInput id="email" type="email" formControlName="email">
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Toppings</mat-label>
-                <mat-select id="vessels" formControlName="vessels" multiple>
-                  <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id">{{vessel.name}}</mat-option>
+                <mat-label>Vessels</mat-label>
+                <mat-select [compareWith]="isOwned" id="vessels" formControlName="vessels" multiple>
+                  <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id" (onSelectionChange)="onVesselChanged($event, vessel)">{{vessel.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-            <button mat-flat-button type="submit" color="primary">Update the Owner</button>
         </div>
     </form>
 </div>

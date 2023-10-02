@@ -13,7 +13,7 @@ import { ListVesselsQuery, GetVesselQuery, CreateVesselMutation, UpdateVesselMut
 
 // Local
 
-import { Vessel } from '../API.service';
+import { Vessel, Owner } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,11 @@ export class FleetService {
     return vesselResult.data.getVessel as Vessel;
   }
 
+
+  async getVesselByOwner(owner: Owner): Promise<any> {
+    return;
+  }
+
   async createVessel(vessel: Vessel, ownerId: String, workflowId: String) {
     const vesselDetails = {
       input: {
@@ -56,12 +61,15 @@ export class FleetService {
 
   async updateVessel(vessel: Vessel) {
     const vesselDetails = {
-      id: vessel.id,
-      compay: vessel.company,
-      name: vessel.name,
-      documentNubmer: vessel.documentNumber,
-      type: vessel.vesselType,
-      vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId
+      input: {
+        id: vessel.id,
+        company: vessel.company,
+        name: vessel.name,
+        vesselType: vessel.vesselType,
+        documentNumber: vessel.documentNumber,
+        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+        ownerBoatsId: vessel.ownerBoatsId
+      }
     }
 
     await API.graphql<GraphQLQuery<UpdateVesselMutation>>(

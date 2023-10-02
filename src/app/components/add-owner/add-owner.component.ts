@@ -48,6 +48,6 @@ export class AddOwnerComponent {
   }
 
   onCancelPressed() {
-    this.router.navigate(['main/owner']);
+    this.router.navigate(['main/owners']);
   }
 }

@@ -26,6 +26,7 @@ import { AddVesselComponent } from './components/add-vessel/add-vessel.component
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
 import { AddOwnerComponent } from './components/add-owner/add-owner.component';
+import { EditVesselComponent } from './components/edit-vessel/edit-vessel.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,9 @@ const routes: Routes = [
     },{
       path: 'add-vessel',
       component: AddVesselComponent
+    },{
+      path: 'edit-vessel/:id',
+      component: EditVesselComponent
     },{
       path: 'fleet',
       component: FleetTableComponent

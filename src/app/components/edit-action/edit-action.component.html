@@ -1,7 +1,8 @@
 <div class="container">
-    <h3>Edit an Action</h3>
+    <h3>Edit the Action</h3>
     <form [formGroup]="actionForm" #formDirective="ngForm"
         (ngSubmit)="onUpdateActionPressed(actionForm.value, formDirective)">
+        <button mat-flat-button type="submit" color="primary">Update the Action</button>
         <div action="#" class="column">
             <div *ngIf="false">
                 <mat-form-field>
@@ -21,7 +22,6 @@
                 <mat-label>Notes</mat-label>
                 <textarea matInput id="notes" type="text" formControlName="notes"></textarea>
             </mat-form-field>
-            <button mat-flat-button type="submit" color="primary">Update the Action</button>
         </div>
     </form>
 </div>
