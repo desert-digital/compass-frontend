@@ -31,7 +31,6 @@ export class StaffService {
     const staff = await API.graphql<GraphQLQuery<ListStaffQuery>>(
       graphqlOperation(queries.listVessels)
     );
-    console.log(staff);
 
     return staff;
   }

@@ -9,10 +9,11 @@ import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
 import { GraphQLQuery } from '@aws-amplify/api';
-import { CreateOwnerMutation, 
-  DeleteOwnerMutation, 
+import {
+  CreateOwnerMutation,
+  DeleteOwnerMutation,
   GetOwnerQuery,
-  ListOwnersQuery, 
+  ListOwnersQuery,
   UpdateOwnerMutation
 } from '../API.service';
 
@@ -53,9 +54,9 @@ export class OwnersService {
 
   async createOwner(owner: any): Promise<Owner> {
     const ownerDetails = {
-      input: 
+      input:
       {
-        company: '0', 
+        company: '0',
         name: owner.name,
         email: owner.email,
         phone: owner.phone,
@@ -71,11 +72,13 @@ export class OwnersService {
 
   async updateOwner(owner: Owner, boats: Vessel[]) {
     const ownerDetails = {
-      id: owner.id,
-      company: owner.company,
-      name: owner.name,
-      email: owner.email,
-      phone: owner.phone
+      input: {
+        id: owner.id,
+        company: '0',
+        name: owner.name,
+        email: owner.email,
+        phone: owner.phone
+      }
     };
 
     const ownerResult = await API.graphql<GraphQLQuery<UpdateOwnerMutation>>(
@@ -83,8 +86,7 @@ export class OwnersService {
     );
 
     for (let boat of boats) {
-      console.log(JSON.stringify(boat));
-      this._fleetService.updateVesselWithOwner(boat.id, owner.id);
+      this._fleetService.updateVesselWithOwner(boat, owner);
     }
   }
 

@@ -25,7 +25,6 @@ export class ChecklistsService {
     const checklists = await API.graphql<GraphQLQuery<ListChecklistsQuery>>(
       graphqlOperation(queries.listVessels)
     );
-    console.log(checklists);
 
     return checklists;
   };

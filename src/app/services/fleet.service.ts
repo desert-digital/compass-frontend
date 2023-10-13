@@ -77,14 +77,39 @@ export class FleetService {
     )
   }
 
-  async updateVesselWithOwner(id: String, ownerId: String) {
-    const vesselOwnerDetails = {
-      id: id,
-      ownerBoatsId: ownerId
+  async updateVesselWithOwner(vessel: Vessel, owner: Owner) {
+    const vesselDetails = {
+      input: {
+        id: vessel.id,
+        company: vessel.company,
+        name: vessel.name,
+        vesselType: vessel.vesselType,
+        documentNumber: vessel.documentNumber,
+        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+        ownerBoatsId: owner.id
+      }
     }
 
     await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
-      graphqlOperation(mutations.updateVessel, vesselOwnerDetails)
+      graphqlOperation(mutations.updateVessel, vesselDetails)
+    )
+  }
+
+  async updateVesselWithoutOwner(vessel: Vessel) {
+    const vesselDetails = {
+      input: {
+        id: vessel.id,
+        company: vessel.company,
+        name: vessel.name,
+        vesselType: vessel.vesselType,
+        documentNumber: vessel.documentNumber,
+        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+        ownerBoatsId: null
+      }
+    }
+
+    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
+      graphqlOperation(mutations.updateVessel, vesselDetails)
     )
   }
 

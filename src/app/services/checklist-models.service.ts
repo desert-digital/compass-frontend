@@ -98,7 +98,6 @@ export class ChecklistModelsService {
       await API.graphql<GraphQLQuery<DeleteChecklistActionsMutation>>(
         graphqlOperation(mutations.deleteChecklistActions, checklistActionId)
       );
-      console.log(`Deleted Id: ${checklistActionId.input.id}`)
     }
 
     await API.graphql<GraphQLQuery<DeleteChecklistModelMutation>>(

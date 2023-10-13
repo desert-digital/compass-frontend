@@ -63,7 +63,7 @@ export class EditActionComponent {
         formDirective.resetForm();
       })
     } catch (error) {
-      console.log(error.errors);
+      console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', {duration: 3000})
     }
   }

@@ -27,10 +27,13 @@ export class EditOwnerComponent {
 
   ownerForm: FormGroup;
 
+  owner: Owner; 
+
   vesselList: Vessel[] = [];
   ownedVesselList: Vessel[] = [];
 
   constructor(private formBuilder: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute,
     private _ownersService: OwnersService,
     private _fleetService: FleetService,
@@ -45,17 +48,21 @@ export class EditOwnerComponent {
   }
 
   async ngOnInit() {
+    await this._setUp();
+  }
+
+  async _setUp() {
     const id = this.route.snapshot.paramMap.get('id');
-    const owner = await this._ownersService.getOwnerFromId(id);
+    this.owner = await this._ownersService.getOwnerFromId(id);
 
     this.vesselList = await this._fleetService.getVessels();
-    this.ownedVesselList = owner.boats.items;
+    this.ownedVesselList = this.owner.boats.items;
 
     this.ownerForm.setValue({
-      id: owner.id,
-      name: owner.name,
-      phone: owner.phone,
-      email: owner.email,
+      id: this.owner.id,
+      name: this.owner.name,
+      phone: this.owner.phone,
+      email: this.owner.email,
       vessels: this.ownedVesselList
     });
   }
@@ -64,27 +71,33 @@ export class EditOwnerComponent {
     return o1 && o2 ? o1 == o2.id : false;
   }
 
-  onVesselChanged(event: any, vessel: Vessel) {
-    if (this.ownedVesselList.includes(vessel)) {
-      console.log('Turning Off');
-      this.ownedVesselList = this.ownedVesselList.filter(item => item != vessel);
+  onVesselChanged(event: any) {
+    if (event.source.selected) {
+      const newVessel = this.vesselList.find(item => item.id === event.source.value);
+      const newVesselIndex = this.ownerForm.value.vessels.findIndex(item => item.id === newVessel.id);
+      if (newVesselIndex === -1) {
+        this.ownerForm.value.vessels.push(newVessel);
+        this._fleetService.updateVesselWithOwner(newVessel,this.owner);
+        this._snackBar.open(`Added ${newVessel.name}`, 'OK', { duration: 3000 });
+      }
     }
     else {
-      console.log('Turning On');
-      this.ownedVesselList.push(vessel);
+      const newVessel = this.vesselList.find(item => item.id === event.source.value);
+      this.ownerForm.value.vessels = this.ownerForm.value.vessels.filter(item => item.id === event.source.value);
+      this._fleetService.updateVesselWithoutOwner(newVessel);
+      this._snackBar.open(`Removed ${newVessel.name}`, 'OK', { duration: 3000 });
     }
-    console.log(JSON.stringify(this.ownedVesselList));
+    this.ownedVesselList = this.ownerForm.value.vessels;
   }
 
   async onUpdateOwnerPressed(owner: Owner, formDirective: FormGroupDirective) {
     try {
       await this._ownersService.updateOwner(owner, this.ownedVesselList).then(() => {
         this._snackBar.open(`Updated ${owner.name}`, 'OK', { duration: 3000 })
-        this.ownerForm.reset();
-        formDirective.resetForm();
+        this.router.navigate(['/main/owners']);
       });
-  } catch (error) {
-      console.log(error.errors);
+    } catch (error) {
+      console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', { duration: 3000 })
     }
   }

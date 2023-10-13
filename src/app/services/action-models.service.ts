@@ -68,11 +68,9 @@ export class ActionModelsService {
       }
     }
 
-    console.log('1');
     await API.graphql<GraphQLQuery<UpdateActionModelMutation>>(
       graphqlOperation(mutations.updateActionModel, actionModelDetails)
     );
-    console.log('2');
   }
 
   async deleteModel(action: ActionModel) {
