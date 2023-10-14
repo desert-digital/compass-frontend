@@ -89,4 +89,6 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   end: AWSDate 
 }
 
-type startWorklow(workflow: Workflow) @function(name: "startworkflow-${env}")
+type Mutation {
+  startWorklow(workflow: Workflow): String @function(name: "startworkflow-${env}")
+}
