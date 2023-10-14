@@ -88,3 +88,5 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   start: AWSDate
   end: AWSDate 
 }
+
+type startWorklow(workflow: Workflow) @function(name: "startworkflow-${env}")

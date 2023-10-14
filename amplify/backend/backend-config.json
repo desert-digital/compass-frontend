@@ -61,5 +61,30 @@
     }
   },
   "custom": {},
+  "function": {
+    "startworkflow": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_startworkflow_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "startworkflow"
+        }
+      ]
+    },
+    "AMPLIFY_function_startworkflow_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "startworkflow"
+        }
+      ]
+    }
+  },
   "storage": {}
 }

@@ -19,12 +19,6 @@ import { Staff } from '../API.service';
 })
 export class StaffService {
 
-  ITEMS: any = [
-    "OUPV. Power boats, sail boats, and PWC qualified", 
-    "Power boats, sail boats, and PWC qualified",
-    "PWC qualified."
-  ];
-
   constructor() { }
 
   async getStaff(): Promise<any> {
@@ -33,5 +27,17 @@ export class StaffService {
     );
 
     return staff;
+  }
+
+  async createStaff(staff: Staff) {
+    return;
+  }
+
+  async updateStaff(staff: Staff) {
+    return;
+  }
+
+  async deleteStaff(staff: Staff) {
+    return;
   }
 }
