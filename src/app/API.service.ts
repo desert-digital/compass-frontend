@@ -972,6 +972,14 @@ export type ModelSubscriptionWorkflowChecklistsFilterInput = {
   or?: Array< ModelSubscriptionWorkflowChecklistsFilterInput | null > | null,
 };
 
+export type StartWorklowMutationVariables = {
+  workflowId: string,
+};
+
+export type StartWorklowMutation = {
+  startWorklow?: string | null,
+};
+
 export type CreatePendingEventMutationVariables = {
   input: CreatePendingEventInput,
   condition?: ModelPendingEventConditionInput | null,

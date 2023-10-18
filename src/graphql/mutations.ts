@@ -2,6 +2,11 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const startWorklow = /* GraphQL */ `
+  mutation StartWorklow($workflowId: String!) {
+    startWorklow(workflowId: $workflowId)
+  }
+`;
 export const createPendingEvent = /* GraphQL */ `
   mutation CreatePendingEvent(
     $input: CreatePendingEventInput!
