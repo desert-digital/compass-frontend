@@ -14,14 +14,14 @@ import { MatTable } from '@angular/material/table';
 
 import { Vessel } from '../../API.service';
 import { FleetService } from 'src/app/services/fleet.service';
-import { FleetTableDataSource } from './fleet-table-datasource';
+import { FleetTableDataSource } from './manage-fleet-datasource';
 
 @Component({
-  selector: 'app-fleet-table',
-  templateUrl: './fleet-table.component.html',
-  styleUrls: ['./fleet-table.component.scss']
+  selector: 'manage-fleet',
+  templateUrl: './manage-fleet.component.html',
+  styleUrls: ['./manage-fleet.component.scss']
 })
-export class FleetTableComponent implements AfterViewInit {
+export class ManageFleetComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Vessel>;
@@ -72,5 +72,6 @@ export class FleetTableComponent implements AfterViewInit {
     await this._fleetService.deleteVessel(vessel.id).then(_ => {
       this._snackBar.open(`Deleted ${vessel.name}`, 'OK', {duration: 3000});
     });
+    this._setup();
   }
 }

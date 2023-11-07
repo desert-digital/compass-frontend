@@ -9,12 +9,14 @@ export const onCreatePendingEvent = /* GraphQL */ `
     onCreatePendingEvent(filter: $filter) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename
@@ -28,12 +30,14 @@ export const onUpdatePendingEvent = /* GraphQL */ `
     onUpdatePendingEvent(filter: $filter) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename
@@ -47,12 +51,14 @@ export const onDeletePendingEvent = /* GraphQL */ `
     onDeletePendingEvent(filter: $filter) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename

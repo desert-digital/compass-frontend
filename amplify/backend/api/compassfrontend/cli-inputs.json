@@ -11,9 +11,13 @@
       {
         "mode": "API_KEY",
         "expirationTime": 365,
-        "apiKeyExpirationDate": "2024-05-20T23:45:21.617Z",
+        "apiKeyExpirationDate": "2024-10-27T23:29:23.954Z",
         "keyDescription": "public"
+      },
+      {
+        "mode": "AWS_IAM"
       }
-    ]
+    ],
+    "conflictResolution": {}
   }
 }

@@ -46,7 +46,7 @@ export class EditWorkflowComponent {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    const workflowModel = await this._workflowModelsService.getWorkflowModelFromId(id);
+    const workflowModel = await this._workflowModelsService.getWorkflowModelById(id);
 
     this.workflowForm.setValue({
       id: workflowModel.id,

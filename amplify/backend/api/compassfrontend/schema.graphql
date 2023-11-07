@@ -1,12 +1,14 @@
 type PendingEvent @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
-  body: String
+  company: String
   start: String 
   end: String
   item: String
   item_id: String
-  status: String
+  status: String,
+  contactEmail: String,
+  contactName: String,
+  contactPhone: String
 }
 
 type Vessel @model @auth(rules: [{ allow: private }]){
@@ -88,7 +90,6 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   start: AWSDate
   end: AWSDate 
 }
-
 
 type Mutation {
   startWorklow(workflowId: String!): String @function(name: "startworkflow-${env}")

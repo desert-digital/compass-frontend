@@ -25,9 +25,10 @@
             <mat-form-field>
                 <mat-label>Vessels</mat-label>
                 <mat-select [compareWith]="isOwned" id="vessels" formControlName="vessels" multiple>
-                  <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id" (onSelectionChange)="onVesselChanged($event)">{{vessel.name}}</mat-option>
+                    <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id"
+                        (onSelectionChange)="onVesselChanged($event)">{{vessel.name}}</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
     </form>
 </div>

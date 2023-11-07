@@ -30,7 +30,7 @@ export class WorkflowModelsService {
   };
 
 
-  async getWorkflowModelFromId(id: string): Promise<WorkflowModel> {
+  async getWorkflowModelById(id: string): Promise<WorkflowModel> {
     const workflowModel = await API.graphql<GraphQLQuery<GetWorkflowModelQuery>>(
       graphqlOperation(queries.getWorkflowModel, { id: id })
     );    
@@ -65,9 +65,38 @@ export class WorkflowModelsService {
     }
   }
 
-  async updateWorkflowModel(model: WorkflowModel, checklists: any[]) {
-    await this.deleteModel(model);
-    await this.createWorkflowModel(model, checklists);
+  async updateWorkflowModel(workflowModel: WorkflowModel, checklistModels: any[]) {
+    const workflowModelId = {
+      workflowModelId: workflowModel.id
+    }
+
+    const workflowChecklistResult = await API.graphql<GraphQLQuery<any>>(
+      graphqlOperation(queries.workflowChecklistsByWorkflowModelId, {workflowModelId: workflowModel.id})
+    )
+
+    const workflowChecklists = workflowChecklistResult.data.workflowChecklistsByWorkflowModelId.items;
+  
+    for (let workflowChecklist of workflowChecklists) {
+      const workflowChecklistId = {
+        input: {
+          id: workflowChecklist.id
+        }
+      }
+      await API.graphql<GraphQLQuery<DeleteWorkflowChecklistsInput>>(
+        graphqlOperation(mutations.deleteWorkflowChecklists, workflowChecklistId)
+      );
+    }
+    
+    for (let checklist of checklistModels) {
+      const workflowChecklistDetails = {
+        input: {
+          checklistModelId: checklist.id,
+          workflowModelId: workflowModel.id
+        }
+      }
+      await API.graphql(graphqlOperation(mutations.createWorkflowChecklists, workflowChecklistDetails))
+
+    }
   }
 
   async deleteModel(workflowModel: WorkflowModel) {
@@ -95,6 +124,5 @@ export class WorkflowModelsService {
     await API.graphql<GraphQLQuery<DeleteWorkflowChecklistsInput>>(
       graphqlOperation(mutations.deleteWorkflowModel, {input: {id: workflowModel.id}})
     );
-  
   }
 }

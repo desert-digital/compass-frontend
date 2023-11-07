@@ -4,15 +4,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
-import { FleetTableComponent } from './fleet-table.component';
+import { ManageFleetComponent } from './manage-fleet.component';
 
 describe('FleetTableComponent', () => {
-  let component: FleetTableComponent;
-  let fixture: ComponentFixture<FleetTableComponent>;
+  let component: ManageFleetComponent;
+  let fixture: ComponentFixture<ManageFleetComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [FleetTableComponent],
+      declarations: [ManageFleetComponent],
       imports: [
         NoopAnimationsModule,
         MatPaginatorModule,
@@ -23,7 +23,7 @@ describe('FleetTableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FleetTableComponent);
+    fixture = TestBed.createComponent(ManageFleetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

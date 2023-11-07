@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 // Amplify 
 
 import { API, graphqlOperation } from 'aws-amplify';
+import { GRAPHQL_AUTH_MODE, } from '@aws-amplify/api';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
@@ -29,12 +30,16 @@ export class PendingService {
 
     const variables: ListPendingEventsQueryVariables = {
       filter: {
-        and: [{start: { ge: today }}, {status: { ne: 'cancelled' }}]
-      }
+        and: [
+          { status: { ne: 'cancelled' } },
+          { start: { ge: today } }]
+      },
     };
-    const events = await API.graphql<GraphQLQuery<ListPendingEventsQuery>>(
-      graphqlOperation(queries.listPendingEvents, variables)
-    );
+    const events = await API.graphql<GraphQLQuery<ListPendingEventsQuery>>({
+      query: queries.listPendingEvents,
+      variables: variables
+    });
+
     const pendingEvents = events.data.listPendingEvents.items;
 
     this.numberOfPendingEvents$.next(pendingEvents.length) //events.length);
@@ -43,7 +48,7 @@ export class PendingService {
 
   async getPendingItem(id: string): Promise<PendingEvent> {
     const events = await API.graphql<GraphQLQuery<GetPendingEventQuery>>(
-      graphqlOperation(queries.getPendingEvent, id)
+      graphqlOperation(queries.getPendingEvent, { id: id })
     );
     const eventById = events.data.getPendingEvent;
 

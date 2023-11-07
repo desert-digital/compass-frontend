@@ -56,8 +56,7 @@ import { DeleteChecklistDialogComponent } from './components/delete-checklist-di
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
-import { FleetComponent } from './components/fleet/fleet.component';
-import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
+import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -68,10 +67,10 @@ import { ManageWorkflowsComponent } from './components/manage-workflows/manage-w
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
-import { StaffComponent } from './components/staff/staff.component';
+import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
-import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
+import { WorkflowOverviewComponent } from './components/workflow-overview/workflow-overview.component';
 import { ShowActionNotesDialogComponent } from './components/show-action-notes-dialog/show-action-notes-dialog.component';
 import { ShowChecklistNotesDialogComponent } from './components/show-checklist-notes-dialog/show-checklist-notes-dialog.component';
 import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-notes-dialog/show-workflow-notes-dialog.component';
@@ -88,10 +87,9 @@ import { EditStaffComponent } from './components/edit-staff/edit-staff.component
     MainComponent,
     HomeComponent,
     WorkflowComponent,
-    StaffComponent,
-    FleetComponent,
+    ManageStaffComponent,
     ChecklistComponent,
-    WorkflowListComponent,
+    WorkflowOverviewComponent,
     AvailableFleetComponent,
     ServiceOrderTableComponent,
     CharterChartComponent,
@@ -112,7 +110,7 @@ import { EditStaffComponent } from './components/edit-staff/edit-staff.component
     ShowChecklistNotesDialogComponent,
     EditChecklistComponent,
     ShowWorkflowNotesDialogComponent,
-    FleetTableComponent,
+    ManageFleetComponent,
     EditWorkflowComponent,
     AddVesselComponent,
     AddOwnerComponent,

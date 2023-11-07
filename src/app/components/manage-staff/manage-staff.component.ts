@@ -4,10 +4,10 @@ import { StaffService } from 'src/app/services/staff.service';
 
 @Component({
   selector: 'app-staff',
-  templateUrl: './staff.component.html',
-  styleUrls: ['./staff.component.scss']
+  templateUrl: './manage-staff.component.html',
+  styleUrls: ['./manage-staff.component.scss']
 })
-export class StaffComponent {
+export class ManageStaffComponent {
 
   items: any[] = [];
 

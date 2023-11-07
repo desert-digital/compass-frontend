@@ -10,7 +10,7 @@ import { ChecklistComponent } from './components/checklist/checklist.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
-import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
+import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -20,7 +20,7 @@ import { ManageChecklistsComponent } from './components/manage-checklists/manage
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
-import { StaffComponent } from './components/staff/staff.component';
+import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { AddVesselComponent } from './components/add-vessel/add-vessel.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
@@ -42,10 +42,10 @@ const routes: Routes = [
       component: EditVesselComponent
     },{
       path: 'fleet',
-      component: FleetTableComponent
+      component: ManageFleetComponent
     },{
       path: 'staff',
-      component: StaffComponent
+      component: ManageStaffComponent
     },{
       path: 'add-owner',
       component: AddOwnerComponent

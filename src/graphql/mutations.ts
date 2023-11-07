@@ -15,12 +15,14 @@ export const createPendingEvent = /* GraphQL */ `
     createPendingEvent(input: $input, condition: $condition) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename
@@ -35,12 +37,14 @@ export const updatePendingEvent = /* GraphQL */ `
     updatePendingEvent(input: $input, condition: $condition) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename
@@ -55,12 +59,14 @@ export const deletePendingEvent = /* GraphQL */ `
     deletePendingEvent(input: $input, condition: $condition) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename

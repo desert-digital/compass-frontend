@@ -7,12 +7,14 @@ export const getPendingEvent = /* GraphQL */ `
     getPendingEvent(id: $id) {
       id
       company
-      body
       start
       end
       item
       item_id
       status
+      contactEmail
+      contactName
+      contactPhone
       createdAt
       updatedAt
       __typename
@@ -29,12 +31,14 @@ export const listPendingEvents = /* GraphQL */ `
       items {
         id
         company
-        body
         start
         end
         item
         item_id
         status
+        contactEmail
+        contactName
+        contactPhone
         createdAt
         updatedAt
         __typename

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-workflow-list',
-  templateUrl: './workflow-list.component.html',
-  styleUrls: ['./workflow-list.component.scss']
+  templateUrl: './workflow-overview.component.html',
+  styleUrls: ['./workflow-overview.component.scss']
 })
-export class WorkflowListComponent {
+export class WorkflowOverviewComponent {
   items: any = [{
     name: 'Charter 1',
     status: 'On time'
