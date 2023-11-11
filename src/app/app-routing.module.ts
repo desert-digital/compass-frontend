@@ -10,6 +10,7 @@ import { AddStaffComponent } from './components/add-staff/add-staff.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
+import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
 import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,67 +36,67 @@ const routes: Routes = [
     children: [{
       path: 'home',
       component: HomeComponent
-    },{
+    }, {
       path: 'add-vessel',
       component: AddVesselComponent
-    },{
+    }, {
       path: 'edit-vessel/:id',
       component: EditVesselComponent
-    },{
+    }, {
       path: 'fleet',
       component: ManageFleetComponent
-    },{
+    }, {
       path: 'staff',
       component: ManageStaffComponent
-    },
-    {
+    }, {
       path: 'add-staff',
       component: AddStaffComponent
-    },
-    {
+    }, {
+      path: 'edit-staff/:id',
+      component: EditStaffComponent
+    }, {
       path: 'add-owner',
       component: AddOwnerComponent
-    }
-    ,{
+    }, {
       path: 'edit-owner/:id',
       component: EditOwnerComponent
-    },{
+    }, {
       path: 'owners',
       component: ManageOwnersComponent
-    },{
+    }, {
       path: 'pending',
       component: PendingTableComponent
-    },{
+    }, {
       path: 'workflow/:eventId',
       component: AssignWorkflowComponent
-    },{
+    }, {
       path: 'add-workflow',
       component: AddWorkflowComponent
-    },{
+    }, {
       path: 'edit-workflow/:id',
       component: EditWorkflowComponent
-    },{
+    }, {
       path: 'workflows',
       component: ManageWorkflowsComponent
-    },{
+    }, {
       path: 'add-checklist',
       component: AddChecklistComponent
-    },{
+    }, {
       path: 'edit-checklist/:id',
       component: EditChecklistComponent
-    },{
+    }, {
       path: 'checklists',
       component: ManageChecklistsComponent
-    },{
+    }, {
       path: 'add-new-action',
       component: AddActionComponent
-    },{
+    }, {
       path: 'edit-action/:id',
       component: EditActionComponent
-    },{
+    }, {
       path: 'actions',
       component: ManageActionsComponent
-    },{
+    }, {
       path: 'services',
       component: ManageServiceOrdersComponent
     }],
@@ -118,7 +119,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableTracing: false})],
+  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

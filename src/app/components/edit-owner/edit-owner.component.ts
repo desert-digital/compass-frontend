@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 // Material
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 // Amplify
 

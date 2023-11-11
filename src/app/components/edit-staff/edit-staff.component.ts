@@ -1,4 +1,15 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+
+// Material
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// Amplify
+
+import { Staff } from 'src/app/API.service';
+import { StaffService } from 'src/app/services/staff.service';
 
 @Component({
   selector: 'app-edit-staff',
@@ -7,4 +18,51 @@ import { Component } from '@angular/core';
 })
 export class EditStaffComponent {
 
+  staffName: String = '';
+  staffPhone: Number = 0;
+  staffEmail: String = '';
+
+  staffForm: FormGroup;
+
+  staff: Staff; 
+
+  constructor(private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private _staffService: StaffService,
+    private _snackBar: MatSnackBar) {
+    this.staffForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+  async ngOnInit() {
+    await this._setUp();
+  }
+
+  async _setUp() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.staff = await this._staffService.getStaffFromId(id);
+
+    this.staffForm.setValue({
+      id: this.staff.id,
+      name: this.staff.name,
+      phone: this.staff.phone,
+      email: this.staff.email,
+    });
+  }
+
+  async onUpdateStaffPressed(staff: Staff, formDirective: FormGroupDirective) {
+    try {
+      await this._staffService.updateStaff(staff).then(() => {
+        this._snackBar.open(`Updated ${staff.name}`, 'OK', { duration: 3000 })
+        this.router.navigate(['/main/staff']);
+      });
+    } catch (error) {
+      console.log(JSON.stringify(error.errors));
+      this._snackBar.open('An error occured when updating the action', 'OK', { duration: 3000 })
+    }
+  }
 }

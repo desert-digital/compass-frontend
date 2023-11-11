@@ -1,1 +1,27 @@
-<p>edit-staff works!</p>
+<div class="container">
+    <h3>Edit the Owner</h3>
+    <form [formGroup]="staffForm" #formDirective="ngForm"
+        (ngSubmit)="onUpdateStaffPressed(staffForm.value, formDirective)">
+        <button mat-flat-button type="submit" color="primary">Update the Owner</button>
+        <div action="#" class="column">
+            <div *ngIf="false">
+                <mat-form-field>
+                    <mat-label>ID</mat-label>
+                    <input matInput id="id" type="text" formControlName="id">
+                </mat-form-field>
+            </div>
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput id="name" type="text" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone</mat-label>
+                <input matInput id="phone" type="phone" formControlName="phone">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput id="email" type="email" formControlName="email">
+            </mat-form-field>
+        </div>
+    </form>
+</div>

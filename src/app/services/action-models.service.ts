@@ -45,7 +45,7 @@ export class ActionModelsService {
   async createActionModel(model: ActionModel) {
     const actionModelDetails = {
       input: {
-        company: '0', // eventually this will be provided as part of the account information
+        company: 'seaforth', // eventually this will be provided as part of the account information
         name: model.name,
         duration: model.duration,
         notes: model.notes

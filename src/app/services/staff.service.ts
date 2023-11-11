@@ -37,11 +37,18 @@ export class StaffService {
     return staffResult.data.listStaff.items as Staff[];
   }
 
+  async getStaffFromId(id: string): Promise<any>{
+    const staffResult = await API.graphql<GraphQLQuery<GetStaffQuery>>(
+      graphqlOperation(queries.getStaff, { id: id })
+    );
+    return staffResult.data.getStaff as Staff;
+  }
+
   async createStaff(staff: Staff) {
     const staffDetails = {
       input:
       {
-        company: '0',
+        company: 'seaforth',
         name: staff.name,
         email: staff.email,
         phone: staff.phone,
@@ -56,7 +63,19 @@ export class StaffService {
   }
 
   async updateStaff(staff: Staff) {
-    return;
+    const staffDetails = {
+      input: {
+        id: staff.id,
+        company: 'seaforth',
+        name: staff.name,
+        email: staff.email,
+        phone: staff.phone
+      }
+    };
+
+    const staffResult = await API.graphql<GraphQLQuery<UpdateStaffMutation>>(
+      graphqlOperation(mutations.updateStaff, staffDetails)
+    );
   }
 
   async deleteStaff(staff: Staff) {

@@ -41,7 +41,7 @@ export class WorkflowModelsService {
   async createWorkflowModel(workflowModel: WorkflowModel, checklistModels: ChecklistModel[]) {
     const workflowModelDetails = {
       input: {
-        company: '0',
+        company: 'seaforth',
         name: workflowModel.name,
         duration: workflowModel.duration,
         notes: workflowModel.notes

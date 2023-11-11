@@ -56,7 +56,7 @@ export class OwnersService {
     const ownerDetails = {
       input:
       {
-        company: '0',
+        company: 'seaforth',
         name: owner.name,
         email: owner.email,
         phone: owner.phone,
@@ -74,7 +74,7 @@ export class OwnersService {
     const ownerDetails = {
       input: {
         id: owner.id,
-        company: '0',
+        company: 'seaforth',
         name: owner.name,
         email: owner.email,
         phone: owner.phone

@@ -48,7 +48,7 @@ export class ChecklistModelsService {
   async createChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
     const checklistModelDetails = {
       input: {
-        company: '0',
+        company: 'seaforth',
         name: checklistModel.name,
         duration: checklistModel.duration,
         notes: checklistModel.notes,

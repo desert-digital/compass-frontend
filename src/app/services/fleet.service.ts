@@ -45,7 +45,7 @@ export class FleetService {
   async createVessel(vessel: Vessel, ownerId: String, workflowId: String) {
     const vesselDetails = {
       input: {
-        company: '0',
+        company: 'seaforth',
         name: vessel.name,
         vesselType: vessel.vesselType,
         documentNumber: vessel.documentNumber,
