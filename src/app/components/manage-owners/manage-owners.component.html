@@ -2,7 +2,7 @@
     <div class="row">
         <button mat-flat-button color="primary" (click)="onAddOwnerPressed()">Add a New Owner</button>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="owners.length > 0; else noOwners">
         <div *ngFor="let owner of owners">
             <mat-card class="example-card">
                 <mat-card-header>
@@ -26,5 +26,8 @@
                 </mat-card-actions>
             </mat-card>
         </div>
-    </div>
+    </div>    
+    <ng-template #noOwners class="row">
+        <h3>No Owners Found</h3>
+    </ng-template>
 </div>

@@ -1,6 +1,6 @@
 <div class="container">
     <button mat-flat-button color="primary" (click)="onAddNewActionPressed()">Add a New Action</button>
-    <div *ngIf="actions.length > 0">
+    <div *ngIf="actions.length > 0; else noActions">
         <h3>Available Actions</h3>
         <mat-list role="list">
             <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
@@ -30,7 +30,7 @@
             </button>
         </mat-menu>
     </div>
-    <div *ngIf="actions.length == 0">
+    <ng-template #noActions>
         <h3>No Actions Found</h3>
-    </div>
+    </ng-template>
 </div>

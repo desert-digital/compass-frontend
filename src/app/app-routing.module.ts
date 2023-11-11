@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddActionComponent } from './components/add-action/add-action.component';
 import { AddChecklistComponent } from './components/add-checklist/add-checklist.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
+import { AddStaffComponent } from './components/add-staff/add-staff.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
@@ -21,7 +22,7 @@ import { ManageServiceOrdersComponent } from './components/manage-service-orders
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
-import { WorkflowComponent } from './components/workflow/workflow.component';
+import { AssignWorkflowComponent } from './components/assign-workflow/assign-workflow.component';
 import { AddVesselComponent } from './components/add-vessel/add-vessel.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
@@ -46,7 +47,12 @@ const routes: Routes = [
     },{
       path: 'staff',
       component: ManageStaffComponent
-    },{
+    },
+    {
+      path: 'add-staff',
+      component: AddStaffComponent
+    },
+    {
       path: 'add-owner',
       component: AddOwnerComponent
     }
@@ -61,7 +67,7 @@ const routes: Routes = [
       component: PendingTableComponent
     },{
       path: 'workflow/:eventId',
-      component: WorkflowComponent
+      component: AssignWorkflowComponent
     },{
       path: 'add-workflow',
       component: AddWorkflowComponent

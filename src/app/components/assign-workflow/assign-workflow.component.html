@@ -1,0 +1,39 @@
+<div class="container">
+  <h4>Assign The Workflow</h4>
+  <h4 class="tight">Charter: {{ event?.item }}</h4>
+  <p class="tight">Charter starting on: {{ event?.start | date: 'short' }}</p>
+  <form [formGroup]="workflowForm">
+    <mat-form-field>
+      <mat-label>Vessels</mat-label>
+      <mat-select id="vessels" formControlName="vessels">
+        <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id"
+          (onSelectionChange)="onVesselChanged($event)">{{
+          vessel.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="boatSelected">
+      <ng-container formArrayName="steps">
+        <mat-stepper orientation="vertical">
+          <ng-container *ngFor="let stepForm of steps.controls; let index = index">
+            <mat-step>
+              <ng-container matStepName>{{ workflow.checklists.items[index].checklistModel.name }}</ng-container>
+              <div [formGroupName]="index">
+                <mat-form-field appearance="fill">
+                  <mat-select formControlName="assignee">
+                    <mat-option *ngFor="let person of staff" [value]="person.id">{{ person.name }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div *ngIf="index < steps.controls.length-1">
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+              <div *ngIf="index === steps.controls.length-1">
+                <button mat-raised-button (click)="onStartWorkflowPressed()">Submit</button>
+              </div>
+            </mat-step>
+          </ng-container>
+        </mat-stepper>
+      </ng-container>
+    </div>
+  </form>
+</div>

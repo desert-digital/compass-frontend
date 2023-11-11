@@ -105,7 +105,7 @@ export type DeletePendingEventInput = {
 
 export type CreateVesselInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
   name?: string | null,
   vesselType?: string | null,
   documentNumber?: string | null,
@@ -114,7 +114,7 @@ export type CreateVesselInput = {
 };
 
 export type ModelVesselConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   vesselType?: ModelStringInput | null,
   documentNumber?: ModelStringInput | null,
@@ -144,7 +144,7 @@ export type ModelIDInput = {
 export type Vessel = {
   __typename: "Vessel",
   id: string,
-  company?: string | null,
+  company: string,
   name?: string | null,
   vesselType?: string | null,
   documentNumber?: string | null,
@@ -187,7 +187,7 @@ export type WorkflowChecklists = {
 export type ChecklistModel = {
   __typename: "ChecklistModel",
   id: string,
-  company?: string | null,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
@@ -218,7 +218,7 @@ export type ChecklistActions = {
 export type ActionModel = {
   __typename: "ActionModel",
   id: string,
-  company?: string | null,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
@@ -243,15 +243,17 @@ export type DeleteVesselInput = {
 
 export type CreateStaffInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
   name?: string | null,
   email?: string | null,
+  phone?: string | null,
 };
 
 export type ModelStaffConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
   and?: Array< ModelStaffConditionInput | null > | null,
   or?: Array< ModelStaffConditionInput | null > | null,
   not?: ModelStaffConditionInput | null,
@@ -260,9 +262,10 @@ export type ModelStaffConditionInput = {
 export type Staff = {
   __typename: "Staff",
   id: string,
-  company?: string | null,
+  company: string,
   name?: string | null,
   email?: string | null,
+  phone?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -272,6 +275,7 @@ export type UpdateStaffInput = {
   company?: string | null,
   name?: string | null,
   email?: string | null,
+  phone?: string | null,
 };
 
 export type DeleteStaffInput = {
@@ -280,14 +284,14 @@ export type DeleteStaffInput = {
 
 export type CreateOwnerInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
   name?: string | null,
   email?: string | null,
   phone?: string | null,
 };
 
 export type ModelOwnerConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
@@ -299,7 +303,7 @@ export type ModelOwnerConditionInput = {
 export type Owner = {
   __typename: "Owner",
   id: string,
-  company?: string | null,
+  company: string,
   name?: string | null,
   email?: string | null,
   phone?: string | null,
@@ -328,14 +332,14 @@ export type DeleteOwnerInput = {
 
 export type CreateActionModelInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
 };
 
 export type ModelActionModelConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -370,7 +374,7 @@ export type DeleteActionModelInput = {
 
 export type CreateChecklistModelInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
@@ -378,7 +382,7 @@ export type CreateChecklistModelInput = {
 };
 
 export type ModelChecklistModelConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -417,7 +421,7 @@ export type CreateWorkflowModelInput = {
 };
 
 export type ModelWorkflowModelConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -440,6 +444,7 @@ export type DeleteWorkflowModelInput = {
 
 export type CreateActionInput = {
   id?: string | null,
+  company: string,
   status?: boolean | null,
   actualStart?: string | null,
   actualEnd?: string | null,
@@ -447,6 +452,7 @@ export type CreateActionInput = {
 };
 
 export type ModelActionConditionInput = {
+  company?: ModelStringInput | null,
   status?: ModelBooleanInput | null,
   actualStart?: ModelStringInput | null,
   actualEnd?: ModelStringInput | null,
@@ -459,6 +465,7 @@ export type ModelActionConditionInput = {
 export type Action = {
   __typename: "Action",
   id: string,
+  company: string,
   status?: boolean | null,
   model?: ActionModel | null,
   actualStart?: string | null,
@@ -470,6 +477,7 @@ export type Action = {
 
 export type UpdateActionInput = {
   id: string,
+  company?: string | null,
   status?: boolean | null,
   actualStart?: string | null,
   actualEnd?: string | null,
@@ -482,45 +490,44 @@ export type DeleteActionInput = {
 
 export type CreateChecklistInput = {
   id?: string | null,
-  company?: string | null,
+  company: string,
+  steps?: Array< string | null > | null,
   start?: string | null,
   end?: string | null,
   checklistOwnerId?: string | null,
-  checklistModelId?: string | null,
 };
 
 export type ModelChecklistConditionInput = {
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
+  steps?: ModelStringInput | null,
   start?: ModelStringInput | null,
   end?: ModelStringInput | null,
   and?: Array< ModelChecklistConditionInput | null > | null,
   or?: Array< ModelChecklistConditionInput | null > | null,
   not?: ModelChecklistConditionInput | null,
   checklistOwnerId?: ModelIDInput | null,
-  checklistModelId?: ModelIDInput | null,
 };
 
 export type Checklist = {
   __typename: "Checklist",
   id: string,
-  company?: string | null,
+  company: string,
   owner?: Staff | null,
-  model?: ChecklistModel | null,
+  steps?: Array< string | null > | null,
   start?: string | null,
   end?: string | null,
   createdAt: string,
   updatedAt: string,
   checklistOwnerId?: string | null,
-  checklistModelId?: string | null,
 };
 
 export type UpdateChecklistInput = {
   id: string,
   company?: string | null,
+  steps?: Array< string | null > | null,
   start?: string | null,
   end?: string | null,
   checklistOwnerId?: string | null,
-  checklistModelId?: string | null,
 };
 
 export type DeleteChecklistInput = {
@@ -530,44 +537,43 @@ export type DeleteChecklistInput = {
 export type CreateWorkflowInput = {
   id?: string | null,
   company: string,
-  start?: string | null,
-  end?: string | null,
-  workflowOwnerId?: string | null,
-  workflowStepsId?: string | null,
+  mustStart?: string | null,
+  mustEnd?: string | null,
+  actualStart?: string | null,
+  actualEnd?: string | null,
 };
 
 export type ModelWorkflowConditionInput = {
-  company?: ModelIDInput | null,
-  start?: ModelStringInput | null,
-  end?: ModelStringInput | null,
+  company?: ModelStringInput | null,
+  mustStart?: ModelStringInput | null,
+  mustEnd?: ModelStringInput | null,
+  actualStart?: ModelStringInput | null,
+  actualEnd?: ModelStringInput | null,
   and?: Array< ModelWorkflowConditionInput | null > | null,
   or?: Array< ModelWorkflowConditionInput | null > | null,
   not?: ModelWorkflowConditionInput | null,
-  workflowOwnerId?: ModelIDInput | null,
-  workflowStepsId?: ModelIDInput | null,
 };
 
 export type Workflow = {
   __typename: "Workflow",
   id: string,
   company: string,
-  owner?: Staff | null,
-  steps?: WorkflowModel | null,
-  start?: string | null,
-  end?: string | null,
+  steps?:  Array<Checklist | null > | null,
+  mustStart?: string | null,
+  mustEnd?: string | null,
+  actualStart?: string | null,
+  actualEnd?: string | null,
   createdAt: string,
   updatedAt: string,
-  workflowOwnerId?: string | null,
-  workflowStepsId?: string | null,
 };
 
 export type UpdateWorkflowInput = {
   id: string,
   company?: string | null,
-  start?: string | null,
-  end?: string | null,
-  workflowOwnerId?: string | null,
-  workflowStepsId?: string | null,
+  mustStart?: string | null,
+  mustEnd?: string | null,
+  actualStart?: string | null,
+  actualEnd?: string | null,
 };
 
 export type DeleteWorkflowInput = {
@@ -646,7 +652,7 @@ export type ModelPendingEventConnection = {
 
 export type ModelVesselFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   vesselType?: ModelStringInput | null,
   documentNumber?: ModelStringInput | null,
@@ -659,9 +665,10 @@ export type ModelVesselFilterInput = {
 
 export type ModelStaffFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
   and?: Array< ModelStaffFilterInput | null > | null,
   or?: Array< ModelStaffFilterInput | null > | null,
   not?: ModelStaffFilterInput | null,
@@ -675,7 +682,7 @@ export type ModelStaffConnection = {
 
 export type ModelOwnerFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
@@ -692,7 +699,7 @@ export type ModelOwnerConnection = {
 
 export type ModelActionModelFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -709,7 +716,7 @@ export type ModelActionModelConnection = {
 
 export type ModelChecklistModelFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -727,7 +734,7 @@ export type ModelChecklistModelConnection = {
 
 export type ModelWorkflowModelFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
@@ -744,6 +751,7 @@ export type ModelWorkflowModelConnection = {
 
 export type ModelActionFilterInput = {
   id?: ModelIDInput | null,
+  company?: ModelStringInput | null,
   status?: ModelBooleanInput | null,
   actualStart?: ModelStringInput | null,
   actualEnd?: ModelStringInput | null,
@@ -761,14 +769,14 @@ export type ModelActionConnection = {
 
 export type ModelChecklistFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
+  company?: ModelStringInput | null,
+  steps?: ModelStringInput | null,
   start?: ModelStringInput | null,
   end?: ModelStringInput | null,
   and?: Array< ModelChecklistFilterInput | null > | null,
   or?: Array< ModelChecklistFilterInput | null > | null,
   not?: ModelChecklistFilterInput | null,
   checklistOwnerId?: ModelIDInput | null,
-  checklistModelId?: ModelIDInput | null,
 };
 
 export type ModelChecklistConnection = {
@@ -779,14 +787,14 @@ export type ModelChecklistConnection = {
 
 export type ModelWorkflowFilterInput = {
   id?: ModelIDInput | null,
-  company?: ModelIDInput | null,
-  start?: ModelStringInput | null,
-  end?: ModelStringInput | null,
+  company?: ModelStringInput | null,
+  mustStart?: ModelStringInput | null,
+  mustEnd?: ModelStringInput | null,
+  actualStart?: ModelStringInput | null,
+  actualEnd?: ModelStringInput | null,
   and?: Array< ModelWorkflowFilterInput | null > | null,
   or?: Array< ModelWorkflowFilterInput | null > | null,
   not?: ModelWorkflowFilterInput | null,
-  workflowOwnerId?: ModelIDInput | null,
-  workflowStepsId?: ModelIDInput | null,
 };
 
 export type ModelWorkflowConnection = {
@@ -866,7 +874,7 @@ export type ModelSubscriptionStringInput = {
 
 export type ModelSubscriptionVesselFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   vesselType?: ModelSubscriptionStringInput | null,
   documentNumber?: ModelSubscriptionStringInput | null,
@@ -876,16 +884,17 @@ export type ModelSubscriptionVesselFilterInput = {
 
 export type ModelSubscriptionStaffFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionStaffFilterInput | null > | null,
   or?: Array< ModelSubscriptionStaffFilterInput | null > | null,
 };
 
 export type ModelSubscriptionOwnerFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
@@ -895,7 +904,7 @@ export type ModelSubscriptionOwnerFilterInput = {
 
 export type ModelSubscriptionActionModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
@@ -917,7 +926,7 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionChecklistModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
@@ -933,7 +942,7 @@ export type ModelSubscriptionBooleanInput = {
 
 export type ModelSubscriptionWorkflowModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
@@ -943,6 +952,7 @@ export type ModelSubscriptionWorkflowModelFilterInput = {
 
 export type ModelSubscriptionActionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
   status?: ModelSubscriptionBooleanInput | null,
   actualStart?: ModelSubscriptionStringInput | null,
   actualEnd?: ModelSubscriptionStringInput | null,
@@ -952,7 +962,8 @@ export type ModelSubscriptionActionFilterInput = {
 
 export type ModelSubscriptionChecklistFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  steps?: ModelSubscriptionStringInput | null,
   start?: ModelSubscriptionStringInput | null,
   end?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChecklistFilterInput | null > | null,
@@ -961,9 +972,11 @@ export type ModelSubscriptionChecklistFilterInput = {
 
 export type ModelSubscriptionWorkflowFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionIDInput | null,
-  start?: ModelSubscriptionStringInput | null,
-  end?: ModelSubscriptionStringInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  mustStart?: ModelSubscriptionStringInput | null,
+  mustEnd?: ModelSubscriptionStringInput | null,
+  actualStart?: ModelSubscriptionStringInput | null,
+  actualEnd?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
 };
@@ -1070,7 +1083,7 @@ export type CreateVesselMutation = {
   createVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -1112,7 +1125,7 @@ export type UpdateVesselMutation = {
   updateVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -1154,7 +1167,7 @@ export type DeleteVesselMutation = {
   deleteVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -1196,9 +1209,10 @@ export type CreateStaffMutation = {
   createStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1213,9 +1227,10 @@ export type UpdateStaffMutation = {
   updateStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1230,9 +1245,10 @@ export type DeleteStaffMutation = {
   deleteStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1247,7 +1263,7 @@ export type CreateOwnerMutation = {
   createOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -1256,7 +1272,7 @@ export type CreateOwnerMutation = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -1291,7 +1307,7 @@ export type UpdateOwnerMutation = {
   updateOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -1300,7 +1316,7 @@ export type UpdateOwnerMutation = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -1335,7 +1351,7 @@ export type DeleteOwnerMutation = {
   deleteOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -1344,7 +1360,7 @@ export type DeleteOwnerMutation = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -1379,7 +1395,7 @@ export type CreateActionModelMutation = {
   createActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1393,7 +1409,7 @@ export type CreateActionModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1403,7 +1419,7 @@ export type CreateActionModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1430,7 +1446,7 @@ export type UpdateActionModelMutation = {
   updateActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1444,7 +1460,7 @@ export type UpdateActionModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1454,7 +1470,7 @@ export type UpdateActionModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1481,7 +1497,7 @@ export type DeleteActionModelMutation = {
   deleteActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1495,7 +1511,7 @@ export type DeleteActionModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1505,7 +1521,7 @@ export type DeleteActionModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1532,7 +1548,7 @@ export type CreateChecklistModelMutation = {
   createChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1547,7 +1563,7 @@ export type CreateChecklistModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1557,7 +1573,7 @@ export type CreateChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1580,7 +1596,7 @@ export type CreateChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1617,7 +1633,7 @@ export type UpdateChecklistModelMutation = {
   updateChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1632,7 +1648,7 @@ export type UpdateChecklistModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1642,7 +1658,7 @@ export type UpdateChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1665,7 +1681,7 @@ export type UpdateChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1702,7 +1718,7 @@ export type DeleteChecklistModelMutation = {
   deleteChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -1717,7 +1733,7 @@ export type DeleteChecklistModelMutation = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1727,7 +1743,7 @@ export type DeleteChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1750,7 +1766,7 @@ export type DeleteChecklistModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1801,7 +1817,7 @@ export type CreateWorkflowModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1852,7 +1868,7 @@ export type UpdateWorkflowModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1903,7 +1919,7 @@ export type DeleteWorkflowModelMutation = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -1940,11 +1956,12 @@ export type CreateActionMutation = {
   createAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -1980,11 +1997,12 @@ export type UpdateActionMutation = {
   updateAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2020,11 +2038,12 @@ export type DeleteActionMutation = {
   deleteAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2060,57 +2079,23 @@ export type CreateChecklistMutation = {
   createChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -2123,57 +2108,23 @@ export type UpdateChecklistMutation = {
   updateChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -2186,57 +2137,23 @@ export type DeleteChecklistMutation = {
   deleteChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -2250,43 +2167,33 @@ export type CreateWorkflowMutation = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -2300,43 +2207,33 @@ export type UpdateWorkflowMutation = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -2350,43 +2247,33 @@ export type DeleteWorkflowMutation = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -2404,7 +2291,7 @@ export type CreateChecklistActionsMutation = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2426,7 +2313,7 @@ export type CreateChecklistActionsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2477,7 +2364,7 @@ export type UpdateChecklistActionsMutation = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2499,7 +2386,7 @@ export type UpdateChecklistActionsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2550,7 +2437,7 @@ export type DeleteChecklistActionsMutation = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2572,7 +2459,7 @@ export type DeleteChecklistActionsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2623,7 +2510,7 @@ export type CreateWorkflowChecklistsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2696,7 +2583,7 @@ export type UpdateWorkflowChecklistsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2769,7 +2656,7 @@ export type DeleteWorkflowChecklistsMutation = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -2886,7 +2773,7 @@ export type GetVesselQuery = {
   getVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -2931,7 +2818,7 @@ export type ListVesselsQuery = {
     items:  Array< {
       __typename: "Vessel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
@@ -2966,9 +2853,10 @@ export type GetStaffQuery = {
   getStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2986,9 +2874,10 @@ export type ListStaffQuery = {
     items:  Array< {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3004,7 +2893,7 @@ export type GetOwnerQuery = {
   getOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -3013,7 +2902,7 @@ export type GetOwnerQuery = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -3051,7 +2940,7 @@ export type ListOwnersQuery = {
     items:  Array< {
       __typename: "Owner",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
       phone?: string | null,
@@ -3060,7 +2949,7 @@ export type ListOwnersQuery = {
         items:  Array< {
           __typename: "Vessel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           vesselType?: string | null,
           documentNumber?: string | null,
@@ -3086,7 +2975,7 @@ export type GetActionModelQuery = {
   getActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -3100,7 +2989,7 @@ export type GetActionModelQuery = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3110,7 +2999,7 @@ export type GetActionModelQuery = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3140,7 +3029,7 @@ export type ListActionModelsQuery = {
     items:  Array< {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3171,7 +3060,7 @@ export type GetChecklistModelQuery = {
   getChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -3186,7 +3075,7 @@ export type GetChecklistModelQuery = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3196,7 +3085,7 @@ export type GetChecklistModelQuery = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3219,7 +3108,7 @@ export type GetChecklistModelQuery = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3259,7 +3148,7 @@ export type ListChecklistModelsQuery = {
     items:  Array< {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3317,7 +3206,7 @@ export type GetWorkflowModelQuery = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -3388,11 +3277,12 @@ export type GetActionQuery = {
   getAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3431,11 +3321,12 @@ export type ListActionsQuery = {
     items:  Array< {
       __typename: "Action",
       id: string,
+      company: string,
       status?: boolean | null,
       model?:  {
         __typename: "ActionModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3464,57 +3355,23 @@ export type GetChecklistQuery = {
   getChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -3530,41 +3387,23 @@ export type ListChecklistsQuery = {
     items:  Array< {
       __typename: "Checklist",
       id: string,
-      company?: string | null,
+      company: string,
       owner?:  {
         __typename: "Staff",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         email?: string | null,
+        phone?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
-      model?:  {
-        __typename: "ChecklistModel",
-        id: string,
-        company?: string | null,
-        name?: string | null,
-        notes?: string | null,
-        duration?: number | null,
-        preCharter?: boolean | null,
-        actions?:  {
-          __typename: "ModelChecklistActionsConnection",
-          nextToken?: string | null,
-        } | null,
-        workflows?:  {
-          __typename: "ModelWorkflowChecklistsConnection",
-          nextToken?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      steps?: Array< string | null > | null,
       start?: string | null,
       end?: string | null,
       createdAt: string,
       updatedAt: string,
       checklistOwnerId?: string | null,
-      checklistModelId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3579,43 +3418,33 @@ export type GetWorkflowQuery = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -3632,35 +3461,33 @@ export type ListWorkflowsQuery = {
       __typename: "Workflow",
       id: string,
       company: string,
-      owner?:  {
-        __typename: "Staff",
-        id: string,
-        company?: string | null,
-        name?: string | null,
-        email?: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      steps?:  {
-        __typename: "WorkflowModel",
+      steps?:  Array< {
+        __typename: "Checklist",
         id: string,
         company: string,
-        name?: string | null,
-        notes?: string | null,
-        duration?: number | null,
-        checklists?:  {
-          __typename: "ModelWorkflowChecklistsConnection",
-          nextToken?: string | null,
+        owner?:  {
+          __typename: "Staff",
+          id: string,
+          company: string,
+          name?: string | null,
+          email?: string | null,
+          phone?: string | null,
+          createdAt: string,
+          updatedAt: string,
         } | null,
+        steps?: Array< string | null > | null,
+        start?: string | null,
+        end?: string | null,
         createdAt: string,
         updatedAt: string,
-      } | null,
-      start?: string | null,
-      end?: string | null,
+        checklistOwnerId?: string | null,
+      } | null > | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
       createdAt: string,
       updatedAt: string,
-      workflowOwnerId?: string | null,
-      workflowStepsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3679,7 +3506,7 @@ export type GetChecklistActionsQuery = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3701,7 +3528,7 @@ export type GetChecklistActionsQuery = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3755,7 +3582,7 @@ export type ListChecklistActionsQuery = {
       actionModel:  {
         __typename: "ActionModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3769,7 +3596,7 @@ export type ListChecklistActionsQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3805,7 +3632,7 @@ export type GetWorkflowChecklistsQuery = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -3881,7 +3708,7 @@ export type ListWorkflowChecklistsQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3937,7 +3764,7 @@ export type ChecklistActionsByActionModelIdQuery = {
       actionModel:  {
         __typename: "ActionModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3951,7 +3778,7 @@ export type ChecklistActionsByActionModelIdQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -3993,7 +3820,7 @@ export type ChecklistActionsByChecklistModelIdQuery = {
       actionModel:  {
         __typename: "ActionModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4007,7 +3834,7 @@ export type ChecklistActionsByChecklistModelIdQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4049,7 +3876,7 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4105,7 +3932,7 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
       checklistModel:  {
         __typename: "ChecklistModel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
@@ -4216,7 +4043,7 @@ export type OnCreateVesselSubscription = {
   onCreateVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -4257,7 +4084,7 @@ export type OnUpdateVesselSubscription = {
   onUpdateVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -4298,7 +4125,7 @@ export type OnDeleteVesselSubscription = {
   onDeleteVessel?:  {
     __typename: "Vessel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
@@ -4339,9 +4166,10 @@ export type OnCreateStaffSubscription = {
   onCreateStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4355,9 +4183,10 @@ export type OnUpdateStaffSubscription = {
   onUpdateStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4371,9 +4200,10 @@ export type OnDeleteStaffSubscription = {
   onDeleteStaff?:  {
     __typename: "Staff",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
+    phone?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4387,7 +4217,7 @@ export type OnCreateOwnerSubscription = {
   onCreateOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -4396,7 +4226,7 @@ export type OnCreateOwnerSubscription = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -4430,7 +4260,7 @@ export type OnUpdateOwnerSubscription = {
   onUpdateOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -4439,7 +4269,7 @@ export type OnUpdateOwnerSubscription = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -4473,7 +4303,7 @@ export type OnDeleteOwnerSubscription = {
   onDeleteOwner?:  {
     __typename: "Owner",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     email?: string | null,
     phone?: string | null,
@@ -4482,7 +4312,7 @@ export type OnDeleteOwnerSubscription = {
       items:  Array< {
         __typename: "Vessel",
         id: string,
-        company?: string | null,
+        company: string,
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
@@ -4516,7 +4346,7 @@ export type OnCreateActionModelSubscription = {
   onCreateActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4530,7 +4360,7 @@ export type OnCreateActionModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4540,7 +4370,7 @@ export type OnCreateActionModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4566,7 +4396,7 @@ export type OnUpdateActionModelSubscription = {
   onUpdateActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4580,7 +4410,7 @@ export type OnUpdateActionModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4590,7 +4420,7 @@ export type OnUpdateActionModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4616,7 +4446,7 @@ export type OnDeleteActionModelSubscription = {
   onDeleteActionModel?:  {
     __typename: "ActionModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4630,7 +4460,7 @@ export type OnDeleteActionModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4640,7 +4470,7 @@ export type OnDeleteActionModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4666,7 +4496,7 @@ export type OnCreateChecklistModelSubscription = {
   onCreateChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4681,7 +4511,7 @@ export type OnCreateChecklistModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4691,7 +4521,7 @@ export type OnCreateChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4714,7 +4544,7 @@ export type OnCreateChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4750,7 +4580,7 @@ export type OnUpdateChecklistModelSubscription = {
   onUpdateChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4765,7 +4595,7 @@ export type OnUpdateChecklistModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4775,7 +4605,7 @@ export type OnUpdateChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4798,7 +4628,7 @@ export type OnUpdateChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4834,7 +4664,7 @@ export type OnDeleteChecklistModelSubscription = {
   onDeleteChecklistModel?:  {
     __typename: "ChecklistModel",
     id: string,
-    company?: string | null,
+    company: string,
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
@@ -4849,7 +4679,7 @@ export type OnDeleteChecklistModelSubscription = {
         actionModel:  {
           __typename: "ActionModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4859,7 +4689,7 @@ export type OnDeleteChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4882,7 +4712,7 @@ export type OnDeleteChecklistModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4932,7 +4762,7 @@ export type OnCreateWorkflowModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -4982,7 +4812,7 @@ export type OnUpdateWorkflowModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -5032,7 +4862,7 @@ export type OnDeleteWorkflowModelSubscription = {
         checklistModel:  {
           __typename: "ChecklistModel",
           id: string,
-          company?: string | null,
+          company: string,
           name?: string | null,
           notes?: string | null,
           duration?: number | null,
@@ -5068,11 +4898,12 @@ export type OnCreateActionSubscription = {
   onCreateAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5107,11 +4938,12 @@ export type OnUpdateActionSubscription = {
   onUpdateAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5146,11 +4978,12 @@ export type OnDeleteActionSubscription = {
   onDeleteAction?:  {
     __typename: "Action",
     id: string,
+    company: string,
     status?: boolean | null,
     model?:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5185,57 +5018,23 @@ export type OnCreateChecklistSubscription = {
   onCreateChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -5247,57 +5046,23 @@ export type OnUpdateChecklistSubscription = {
   onUpdateChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -5309,57 +5074,23 @@ export type OnDeleteChecklistSubscription = {
   onDeleteChecklist?:  {
     __typename: "Checklist",
     id: string,
-    company?: string | null,
+    company: string,
     owner?:  {
       __typename: "Staff",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       email?: string | null,
+      phone?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
-    model?:  {
-      __typename: "ChecklistModel",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      preCharter?: boolean | null,
-      actions?:  {
-        __typename: "ModelChecklistActionsConnection",
-        items:  Array< {
-          __typename: "ChecklistActions",
-          id: string,
-          actionModelId: string,
-          checklistModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      workflows?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    steps?: Array< string | null > | null,
     start?: string | null,
     end?: string | null,
     createdAt: string,
     updatedAt: string,
     checklistOwnerId?: string | null,
-    checklistModelId?: string | null,
   } | null,
 };
 
@@ -5372,43 +5103,33 @@ export type OnCreateWorkflowSubscription = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -5421,43 +5142,33 @@ export type OnUpdateWorkflowSubscription = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -5470,43 +5181,33 @@ export type OnDeleteWorkflowSubscription = {
     __typename: "Workflow",
     id: string,
     company: string,
-    owner?:  {
-      __typename: "Staff",
-      id: string,
-      company?: string | null,
-      name?: string | null,
-      email?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    steps?:  {
-      __typename: "WorkflowModel",
+    steps?:  Array< {
+      __typename: "Checklist",
       id: string,
       company: string,
-      name?: string | null,
-      notes?: string | null,
-      duration?: number | null,
-      checklists?:  {
-        __typename: "ModelWorkflowChecklistsConnection",
-        items:  Array< {
-          __typename: "WorkflowChecklists",
-          id: string,
-          checklistModelId: string,
-          workflowModelId: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null >,
-        nextToken?: string | null,
+      owner?:  {
+        __typename: "Staff",
+        id: string,
+        company: string,
+        name?: string | null,
+        email?: string | null,
+        phone?: string | null,
+        createdAt: string,
+        updatedAt: string,
       } | null,
+      steps?: Array< string | null > | null,
+      start?: string | null,
+      end?: string | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    start?: string | null,
-    end?: string | null,
+      checklistOwnerId?: string | null,
+    } | null > | null,
+    mustStart?: string | null,
+    mustEnd?: string | null,
+    actualStart?: string | null,
+    actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
-    workflowOwnerId?: string | null,
-    workflowStepsId?: string | null,
   } | null,
 };
 
@@ -5523,7 +5224,7 @@ export type OnCreateChecklistActionsSubscription = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5545,7 +5246,7 @@ export type OnCreateChecklistActionsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5595,7 +5296,7 @@ export type OnUpdateChecklistActionsSubscription = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5617,7 +5318,7 @@ export type OnUpdateChecklistActionsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5667,7 +5368,7 @@ export type OnDeleteChecklistActionsSubscription = {
     actionModel:  {
       __typename: "ActionModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5689,7 +5390,7 @@ export type OnDeleteChecklistActionsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5739,7 +5440,7 @@ export type OnCreateWorkflowChecklistsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5811,7 +5512,7 @@ export type OnUpdateWorkflowChecklistsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
@@ -5883,7 +5584,7 @@ export type OnDeleteWorkflowChecklistsSubscription = {
     checklistModel:  {
       __typename: "ChecklistModel",
       id: string,
-      company?: string | null,
+      company: string,
       name?: string | null,
       notes?: string | null,
       duration?: number | null,

@@ -206,6 +206,7 @@ export const createStaff = /* GraphQL */ `
       company
       name
       email
+      phone
       createdAt
       updatedAt
       __typename
@@ -222,6 +223,7 @@ export const updateStaff = /* GraphQL */ `
       company
       name
       email
+      phone
       createdAt
       updatedAt
       __typename
@@ -238,6 +240,7 @@ export const deleteStaff = /* GraphQL */ `
       company
       name
       email
+      phone
       createdAt
       updatedAt
       __typename
@@ -932,6 +935,7 @@ export const createAction = /* GraphQL */ `
   ) {
     createAction(input: $input, condition: $condition) {
       id
+      company
       status
       model {
         id
@@ -971,6 +975,7 @@ export const updateAction = /* GraphQL */ `
   ) {
     updateAction(input: $input, condition: $condition) {
       id
+      company
       status
       model {
         id
@@ -1010,6 +1015,7 @@ export const deleteAction = /* GraphQL */ `
   ) {
     deleteAction(input: $input, condition: $condition) {
       id
+      company
       status
       model {
         id
@@ -1055,51 +1061,17 @@ export const createChecklist = /* GraphQL */ `
         company
         name
         email
+        phone
         createdAt
         updatedAt
         __typename
       }
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        preCharter
-        actions {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        workflows {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      steps
       start
       end
       createdAt
       updatedAt
       checklistOwnerId
-      checklistModelId
       __typename
     }
   }
@@ -1117,51 +1089,17 @@ export const updateChecklist = /* GraphQL */ `
         company
         name
         email
+        phone
         createdAt
         updatedAt
         __typename
       }
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        preCharter
-        actions {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        workflows {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      steps
       start
       end
       createdAt
       updatedAt
       checklistOwnerId
-      checklistModelId
       __typename
     }
   }
@@ -1179,51 +1117,17 @@ export const deleteChecklist = /* GraphQL */ `
         company
         name
         email
+        phone
         createdAt
         updatedAt
         __typename
       }
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        preCharter
-        actions {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        workflows {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      steps
       start
       end
       createdAt
       updatedAt
       checklistOwnerId
-      checklistModelId
       __typename
     }
   }
@@ -1236,43 +1140,33 @@ export const createWorkflow = /* GraphQL */ `
     createWorkflow(input: $input, condition: $condition) {
       id
       company
-      owner {
-        id
-        company
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
       steps {
         id
         company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
           __typename
         }
+        steps
+        start
+        end
         createdAt
         updatedAt
+        checklistOwnerId
         __typename
       }
-      start
-      end
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
-      workflowOwnerId
-      workflowStepsId
       __typename
     }
   }
@@ -1285,43 +1179,33 @@ export const updateWorkflow = /* GraphQL */ `
     updateWorkflow(input: $input, condition: $condition) {
       id
       company
-      owner {
-        id
-        company
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
       steps {
         id
         company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
           __typename
         }
+        steps
+        start
+        end
         createdAt
         updatedAt
+        checklistOwnerId
         __typename
       }
-      start
-      end
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
-      workflowOwnerId
-      workflowStepsId
       __typename
     }
   }
@@ -1334,43 +1218,33 @@ export const deleteWorkflow = /* GraphQL */ `
     deleteWorkflow(input: $input, condition: $condition) {
       id
       company
-      owner {
-        id
-        company
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
       steps {
         id
         company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            checklistModelId
-            workflowModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
           __typename
         }
+        steps
+        start
+        end
         createdAt
         updatedAt
+        checklistOwnerId
         __typename
       }
-      start
-      end
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
-      workflowOwnerId
-      workflowStepsId
       __typename
     }
   }

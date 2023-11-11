@@ -74,8 +74,37 @@ export class ChecklistModelsService {
   }
 
   async updateChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
-    this.deleteModel(checklistModel);
-    this.createChecklistModel(checklistModel, actions);
+    const checklistModelId = {
+      checklistModelId: checklistModel.id
+    }
+
+    const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
+      graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
+    )
+
+    const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
+
+    for (let checkListAction of checklistActions) {
+      const checklistActionId = {
+        input: {
+          id: checkListAction.id
+        }
+      }
+      await API.graphql<GraphQLQuery<DeleteChecklistActionsMutation>>(
+        graphqlOperation(mutations.deleteChecklistActions, checklistActionId)
+      );
+    }
+
+    for (let action of actions) {
+      const checklistActionsDetails = {
+        input: {
+          actionModelId: action.id,
+          checklistModelId: checklistModel.id
+        },
+      }
+
+      await API.graphql(graphqlOperation(mutations.createChecklistActions, checklistActionsDetails));
+    }
   }
 
   async deleteModel(checklistModel: ChecklistModel) {
@@ -84,7 +113,7 @@ export class ChecklistModelsService {
     }
 
     const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
-      graphqlOperation(queries.checklistActionsByChecklistModelId, {checklistModelId: checklistModel.id})
+      graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
     )
 
     const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
@@ -101,7 +130,7 @@ export class ChecklistModelsService {
     }
 
     await API.graphql<GraphQLQuery<DeleteChecklistModelMutation>>(
-      graphqlOperation(mutations.deleteChecklistModel, {input: {id: checklistModel.id}})
+      graphqlOperation(mutations.deleteChecklistModel, { input: { id: checklistModel.id } })
     );
 
     // TO DO: should also delete the _checklists_ that use this model, and 

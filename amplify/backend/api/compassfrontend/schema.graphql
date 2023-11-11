@@ -13,7 +13,7 @@ type PendingEvent @model @auth(rules: [{ allow: private }]){
 
 type Vessel @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
   name: String
   vesselType: String
   documentNumber: String
@@ -22,14 +22,15 @@ type Vessel @model @auth(rules: [{ allow: private }]){
 
 type Staff @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
   name: String
   email: String
+  phone: String
 }
 
 type Owner @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
   name: String
   email: String
   phone: String
@@ -38,7 +39,7 @@ type Owner @model @auth(rules: [{ allow: private }]){
 
 type ActionModel @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
   name: String
   notes: String 
   duration: Int
@@ -47,7 +48,7 @@ type ActionModel @model @auth(rules: [{ allow: private }]){
 
 type ChecklistModel @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
   name: String
   notes: String
   duration: Int
@@ -58,7 +59,7 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
 
 type WorkflowModel @model @auth(rules: [{allow: private}]) {
   id: ID!
-  company: ID!
+  company: String!
   name: String
   notes: String
   duration: Int
@@ -67,6 +68,7 @@ type WorkflowModel @model @auth(rules: [{allow: private}]) {
 
 type Action @model @auth(rules: [{allow: private}]){
   id: ID!
+  company: String!
   status: Boolean
   model: ActionModel @hasOne
   actualStart: String
@@ -75,20 +77,25 @@ type Action @model @auth(rules: [{allow: private}]){
 
 type Checklist @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID
+  company: String!
+  name: String
   owner: Staff @hasOne
-  model: ChecklistModel @hasOne
-  start: AWSDate
-  end: AWSDate 
+  steps: [String]
+  mustStart: AWSDate
+  mustEnd: AWSDate 
+  actualStart: AWSDate
+  actualEnd: AWSDate 
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
-  company: ID!
-  owner: Staff @hasOne
-  steps: WorkflowModel @hasOne
-  start: AWSDate
-  end: AWSDate 
+  company: String!
+  name: String
+  steps: [Checklist]
+  mustStart: AWSDate
+  mustEnd: AWSDate
+  actualStart: AWSDate
+  actualEnd: AWSDate 
 }
 
 type Mutation {

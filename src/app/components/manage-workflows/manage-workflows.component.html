@@ -1,6 +1,6 @@
 <div class="container">
     <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Workflow</button>
-    <div *ngIf="workflows.length > 0">
+    <div *ngIf="workflows.length > 0; else noWorkflows">
         <h3>Available Workflows</h3>
         <mat-list role="list">
             <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
@@ -32,7 +32,7 @@
         </mat-menu>
 
     </div>
-    <div *ngIf="workflows.length == 0">
+    <ng-template #noWorkflows>
         <h3>No Workflows Found</h3>
-    </div>
+    </ng-template>
 </div>

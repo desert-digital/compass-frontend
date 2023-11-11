@@ -69,7 +69,7 @@ import { ManageActionsComponent } from './components/manage-actions/manage-actio
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
-import { WorkflowComponent } from './components/workflow/workflow.component';
+import { AssignWorkflowComponent } from './components/assign-workflow/assign-workflow.component';
 import { WorkflowOverviewComponent } from './components/workflow-overview/workflow-overview.component';
 import { ShowActionNotesDialogComponent } from './components/show-action-notes-dialog/show-action-notes-dialog.component';
 import { ShowChecklistNotesDialogComponent } from './components/show-checklist-notes-dialog/show-checklist-notes-dialog.component';
@@ -86,7 +86,7 @@ import { EditStaffComponent } from './components/edit-staff/edit-staff.component
     AppComponent,
     MainComponent,
     HomeComponent,
-    WorkflowComponent,
+    AssignWorkflowComponent,
     ManageStaffComponent,
     ChecklistComponent,
     WorkflowOverviewComponent,

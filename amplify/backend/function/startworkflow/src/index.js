@@ -1,15 +1,35 @@
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  },
-        body: JSON.stringify('Hello from Lambda!'),
+
+const AWS = require('aws-sdk');
+
+exports.handler = async (event, context) => {
+    // Set the AWS region
+    AWS.config.update({ region: 'us-west-1' });
+
+    // Create an EventBridge instance
+    const eventBridge = new AWS.EventBridge();
+
+    // Define the event details
+    const eventDetails = {
+        Entries: [
+            {
+                Source: 'your-source',
+                DetailType: 'your-detail-type',
+                Detail: JSON.stringify({ key1: 'value1', key2: 'value2' }),
+                EventBusName: 'your-event-bus-name', // Use 'default' for the default event bus
+            },
+        ],
     };
+
+    try {
+        // Put events to the event bus
+        const response = await eventBridge.putEvents(eventDetails).promise();
+        console.log('Event created successfully:', response);
+        return { statusCode: 200, body: JSON.stringify('Event created successfully') };
+    } catch (error) {
+        console.error('Error creating event:', error);
+        return { statusCode: 500, body: JSON.stringify('Error creating event') };
+    }
 };

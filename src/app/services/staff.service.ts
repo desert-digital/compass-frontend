@@ -7,8 +7,16 @@ import { Observable, of } from 'rxjs';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
+
 import { GraphQLQuery } from '@aws-amplify/api';
-import { ListStaffQuery } from '../API.service';
+import {
+  CreateStaffMutation,
+  DeleteStaffMutation,
+  GetStaffQuery,
+  ListStaffQuery,
+  UpdateStaffMutation
+} from '../API.service';
 
 // Local
 
@@ -21,16 +29,30 @@ export class StaffService {
 
   constructor() { }
 
-  async getStaff(): Promise<any> {
-    const staff = await API.graphql<GraphQLQuery<ListStaffQuery>>(
-      graphqlOperation(queries.listVessels)
+  async getStaff(): Promise<any[]> {
+    const staffResult = await API.graphql<GraphQLQuery<ListStaffQuery>>(
+      graphqlOperation(queries.listStaff)
     );
 
-    return staff;
+    return staffResult.data.listStaff.items as Staff[];
   }
 
   async createStaff(staff: Staff) {
-    return;
+    const staffDetails = {
+      input:
+      {
+        company: '0',
+        name: staff.name,
+        email: staff.email,
+        phone: staff.phone,
+      }
+    }
+
+    const newStaff = await API.graphql<GraphQLQuery<CreateStaffMutation>>(
+      graphqlOperation(mutations.createStaff, staffDetails)
+    );
+
+    return newStaff.data.createStaff as Staff;
   }
 
   async updateStaff(staff: Staff) {
@@ -38,6 +60,14 @@ export class StaffService {
   }
 
   async deleteStaff(staff: Staff) {
-    return;
+    const staffDetails = {
+      input: {
+        id: staff.id
+      }
+    }
+
+    await API.graphql<GraphQLQuery<DeleteStaffMutation>>(
+      graphqlOperation(mutations.deleteStaff, staffDetails)
+    );
   }
 }
