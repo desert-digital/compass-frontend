@@ -21,7 +21,7 @@
       "function": {
         "startworkflow": {
           "deploymentBucketName": "amplify-compassfrontend-dev-155547-deployment",
-          "s3Key": "amplify-builds/startworkflow-30752f377a6949623239-build.zip"
+          "s3Key": "amplify-builds/startworkflow-656a317a366870496d49-build.zip"
         }
       }
     }

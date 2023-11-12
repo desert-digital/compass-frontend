@@ -15,10 +15,10 @@ exports.handler = async (event, context) => {
     const eventDetails = {
         Entries: [
             {
-                Source: 'your-source',
-                DetailType: 'your-detail-type',
+                Source: 'custom.compass',
+                DetailType: 'workflow',
                 Detail: JSON.stringify({ key1: 'value1', key2: 'value2' }),
-                EventBusName: 'your-event-bus-name', // Use 'default' for the default event bus
+                EventBusName: 'default', // Use 'default' for the default event bus
             },
         ],
     };
