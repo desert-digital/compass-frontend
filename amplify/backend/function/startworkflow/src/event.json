@@ -1,5 +1,5 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "owner": "brandy@finest-silver.com",
+  "name": "Small Boat Waiver (C22, C250, C260)",
+  "steps": ["step 1", "step 2", "step 3"]
 }

@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
             {
                 Source: 'custom.compass',
                 DetailType: 'workflow',
-                Detail: JSON.stringify({ key1: 'value1', key2: 'value2' }),
+                Detail: JSON.stringify({ workflow: event }),
                 EventBusName: 'default', // Use 'default' for the default event bus
             },
         ],
