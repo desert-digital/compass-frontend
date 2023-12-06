@@ -935,7 +935,6 @@ export const createAction = /* GraphQL */ `
   ) {
     createAction(input: $input, condition: $condition) {
       id
-      company
       status
       model {
         id
@@ -963,6 +962,7 @@ export const createAction = /* GraphQL */ `
       actualEnd
       createdAt
       updatedAt
+      checklistStepsId
       actionModelId
       __typename
     }
@@ -975,7 +975,6 @@ export const updateAction = /* GraphQL */ `
   ) {
     updateAction(input: $input, condition: $condition) {
       id
-      company
       status
       model {
         id
@@ -1003,6 +1002,7 @@ export const updateAction = /* GraphQL */ `
       actualEnd
       createdAt
       updatedAt
+      checklistStepsId
       actionModelId
       __typename
     }
@@ -1015,7 +1015,6 @@ export const deleteAction = /* GraphQL */ `
   ) {
     deleteAction(input: $input, condition: $condition) {
       id
-      company
       status
       model {
         id
@@ -1043,6 +1042,7 @@ export const deleteAction = /* GraphQL */ `
       actualEnd
       createdAt
       updatedAt
+      checklistStepsId
       actionModelId
       __typename
     }
@@ -1056,6 +1056,7 @@ export const createChecklist = /* GraphQL */ `
     createChecklist(input: $input, condition: $condition) {
       id
       company
+      name
       owner {
         id
         company
@@ -1066,11 +1067,38 @@ export const createChecklist = /* GraphQL */ `
         updatedAt
         __typename
       }
-      steps
-      start
-      end
+      steps {
+        items {
+          id
+          status
+          model {
+            id
+            company
+            name
+            notes
+            duration
+            createdAt
+            updatedAt
+            __typename
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          actionModelId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      workflowStepsId
       checklistOwnerId
       __typename
     }
@@ -1084,6 +1112,7 @@ export const updateChecklist = /* GraphQL */ `
     updateChecklist(input: $input, condition: $condition) {
       id
       company
+      name
       owner {
         id
         company
@@ -1094,11 +1123,38 @@ export const updateChecklist = /* GraphQL */ `
         updatedAt
         __typename
       }
-      steps
-      start
-      end
+      steps {
+        items {
+          id
+          status
+          model {
+            id
+            company
+            name
+            notes
+            duration
+            createdAt
+            updatedAt
+            __typename
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          actionModelId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      workflowStepsId
       checklistOwnerId
       __typename
     }
@@ -1112,6 +1168,7 @@ export const deleteChecklist = /* GraphQL */ `
     deleteChecklist(input: $input, condition: $condition) {
       id
       company
+      name
       owner {
         id
         company
@@ -1122,11 +1179,38 @@ export const deleteChecklist = /* GraphQL */ `
         updatedAt
         __typename
       }
-      steps
-      start
-      end
+      steps {
+        items {
+          id
+          status
+          model {
+            id
+            company
+            name
+            notes
+            duration
+            createdAt
+            updatedAt
+            __typename
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          actionModelId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      workflowStepsId
       checklistOwnerId
       __typename
     }
@@ -1140,25 +1224,37 @@ export const createWorkflow = /* GraphQL */ `
     createWorkflow(input: $input, condition: $condition) {
       id
       company
+      name
       steps {
-        id
-        company
-        owner {
+        items {
           id
           company
           name
-          email
-          phone
+          owner {
+            id
+            company
+            name
+            email
+            phone
+            createdAt
+            updatedAt
+            __typename
+          }
+          steps {
+            nextToken
+            __typename
+          }
+          mustStart
+          mustEnd
+          actualStart
+          actualEnd
           createdAt
           updatedAt
+          workflowStepsId
+          checklistOwnerId
           __typename
         }
-        steps
-        start
-        end
-        createdAt
-        updatedAt
-        checklistOwnerId
+        nextToken
         __typename
       }
       mustStart
@@ -1179,25 +1275,37 @@ export const updateWorkflow = /* GraphQL */ `
     updateWorkflow(input: $input, condition: $condition) {
       id
       company
+      name
       steps {
-        id
-        company
-        owner {
+        items {
           id
           company
           name
-          email
-          phone
+          owner {
+            id
+            company
+            name
+            email
+            phone
+            createdAt
+            updatedAt
+            __typename
+          }
+          steps {
+            nextToken
+            __typename
+          }
+          mustStart
+          mustEnd
+          actualStart
+          actualEnd
           createdAt
           updatedAt
+          workflowStepsId
+          checklistOwnerId
           __typename
         }
-        steps
-        start
-        end
-        createdAt
-        updatedAt
-        checklistOwnerId
+        nextToken
         __typename
       }
       mustStart
@@ -1218,25 +1326,37 @@ export const deleteWorkflow = /* GraphQL */ `
     deleteWorkflow(input: $input, condition: $condition) {
       id
       company
+      name
       steps {
-        id
-        company
-        owner {
+        items {
           id
           company
           name
-          email
-          phone
+          owner {
+            id
+            company
+            name
+            email
+            phone
+            createdAt
+            updatedAt
+            __typename
+          }
+          steps {
+            nextToken
+            __typename
+          }
+          mustStart
+          mustEnd
+          actualStart
+          actualEnd
           createdAt
           updatedAt
+          workflowStepsId
+          checklistOwnerId
           __typename
         }
-        steps
-        start
-        end
-        createdAt
-        updatedAt
-        checklistOwnerId
+        nextToken
         __typename
       }
       mustStart

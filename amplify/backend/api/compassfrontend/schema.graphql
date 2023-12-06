@@ -68,7 +68,6 @@ type WorkflowModel @model @auth(rules: [{allow: private}]) {
 
 type Action @model @auth(rules: [{allow: private}]){
   id: ID!
-  company: String!
   status: Boolean
   model: ActionModel @hasOne
   actualStart: String
@@ -80,7 +79,7 @@ type Checklist @model @auth(rules: [{ allow: private }]){
   company: String!
   name: String
   owner: Staff @hasOne
-  steps: [String]
+  steps: [Action] @hasMany
   mustStart: AWSDate
   mustEnd: AWSDate 
   actualStart: AWSDate
@@ -91,7 +90,7 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: String!
   name: String
-  steps: [Checklist]
+  steps: [Checklist] @hasMany
   mustStart: AWSDate
   mustEnd: AWSDate
   actualStart: AWSDate

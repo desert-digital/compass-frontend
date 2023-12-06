@@ -532,7 +532,6 @@ export const getAction = /* GraphQL */ `
   query GetAction($id: ID!) {
     getAction(id: $id) {
       id
-      company
       status
       model {
         id
@@ -560,6 +559,7 @@ export const getAction = /* GraphQL */ `
       actualEnd
       createdAt
       updatedAt
+      checklistStepsId
       actionModelId
       __typename
     }
@@ -574,7 +574,6 @@ export const listActions = /* GraphQL */ `
     listActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        company
         status
         model {
           id
@@ -594,6 +593,7 @@ export const listActions = /* GraphQL */ `
         actualEnd
         createdAt
         updatedAt
+        checklistStepsId
         actionModelId
         __typename
       }
@@ -607,6 +607,7 @@ export const getChecklist = /* GraphQL */ `
     getChecklist(id: $id) {
       id
       company
+      name
       owner {
         id
         company
@@ -617,11 +618,38 @@ export const getChecklist = /* GraphQL */ `
         updatedAt
         __typename
       }
-      steps
-      start
-      end
+      steps {
+        items {
+          id
+          status
+          model {
+            id
+            company
+            name
+            notes
+            duration
+            createdAt
+            updatedAt
+            __typename
+          }
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          actionModelId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
       createdAt
       updatedAt
+      workflowStepsId
       checklistOwnerId
       __typename
     }
@@ -637,6 +665,7 @@ export const listChecklists = /* GraphQL */ `
       items {
         id
         company
+        name
         owner {
           id
           company
@@ -647,11 +676,28 @@ export const listChecklists = /* GraphQL */ `
           updatedAt
           __typename
         }
-        steps
-        start
-        end
+        steps {
+          items {
+            id
+            status
+            actualStart
+            actualEnd
+            createdAt
+            updatedAt
+            checklistStepsId
+            actionModelId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
         createdAt
         updatedAt
+        workflowStepsId
         checklistOwnerId
         __typename
       }
@@ -665,25 +711,37 @@ export const getWorkflow = /* GraphQL */ `
     getWorkflow(id: $id) {
       id
       company
+      name
       steps {
-        id
-        company
-        owner {
+        items {
           id
           company
           name
-          email
-          phone
+          owner {
+            id
+            company
+            name
+            email
+            phone
+            createdAt
+            updatedAt
+            __typename
+          }
+          steps {
+            nextToken
+            __typename
+          }
+          mustStart
+          mustEnd
+          actualStart
+          actualEnd
           createdAt
           updatedAt
+          workflowStepsId
+          checklistOwnerId
           __typename
         }
-        steps
-        start
-        end
-        createdAt
-        updatedAt
-        checklistOwnerId
+        nextToken
         __typename
       }
       mustStart
@@ -706,25 +764,23 @@ export const listWorkflows = /* GraphQL */ `
       items {
         id
         company
+        name
         steps {
-          id
-          company
-          owner {
+          items {
             id
             company
             name
-            email
-            phone
+            mustStart
+            mustEnd
+            actualStart
+            actualEnd
             createdAt
             updatedAt
+            workflowStepsId
+            checklistOwnerId
             __typename
           }
-          steps
-          start
-          end
-          createdAt
-          updatedAt
-          checklistOwnerId
+          nextToken
           __typename
         }
         mustStart

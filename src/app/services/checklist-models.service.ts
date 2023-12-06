@@ -45,6 +45,13 @@ export class ChecklistModelsService {
     return checklistResult.data.getChecklistModel as ChecklistModel;
   }
 
+  async getChecklistModelActionsFromId(id: string): Promise<any> {
+    const checklistResult = await API.graphql<GraphQLQuery<GetChecklistModelQuery>>(
+      graphqlOperation(queries.getChecklistModel, { id: id })
+    );
+    return checklistResult.data.getChecklistModel.actions.items;  
+  }
+
   async createChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
     const checklistModelDetails = {
       input: {

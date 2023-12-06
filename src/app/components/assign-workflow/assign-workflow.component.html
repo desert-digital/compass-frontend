@@ -16,9 +16,10 @@
         <mat-stepper orientation="vertical">
           <ng-container *ngFor="let stepForm of steps.controls; let index = index">
             <mat-step>
-              <ng-container matStepName>{{ workflow.checklists.items[index].checklistModel.name }}</ng-container>
+              <ng-template matStepLabel>Checklist: <b>{{ workflowModel.checklists.items[index].checklistModel.name }}</b></ng-template>
               <div [formGroupName]="index">
                 <mat-form-field appearance="fill">
+                  <mat-label>Assign to:</mat-label>
                   <mat-select formControlName="assignee">
                     <mat-option *ngFor="let person of staff" [value]="person.id">{{ person.name }}</mat-option>
                   </mat-select>

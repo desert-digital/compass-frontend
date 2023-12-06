@@ -4,14 +4,32 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+// Material
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// Amplify
+
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from 'src/graphql/queries';
+import * as mutations from 'src/graphql/mutations';
+
+import { GraphQLQuery } from '@aws-amplify/api';
+import {
+  StartWorklowMutation
+} from 'src/app/API.service';
+
+import { PendingEvent, Vessel, WorkflowModel } from 'src/app/API.service';
+
+
 // Local
+
 
 import { PendingService } from 'src/app/services/pending.service';
 import { FleetService } from 'src/app/services/fleet.service';
-import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 import { StaffService } from 'src/app/services/staff.service';
-
-import { PendingEvent, Vessel, WorkflowModel } from 'src/app/API.service';
+import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
+import { WorkflowService } from 'src/app/services/workflow.service';
 
 @Component({
   selector: 'app-workflow',
@@ -21,7 +39,7 @@ import { PendingEvent, Vessel, WorkflowModel } from 'src/app/API.service';
 
 export class AssignWorkflowComponent {
 
-  workflow: WorkflowModel;
+  workflowModel: WorkflowModel;
   staff: any;
   event: PendingEvent;
   vesselList: Vessel[];
@@ -36,6 +54,8 @@ export class AssignWorkflowComponent {
     private _fleetService: FleetService,
     private _staffService: StaffService,
     private _workflowModelService: WorkflowModelsService,
+    private _workflowService: WorkflowService,
+    private _snackBar: MatSnackBar,
     private _formBuilder: FormBuilder) {
     this.workflowForm = this._formBuilder.group({
       vessels: new FormControl(['', Validators.required]),
@@ -65,29 +85,43 @@ export class AssignWorkflowComponent {
     return this.workflowForm.controls['steps'] as FormArray;
   }
 
-
   async onVesselChanged(event: any) {
     const vessel = await this._fleetService.getVesselById(event.source.value);
-    this.workflow = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
+    this.workflowModel = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
 
     let index = 0;
 
-    for (let checklist of this.workflow.checklists.items) {
+    for (let checklist of this.workflowModel.checklists.items) {
       const stepForm = this._formBuilder.group({
         assignee: ['', Validators.required]
       });
-
-      console.log(JSON.stringify(checklist.checklistModel.name));
-
       stepForm.setValue({ assignee: this.staff });
       this.steps.push(stepForm);
     }
     this.boatSelected = true;
   }
 
-  onStartWorkflowPressed() {
-    for (let control of this.steps.controls) {
-      console.log(control.value.assignee);
+  async onStartWorkflowPressed() {
+
+    // create the Workflow
+    const workflowId = await this._workflowService.createWorkflowFromModel(
+      this.event,
+      this.workflowModel
+    );
+
+    try {
+      const workflowDetails = {
+        workflowId: workflowId
+      }
+
+      const checklistMutationResult = await API.graphql<GraphQLQuery<StartWorklowMutation>>(
+        graphqlOperation(mutations.startWorklow, workflowDetails)
+      );
+      this._snackBar.open('Created the Workflow', 'OK', {duration: 3000});
+    }
+    catch {
+      this._snackBar.open('An Error Occured', 'OK', {duration: 3000});
     }
   }
+
 }

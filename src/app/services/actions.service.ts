@@ -11,7 +11,7 @@ import { GetActionQuery, ListActionsQuery } from '../API.service';
 
 // Local
 
-import { Action } from '../API.service';
+import { Action, ActionModel } from '../API.service';
 
 
 @Injectable({
@@ -33,5 +33,16 @@ export class ActionsService {
       graphqlOperation(queries.getAction, {id: id})
     );   
     return action as Action;
+  }
+
+  async createActionFromModel(actionModel: ActionModel)
+  {
+    const actionDetail = {
+      status: false,
+      model: actionModel,
+      actualStart: 0,
+      actualEnd: 0
+    }
+    console.log("Action: " + JSON.stringify(actionDetail));
   }
 }
