@@ -2,6 +2,90 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getCompassUser = /* GraphQL */ `
+  query GetCompassUser($id: ID!) {
+    getCompassUser(id: $id) {
+      id
+      company
+      userName
+      role {
+        id
+        company
+        roleName
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listCompassUsers = /* GraphQL */ `
+  query ListCompassUsers(
+    $filter: ModelCompassUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCompassUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        company
+        userName
+        role {
+          id
+          company
+          roleName
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getCompassUserRole = /* GraphQL */ `
+  query GetCompassUserRole($id: ID!) {
+    getCompassUserRole(id: $id) {
+      id
+      company
+      roleName
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listCompassUserRoles = /* GraphQL */ `
+  query ListCompassUserRoles(
+    $filter: ModelCompassUserRoleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCompassUserRoles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        company
+        roleName
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getPendingEvent = /* GraphQL */ `
   query GetPendingEvent($id: ID!) {
     getPendingEvent(id: $id) {
@@ -39,6 +123,86 @@ export const listPendingEvents = /* GraphQL */ `
         contactEmail
         contactName
         contactPhone
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getServiceOrder = /* GraphQL */ `
+  query GetServiceOrder($id: ID!) {
+    getServiceOrder(id: $id) {
+      id
+      company
+      boat {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          checklists {
+            nextToken
+            __typename
+          }
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      items
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listServiceOrders = /* GraphQL */ `
+  query ListServiceOrders(
+    $filter: ModelServiceOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listServiceOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        company
+        boat {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          defaultWorkflow {
+            id
+            company
+            name
+            notes
+            duration
+            createdAt
+            updatedAt
+            __typename
+          }
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        items
         createdAt
         updatedAt
         __typename
@@ -532,35 +696,15 @@ export const getAction = /* GraphQL */ `
   query GetAction($id: ID!) {
     getAction(id: $id) {
       id
+      company
       status
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      name
+      duration
       actualStart
       actualEnd
       createdAt
       updatedAt
       checklistStepsId
-      actionModelId
       __typename
     }
   }
@@ -574,27 +718,15 @@ export const listActions = /* GraphQL */ `
     listActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        company
         status
-        model {
-          id
-          company
-          name
-          notes
-          duration
-          checklists {
-            nextToken
-            __typename
-          }
-          createdAt
-          updatedAt
-          __typename
-        }
+        name
+        duration
         actualStart
         actualEnd
         createdAt
         updatedAt
         checklistStepsId
-        actionModelId
         __typename
       }
       nextToken
@@ -608,6 +740,7 @@ export const getChecklist = /* GraphQL */ `
       id
       company
       name
+      duration
       owner {
         id
         company
@@ -621,23 +754,15 @@ export const getChecklist = /* GraphQL */ `
       steps {
         items {
           id
+          company
           status
-          model {
-            id
-            company
-            name
-            notes
-            duration
-            createdAt
-            updatedAt
-            __typename
-          }
+          name
+          duration
           actualStart
           actualEnd
           createdAt
           updatedAt
           checklistStepsId
-          actionModelId
           __typename
         }
         nextToken
@@ -666,6 +791,7 @@ export const listChecklists = /* GraphQL */ `
         id
         company
         name
+        duration
         owner {
           id
           company
@@ -679,13 +805,15 @@ export const listChecklists = /* GraphQL */ `
         steps {
           items {
             id
+            company
             status
+            name
+            duration
             actualStart
             actualEnd
             createdAt
             updatedAt
             checklistStepsId
-            actionModelId
             __typename
           }
           nextToken
@@ -712,11 +840,13 @@ export const getWorkflow = /* GraphQL */ `
       id
       company
       name
+      duration
       steps {
         items {
           id
           company
           name
+          duration
           owner {
             id
             company
@@ -765,11 +895,13 @@ export const listWorkflows = /* GraphQL */ `
         id
         company
         name
+        duration
         steps {
           items {
             id
             company
             name
+            duration
             mustStart
             mustEnd
             actualStart

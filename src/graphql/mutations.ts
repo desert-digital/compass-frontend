@@ -7,6 +7,120 @@ export const startWorklow = /* GraphQL */ `
     startWorklow(workflowId: $workflowId)
   }
 `;
+export const createCompassUser = /* GraphQL */ `
+  mutation CreateCompassUser(
+    $input: CreateCompassUserInput!
+    $condition: ModelCompassUserConditionInput
+  ) {
+    createCompassUser(input: $input, condition: $condition) {
+      id
+      company
+      userName
+      role {
+        id
+        company
+        roleName
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateCompassUser = /* GraphQL */ `
+  mutation UpdateCompassUser(
+    $input: UpdateCompassUserInput!
+    $condition: ModelCompassUserConditionInput
+  ) {
+    updateCompassUser(input: $input, condition: $condition) {
+      id
+      company
+      userName
+      role {
+        id
+        company
+        roleName
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteCompassUser = /* GraphQL */ `
+  mutation DeleteCompassUser(
+    $input: DeleteCompassUserInput!
+    $condition: ModelCompassUserConditionInput
+  ) {
+    deleteCompassUser(input: $input, condition: $condition) {
+      id
+      company
+      userName
+      role {
+        id
+        company
+        roleName
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createCompassUserRole = /* GraphQL */ `
+  mutation CreateCompassUserRole(
+    $input: CreateCompassUserRoleInput!
+    $condition: ModelCompassUserRoleConditionInput
+  ) {
+    createCompassUserRole(input: $input, condition: $condition) {
+      id
+      company
+      roleName
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateCompassUserRole = /* GraphQL */ `
+  mutation UpdateCompassUserRole(
+    $input: UpdateCompassUserRoleInput!
+    $condition: ModelCompassUserRoleConditionInput
+  ) {
+    updateCompassUserRole(input: $input, condition: $condition) {
+      id
+      company
+      roleName
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteCompassUserRole = /* GraphQL */ `
+  mutation DeleteCompassUserRole(
+    $input: DeleteCompassUserRoleInput!
+    $condition: ModelCompassUserRoleConditionInput
+  ) {
+    deleteCompassUserRole(input: $input, condition: $condition) {
+      id
+      company
+      roleName
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createPendingEvent = /* GraphQL */ `
   mutation CreatePendingEvent(
     $input: CreatePendingEventInput!
@@ -67,6 +181,129 @@ export const deletePendingEvent = /* GraphQL */ `
       contactEmail
       contactName
       contactPhone
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createServiceOrder = /* GraphQL */ `
+  mutation CreateServiceOrder(
+    $input: CreateServiceOrderInput!
+    $condition: ModelServiceOrderConditionInput
+  ) {
+    createServiceOrder(input: $input, condition: $condition) {
+      id
+      company
+      boat {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          checklists {
+            nextToken
+            __typename
+          }
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      items
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateServiceOrder = /* GraphQL */ `
+  mutation UpdateServiceOrder(
+    $input: UpdateServiceOrderInput!
+    $condition: ModelServiceOrderConditionInput
+  ) {
+    updateServiceOrder(input: $input, condition: $condition) {
+      id
+      company
+      boat {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          checklists {
+            nextToken
+            __typename
+          }
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      items
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteServiceOrder = /* GraphQL */ `
+  mutation DeleteServiceOrder(
+    $input: DeleteServiceOrderInput!
+    $condition: ModelServiceOrderConditionInput
+  ) {
+    deleteServiceOrder(input: $input, condition: $condition) {
+      id
+      company
+      boat {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          checklists {
+            nextToken
+            __typename
+          }
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
+      items
       createdAt
       updatedAt
       __typename
@@ -935,35 +1172,15 @@ export const createAction = /* GraphQL */ `
   ) {
     createAction(input: $input, condition: $condition) {
       id
+      company
       status
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      name
+      duration
       actualStart
       actualEnd
       createdAt
       updatedAt
       checklistStepsId
-      actionModelId
       __typename
     }
   }
@@ -975,35 +1192,15 @@ export const updateAction = /* GraphQL */ `
   ) {
     updateAction(input: $input, condition: $condition) {
       id
+      company
       status
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      name
+      duration
       actualStart
       actualEnd
       createdAt
       updatedAt
       checklistStepsId
-      actionModelId
       __typename
     }
   }
@@ -1015,35 +1212,15 @@ export const deleteAction = /* GraphQL */ `
   ) {
     deleteAction(input: $input, condition: $condition) {
       id
+      company
       status
-      model {
-        id
-        company
-        name
-        notes
-        duration
-        checklists {
-          items {
-            id
-            actionModelId
-            checklistModelId
-            createdAt
-            updatedAt
-            __typename
-          }
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
+      name
+      duration
       actualStart
       actualEnd
       createdAt
       updatedAt
       checklistStepsId
-      actionModelId
       __typename
     }
   }
@@ -1057,6 +1234,7 @@ export const createChecklist = /* GraphQL */ `
       id
       company
       name
+      duration
       owner {
         id
         company
@@ -1070,23 +1248,15 @@ export const createChecklist = /* GraphQL */ `
       steps {
         items {
           id
+          company
           status
-          model {
-            id
-            company
-            name
-            notes
-            duration
-            createdAt
-            updatedAt
-            __typename
-          }
+          name
+          duration
           actualStart
           actualEnd
           createdAt
           updatedAt
           checklistStepsId
-          actionModelId
           __typename
         }
         nextToken
@@ -1113,6 +1283,7 @@ export const updateChecklist = /* GraphQL */ `
       id
       company
       name
+      duration
       owner {
         id
         company
@@ -1126,23 +1297,15 @@ export const updateChecklist = /* GraphQL */ `
       steps {
         items {
           id
+          company
           status
-          model {
-            id
-            company
-            name
-            notes
-            duration
-            createdAt
-            updatedAt
-            __typename
-          }
+          name
+          duration
           actualStart
           actualEnd
           createdAt
           updatedAt
           checklistStepsId
-          actionModelId
           __typename
         }
         nextToken
@@ -1169,6 +1332,7 @@ export const deleteChecklist = /* GraphQL */ `
       id
       company
       name
+      duration
       owner {
         id
         company
@@ -1182,23 +1346,15 @@ export const deleteChecklist = /* GraphQL */ `
       steps {
         items {
           id
+          company
           status
-          model {
-            id
-            company
-            name
-            notes
-            duration
-            createdAt
-            updatedAt
-            __typename
-          }
+          name
+          duration
           actualStart
           actualEnd
           createdAt
           updatedAt
           checklistStepsId
-          actionModelId
           __typename
         }
         nextToken
@@ -1225,11 +1381,13 @@ export const createWorkflow = /* GraphQL */ `
       id
       company
       name
+      duration
       steps {
         items {
           id
           company
           name
+          duration
           owner {
             id
             company
@@ -1276,11 +1434,13 @@ export const updateWorkflow = /* GraphQL */ `
       id
       company
       name
+      duration
       steps {
         items {
           id
           company
           name
+          duration
           owner {
             id
             company
@@ -1327,11 +1487,13 @@ export const deleteWorkflow = /* GraphQL */ `
       id
       company
       name
+      duration
       steps {
         items {
           id
           company
           name
+          duration
           owner {
             id
             company

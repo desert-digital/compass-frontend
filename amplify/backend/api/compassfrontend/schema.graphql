@@ -1,3 +1,16 @@
+type CompassUser @model @auth(rules: [{allow: private}]) {
+  id: ID! 
+  company: String
+  userName: String
+  role: CompassUserRole
+}
+
+type CompassUserRole @model @auth(rules: [{allow: private}]) {
+  id: ID! 
+  company: String
+  roleName: String
+}
+
 type PendingEvent @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: String
@@ -9,6 +22,13 @@ type PendingEvent @model @auth(rules: [{ allow: private }]){
   contactEmail: String,
   contactName: String,
   contactPhone: String
+}
+
+type ServiceOrder @model @auth(rules: [{ allow: private}]){
+  id: ID!
+  company: String
+  boat: Vessel
+  items: [String]
 }
 
 type Vessel @model @auth(rules: [{ allow: private }]){
@@ -68,8 +88,10 @@ type WorkflowModel @model @auth(rules: [{allow: private}]) {
 
 type Action @model @auth(rules: [{allow: private}]){
   id: ID!
+  company: String
   status: Boolean
-  model: ActionModel @hasOne
+  name: String
+  duration: Int
   actualStart: String
   actualEnd: String
 }
@@ -78,23 +100,25 @@ type Checklist @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: String!
   name: String
+  duration: Int
   owner: Staff @hasOne
   steps: [Action] @hasMany
-  mustStart: AWSDate
-  mustEnd: AWSDate 
-  actualStart: AWSDate
-  actualEnd: AWSDate 
+  mustStart: String
+  mustEnd: String 
+  actualStart: String
+  actualEnd: String 
 }
 
 type Workflow @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: String!
   name: String
+  duration: Int
   steps: [Checklist] @hasMany
-  mustStart: AWSDate
-  mustEnd: AWSDate
-  actualStart: AWSDate
-  actualEnd: AWSDate 
+  mustStart: String
+  mustEnd: String 
+  actualStart: String
+  actualEnd: String 
 }
 
 type Mutation {

@@ -104,17 +104,17 @@ export class AssignWorkflowComponent {
   async onStartWorkflowPressed() {
 
     // create the Workflow
-    const workflowId = await this._workflowService.createWorkflowFromModel(
+    const workflow = await this._workflowService.createWorkflowFromModel(
       this.event,
-      this.workflowModel
+      this.workflowModel, 
+      this.steps
     );
 
     try {
       const workflowDetails = {
-        workflowId: workflowId
+        workflowId: workflow.id
       }
-
-      const checklistMutationResult = await API.graphql<GraphQLQuery<StartWorklowMutation>>(
+      const workflowMutationResult = await API.graphql<GraphQLQuery<StartWorklowMutation>>(
         graphqlOperation(mutations.startWorklow, workflowDetails)
       );
       this._snackBar.open('Created the Workflow', 'OK', {duration: 3000});

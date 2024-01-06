@@ -1,3 +1,33 @@
 <div class="container">
-    <p>To Do: add Manage Service Orders capabilities</p>
+    <button mat-flat-button color="primary" (click)="onAddNewServiceOrderPressed()">Add a New Service Order</button>
+    <div *ngIf="orders.length > 0; else noActions">
+        <h3>Services Orders</h3>
+        <mat-list role="list">
+            <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
+                <div *cdkVirtualFor="let action of actions" class="spread">
+                    <div matListItemTitle class="item-title"><b>{{ action.name }}</b> ({{action.duration}} minutes)</div>
+                    <div matListItemMeta>
+                        <button matListItemMeta mat-icon-button (click)="onItemSelected(action)"
+                            [matMenuTriggerFor]="itemMenu">
+                            <mat-icon>
+                                more_vert
+                            </mat-icon>
+                        </button>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </mat-list>
+        <mat-menu #itemMenu="matMenu">
+            <button mat-menu-item (click)="onEditActionPressed()">
+                <mat-icon class="material-icons-outlined" color="primary">edit</mat-icon>edit
+            </button>
+            <button mat-menu-item (click)="onDeleteActionPressed()">
+                <mat-icon class="material-icons-outlined" color="warn">clear</mat-icon>delete
+            </button>
+        </mat-menu>
+    </div>
+    <ng-template #noActions>
+        <h3>No Service Orders Found</h3>
+    </ng-template>
 </div>

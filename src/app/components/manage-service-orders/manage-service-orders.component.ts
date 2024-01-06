@@ -1,4 +1,9 @@
+// Core
+
 import { Component } from '@angular/core';
+
+// Local
+
 
 @Component({
   selector: 'app-manage-service-orders',
@@ -7,4 +12,11 @@ import { Component } from '@angular/core';
 })
 export class ManageServiceOrdersComponent {
 
+  orders: any[] = [];
+
+  onAddNewServiceOrderPressed() {}
+
+  onDeletePressed() {}
+
+  onEditPressed() {}
 }

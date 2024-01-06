@@ -62,16 +62,8 @@ export class PendingService {
   }
 
   createSubscription() {
-    // const sub = this.api.OnCreatePendingEventListener().subscribe({
-    //   next: (value  => console.log(value))
-    // });
   }
 
   async deleteSubscription() {
-    // const sub = this.api.OnDeletePendingEventListener().subscribe({
-    //   next: (value  => {
-    //     console.log(value); this.getPendingItems();
-    //   })
-    // });
   }
 }

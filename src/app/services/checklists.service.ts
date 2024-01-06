@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
 // Amplify
 
 import { API, graphqlOperation } from 'aws-amplify';
+import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import { GraphQLQuery } from '@aws-amplify/api';
-import { ListChecklistsQuery } from '../API.service';
+import { ListChecklistsQuery, CreateChecklistMutation } from '../API.service';
 
 // Local
 
-import { Checklist, ChecklistModel } from '../API.service';
+import { Action, Checklist } from '../API.service';
 import { ChecklistModelsService } from './checklist-models.service';
 import { ActionsService } from './actions.service';
 
@@ -36,31 +37,44 @@ export class ChecklistsService {
     // await this.api.CreateChecklist(item);
   }
 
-  async createChecklistFromModel(checklistModel: any, mustEnd: any): Promise<string> {
+  async createChecklistFromModel(checklistModel: any, assigneeId: string, mustEnd: any): Promise<Checklist> {
     const now = new Date().toISOString();
 
     const mustEndTime = new Date(mustEnd);
     const mustStartTime = new Date(mustEndTime.getTime() - (checklistModel.duration * 60 * 1000));
 
+    console.log(assigneeId);
+
     const checklistDetails = {
-      company: checklistModel.company,
-      name: checklistModel.name,
-      actualStart: now,
-      mustStart: mustStartTime.toISOString(),
-      mustEnd: mustEndTime.toISOString()
+      input: {
+        company: checklistModel.company,
+        name: checklistModel.name,
+        actualStart: now,
+        mustStart: mustStartTime.toISOString(),
+        mustEnd: mustEndTime.toISOString()
+      }
     }
 
-    const actionModels = await this._checklistModelService.getChecklistModelActionsFromId(checklistModel.id);
+    const newChecklistMutationResult = await API.graphql<GraphQLQuery<CreateChecklistMutation>>(
+      graphqlOperation(mutations.createChecklist, checklistDetails)
+    );
+    const newChecklist = newChecklistMutationResult.data.createChecklist;
+    const checklistActionModels = await this._checklistModelService.getChecklistModelActionsFromId(checklistModel.id);
 
-    // For each Action Model in the Cheklist create an Action
+    // For each Action Model in the Checklist create an Action
     // Push the checklist into an array and add all the Checklists to 
     // the Workflow
 
-    for (let actionModel of actionModels) {
-      this._actionsService.createActionFromModel(actionModel);
+    let actions = [];
+
+    for (let checklistActionModel of checklistActionModels) {
+      const newAction = await this._actionsService.createActionFromModel(newChecklist, checklistActionModel.actionModel);
+      actions.push(newAction);
     }
 
-    return (mustStartTime.toISOString());
+    newChecklist.steps.items = actions;
+    console.log(newChecklist);
+    return newChecklist as Checklist;
   }
 }
 
