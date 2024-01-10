@@ -1,7 +1,78 @@
-.login-container {
+@import "/src/compass-theme";
+
+h1 {
+  @include title;
+  margin: 10px;
+}
+
+h2 {
+  @include header;
+}
+
+.login-page {
+  width: 100%;
+  @media only screen and (max-width: 420px) {
+    background-color: $primaryColor;
+    height: 900px;  
     display: flex;
-    align-items: center;
+    flex-wrap: row nowrap;
     justify-content: center;
-    background-color: red;
-    margin: 100px;
+    align-items: flex-start;
+  }
+  @media only screen and (min-width: 421px) {
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll;
+    background-repeat: repeat-y;
+    height: 1000px;  
+    display: flex;
+    flex-wrap: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.container {
+  @media only screen and (max-width: 420px) {
+    width: 350px;
+    margin-top: 45px;
+    margin-bottom: 30px;
+  }
+  @media only screen and (min-width: 421px) {
+    width: 600px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: $borderRadius;
+  background-color: white;
+}
+
+.container > div {
+  width: 95%;
+  text-align: center;
+}
+
+.top-button {
+  @include buttons;
+  width: calc($buttonWidth + 30px);
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+p {
+  @include paragraphs;
+  text-align: center;
+  font-size: 18px;
+}
+
+.copy {
+  font-size: 14px;
+}
+
+.light-text {
+  color: lightblue;
 }

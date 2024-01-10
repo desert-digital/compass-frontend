@@ -80,6 +80,8 @@ import { OwnerNamePipe } from './pipes/owner-name.pipe';
 import { EditVesselComponent } from './components/edit-vessel/edit-vessel.component';
 import { AddStaffComponent } from './components/add-staff/add-staff.component';
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +122,8 @@ import { EditStaffComponent } from './components/edit-staff/edit-staff.component
     EditVesselComponent,
     AddStaffComponent,
     EditStaffComponent,
+    SigninComponent,
+    LoadingComponent,
   ],
   imports: [
     AmplifyAuthenticatorModule,

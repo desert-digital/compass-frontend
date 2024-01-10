@@ -61,9 +61,15 @@ export type CompassUser = {
   id: string,
   company?: string | null,
   userName?: string | null,
-  role?: CompassUserRole | null,
+  roles?: ModelCompassUserRoleConnection | null,
   createdAt: string,
   updatedAt: string,
+};
+
+export type ModelCompassUserRoleConnection = {
+  __typename: "ModelCompassUserRoleConnection",
+  items:  Array<CompassUserRole | null >,
+  nextToken?: string | null,
 };
 
 export type CompassUserRole = {
@@ -73,6 +79,7 @@ export type CompassUserRole = {
   roleName?: string | null,
   createdAt: string,
   updatedAt: string,
+  compassUserRolesId?: string | null,
 };
 
 export type UpdateCompassUserInput = {
@@ -89,6 +96,7 @@ export type CreateCompassUserRoleInput = {
   id?: string | null,
   company?: string | null,
   roleName?: string | null,
+  compassUserRolesId?: string | null,
 };
 
 export type ModelCompassUserRoleConditionInput = {
@@ -97,12 +105,30 @@ export type ModelCompassUserRoleConditionInput = {
   and?: Array< ModelCompassUserRoleConditionInput | null > | null,
   or?: Array< ModelCompassUserRoleConditionInput | null > | null,
   not?: ModelCompassUserRoleConditionInput | null,
+  compassUserRolesId?: ModelIDInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type UpdateCompassUserRoleInput = {
   id: string,
   company?: string | null,
   roleName?: string | null,
+  compassUserRolesId?: string | null,
 };
 
 export type DeleteCompassUserRoleInput = {
@@ -310,22 +336,6 @@ export type ModelVesselConditionInput = {
   not?: ModelVesselConditionInput | null,
   ownerBoatsId?: ModelIDInput | null,
   vesselDefaultWorkflowId?: ModelIDInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type UpdateVesselInput = {
@@ -795,12 +805,7 @@ export type ModelCompassUserRoleFilterInput = {
   and?: Array< ModelCompassUserRoleFilterInput | null > | null,
   or?: Array< ModelCompassUserRoleFilterInput | null > | null,
   not?: ModelCompassUserRoleFilterInput | null,
-};
-
-export type ModelCompassUserRoleConnection = {
-  __typename: "ModelCompassUserRoleConnection",
-  items:  Array<CompassUserRole | null >,
-  nextToken?: string | null,
+  compassUserRolesId?: ModelIDInput | null,
 };
 
 export type ModelPendingEventFilterInput = {
@@ -1233,13 +1238,18 @@ export type CreateCompassUserMutation = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1257,13 +1267,18 @@ export type UpdateCompassUserMutation = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1281,13 +1296,18 @@ export type DeleteCompassUserMutation = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1307,6 +1327,7 @@ export type CreateCompassUserRoleMutation = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -1323,6 +1344,7 @@ export type UpdateCompassUserRoleMutation = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -1339,6 +1361,7 @@ export type DeleteCompassUserRoleMutation = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -3233,13 +3256,18 @@ export type GetCompassUserQuery = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -3260,13 +3288,18 @@ export type ListCompassUsersQuery = {
       id: string,
       company?: string | null,
       userName?: string | null,
-      role?:  {
-        __typename: "CompassUserRole",
-        id: string,
-        company?: string | null,
-        roleName?: string | null,
-        createdAt: string,
-        updatedAt: string,
+      roles?:  {
+        __typename: "ModelCompassUserRoleConnection",
+        items:  Array< {
+          __typename: "CompassUserRole",
+          id: string,
+          company?: string | null,
+          roleName?: string | null,
+          createdAt: string,
+          updatedAt: string,
+          compassUserRolesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
@@ -3287,6 +3320,7 @@ export type GetCompassUserRoleQuery = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -3306,6 +3340,7 @@ export type ListCompassUserRolesQuery = {
       roleName?: string | null,
       createdAt: string,
       updatedAt: string,
+      compassUserRolesId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -4683,13 +4718,18 @@ export type OnCreateCompassUserSubscription = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -4706,13 +4746,18 @@ export type OnUpdateCompassUserSubscription = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -4729,13 +4774,18 @@ export type OnDeleteCompassUserSubscription = {
     id: string,
     company?: string | null,
     userName?: string | null,
-    role?:  {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    roles?:  {
+      __typename: "ModelCompassUserRoleConnection",
+      items:  Array< {
+        __typename: "CompassUserRole",
+        id: string,
+        company?: string | null,
+        roleName?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        compassUserRolesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -4754,6 +4804,7 @@ export type OnCreateCompassUserRoleSubscription = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -4769,6 +4820,7 @@ export type OnUpdateCompassUserRoleSubscription = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 
@@ -4784,6 +4836,7 @@ export type OnDeleteCompassUserRoleSubscription = {
     roleName?: string | null,
     createdAt: string,
     updatedAt: string,
+    compassUserRolesId?: string | null,
   } | null,
 };
 

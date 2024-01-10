@@ -2,7 +2,7 @@ type CompassUser @model @auth(rules: [{allow: private}]) {
   id: ID! 
   company: String
   userName: String
-  role: CompassUserRole
+  roles: [CompassUserRole] @hasMany
 }
 
 type CompassUserRole @model @auth(rules: [{allow: private}]) {

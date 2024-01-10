@@ -1,1 +1,15 @@
-<app-main></app-main>>
+<div class="login-page">
+  <div class="container">
+    <div>
+      <h1>Welcome to Compass Fleet Management</h1>
+      <span>
+        <button id="back-to-login" mat-button color="accent" class="top-button" (click)="onBackToLoginPressed()">Back To
+          Login</button>
+      </span>
+    </div>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+    <p class="copy">&copy; Copyright 2024-24 Desert Digital, LLC<br><span class="light-text">v0.0.1 Build 1</span></p>
+  </div>
+</div>

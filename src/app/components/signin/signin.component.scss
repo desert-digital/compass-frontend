@@ -1,0 +1,26 @@
+@import 'src/compass-theme';
+
+.form-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+mat-form-field {
+  @media only screen and (max-width: 420px) {
+    width: $thinFormWidth;
+  }
+  @media only screen and (min-width: 421px) {
+    width: $formWidth;
+  }
+}
+
+button {
+  @include buttons;
+  margin: 5px;
+}
+
+p {
+  @include paragraphs;
+}
