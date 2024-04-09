@@ -360,6 +360,60 @@ export const deleteServiceOrder = /* GraphQL */ `mutation DeleteServiceOrder(
   APITypes.DeleteServiceOrderMutationVariables,
   APITypes.DeleteServiceOrderMutation
 >;
+export const createInventoryItem = /* GraphQL */ `mutation CreateInventoryItem(
+  $input: CreateInventoryItemInput!
+  $condition: ModelInventoryItemConditionInput
+) {
+  createInventoryItem(input: $input, condition: $condition) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateInventoryItemMutationVariables,
+  APITypes.CreateInventoryItemMutation
+>;
+export const updateInventoryItem = /* GraphQL */ `mutation UpdateInventoryItem(
+  $input: UpdateInventoryItemInput!
+  $condition: ModelInventoryItemConditionInput
+) {
+  updateInventoryItem(input: $input, condition: $condition) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateInventoryItemMutationVariables,
+  APITypes.UpdateInventoryItemMutation
+>;
+export const deleteInventoryItem = /* GraphQL */ `mutation DeleteInventoryItem(
+  $input: DeleteInventoryItemInput!
+  $condition: ModelInventoryItemConditionInput
+) {
+  deleteInventoryItem(input: $input, condition: $condition) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteInventoryItemMutationVariables,
+  APITypes.DeleteInventoryItemMutation
+>;
 export const createVessel = /* GraphQL */ `mutation CreateVessel(
   $input: CreateVesselInput!
   $condition: ModelVesselConditionInput

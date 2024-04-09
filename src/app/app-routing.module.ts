@@ -69,6 +69,9 @@ const routes: Routes = [
       path: 'pending',
       component: PendingTableComponent
     }, {
+      path: 'checklist',
+      component: ChecklistComponent
+    }, {
       path: 'workflow/:eventId',
       component: AssignWorkflowComponent
     }, {
@@ -78,7 +81,7 @@ const routes: Routes = [
       path: 'edit-workflow/:id',
       component: EditWorkflowComponent
     }, {
-      path: 'workflows',
+      path: 'manage-workflows',
       component: ManageWorkflowsComponent
     }, {
       path: 'add-checklist',
@@ -87,7 +90,7 @@ const routes: Routes = [
       path: 'edit-checklist/:id',
       component: EditChecklistComponent
     }, {
-      path: 'checklists',
+      path: 'manage-checklists',
       component: ManageChecklistsComponent
     }, {
       path: 'add-new-action',
@@ -96,16 +99,12 @@ const routes: Routes = [
       path: 'edit-action/:id',
       component: EditActionComponent
     }, {
-      path: 'actions',
+      path: 'manage-actions',
       component: ManageActionsComponent
     }, {
       path: 'services',
       component: ManageServiceOrdersComponent
     }],
-  },
-  {
-    path: 'checklist',
-    component: ChecklistComponent
   },
   {
     path: 'login',

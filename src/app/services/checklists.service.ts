@@ -25,12 +25,12 @@ export class ChecklistsService {
   constructor(private _checklistModelService: ChecklistModelsService,
     private _actionsService: ActionsService) { }
 
-  async getChecklists(): Promise<any> {
+  async getChecklists(): Promise<Checklist[]> {
     const checklists = await API.graphql<GraphQLQuery<ListChecklistsQuery>>(
-      graphqlOperation(queries.listVessels)
+      graphqlOperation(queries.listChecklists)
     );
 
-    return checklists;
+    return checklists.data.listChecklists.items as Checklist[];
   };
 
   async createChecklist() {
@@ -43,13 +43,12 @@ export class ChecklistsService {
     const mustEndTime = new Date(mustEnd);
     const mustStartTime = new Date(mustEndTime.getTime() - (checklistModel.duration * 60 * 1000));
 
-    console.log(assigneeId);
-
     const checklistDetails = {
       input: {
         company: checklistModel.company,
         name: checklistModel.name,
         actualStart: now,
+        checklistOwnerId: assigneeId,
         mustStart: mustStartTime.toISOString(),
         mustEnd: mustEndTime.toISOString()
       }

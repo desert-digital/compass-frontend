@@ -56,6 +56,10 @@ export class MainComponent {
     this._router.navigate(['main/pending']);
   }
 
+  onChecklistPressed() {
+    this._router.navigate(['main/checklist']);
+  }
+
   onStaffPressed() {
     this._router.navigate(['main/staff']);
   }
@@ -64,12 +68,12 @@ export class MainComponent {
     this._router.navigate(['main/owners']);
   }
 
-  onChecklistPressed() {
-    this._router.navigate(['main/checklists']);
+  onChecklistAdminPressed() {
+    this._router.navigate(['main/manage-checklists']);
   }
 
   onWorkflowPressed() {
-    this._router.navigate(['main/workflows']);
+    this._router.navigate(['main/manage-workflows']);
   }
 
   onServicesPressed() {
@@ -77,7 +81,7 @@ export class MainComponent {
   }
 
   onActionsPressed() {
-    this._router.navigate(['main/actions']);
+    this._router.navigate(['main/manage-actions']);
   }
 
   async onLogoutPressed() {

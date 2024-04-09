@@ -14,6 +14,8 @@ export type ModelCompassUserConditionInput = {
   and?: Array< ModelCompassUserConditionInput | null > | null,
   or?: Array< ModelCompassUserConditionInput | null > | null,
   not?: ModelCompassUserConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelStringInput = {
@@ -105,6 +107,8 @@ export type ModelCompassUserRoleConditionInput = {
   and?: Array< ModelCompassUserRoleConditionInput | null > | null,
   or?: Array< ModelCompassUserRoleConditionInput | null > | null,
   not?: ModelCompassUserRoleConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   compassUserRolesId?: ModelIDInput | null,
 };
 
@@ -161,6 +165,8 @@ export type ModelPendingEventConditionInput = {
   and?: Array< ModelPendingEventConditionInput | null > | null,
   or?: Array< ModelPendingEventConditionInput | null > | null,
   not?: ModelPendingEventConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type PendingEvent = {
@@ -208,6 +214,8 @@ export type ModelServiceOrderConditionInput = {
   and?: Array< ModelServiceOrderConditionInput | null > | null,
   or?: Array< ModelServiceOrderConditionInput | null > | null,
   not?: ModelServiceOrderConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ServiceOrder = {
@@ -316,6 +324,57 @@ export type DeleteServiceOrderInput = {
   id: string,
 };
 
+export type CreateInventoryItemInput = {
+  id?: string | null,
+  location?: string | null,
+  description?: string | null,
+  quantity?: number | null,
+};
+
+export type ModelInventoryItemConditionInput = {
+  location?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  quantity?: ModelIntInput | null,
+  and?: Array< ModelInventoryItemConditionInput | null > | null,
+  or?: Array< ModelInventoryItemConditionInput | null > | null,
+  not?: ModelInventoryItemConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type InventoryItem = {
+  __typename: "InventoryItem",
+  id: string,
+  location?: string | null,
+  description?: string | null,
+  quantity?: number | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateInventoryItemInput = {
+  id: string,
+  location?: string | null,
+  description?: string | null,
+  quantity?: number | null,
+};
+
+export type DeleteInventoryItemInput = {
+  id: string,
+};
+
 export type CreateVesselInput = {
   id?: string | null,
   company: string,
@@ -334,6 +393,8 @@ export type ModelVesselConditionInput = {
   and?: Array< ModelVesselConditionInput | null > | null,
   or?: Array< ModelVesselConditionInput | null > | null,
   not?: ModelVesselConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   ownerBoatsId?: ModelIDInput | null,
   vesselDefaultWorkflowId?: ModelIDInput | null,
 };
@@ -368,6 +429,8 @@ export type ModelStaffConditionInput = {
   and?: Array< ModelStaffConditionInput | null > | null,
   or?: Array< ModelStaffConditionInput | null > | null,
   not?: ModelStaffConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type Staff = {
@@ -409,6 +472,8 @@ export type ModelOwnerConditionInput = {
   and?: Array< ModelOwnerConditionInput | null > | null,
   or?: Array< ModelOwnerConditionInput | null > | null,
   not?: ModelOwnerConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type Owner = {
@@ -457,18 +522,8 @@ export type ModelActionModelConditionInput = {
   and?: Array< ModelActionModelConditionInput | null > | null,
   or?: Array< ModelActionModelConditionInput | null > | null,
   not?: ModelActionModelConditionInput | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateActionModelInput = {
@@ -501,6 +556,8 @@ export type ModelChecklistModelConditionInput = {
   and?: Array< ModelChecklistModelConditionInput | null > | null,
   or?: Array< ModelChecklistModelConditionInput | null > | null,
   not?: ModelChecklistModelConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelBooleanInput = {
@@ -539,6 +596,8 @@ export type ModelWorkflowModelConditionInput = {
   and?: Array< ModelWorkflowModelConditionInput | null > | null,
   or?: Array< ModelWorkflowModelConditionInput | null > | null,
   not?: ModelWorkflowModelConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateWorkflowModelInput = {
@@ -574,6 +633,8 @@ export type ModelActionConditionInput = {
   and?: Array< ModelActionConditionInput | null > | null,
   or?: Array< ModelActionConditionInput | null > | null,
   not?: ModelActionConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   checklistStepsId?: ModelIDInput | null,
 };
 
@@ -630,6 +691,8 @@ export type ModelChecklistConditionInput = {
   and?: Array< ModelChecklistConditionInput | null > | null,
   or?: Array< ModelChecklistConditionInput | null > | null,
   not?: ModelChecklistConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   workflowStepsId?: ModelIDInput | null,
   checklistOwnerId?: ModelIDInput | null,
 };
@@ -697,6 +760,8 @@ export type ModelWorkflowConditionInput = {
   and?: Array< ModelWorkflowConditionInput | null > | null,
   or?: Array< ModelWorkflowConditionInput | null > | null,
   not?: ModelWorkflowConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type Workflow = {
@@ -747,6 +812,8 @@ export type ModelChecklistActionsConditionInput = {
   and?: Array< ModelChecklistActionsConditionInput | null > | null,
   or?: Array< ModelChecklistActionsConditionInput | null > | null,
   not?: ModelChecklistActionsConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateChecklistActionsInput = {
@@ -771,6 +838,8 @@ export type ModelWorkflowChecklistsConditionInput = {
   and?: Array< ModelWorkflowChecklistsConditionInput | null > | null,
   or?: Array< ModelWorkflowChecklistsConditionInput | null > | null,
   not?: ModelWorkflowChecklistsConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateWorkflowChecklistsInput = {
@@ -787,6 +856,8 @@ export type ModelCompassUserFilterInput = {
   id?: ModelIDInput | null,
   company?: ModelStringInput | null,
   userName?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelCompassUserFilterInput | null > | null,
   or?: Array< ModelCompassUserFilterInput | null > | null,
   not?: ModelCompassUserFilterInput | null,
@@ -802,6 +873,8 @@ export type ModelCompassUserRoleFilterInput = {
   id?: ModelIDInput | null,
   company?: ModelStringInput | null,
   roleName?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelCompassUserRoleFilterInput | null > | null,
   or?: Array< ModelCompassUserRoleFilterInput | null > | null,
   not?: ModelCompassUserRoleFilterInput | null,
@@ -819,6 +892,8 @@ export type ModelPendingEventFilterInput = {
   contactEmail?: ModelStringInput | null,
   contactName?: ModelStringInput | null,
   contactPhone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelPendingEventFilterInput | null > | null,
   or?: Array< ModelPendingEventFilterInput | null > | null,
   not?: ModelPendingEventFilterInput | null,
@@ -834,6 +909,8 @@ export type ModelServiceOrderFilterInput = {
   id?: ModelIDInput | null,
   company?: ModelStringInput | null,
   items?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelServiceOrderFilterInput | null > | null,
   or?: Array< ModelServiceOrderFilterInput | null > | null,
   not?: ModelServiceOrderFilterInput | null,
@@ -845,12 +922,32 @@ export type ModelServiceOrderConnection = {
   nextToken?: string | null,
 };
 
+export type ModelInventoryItemFilterInput = {
+  id?: ModelIDInput | null,
+  location?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  quantity?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelInventoryItemFilterInput | null > | null,
+  or?: Array< ModelInventoryItemFilterInput | null > | null,
+  not?: ModelInventoryItemFilterInput | null,
+};
+
+export type ModelInventoryItemConnection = {
+  __typename: "ModelInventoryItemConnection",
+  items:  Array<InventoryItem | null >,
+  nextToken?: string | null,
+};
+
 export type ModelVesselFilterInput = {
   id?: ModelIDInput | null,
   company?: ModelStringInput | null,
   name?: ModelStringInput | null,
   vesselType?: ModelStringInput | null,
   documentNumber?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelVesselFilterInput | null > | null,
   or?: Array< ModelVesselFilterInput | null > | null,
   not?: ModelVesselFilterInput | null,
@@ -864,6 +961,8 @@ export type ModelStaffFilterInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelStaffFilterInput | null > | null,
   or?: Array< ModelStaffFilterInput | null > | null,
   not?: ModelStaffFilterInput | null,
@@ -881,6 +980,8 @@ export type ModelOwnerFilterInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelOwnerFilterInput | null > | null,
   or?: Array< ModelOwnerFilterInput | null > | null,
   not?: ModelOwnerFilterInput | null,
@@ -898,6 +999,8 @@ export type ModelActionModelFilterInput = {
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelActionModelFilterInput | null > | null,
   or?: Array< ModelActionModelFilterInput | null > | null,
   not?: ModelActionModelFilterInput | null,
@@ -916,6 +1019,8 @@ export type ModelChecklistModelFilterInput = {
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
   preCharter?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelChecklistModelFilterInput | null > | null,
   or?: Array< ModelChecklistModelFilterInput | null > | null,
   not?: ModelChecklistModelFilterInput | null,
@@ -933,6 +1038,8 @@ export type ModelWorkflowModelFilterInput = {
   name?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   duration?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelWorkflowModelFilterInput | null > | null,
   or?: Array< ModelWorkflowModelFilterInput | null > | null,
   not?: ModelWorkflowModelFilterInput | null,
@@ -952,6 +1059,8 @@ export type ModelActionFilterInput = {
   duration?: ModelIntInput | null,
   actualStart?: ModelStringInput | null,
   actualEnd?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelActionFilterInput | null > | null,
   or?: Array< ModelActionFilterInput | null > | null,
   not?: ModelActionFilterInput | null,
@@ -967,6 +1076,8 @@ export type ModelChecklistFilterInput = {
   mustEnd?: ModelStringInput | null,
   actualStart?: ModelStringInput | null,
   actualEnd?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelChecklistFilterInput | null > | null,
   or?: Array< ModelChecklistFilterInput | null > | null,
   not?: ModelChecklistFilterInput | null,
@@ -983,6 +1094,8 @@ export type ModelWorkflowFilterInput = {
   mustEnd?: ModelStringInput | null,
   actualStart?: ModelStringInput | null,
   actualEnd?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelWorkflowFilterInput | null > | null,
   or?: Array< ModelWorkflowFilterInput | null > | null,
   not?: ModelWorkflowFilterInput | null,
@@ -998,6 +1111,8 @@ export type ModelChecklistActionsFilterInput = {
   id?: ModelIDInput | null,
   actionModelId?: ModelIDInput | null,
   checklistModelId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelChecklistActionsFilterInput | null > | null,
   or?: Array< ModelChecklistActionsFilterInput | null > | null,
   not?: ModelChecklistActionsFilterInput | null,
@@ -1007,6 +1122,8 @@ export type ModelWorkflowChecklistsFilterInput = {
   id?: ModelIDInput | null,
   checklistModelId?: ModelIDInput | null,
   workflowModelId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelWorkflowChecklistsFilterInput | null > | null,
   or?: Array< ModelWorkflowChecklistsFilterInput | null > | null,
   not?: ModelWorkflowChecklistsFilterInput | null,
@@ -1022,8 +1139,11 @@ export type ModelSubscriptionCompassUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   company?: ModelSubscriptionStringInput | null,
   userName?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCompassUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionCompassUserFilterInput | null > | null,
+  compassUserRolesId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -1060,6 +1180,8 @@ export type ModelSubscriptionCompassUserRoleFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   company?: ModelSubscriptionStringInput | null,
   roleName?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCompassUserRoleFilterInput | null > | null,
   or?: Array< ModelSubscriptionCompassUserRoleFilterInput | null > | null,
 };
@@ -1075,6 +1197,8 @@ export type ModelSubscriptionPendingEventFilterInput = {
   contactEmail?: ModelSubscriptionStringInput | null,
   contactName?: ModelSubscriptionStringInput | null,
   contactPhone?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
   or?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
 };
@@ -1083,48 +1207,21 @@ export type ModelSubscriptionServiceOrderFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   company?: ModelSubscriptionStringInput | null,
   items?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionServiceOrderFilterInput | null > | null,
   or?: Array< ModelSubscriptionServiceOrderFilterInput | null > | null,
 };
 
-export type ModelSubscriptionVesselFilterInput = {
+export type ModelSubscriptionInventoryItemFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  vesselType?: ModelSubscriptionStringInput | null,
-  documentNumber?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionVesselFilterInput | null > | null,
-  or?: Array< ModelSubscriptionVesselFilterInput | null > | null,
-};
-
-export type ModelSubscriptionStaffFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  phone?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionStaffFilterInput | null > | null,
-  or?: Array< ModelSubscriptionStaffFilterInput | null > | null,
-};
-
-export type ModelSubscriptionOwnerFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  phone?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionOwnerFilterInput | null > | null,
-  or?: Array< ModelSubscriptionOwnerFilterInput | null > | null,
-};
-
-export type ModelSubscriptionActionModelFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  notes?: ModelSubscriptionStringInput | null,
-  duration?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionActionModelFilterInput | null > | null,
-  or?: Array< ModelSubscriptionActionModelFilterInput | null > | null,
+  location?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  quantity?: ModelSubscriptionIntInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionInventoryItemFilterInput | null > | null,
+  or?: Array< ModelSubscriptionInventoryItemFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -1139,6 +1236,56 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionVesselFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  vesselType?: ModelSubscriptionStringInput | null,
+  documentNumber?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionVesselFilterInput | null > | null,
+  or?: Array< ModelSubscriptionVesselFilterInput | null > | null,
+  vesselDefaultWorkflowId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionStaffFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionStaffFilterInput | null > | null,
+  or?: Array< ModelSubscriptionStaffFilterInput | null > | null,
+};
+
+export type ModelSubscriptionOwnerFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionOwnerFilterInput | null > | null,
+  or?: Array< ModelSubscriptionOwnerFilterInput | null > | null,
+  ownerBoatsId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionActionModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  company?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  notes?: ModelSubscriptionStringInput | null,
+  duration?: ModelSubscriptionIntInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionActionModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionActionModelFilterInput | null > | null,
+};
+
 export type ModelSubscriptionChecklistModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   company?: ModelSubscriptionStringInput | null,
@@ -1146,6 +1293,8 @@ export type ModelSubscriptionChecklistModelFilterInput = {
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
   preCharter?: ModelSubscriptionBooleanInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChecklistModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionChecklistModelFilterInput | null > | null,
 };
@@ -1161,6 +1310,8 @@ export type ModelSubscriptionWorkflowModelFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   notes?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionIntInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionWorkflowModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowModelFilterInput | null > | null,
 };
@@ -1173,6 +1324,8 @@ export type ModelSubscriptionActionFilterInput = {
   duration?: ModelSubscriptionIntInput | null,
   actualStart?: ModelSubscriptionStringInput | null,
   actualEnd?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionActionFilterInput | null > | null,
   or?: Array< ModelSubscriptionActionFilterInput | null > | null,
 };
@@ -1186,8 +1339,12 @@ export type ModelSubscriptionChecklistFilterInput = {
   mustEnd?: ModelSubscriptionStringInput | null,
   actualStart?: ModelSubscriptionStringInput | null,
   actualEnd?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChecklistFilterInput | null > | null,
   or?: Array< ModelSubscriptionChecklistFilterInput | null > | null,
+  checklistStepsId?: ModelSubscriptionIDInput | null,
+  checklistOwnerId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionWorkflowFilterInput = {
@@ -1199,14 +1356,19 @@ export type ModelSubscriptionWorkflowFilterInput = {
   mustEnd?: ModelSubscriptionStringInput | null,
   actualStart?: ModelSubscriptionStringInput | null,
   actualEnd?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
+  workflowStepsId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionChecklistActionsFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   actionModelId?: ModelSubscriptionIDInput | null,
   checklistModelId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChecklistActionsFilterInput | null > | null,
   or?: Array< ModelSubscriptionChecklistActionsFilterInput | null > | null,
 };
@@ -1215,6 +1377,8 @@ export type ModelSubscriptionWorkflowChecklistsFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   checklistModelId?: ModelSubscriptionIDInput | null,
   workflowModelId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionWorkflowChecklistsFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowChecklistsFilterInput | null > | null,
 };
@@ -1555,6 +1719,57 @@ export type DeleteServiceOrderMutation = {
       vesselDefaultWorkflowId?: string | null,
     } | null,
     items?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateInventoryItemMutationVariables = {
+  input: CreateInventoryItemInput,
+  condition?: ModelInventoryItemConditionInput | null,
+};
+
+export type CreateInventoryItemMutation = {
+  createInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateInventoryItemMutationVariables = {
+  input: UpdateInventoryItemInput,
+  condition?: ModelInventoryItemConditionInput | null,
+};
+
+export type UpdateInventoryItemMutation = {
+  updateInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteInventoryItemMutationVariables = {
+  input: DeleteInventoryItemInput,
+  condition?: ModelInventoryItemConditionInput | null,
+};
+
+export type DeleteInventoryItemMutation = {
+  deleteInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3480,6 +3695,44 @@ export type ListServiceOrdersQuery = {
   } | null,
 };
 
+export type GetInventoryItemQueryVariables = {
+  id: string,
+};
+
+export type GetInventoryItemQuery = {
+  getInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListInventoryItemsQueryVariables = {
+  filter?: ModelInventoryItemFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListInventoryItemsQuery = {
+  listInventoryItems?:  {
+    __typename: "ModelInventoryItemConnection",
+    items:  Array< {
+      __typename: "InventoryItem",
+      id: string,
+      location?: string | null,
+      description?: string | null,
+      quantity?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetVesselQueryVariables = {
   id: string,
 };
@@ -5024,6 +5277,54 @@ export type OnDeleteServiceOrderSubscription = {
       vesselDefaultWorkflowId?: string | null,
     } | null,
     items?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateInventoryItemSubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryItemFilterInput | null,
+};
+
+export type OnCreateInventoryItemSubscription = {
+  onCreateInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateInventoryItemSubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryItemFilterInput | null,
+};
+
+export type OnUpdateInventoryItemSubscription = {
+  onUpdateInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteInventoryItemSubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryItemFilterInput | null,
+};
+
+export type OnDeleteInventoryItemSubscription = {
+  onDeleteInventoryItem?:  {
+    __typename: "InventoryItem",
+    id: string,
+    location?: string | null,
+    description?: string | null,
+    quantity?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,

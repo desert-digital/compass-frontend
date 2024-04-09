@@ -31,6 +31,13 @@ type ServiceOrder @model @auth(rules: [{ allow: private}]){
   items: [String]
 }
 
+type InventoryItem @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  location: String 
+  description: String 
+  quantity: Int
+}
+
 type Vessel @model @auth(rules: [{ allow: private }]){
   id: ID!
   company: String!

@@ -341,6 +341,57 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
   APITypes.OnDeleteServiceOrderSubscriptionVariables,
   APITypes.OnDeleteServiceOrderSubscription
 >;
+export const onCreateInventoryItem = /* GraphQL */ `subscription OnCreateInventoryItem(
+  $filter: ModelSubscriptionInventoryItemFilterInput
+) {
+  onCreateInventoryItem(filter: $filter) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateInventoryItemSubscriptionVariables,
+  APITypes.OnCreateInventoryItemSubscription
+>;
+export const onUpdateInventoryItem = /* GraphQL */ `subscription OnUpdateInventoryItem(
+  $filter: ModelSubscriptionInventoryItemFilterInput
+) {
+  onUpdateInventoryItem(filter: $filter) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateInventoryItemSubscriptionVariables,
+  APITypes.OnUpdateInventoryItemSubscription
+>;
+export const onDeleteInventoryItem = /* GraphQL */ `subscription OnDeleteInventoryItem(
+  $filter: ModelSubscriptionInventoryItemFilterInput
+) {
+  onDeleteInventoryItem(filter: $filter) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteInventoryItemSubscriptionVariables,
+  APITypes.OnDeleteInventoryItemSubscription
+>;
 export const onCreateVessel = /* GraphQL */ `subscription OnCreateVessel($filter: ModelSubscriptionVesselFilterInput) {
   onCreateVessel(filter: $filter) {
     id

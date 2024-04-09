@@ -1,4 +1,11 @@
+// Core
+
 import { Component } from '@angular/core';
+
+// Local
+
+import { Checklist } from 'src/app/API.service';
+import { ChecklistsService } from 'src/app/services/checklists.service';
 
 @Component({
   selector: 'app-checklist',
@@ -6,20 +13,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./checklist.component.scss']
 })
 export class ChecklistComponent {
-  title: string = 'Team Pre-charter Checklist';
   checklistCompleted: boolean = false;
-  steps: any[] = [
-    { name: 'Team pre #1', selected: false },
-    { name: 'Team pre #2', selected: false },
-    { name: 'Team pre #3', selected: false },
-    { name: 'Team pre #4', selected: false },
-    { name: 'Team pre #5', selected: false }];
+  checklists: Checklist[] = [];
+  
+  constructor(private _checklistService: ChecklistsService) {
+  }
+
+  async ngOnInit() {
+    this.checklists = await this._checklistService.getChecklists();
+    this.checklistCompleted = false;
+  }
 
   onItemChecked(item: any) {
     item.selected = !item.selected;
     this.checklistCompleted = true;
-    this.steps.forEach( item => {
-      this.checklistCompleted = this.checklistCompleted && item.selected;
-    })
+    // this.steps.forEach( item => {
+    //   this.checklistCompleted = this.checklistCompleted && item.selected;
+    // })
   }
 }

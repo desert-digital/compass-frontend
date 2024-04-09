@@ -242,6 +242,44 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
   APITypes.ListServiceOrdersQueryVariables,
   APITypes.ListServiceOrdersQuery
 >;
+export const getInventoryItem = /* GraphQL */ `query GetInventoryItem($id: ID!) {
+  getInventoryItem(id: $id) {
+    id
+    location
+    description
+    quantity
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetInventoryItemQueryVariables,
+  APITypes.GetInventoryItemQuery
+>;
+export const listInventoryItems = /* GraphQL */ `query ListInventoryItems(
+  $filter: ModelInventoryItemFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listInventoryItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      location
+      description
+      quantity
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListInventoryItemsQueryVariables,
+  APITypes.ListInventoryItemsQuery
+>;
 export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
   getVessel(id: $id) {
     id

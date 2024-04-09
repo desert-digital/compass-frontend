@@ -1,8 +1,9 @@
 <div class="container">
-  <h3>{{ title }}</h3>
+  <h3>Active Checkslists</h3>
   <mat-selection-list>
-    <mat-list-option *ngFor="let step of steps" (click)="onItemChecked(step)">
-      <span class="line-item" [ngClass]="step.selected ? 'finished' : 'todo' ">{{ step.name }}</span>
+    <mat-list-option *ngFor="let checklist of checklists" (click)="onItemChecked(checklist)">
+      <div>{{ checklist.name }}</div>
+      <div>{{ checklist.checklistOwnerId }}</div>
     </mat-list-option>
   </mat-selection-list>
   <div class="completed" *ngIf="checklistCompleted"><b>Completed!</b></div>

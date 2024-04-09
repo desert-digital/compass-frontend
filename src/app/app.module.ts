@@ -82,6 +82,7 @@ import { AddStaffComponent } from './components/add-staff/add-staff.component';
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { StaffNamePipe } from './pipes/staff-name.pipe';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     EditStaffComponent,
     SigninComponent,
     LoadingComponent,
+    StaffNamePipe,
   ],
   imports: [
     AmplifyAuthenticatorModule,
