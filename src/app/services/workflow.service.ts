@@ -12,7 +12,7 @@ import * as queries from '../../graphql/queries';
 import { GraphQLQuery } from '@aws-amplify/api';
 
 import { ListWorkflowsQuery, CreateWorkflowMutation } from '../API.service';
-import { PendingEvent, Staff, Workflow, WorkflowModel } from '../API.service';
+import { PendingEvent, Workflow, WorkflowModel } from '../API.service';
 
 // Local
 
@@ -36,7 +36,7 @@ export class WorkflowService {
     );
 
     return workflows;
-  };
+  }
 
   async createWorkflowFromModel(event: PendingEvent, workflowModel: WorkflowModel, assignees: FormArray): Promise<Workflow> {
     const now = new Date().toISOString();
@@ -68,7 +68,7 @@ export class WorkflowService {
     let endTime = event.end;
 
     for (let index = workflowModel.checklists.items.length - 1; index >= 0; index -= 1) {
-      let checklist = await this._checklistService.createChecklistFromModel(
+      const checklist = await this._checklistService.createChecklistFromModel(
         workflowModel.checklists.items[index].checklistModel,
         assignees.controls[index].value,
         endTime

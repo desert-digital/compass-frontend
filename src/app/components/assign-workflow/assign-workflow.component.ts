@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 // Amplify
 
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from 'src/graphql/queries';
 import * as mutations from 'src/graphql/mutations';
 
 import { GraphQLQuery } from '@aws-amplify/api';
@@ -89,9 +88,7 @@ export class AssignWorkflowComponent {
     const vessel = await this._fleetService.getVesselById(event.source.value);
     this.workflowModel = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
 
-    let index = 0;
-
-    for (let checklist of this.workflowModel.checklists.items) {
+    for (const checklist of this.workflowModel.checklists.items) {
       const stepForm = this._formBuilder.group({
         assignee: ['', Validators.required]
       });
@@ -114,7 +111,7 @@ export class AssignWorkflowComponent {
       const workflowDetails = {
         workflowId: workflow.id
       }
-      const workflowMutationResult = await API.graphql<GraphQLQuery<StartWorklowMutation>>(
+      await API.graphql<GraphQLQuery<StartWorklowMutation>>(
         graphqlOperation(mutations.startWorklow, workflowDetails)
       );
       this._snackBar.open('Created the Workflow', 'OK', {duration: 3000});

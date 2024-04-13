@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Material
 
@@ -53,7 +53,7 @@ export class EditChecklistComponent {
       duration: checklistModel.duration,
       notes: checklistModel.notes
     });
-    for (let item of checklistModel.actions.items) {
+    for (const item of checklistModel.actions.items) {
       const action = await this._actionModelsService.getActionModelFromId(item.actionModelId);
       this.checklist.push(action);
     }
@@ -84,7 +84,7 @@ export class EditChecklistComponent {
     this._updateDuration();
   }
 
-  onUpdateChecklistPressed(model: ChecklistModel, formDirective: FormGroupDirective) {
+  onUpdateChecklistPressed(model: ChecklistModel) {
     try {
       this._checklistModelsService.updateChecklistModel(model, this.checklist); 
       this._snackBar.open(`Updated ${model.name}`, 'OK', {duration: 3000});

@@ -6,7 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 // Amplify
 
-import { Amplify, Auth, Storage } from 'aws-amplify';
+import {Auth } from 'aws-amplify';
 
 // Local
 
@@ -38,7 +38,7 @@ export class MainComponent {
   async ngOnInit() {
     this.onHomePressed();
 
-    const items = this._pendingService.getPendingItems();
+    this._pendingService.getPendingItems();
     
     this._pendingService.numberOfPendingEvents$.subscribe((number : any) => 
       this.pendingItems = number);

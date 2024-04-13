@@ -47,7 +47,7 @@ export class ManageChecklistsComponent {
   }
 
   onNotesPressed() {
-    const dialogRef = this._dialog.open(ShowChecklistNotesDialogComponent,
+    this._dialog.open(ShowChecklistNotesDialogComponent,
       { data: this.selectedChecklist });
   }
 

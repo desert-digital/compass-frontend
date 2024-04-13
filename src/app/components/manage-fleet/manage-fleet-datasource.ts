@@ -1,7 +1,7 @@
 // Core
 
 import { map, startWith, switchMap } from 'rxjs/operators';
-import { Observable, of, merge } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
 // Material
 
@@ -12,7 +12,6 @@ import { MatSort } from '@angular/material/sort';
 // Local
 
 import { FleetService } from 'src/app/services/fleet.service';
-import { OnCreateVesselSubscription } from 'src/app/API.service';
 
 /**
  * Data source for the FleetTable view. This class should

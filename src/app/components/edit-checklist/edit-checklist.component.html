@@ -3,7 +3,7 @@
         <h3>Edit the Checklist</h3>
         <div class="one-wide">
             <form [formGroup]="checklistForm" #formDirective="ngForm"
-                (ngSubmit)="onUpdateChecklistPressed(checklistForm.value, formDirective)">
+                (ngSubmit)="onUpdateChecklistPressed(checklistForm.value)">
                 <button mat-flat-button type="submit" color="primary">Update the Checklist</button>
                 <button mat-flat-button color="warn" (click)="onCancelEdit()">Cancel</button>
                 <div class="row" *ngIf="false">

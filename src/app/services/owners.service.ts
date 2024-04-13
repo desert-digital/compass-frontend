@@ -84,8 +84,9 @@ export class OwnersService {
     const ownerResult = await API.graphql<GraphQLQuery<UpdateOwnerMutation>>(
       graphqlOperation(mutations.updateOwner, ownerDetails)
     );
+    console.log(ownerResult);
 
-    for (let boat of boats) {
+    for (const boat of boats) {
       this._fleetService.updateVesselWithOwner(boat, owner);
     }
   }

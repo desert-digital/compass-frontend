@@ -1,7 +1,6 @@
 // Core
 
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 // Amplify 
 
@@ -76,6 +75,7 @@ export class StaffService {
     const staffResult = await API.graphql<GraphQLQuery<UpdateStaffMutation>>(
       graphqlOperation(mutations.updateStaff, staffDetails)
     );
+    console.log(staffResult);
   }
 
   async deleteStaff(staff: Staff) {

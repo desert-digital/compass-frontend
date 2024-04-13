@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { Auth, Hub } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 // Local
 
@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
 
   state: string;
 
-  @Output('lostPasswordEvent') lostPasswordEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() lostPasswordEvent: EventEmitter<string> = new EventEmitter<string>();
 
   diagnostic: string;
   constructor(private route: ActivatedRoute,
@@ -52,7 +52,7 @@ export class SigninComponent implements OnInit {
 
     this.hidePassword = true;
 
-    let userNameFromRoute = this.route.snapshot.paramMap.get('username')
+    const userNameFromRoute = this.route.snapshot.paramMap.get('username')
     if ( userNameFromRoute !== '') {
       this.userName = userNameFromRoute;
     }

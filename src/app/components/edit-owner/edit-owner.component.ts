@@ -19,9 +19,9 @@ import { FleetService } from 'src/app/services/fleet.service';
 })
 export class EditOwnerComponent {
 
-  ownerName: String = '';
-  ownerPhone: Number = 0;
-  ownerEmail: String = '';
+  ownerName: string = '';
+  ownerPhone: number = 0;
+  ownerEmail: string = '';
 
   ownerForm: FormGroup;
 
@@ -88,7 +88,7 @@ export class EditOwnerComponent {
     this.ownedVesselList = this.ownerForm.value.vessels;
   }
 
-  async onUpdateOwnerPressed(owner: Owner, formDirective: FormGroupDirective) {
+  async onUpdateOwnerPressed(owner: Owner) {
     try {
       await this._ownersService.updateOwner(owner, this.ownedVesselList).then(() => {
         this._snackBar.open(`Updated ${owner.name}`, 'OK', { duration: 3000 })

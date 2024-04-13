@@ -50,7 +50,7 @@ export class ManageWorkflowsComponent {
   }
 
   onNotesPressed() {
-    const dialogRef = this._dialog.open(ShowWorkflowNotesDialogComponent,
+    this._dialog.open(ShowWorkflowNotesDialogComponent,
       { data: this.selectedWorkflow });
   }
 

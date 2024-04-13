@@ -18,9 +18,9 @@ import { StaffService } from 'src/app/services/staff.service';
 })
 export class AddStaffComponent {
 
-  ownerName: String = '';
-  ownerPhone: Number = 0;
-  ownerEmail: String = '';
+  ownerName: string = '';
+  ownerPhone: number = 0;
+  ownerEmail: string = '';
 
   staffForm: FormGroup;
 

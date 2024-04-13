@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Material
 
@@ -54,7 +54,7 @@ export class EditWorkflowComponent {
       duration: workflowModel.duration,
       notes: workflowModel.notes
     });
-    for (let item of workflowModel.checklists.items) {
+    for (const item of workflowModel.checklists.items) {
       const checklist = await this._checklistModelsService.getChecklistModelFromId(item.checklistModelId);
       this.workflow.push(checklist);
     }
@@ -84,7 +84,7 @@ export class EditWorkflowComponent {
     });
   }
 
-  async onUpdateWorkflowPressed(model: WorkflowModel, formDirective: FormGroupDirective) {
+  async onUpdateWorkflowPressed(model: WorkflowModel) {
     try {
       this._workflowModelsService.updateWorkflowModel(model, this.workflow).then(() => {
         this._snackBar.open(`Updated ${model.name}`, 'OK', { duration: 3000 });

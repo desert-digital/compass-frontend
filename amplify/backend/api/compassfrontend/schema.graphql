@@ -35,6 +35,7 @@ type InventoryItem @model @auth(rules: [{allow: private}]) {
   id: ID!
   location: String 
   description: String 
+  leadTime: Int
   quantity: Int
 }
 

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Local
 
-import { Vessel, Owner, WorkflowModel } from '../../API.service';
+import { Owner, WorkflowModel } from '../../API.service';
 import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 import { OwnersService } from 'src/app/services/owners.service';
 import { FleetService } from 'src/app/services/fleet.service'
@@ -22,18 +22,18 @@ import { FleetService } from 'src/app/services/fleet.service'
 })
 export class AddVesselComponent {
 
-  vesselName: String = '';
-  vesselDocumentNumber: String = '';
+  vesselName: string = '';
+  vesselDocumentNumber: string = '';
 
   compositeForm: FormGroup;
   vesselForm: FormGroup;
   ownerForm: FormGroup;
 
-  owner: String;
+  owner: string;
   owners: Owner[] = [];
 
   workflows: WorkflowModel[] = [];
-  defaultWorkflow: String;
+  defaultWorkflow: string;
 
   vesselType: string; 
   vesselTypes: string[] = ['Sail', 'Power', 'Paddle'];

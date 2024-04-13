@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 // Amplify 
 
 import { API, graphqlOperation } from 'aws-amplify';
-import { GRAPHQL_AUTH_MODE, } from '@aws-amplify/api';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
@@ -59,6 +58,7 @@ export class PendingService {
     const events = await API.graphql<GraphQLQuery<DeletePendingEventMutation>>(
       graphqlOperation(mutations.deletePendingEvent, item.id)
     );
+    console.log(events);
   }
 
   createSubscription() {

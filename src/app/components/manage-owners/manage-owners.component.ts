@@ -34,7 +34,7 @@ export class ManageOwnersComponent {
 
   async _getOwners() {
     this.owners = await this._ownerService.getOwners();
-    for (let owner of this.owners) {
+    for (const owner of this.owners) {
       const ownersBoats = await this._ownerService.getVesselsForOwner(owner.id);
       this.boats.set(owner.id, ownersBoats);
     }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
 
 import { GraphQLQuery } from '@aws-amplify/api';
 import { ListInventoryItemsQuery } from '../API.service';

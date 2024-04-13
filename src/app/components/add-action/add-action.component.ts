@@ -21,9 +21,9 @@ import { ActionModelsService } from 'src/app/services/action-models.service';
 })
 export class AddActionComponent {
 
-  actionName: String = '';
-  actionDuration: Number = 0;
-  actionNotes: String = '';
+  actionName: string = '';
+  actionDuration: number = 0;
+  actionNotes: string = '';
   actionStatus: boolean = false;
 
   actionForm: FormGroup;
@@ -38,9 +38,6 @@ export class AddActionComponent {
       notes: ['',],
       status: ['open', Validators.required]
     });
-  }
-
-  ngOnInit() {
   }
 
   async onAddNewActionPressed(action: ActionModel, formDirective: FormGroupDirective) {

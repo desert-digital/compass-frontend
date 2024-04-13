@@ -27,7 +27,7 @@ export class WorkflowModelsService {
     );
 
     return workflowModels.data.listWorkflowModels.items as WorkflowModel[];
-  };
+  }
 
 
   async getWorkflowModelById(id: string): Promise<WorkflowModel> {
@@ -53,7 +53,7 @@ export class WorkflowModelsService {
     )
     const workflow = workflowMutationResult.data.createWorkflowModel;
 
-    for (let checklist of checklistModels) {
+    for (const checklist of checklistModels) {
       const workflowChecklistDetails = {
         input: {
           checklistModelId: checklist.id,
@@ -65,18 +65,14 @@ export class WorkflowModelsService {
     }
   }
 
-  async updateWorkflowModel(workflowModel: WorkflowModel, checklistModels: any[]) {
-    const workflowModelId = {
-      workflowModelId: workflowModel.id
-    }
-
+  async updateWorkflowModel(workflowModel: WorkflowModel, checklistModels: ChecklistModel[]) {
     const workflowChecklistResult = await API.graphql<GraphQLQuery<any>>(
       graphqlOperation(queries.workflowChecklistsByWorkflowModelId, {workflowModelId: workflowModel.id})
     )
 
     const workflowChecklists = workflowChecklistResult.data.workflowChecklistsByWorkflowModelId.items;
   
-    for (let workflowChecklist of workflowChecklists) {
+    for (const workflowChecklist of workflowChecklists) {
       const workflowChecklistId = {
         input: {
           id: workflowChecklist.id
@@ -87,7 +83,7 @@ export class WorkflowModelsService {
       );
     }
     
-    for (let checklist of checklistModels) {
+    for (const checklist of checklistModels) {
       const workflowChecklistDetails = {
         input: {
           checklistModelId: checklist.id,
@@ -100,9 +96,6 @@ export class WorkflowModelsService {
   }
 
   async deleteModel(workflowModel: WorkflowModel) {
-    const workflowModelId = {
-      workflowModelId: workflowModel.id
-    }
 
     const workflowChecklistResult = await API.graphql<GraphQLQuery<any>>(
       graphqlOperation(queries.workflowChecklistsByWorkflowModelId, {workflowModelId: workflowModel.id})
@@ -110,7 +103,7 @@ export class WorkflowModelsService {
 
     const workflowChecklists = workflowChecklistResult.data.workflowChecklistsByWorkflowModelId.items;
   
-    for (let workflowChecklist of workflowChecklists) {
+    for (const workflowChecklist of workflowChecklists) {
       const workflowChecklistId = {
         input: {
           id: workflowChecklist.id

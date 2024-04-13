@@ -1,20 +1,11 @@
 // Core
 
 import { Injectable } from '@angular/core';
-import { Auth, DataStore } from 'aws-amplify';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Auth } from 'aws-amplify';
+import { BehaviorSubject } from 'rxjs';
 
-// Amplify
-
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { GetActionQuery, ListActionsQuery, CreateActionMutation } from '../API.service';
 
 // Local
-
-import { CompassUser } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +53,7 @@ export class AccountService {
 
   async getConnectedStatus() {
     try {
-      const result = await Auth.currentAuthenticatedUser()
+      await Auth.currentAuthenticatedUser()
       return 'connected';
     }
     catch (e) {
@@ -76,7 +67,7 @@ export class AccountService {
 
   async getConnectedGroup() {
     const _session = await Auth.currentSession();
-    let accessToken = _session.getAccessToken();
+    const accessToken = _session.getAccessToken();
 
     if ('cognito:groups' in accessToken.payload) {
       return 'ADMIN';

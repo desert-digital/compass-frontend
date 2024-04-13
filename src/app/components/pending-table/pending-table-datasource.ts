@@ -1,7 +1,7 @@
 // Core
 
 import { map, startWith, switchMap } from 'rxjs/operators';
-import { Observable, of, merge } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
 // Material
 

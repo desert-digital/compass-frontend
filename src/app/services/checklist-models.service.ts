@@ -14,7 +14,6 @@ import {
   GetChecklistModelQuery,
   DeleteChecklistModelMutation,
   CreateChecklistModelMutation,
-  ListChecklistActionsQuery,
   DeleteChecklistActionsMutation,
 } from '../API.service';
 
@@ -36,8 +35,8 @@ export class ChecklistModelsService {
       graphqlOperation(queries.listChecklistModels)
     );
     return checklistResult.data.listChecklistModels.items as ChecklistModel[];
-  };
-
+  }
+  
   async getChecklistModelFromId(id: string): Promise<ChecklistModel> {
     const checklistResult = await API.graphql<GraphQLQuery<GetChecklistModelQuery>>(
       graphqlOperation(queries.getChecklistModel, { id: id })
@@ -68,7 +67,7 @@ export class ChecklistModelsService {
     );
     const checklist = checklistMutationResult.data.createChecklistModel;
 
-    for (let action of actions) {
+    for (const action of actions) {
       const checklistActionsDetails = {
         input: {
           actionModelId: action.id,
@@ -81,17 +80,13 @@ export class ChecklistModelsService {
   }
 
   async updateChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
-    const checklistModelId = {
-      checklistModelId: checklistModel.id
-    }
-
     const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
       graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
     )
 
     const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
 
-    for (let checkListAction of checklistActions) {
+    for (const checkListAction of checklistActions) {
       const checklistActionId = {
         input: {
           id: checkListAction.id
@@ -102,7 +97,7 @@ export class ChecklistModelsService {
       );
     }
 
-    for (let action of actions) {
+    for (const action of actions) {
       const checklistActionsDetails = {
         input: {
           actionModelId: action.id,
@@ -115,17 +110,13 @@ export class ChecklistModelsService {
   }
 
   async deleteModel(checklistModel: ChecklistModel) {
-    const checklistModelId = {
-      checklistModelId: checklistModel.id
-    }
-
     const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
       graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
     )
 
     const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
 
-    for (let checkListAction of checklistActions) {
+    for (const checkListAction of checklistActions) {
       const checklistActionId = {
         input: {
           id: checkListAction.id

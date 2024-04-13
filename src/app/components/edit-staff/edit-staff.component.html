@@ -1,7 +1,7 @@
 <div class="container">
     <h3>Edit the Owner</h3>
     <form [formGroup]="staffForm" #formDirective="ngForm"
-        (ngSubmit)="onUpdateStaffPressed(staffForm.value, formDirective)">
+        (ngSubmit)="onUpdateStaffPressed(staffForm.value)">
         <button mat-flat-button type="submit" color="primary">Update the Owner</button>
         <div action="#" class="column">
             <div *ngIf="false">

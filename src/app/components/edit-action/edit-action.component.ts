@@ -23,10 +23,10 @@ import { ActionModelsService } from 'src/app/services/action-models.service';
 })
 export class EditActionComponent {
 
-  actionName: String = '';
-  actionCompany: String = '';
-  actionDuration: Number = 0;
-  actionNotes: String = '';
+  actionName: string = '';
+  actionCompany: string = '';
+  actionDuration: number = 0;
+  actionNotes: string = '';
 
   actionForm: FormGroup;
   constructor(private route: ActivatedRoute,

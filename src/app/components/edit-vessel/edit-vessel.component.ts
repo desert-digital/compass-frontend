@@ -1,7 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -25,7 +25,7 @@ export class EditVesselComponent {
   vesselForm: FormGroup;
 
   workflows: WorkflowModel[] = [];
-  selectedWorkflowId: String;
+  selectedWorkflowId: string;
 
   owners: Owner[] = [];
   selectedOwner: string = '';

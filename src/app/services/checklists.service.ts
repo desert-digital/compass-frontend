@@ -12,7 +12,7 @@ import { ListChecklistsQuery, CreateChecklistMutation } from '../API.service';
 
 // Local
 
-import { Action, Checklist } from '../API.service';
+import { Checklist } from '../API.service';
 import { ChecklistModelsService } from './checklist-models.service';
 import { ActionsService } from './actions.service';
 
@@ -31,7 +31,7 @@ export class ChecklistsService {
     );
 
     return checklists.data.listChecklists.items as Checklist[];
-  };
+  }
 
   async createChecklist() {
     // await this.api.CreateChecklist(item);
@@ -64,9 +64,9 @@ export class ChecklistsService {
     // Push the checklist into an array and add all the Checklists to 
     // the Workflow
 
-    let actions = [];
+    const actions = [];
 
-    for (let checklistActionModel of checklistActionModels) {
+    for (const checklistActionModel of checklistActionModels) {
       const newAction = await this._actionsService.createActionFromModel(newChecklist, checklistActionModel.actionModel);
       actions.push(newAction);
     }

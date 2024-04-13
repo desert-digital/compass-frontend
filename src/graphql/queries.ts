@@ -247,6 +247,7 @@ export const getInventoryItem = /* GraphQL */ `query GetInventoryItem($id: ID!) 
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt
@@ -267,6 +268,7 @@ export const listInventoryItems = /* GraphQL */ `query ListInventoryItems(
       id
       location
       description
+      leadTime
       quantity
       createdAt
       updatedAt

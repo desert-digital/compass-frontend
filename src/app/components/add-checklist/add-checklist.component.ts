@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { ActionModel, Action, ChecklistModel } from '../../API.service';
+import { ActionModel, ChecklistModel } from '../../API.service';
 
 // Local
 

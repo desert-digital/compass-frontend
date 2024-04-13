@@ -39,10 +39,10 @@ export class FleetService {
 
 
   async getVesselByOwner(owner: Owner): Promise<any> {
-    return;
+    console.log(owner);
   }
 
-  async createVessel(vessel: Vessel, ownerId: String, workflowId: String) {
+  async createVessel(vessel: Vessel, ownerId: string, workflowId: string) {
     const vesselDetails = {
       input: {
         company: 'seaforth',
@@ -113,7 +113,7 @@ export class FleetService {
     )
   }
 
-  async deleteVessel(id: String) {
+  async deleteVessel(id: string) {
     const vesselOwnerDetails = {
       input: {
         id: id

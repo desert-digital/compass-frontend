@@ -1,6 +1,6 @@
 // Core
 
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Amplify
@@ -54,7 +54,7 @@ export class ManageActionsComponent {
   }
 
   onNotesPressed() {
-    const dialogRef = this._dialog.open(ShowActionNotesDialogComponent, 
+    this._dialog.open(ShowActionNotesDialogComponent, 
       {data: this.selectedAction });
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Material
@@ -18,9 +18,9 @@ import { StaffService } from 'src/app/services/staff.service';
 })
 export class EditStaffComponent {
 
-  staffName: String = '';
-  staffPhone: Number = 0;
-  staffEmail: String = '';
+  staffName: string = '';
+  staffPhone: number = 0;
+  staffEmail: string = '';
 
   staffForm: FormGroup;
 
@@ -54,7 +54,7 @@ export class EditStaffComponent {
     });
   }
 
-  async onUpdateStaffPressed(staff: Staff, formDirective: FormGroupDirective) {
+  async onUpdateStaffPressed(staff: Staff) {
     try {
       await this._staffService.updateStaff(staff).then(() => {
         this._snackBar.open(`Updated ${staff.name}`, 'OK', { duration: 3000 })

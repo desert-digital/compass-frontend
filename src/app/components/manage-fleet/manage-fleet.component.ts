@@ -17,7 +17,7 @@ import { FleetService } from 'src/app/services/fleet.service';
 import { FleetTableDataSource } from './manage-fleet-datasource';
 
 @Component({
-  selector: 'manage-fleet',
+  selector: 'app-manage-fleet',
   templateUrl: './manage-fleet.component.html',
   styleUrls: ['./manage-fleet.component.scss']
 })
@@ -50,8 +50,6 @@ export class ManageFleetComponent implements AfterViewInit {
   }
 
   async onFileSelected(event: any) {
-    const fleetFile = event.target.files[0];
-
     try {
       console.log('Uploading the file');
     }

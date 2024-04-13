@@ -348,6 +348,7 @@ export const onCreateInventoryItem = /* GraphQL */ `subscription OnCreateInvento
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt
@@ -365,6 +366,7 @@ export const onUpdateInventoryItem = /* GraphQL */ `subscription OnUpdateInvento
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt
@@ -382,6 +384,7 @@ export const onDeleteInventoryItem = /* GraphQL */ `subscription OnDeleteInvento
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt

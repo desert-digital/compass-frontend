@@ -368,6 +368,7 @@ export const createInventoryItem = /* GraphQL */ `mutation CreateInventoryItem(
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt
@@ -386,6 +387,7 @@ export const updateInventoryItem = /* GraphQL */ `mutation UpdateInventoryItem(
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt
@@ -404,6 +406,7 @@ export const deleteInventoryItem = /* GraphQL */ `mutation DeleteInventoryItem(
     id
     location
     description
+    leadTime
     quantity
     createdAt
     updatedAt

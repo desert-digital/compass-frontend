@@ -18,9 +18,9 @@ import { OwnersService } from 'src/app/services/owners.service';
 })
 export class AddOwnerComponent {
 
-  ownerName: String = '';
-  ownerPhone: Number = 0;
-  ownerEmail: String = '';
+  ownerName: string = '';
+  ownerPhone: number = 0;
+  ownerEmail: string = '';
 
   ownerForm: FormGroup;
 
