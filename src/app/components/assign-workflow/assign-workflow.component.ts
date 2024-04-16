@@ -85,7 +85,7 @@ export class AssignWorkflowComponent {
     this.workflowModel = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
 
     for (let i=0; i < this.workflowModel.checklistModels.items.length; i++) {
-      const stepForm = this._formBuilder.group({
+      const stepForm: FormGroup = this._formBuilder.group({
         assignee: new FormControl(['', Validators.required])
       });
       stepForm.setValue({ assignee: this.staff });
