@@ -4,22 +4,22 @@ import { Injectable } from '@angular/core';
 
 // Amplify
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
-
-import { GraphQLQuery } from '@aws-amplify/api';
+import { generateClient } from '@aws-amplify/api';
 import {
-  ListChecklistModelsQuery,
-  GetChecklistModelQuery,
-  DeleteChecklistModelMutation,
-  CreateChecklistModelMutation,
-  DeleteChecklistActionsMutation,
-} from '../API.service';
+  listChecklistModels,
+  getChecklistModel,
+  checklistActionsByChecklistModelId
+} from '../../graphql/queries';
+import {
+  createChecklistModel,
+  deleteChecklistModel,
+  createChecklistActions,
+  deleteChecklistActions
+} from '../../graphql/mutations';
 
 // Local
 
-import { ChecklistModel, ActionModel } from '../API.service';
+import { ChecklistModel, ActionModel, ChecklistActions } from '../API.service';
 import { ActionsService } from './actions.service';
 
 @Injectable({
@@ -27,109 +27,126 @@ import { ActionsService } from './actions.service';
 })
 export class ChecklistModelsService {
 
+  client = generateClient()
+
   constructor(
     private _actionsService: ActionsService) { }
 
   async getChecklistModels(): Promise<ChecklistModel[]> {
-    const checklistResult = await API.graphql<GraphQLQuery<ListChecklistModelsQuery>>(
-      graphqlOperation(queries.listChecklistModels)
-    );
+    const checklistResult = await this.client.graphql({ query: listChecklistModels })
     return checklistResult.data.listChecklistModels.items as ChecklistModel[];
   }
-  
+
   async getChecklistModelFromId(id: string): Promise<ChecklistModel> {
-    const checklistResult = await API.graphql<GraphQLQuery<GetChecklistModelQuery>>(
-      graphqlOperation(queries.getChecklistModel, { id: id })
-    );
+    const checklistResult = await this.client.graphql({
+      query: getChecklistModel,
+      variables: { id: id }
+    })
     return checklistResult.data.getChecklistModel as ChecklistModel;
   }
 
-  async getChecklistModelActionsFromId(id: string): Promise<any> {
-    const checklistResult = await API.graphql<GraphQLQuery<GetChecklistModelQuery>>(
-      graphqlOperation(queries.getChecklistModel, { id: id })
-    );
-    return checklistResult.data.getChecklistModel.actions.items;  
+  async getChecklistModelActionsFromId(id: string): Promise<ChecklistActions[]> {
+    const checklistResult = await this.client.graphql({
+      query: getChecklistModel,
+      variables: {
+        id: id
+      }
+    })
+    return checklistResult.data.getChecklistModel.actionModels.items as ChecklistActions[];
   }
 
   async createChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
-    const checklistModelDetails = {
-      input: {
-        company: 'seaforth',
-        name: checklistModel.name,
-        duration: checklistModel.duration,
-        notes: checklistModel.notes,
-        precharter: checklistModel.preCharter,
+    const checklistMutationResult = await this.client.graphql({
+      query: createChecklistModel,
+      variables: {
+        input: {
+          company: 'seaforth',
+          name: checklistModel.name,
+          duration: checklistModel.duration,
+          notes: checklistModel.notes,
+          preCharter: checklistModel.preCharter,
+        }
       }
-    }
+    });
 
-    const checklistMutationResult = await API.graphql<GraphQLQuery<CreateChecklistModelMutation>>(
-      graphqlOperation(mutations.createChecklistModel, checklistModelDetails)
-    );
     const checklist = checklistMutationResult.data.createChecklistModel;
 
     for (const action of actions) {
-      const checklistActionsDetails = {
-        input: {
-          actionModelId: action.id,
-          checklistModelId: checklist.id
-        },
-      }
-
-      await API.graphql(graphqlOperation(mutations.createChecklistActions, checklistActionsDetails));
+      await this.client.graphql({
+        query: createChecklistActions,
+        variables: {
+          input: {
+            actionModelId: action.id,
+            checklistModelId: checklist.id
+          },
+        }
+      });
     }
   }
 
   async updateChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
-    const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
-      graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
-    )
+    const checklistActionsResult = await this.client.graphql({
+      query: checklistActionsByChecklistModelId,
+      variables: {
+        checklistModelId: checklistModel.id
+      }
+    });
 
     const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
 
     for (const checkListAction of checklistActions) {
-      const checklistActionId = {
-        input: {
-          id: checkListAction.id
+      await this.client.graphql({
+        query: deleteChecklistActions,
+        variables: {
+          input: {
+            id: checkListAction.id
+          }
         }
-      }
-      await API.graphql<GraphQLQuery<DeleteChecklistActionsMutation>>(
-        graphqlOperation(mutations.deleteChecklistActions, checklistActionId)
-      );
+      })
     }
 
     for (const action of actions) {
-      const checklistActionsDetails = {
-        input: {
-          actionModelId: action.id,
-          checklistModelId: checklistModel.id
-        },
-      }
-
-      await API.graphql(graphqlOperation(mutations.createChecklistActions, checklistActionsDetails));
+      await this.client.graphql({
+        query: createChecklistActions,
+        variables: {
+          input: {
+            actionModelId: action.id,
+            checklistModelId: checklistModel.id
+          },
+        }
+      });
     }
   }
 
   async deleteModel(checklistModel: ChecklistModel) {
-    const checklistActionsResult = await API.graphql<GraphQLQuery<any>>(
-      graphqlOperation(queries.checklistActionsByChecklistModelId, { checklistModelId: checklistModel.id })
-    )
-
-    const checklistActions = checklistActionsResult.data.checklistActionsByChecklistModelId.items;
-
-    for (const checkListAction of checklistActions) {
-      const checklistActionId = {
+    const checklistActionsResult = await this.client.graphql({
+      query: deleteChecklistModel,
+      variables: {
         input: {
-          id: checkListAction.id
+          id: checklistModel.id
         }
       }
-      await API.graphql<GraphQLQuery<DeleteChecklistActionsMutation>>(
-        graphqlOperation(mutations.deleteChecklistActions, checklistActionId)
-      );
+    })
+
+    const checklistActions = checklistActionsResult.data.deleteChecklistModel.actionModels.items;
+
+    for (const checkListAction of checklistActions) {
+      await this.client.graphql({
+        query: deleteChecklistActions,
+        variables: {
+          input: {
+            id: checkListAction.id
+          }
+        }
+      })
     }
 
-    await API.graphql<GraphQLQuery<DeleteChecklistModelMutation>>(
-      graphqlOperation(mutations.deleteChecklistModel, { input: { id: checklistModel.id } })
-    );
+    await this.client.graphql({
+      query: deleteChecklistModel,
+      variables: {
+        input: { id: checklistModel.id }
+      }
+    });
 
     // TO DO: should also delete the _checklists_ that use this model, and 
     // then the workflow models that use the _checklist_

@@ -81,7 +81,7 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
   notes: String
   duration: Int
   preCharter: Boolean
-  actions: [ActionModel] @manyToMany(relationName: "ChecklistActions")
+  actionModels: [ActionModel] @manyToMany(relationName: "ChecklistActions")
   workflows: [WorkflowModel] @manyToMany(relationName: "WorkflowChecklists") 
 }
 
@@ -91,7 +91,7 @@ type WorkflowModel @model @auth(rules: [{allow: private}]) {
   name: String
   notes: String
   duration: Int
-  checklists: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
+  checklistModels: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
 }
 
 type Action @model @auth(rules: [{allow: private}]){
@@ -130,5 +130,5 @@ type Workflow @model @auth(rules: [{ allow: private }]){
 }
 
 type Mutation {
-  startWorklow(workflowId: String!): String @function(name: "startworkflow-${env}")
+  startWorkflow(workflowId: String!): String @function(name: "startworkflow-${env}")
 }

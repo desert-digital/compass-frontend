@@ -1,10 +1,13 @@
+// Core
+
 import { Injectable } from '@angular/core';
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
+// Amplify
 
-import { GraphQLQuery } from '@aws-amplify/api';
-import { ListInventoryItemsQuery } from '../API.service';
+import { generateClient } from '@aws-amplify/api';
+import { listInventoryItems } from '../../graphql/queries';
+
+// Local
 
 import { InventoryItem } from '../API.service';
 
@@ -14,9 +17,10 @@ import { InventoryItem } from '../API.service';
 })
 export class InventoryService {
 
+  client = generateClient();
+
   async getItems(): Promise<InventoryItem[]> {
-    const vesselResult = await API.graphql<GraphQLQuery<ListInventoryItemsQuery>>(
-      graphqlOperation(queries.listVessels));
+    const vesselResult = await this.client.graphql({query: listInventoryItems});
 
     return vesselResult.data.listInventoryItems.items as InventoryItem[];
   }

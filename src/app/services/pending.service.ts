@@ -5,12 +5,9 @@ import { Subject } from 'rxjs';
 
 // Amplify 
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
-
-import { GraphQLQuery } from '@aws-amplify/api';
-import { ListPendingEventsQuery, ListPendingEventsQueryVariables, GetPendingEventQuery, DeletePendingEventMutation } from '../API.service';
+import { generateClient } from '@aws-amplify/api';
+import { listPendingEvents, getPendingEvent } from '../../graphql/queries';
+import { deletePendingEvent } from '../../graphql/mutations';
 
 // Local
 
@@ -22,21 +19,20 @@ import { PendingEvent } from '../API.service';
 export class PendingService {
   constructor() { }
 
+  client = generateClient();
   public numberOfPendingEvents$ = new Subject();
 
   async getPendingItems(): Promise<PendingEvent[]> {
     const today = new Date().toISOString();
-
-    const variables: ListPendingEventsQueryVariables = {
-      filter: {
-        and: [
-          { status: { ne: 'cancelled' } },
-          { start: { ge: today } }]
-      },
-    };
-    const events = await API.graphql<GraphQLQuery<ListPendingEventsQuery>>({
-      query: queries.listPendingEvents,
-      variables: variables
+    const events = await this.client.graphql({
+      query: listPendingEvents,
+      variables: {
+        filter: {
+          and: [
+            { status: { ne: 'cancelled' } },
+            { start: { ge: today } }]
+        },
+      }
     });
 
     const pendingEvents = events.data.listPendingEvents.items;
@@ -46,8 +42,12 @@ export class PendingService {
   }
 
   async getPendingItem(id: string): Promise<PendingEvent> {
-    const events = await API.graphql<GraphQLQuery<GetPendingEventQuery>>(
-      graphqlOperation(queries.getPendingEvent, { id: id })
+    const events = await this.client.graphql({
+      query: getPendingEvent,
+      variables: {
+        id: id
+      }
+    }
     );
     const eventById = events.data.getPendingEvent;
 
@@ -55,9 +55,12 @@ export class PendingService {
   }
 
   async deleteItem(item: PendingEvent) {
-    const events = await API.graphql<GraphQLQuery<DeletePendingEventMutation>>(
-      graphqlOperation(mutations.deletePendingEvent, item.id)
-    );
+    const events = await this.client.graphql({
+      query: deletePendingEvent,
+      variables: {
+        input: { id: item.id }
+      }
+    });
     console.log(events);
   }
 

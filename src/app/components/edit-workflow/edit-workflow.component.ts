@@ -54,7 +54,7 @@ export class EditWorkflowComponent {
       duration: workflowModel.duration,
       notes: workflowModel.notes
     });
-    for (const item of workflowModel.checklists.items) {
+    for (const item of workflowModel.checklistModels.items) {
       const checklist = await this._checklistModelsService.getChecklistModelFromId(item.checklistModelId);
       this.workflow.push(checklist);
     }

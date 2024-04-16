@@ -27,7 +27,7 @@ $compass-frontend-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '~@aws-amplify/ui-angular/theme.css';
+/* @import '~@aws-amplify/ui-angular/theme.css'; */
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 
 :root {

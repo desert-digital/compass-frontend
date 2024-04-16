@@ -6,7 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 // Amplify
 
-import {Auth } from 'aws-amplify';
+import { signOut } from 'aws-amplify/auth';
 
 // Local
 
@@ -86,7 +86,7 @@ export class MainComponent {
 
   async onLogoutPressed() {
     try {
-      await Auth.signOut();
+      await signOut();
       // add code to disable navigation
     }
     catch (e) {

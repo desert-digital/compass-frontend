@@ -8,12 +8,12 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const startWorklow = /* GraphQL */ `mutation StartWorklow($workflowId: String!) {
-  startWorklow(workflowId: $workflowId)
+export const startWorkflow = /* GraphQL */ `mutation StartWorkflow($workflowId: String!) {
+  startWorkflow(workflowId: $workflowId)
 }
 ` as GeneratedMutation<
-  APITypes.StartWorklowMutationVariables,
-  APITypes.StartWorklowMutation
+  APITypes.StartWorkflowMutationVariables,
+  APITypes.StartWorkflowMutation
 >;
 export const createCompassUser = /* GraphQL */ `mutation CreateCompassUser(
   $input: CreateCompassUserInput!
@@ -250,7 +250,7 @@ export const createServiceOrder = /* GraphQL */ `mutation CreateServiceOrder(
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -293,7 +293,7 @@ export const updateServiceOrder = /* GraphQL */ `mutation UpdateServiceOrder(
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -336,7 +336,7 @@ export const deleteServiceOrder = /* GraphQL */ `mutation DeleteServiceOrder(
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -433,7 +433,7 @@ export const createVessel = /* GraphQL */ `mutation CreateVessel(
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -476,7 +476,7 @@ export const updateVessel = /* GraphQL */ `mutation UpdateVessel(
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -519,7 +519,7 @@ export const deleteVessel = /* GraphQL */ `mutation DeleteVessel(
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -905,7 +905,7 @@ export const createChecklistModel = /* GraphQL */ `mutation CreateChecklistModel
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -991,7 +991,7 @@ export const updateChecklistModel = /* GraphQL */ `mutation UpdateChecklistModel
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -1077,7 +1077,7 @@ export const deleteChecklistModel = /* GraphQL */ `mutation DeleteChecklistModel
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -1162,7 +1162,7 @@ export const createWorkflowModel = /* GraphQL */ `mutation CreateWorkflowModel(
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1214,7 +1214,7 @@ export const updateWorkflowModel = /* GraphQL */ `mutation UpdateWorkflowModel(
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1266,7 +1266,7 @@ export const deleteWorkflowModel = /* GraphQL */ `mutation DeleteWorkflowModel(
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1729,7 +1729,7 @@ export const createChecklistActions = /* GraphQL */ `mutation CreateChecklistAct
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1803,7 +1803,7 @@ export const updateChecklistActions = /* GraphQL */ `mutation UpdateChecklistAct
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1877,7 +1877,7 @@ export const deleteChecklistActions = /* GraphQL */ `mutation DeleteChecklistAct
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1929,7 +1929,7 @@ export const createWorkflowChecklists = /* GraphQL */ `mutation CreateWorkflowCh
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1963,7 +1963,7 @@ export const createWorkflowChecklists = /* GraphQL */ `mutation CreateWorkflowCh
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -2003,7 +2003,7 @@ export const updateWorkflowChecklists = /* GraphQL */ `mutation UpdateWorkflowCh
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -2037,7 +2037,7 @@ export const updateWorkflowChecklists = /* GraphQL */ `mutation UpdateWorkflowCh
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -2077,7 +2077,7 @@ export const deleteWorkflowChecklists = /* GraphQL */ `mutation DeleteWorkflowCh
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -2111,7 +2111,7 @@ export const deleteWorkflowChecklists = /* GraphQL */ `mutation DeleteWorkflowCh
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId

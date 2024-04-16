@@ -1,7 +1,7 @@
 // Core
 
 import { Injectable } from '@angular/core';
-import { Auth } from 'aws-amplify';
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -53,7 +53,7 @@ export class AccountService {
 
   async getConnectedStatus() {
     try {
-      await Auth.currentAuthenticatedUser()
+      await getCurrentUser()
       return 'connected';
     }
     catch (e) {
@@ -65,15 +65,11 @@ export class AccountService {
     return this.currentUserName;
   }
 
-  async getConnectedGroup() {
-    const _session = await Auth.currentSession();
-    const accessToken = _session.getAccessToken();
+  //TODO: Update to v6
 
-    if ('cognito:groups' in accessToken.payload) {
-      return 'ADMIN';
-    }
-    else {
-      return this.currentGroup;
-    }
+  async getConnectedGroup() {
+    await fetchAuthSession();
+
+    return 'ADMIN';
   }
 }

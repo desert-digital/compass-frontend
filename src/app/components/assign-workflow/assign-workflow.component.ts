@@ -10,25 +10,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as mutations from 'src/graphql/mutations';
-
-import { GraphQLQuery } from '@aws-amplify/api';
-import {
-  StartWorklowMutation
-} from 'src/app/API.service';
-
-import { PendingEvent, Vessel, WorkflowModel } from 'src/app/API.service';
-
+import { generateClient } from '@aws-amplify/api';
 
 // Local
-
 
 import { PendingService } from 'src/app/services/pending.service';
 import { FleetService } from 'src/app/services/fleet.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 import { WorkflowService } from 'src/app/services/workflow.service';
+
+import { startWorkflow } from 'src/graphql/mutations';
+import { PendingEvent, Vessel, Staff, WorkflowModel } from 'src/app/API.service';
+
 
 @Component({
   selector: 'app-workflow',
@@ -39,7 +33,7 @@ import { WorkflowService } from 'src/app/services/workflow.service';
 export class AssignWorkflowComponent {
 
   workflowModel: WorkflowModel;
-  staff: any;
+  staff: Staff[];
   event: PendingEvent;
   vesselList: Vessel[];
 
@@ -47,6 +41,8 @@ export class AssignWorkflowComponent {
   workflowForm: FormGroup;
 
   isLinear = true;
+
+  client = generateClient();
 
   constructor(private activatedRoute: ActivatedRoute,
     private _pendingService: PendingService,
@@ -88,9 +84,9 @@ export class AssignWorkflowComponent {
     const vessel = await this._fleetService.getVesselById(event.source.value);
     this.workflowModel = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
 
-    for (const checklist of this.workflowModel.checklists.items) {
+    for (let i=0; i < this.workflowModel.checklistModels.items.length; i++) {
       const stepForm = this._formBuilder.group({
-        assignee: ['', Validators.required]
+        assignee: new FormControl(['', Validators.required])
       });
       stepForm.setValue({ assignee: this.staff });
       this.steps.push(stepForm);
@@ -103,22 +99,22 @@ export class AssignWorkflowComponent {
     // create the Workflow
     const workflow = await this._workflowService.createWorkflowFromModel(
       this.event,
-      this.workflowModel, 
+      this.workflowModel,
       this.steps
     );
 
     try {
-      const workflowDetails = {
-        workflowId: workflow.id
-      }
-      await API.graphql<GraphQLQuery<StartWorklowMutation>>(
-        graphqlOperation(mutations.startWorklow, workflowDetails)
-      );
-      this._snackBar.open('Created the Workflow', 'OK', {duration: 3000});
+      await this.client.graphql({
+        query: startWorkflow,
+        variables: {
+          workflowId: workflow.id
+
+        }
+      });
+      this._snackBar.open('Created the Workflow', 'OK', { duration: 3000 });
     }
     catch {
-      this._snackBar.open('An Error Occured', 'OK', {duration: 3000});
+      this._snackBar.open('An Error Occured', 'OK', { duration: 3000 });
     }
   }
-
 }

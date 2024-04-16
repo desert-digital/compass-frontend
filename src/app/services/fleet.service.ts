@@ -4,12 +4,9 @@ import { Injectable } from '@angular/core';
 
 // Amplify 
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
-
-import { GraphQLQuery } from '@aws-amplify/api';
-import { ListVesselsQuery, GetVesselQuery, CreateVesselMutation, UpdateVesselMutation, DeleteVesselMutation } from '../API.service';
+import { generateClient } from '@aws-amplify/api';
+import { listVessels, getVessel } from '../../graphql/queries';
+import { createVessel, updateVessel, deleteVessel } from '../../graphql/mutations';
 
 // Local
 
@@ -20,20 +17,22 @@ import { Vessel, Owner } from '../API.service';
 })
 export class FleetService {
 
+  client = generateClient();
+
   constructor() { }
 
   async getVessels(): Promise<Vessel[]> {
-    const vesselResult = await API.graphql<GraphQLQuery<ListVesselsQuery>>(
-      graphqlOperation(queries.listVessels));
-
+    const vesselResult = await this.client.graphql({ query: listVessels });
     return vesselResult.data.listVessels.items as Vessel[];
   }
 
-  async getVesselById(id: string): Promise<any> {
-    const vesselResult = await API.graphql<GraphQLQuery<GetVesselQuery>>(
-      graphqlOperation(queries.getVessel, { id: id })
-    )
-
+  async getVesselById(id: string): Promise<Vessel> {
+    const vesselResult = await this.client.graphql({
+      query: getVessel,
+      variables: {
+        id: id
+      }
+    });
     return vesselResult.data.getVessel as Vessel;
   }
 
@@ -43,85 +42,80 @@ export class FleetService {
   }
 
   async createVessel(vessel: Vessel, ownerId: string, workflowId: string) {
-    const vesselDetails = {
-      input: {
-        company: 'seaforth',
-        name: vessel.name,
-        vesselType: vessel.vesselType,
-        documentNumber: vessel.documentNumber,
-        vesselDefaultWorkflowId: workflowId,
-        ownerBoatsId: ownerId
+    await this.client.graphql({
+      query: createVessel,
+      variables: {
+        input: {
+          company: 'seaforth',
+          name: vessel.name,
+          vesselType: vessel.vesselType,
+          documentNumber: vessel.documentNumber,
+          vesselDefaultWorkflowId: workflowId,
+          ownerBoatsId: ownerId
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<CreateVesselMutation>>(
-      graphqlOperation(mutations.createVessel, vesselDetails)
-    )
+    });
   }
 
   async updateVessel(vessel: Vessel) {
-    const vesselDetails = {
-      input: {
-        id: vessel.id,
-        company: vessel.company,
-        name: vessel.name,
-        vesselType: vessel.vesselType,
-        documentNumber: vessel.documentNumber,
-        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
-        ownerBoatsId: vessel.ownerBoatsId
+    await this.client.graphql({
+      query: updateVessel,
+      variables: {
+        input: {
+          id: vessel.id,
+          company: vessel.company,
+          name: vessel.name,
+          vesselType: vessel.vesselType,
+          documentNumber: vessel.documentNumber,
+          vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+          ownerBoatsId: vessel.ownerBoatsId
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
-      graphqlOperation(mutations.updateVessel, vesselDetails)
-    )
+    });
   }
 
   async updateVesselWithOwner(vessel: Vessel, owner: Owner) {
-    const vesselDetails = {
-      input: {
-        id: vessel.id,
-        company: vessel.company,
-        name: vessel.name,
-        vesselType: vessel.vesselType,
-        documentNumber: vessel.documentNumber,
-        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
-        ownerBoatsId: owner.id
+    await this.client.graphql({
+      query: updateVessel,
+      variables: {
+        input: {
+          id: vessel.id,
+          company: vessel.company,
+          name: vessel.name,
+          vesselType: vessel.vesselType,
+          documentNumber: vessel.documentNumber,
+          vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+          ownerBoatsId: owner.id
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
-      graphqlOperation(mutations.updateVessel, vesselDetails)
-    )
+    });
   }
 
   async updateVesselWithoutOwner(vessel: Vessel) {
-    const vesselDetails = {
-      input: {
-        id: vessel.id,
-        company: vessel.company,
-        name: vessel.name,
-        vesselType: vessel.vesselType,
-        documentNumber: vessel.documentNumber,
-        vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
-        ownerBoatsId: null
+    await this.client.graphql({
+      query: updateVessel,
+      variables: {
+        input: {
+          id: vessel.id,
+          company: vessel.company,
+          name: vessel.name,
+          vesselType: vessel.vesselType,
+          documentNumber: vessel.documentNumber,
+          vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+          ownerBoatsId: null
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<UpdateVesselMutation>>(
-      graphqlOperation(mutations.updateVessel, vesselDetails)
-    )
+    });
   }
 
   async deleteVessel(id: string) {
-    const vesselOwnerDetails = {
-      input: {
-        id: id
+    await this.client.graphql({
+      query: deleteVessel,
+      variables: {
+        input: {
+          id: id
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<DeleteVesselMutation>>(
-      graphqlOperation(mutations.deleteVessel, vesselOwnerDetails)
-    )
+    });
   }
 }

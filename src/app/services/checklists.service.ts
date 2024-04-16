@@ -4,15 +4,13 @@ import { Injectable } from '@angular/core';
 
 // Amplify
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as mutations from '../../graphql/mutations';
-import * as queries from '../../graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { ListChecklistsQuery, CreateChecklistMutation } from '../API.service';
+import { generateClient } from '@aws-amplify/api';
+import { createChecklist } from '../../graphql/mutations';
+import { listChecklists } from '../../graphql/queries';
 
 // Local
 
-import { Checklist } from '../API.service';
+import { Checklist, ChecklistModel } from '../API.service';
 import { ChecklistModelsService } from './checklist-models.service';
 import { ActionsService } from './actions.service';
 
@@ -22,14 +20,13 @@ import { ActionsService } from './actions.service';
 })
 export class ChecklistsService {
 
+  client = generateClient();
+
   constructor(private _checklistModelService: ChecklistModelsService,
     private _actionsService: ActionsService) { }
 
   async getChecklists(): Promise<Checklist[]> {
-    const checklists = await API.graphql<GraphQLQuery<ListChecklistsQuery>>(
-      graphqlOperation(queries.listChecklists)
-    );
-
+    const checklists = await this.client.graphql({ query: listChecklists });
     return checklists.data.listChecklists.items as Checklist[];
   }
 
@@ -37,25 +34,23 @@ export class ChecklistsService {
     // await this.api.CreateChecklist(item);
   }
 
-  async createChecklistFromModel(checklistModel: any, assigneeId: string, mustEnd: any): Promise<Checklist> {
+  async createChecklistFromModel(checklistModel: ChecklistModel, assigneeId: string, mustEnd: string): Promise<Checklist> {
     const now = new Date().toISOString();
-
     const mustEndTime = new Date(mustEnd);
     const mustStartTime = new Date(mustEndTime.getTime() - (checklistModel.duration * 60 * 1000));
-
-    const checklistDetails = {
-      input: {
-        company: checklistModel.company,
-        name: checklistModel.name,
-        actualStart: now,
-        checklistOwnerId: assigneeId,
-        mustStart: mustStartTime.toISOString(),
-        mustEnd: mustEndTime.toISOString()
+    const newChecklistMutationResult = await this.client.graphql({
+      query: createChecklist,
+      variables: {
+        input: {
+          company: 'seaforth',
+          name: checklistModel.name,
+          actualStart: now,
+          checklistOwnerId: assigneeId,
+          mustStart: mustStartTime.toISOString(),
+          mustEnd: mustEndTime.toISOString()
+        }
       }
     }
-
-    const newChecklistMutationResult = await API.graphql<GraphQLQuery<CreateChecklistMutation>>(
-      graphqlOperation(mutations.createChecklist, checklistDetails)
     );
     const newChecklist = newChecklistMutationResult.data.createChecklist;
     const checklistActionModels = await this._checklistModelService.getChecklistModelActionsFromId(checklistModel.id);

@@ -174,7 +174,7 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -295,7 +295,7 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -337,7 +337,7 @@ export const listVessels = /* GraphQL */ `query ListVessels(
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -565,7 +565,7 @@ export const getChecklistModel = /* GraphQL */ `query GetChecklistModel($id: ID!
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -653,7 +653,7 @@ export const listChecklistModels = /* GraphQL */ `query ListChecklistModels(
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -696,7 +696,7 @@ export const getWorkflowModel = /* GraphQL */ `query GetWorkflowModel($id: ID!) 
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -750,7 +750,7 @@ export const listWorkflowModels = /* GraphQL */ `query ListWorkflowModels(
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -1053,7 +1053,7 @@ export const getChecklistActions = /* GraphQL */ `query GetChecklistActions($id:
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1121,7 +1121,7 @@ export const listChecklistActions = /* GraphQL */ `query ListChecklistActions(
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1157,7 +1157,7 @@ export const getWorkflowChecklists = /* GraphQL */ `query GetWorkflowChecklists(
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1191,7 +1191,7 @@ export const getWorkflowChecklists = /* GraphQL */ `query GetWorkflowChecklists(
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -1237,7 +1237,7 @@ export const listWorkflowChecklists = /* GraphQL */ `query ListWorkflowChecklist
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1255,7 +1255,7 @@ export const listWorkflowChecklists = /* GraphQL */ `query ListWorkflowChecklist
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -1314,7 +1314,7 @@ export const checklistActionsByActionModelId = /* GraphQL */ `query ChecklistAct
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1377,7 +1377,7 @@ export const checklistActionsByChecklistModelId = /* GraphQL */ `query Checklist
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1426,7 +1426,7 @@ export const workflowChecklistsByChecklistModelId = /* GraphQL */ `query Workflo
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1444,7 +1444,7 @@ export const workflowChecklistsByChecklistModelId = /* GraphQL */ `query Workflo
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -1489,7 +1489,7 @@ export const workflowChecklistsByWorkflowModelId = /* GraphQL */ `query Workflow
         notes
         duration
         preCharter
-        actions {
+        actionModels {
           nextToken
           __typename
         }
@@ -1507,7 +1507,7 @@ export const workflowChecklistsByWorkflowModelId = /* GraphQL */ `query Workflow
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }

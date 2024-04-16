@@ -53,7 +53,7 @@ export class EditChecklistComponent {
       duration: checklistModel.duration,
       notes: checklistModel.notes
     });
-    for (const item of checklistModel.actions.items) {
+    for (const item of checklistModel.actionModels.items) {
       const action = await this._actionModelsService.getActionModelFromId(item.actionModelId);
       this.checklist.push(action);
     }

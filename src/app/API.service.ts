@@ -249,7 +249,7 @@ export type WorkflowModel = {
   name?: string | null,
   notes?: string | null,
   duration?: number | null,
-  checklists?: ModelWorkflowChecklistsConnection | null,
+  checklistModels?: ModelWorkflowChecklistsConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -279,7 +279,7 @@ export type ChecklistModel = {
   notes?: string | null,
   duration?: number | null,
   preCharter?: boolean | null,
-  actions?: ModelChecklistActionsConnection | null,
+  actionModels?: ModelChecklistActionsConnection | null,
   workflows?: ModelWorkflowChecklistsConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -1389,12 +1389,12 @@ export type ModelSubscriptionWorkflowChecklistsFilterInput = {
   or?: Array< ModelSubscriptionWorkflowChecklistsFilterInput | null > | null,
 };
 
-export type StartWorklowMutationVariables = {
+export type StartWorkflowMutationVariables = {
   workflowId: string,
 };
 
-export type StartWorklowMutation = {
-  startWorklow?: string | null,
+export type StartWorkflowMutation = {
+  startWorkflow?: string | null,
 };
 
 export type CreateCompassUserMutationVariables = {
@@ -1628,7 +1628,7 @@ export type CreateServiceOrderMutation = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -1670,7 +1670,7 @@ export type UpdateServiceOrderMutation = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -1712,7 +1712,7 @@ export type DeleteServiceOrderMutation = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -1804,7 +1804,7 @@ export type CreateVesselMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -1846,7 +1846,7 @@ export type UpdateVesselMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -1888,7 +1888,7 @@ export type DeleteVesselMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -2263,7 +2263,7 @@ export type CreateChecklistModelMutation = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -2348,7 +2348,7 @@ export type UpdateChecklistModelMutation = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -2433,7 +2433,7 @@ export type DeleteChecklistModelMutation = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -2517,7 +2517,7 @@ export type CreateWorkflowModelMutation = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -2568,7 +2568,7 @@ export type UpdateWorkflowModelMutation = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -2619,7 +2619,7 @@ export type DeleteWorkflowModelMutation = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -3073,7 +3073,7 @@ export type CreateChecklistActionsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3146,7 +3146,7 @@ export type UpdateChecklistActionsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3219,7 +3219,7 @@ export type DeleteChecklistActionsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3270,7 +3270,7 @@ export type CreateWorkflowChecklistsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3304,7 +3304,7 @@ export type CreateWorkflowChecklistsMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -3343,7 +3343,7 @@ export type UpdateWorkflowChecklistsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3377,7 +3377,7 @@ export type UpdateWorkflowChecklistsMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -3416,7 +3416,7 @@ export type DeleteWorkflowChecklistsMutation = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -3450,7 +3450,7 @@ export type DeleteWorkflowChecklistsMutation = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -3643,7 +3643,7 @@ export type GetServiceOrderQuery = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -3763,7 +3763,7 @@ export type GetVesselQuery = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -3808,7 +3808,7 @@ export type ListVesselsQuery = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -4044,7 +4044,7 @@ export type GetChecklistModelQuery = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -4132,7 +4132,7 @@ export type ListChecklistModelsQuery = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -4175,7 +4175,7 @@ export type GetWorkflowModelQuery = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -4229,7 +4229,7 @@ export type ListWorkflowModelsQuery = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -4536,7 +4536,7 @@ export type GetChecklistActionsQuery = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -4604,7 +4604,7 @@ export type ListChecklistActionsQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4640,7 +4640,7 @@ export type GetWorkflowChecklistsQuery = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -4674,7 +4674,7 @@ export type GetWorkflowChecklistsQuery = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -4716,7 +4716,7 @@ export type ListWorkflowChecklistsQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4734,7 +4734,7 @@ export type ListWorkflowChecklistsQuery = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -4786,7 +4786,7 @@ export type ChecklistActionsByActionModelIdQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4842,7 +4842,7 @@ export type ChecklistActionsByChecklistModelIdQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4884,7 +4884,7 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4902,7 +4902,7 @@ export type WorkflowChecklistsByChecklistModelIdQuery = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -4940,7 +4940,7 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
         notes?: string | null,
         duration?: number | null,
         preCharter?: boolean | null,
-        actions?:  {
+        actionModels?:  {
           __typename: "ModelChecklistActionsConnection",
           nextToken?: string | null,
         } | null,
@@ -4958,7 +4958,7 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -5193,7 +5193,7 @@ export type OnCreateServiceOrderSubscription = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -5234,7 +5234,7 @@ export type OnUpdateServiceOrderSubscription = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -5275,7 +5275,7 @@ export type OnDeleteServiceOrderSubscription = {
         name?: string | null,
         notes?: string | null,
         duration?: number | null,
-        checklists?:  {
+        checklistModels?:  {
           __typename: "ModelWorkflowChecklistsConnection",
           nextToken?: string | null,
         } | null,
@@ -5363,7 +5363,7 @@ export type OnCreateVesselSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -5404,7 +5404,7 @@ export type OnUpdateVesselSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -5445,7 +5445,7 @@ export type OnDeleteVesselSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -5810,7 +5810,7 @@ export type OnCreateChecklistModelSubscription = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -5894,7 +5894,7 @@ export type OnUpdateChecklistModelSubscription = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -5978,7 +5978,7 @@ export type OnDeleteChecklistModelSubscription = {
     notes?: string | null,
     duration?: number | null,
     preCharter?: boolean | null,
-    actions?:  {
+    actionModels?:  {
       __typename: "ModelChecklistActionsConnection",
       items:  Array< {
         __typename: "ChecklistActions",
@@ -6061,7 +6061,7 @@ export type OnCreateWorkflowModelSubscription = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -6111,7 +6111,7 @@ export type OnUpdateWorkflowModelSubscription = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -6161,7 +6161,7 @@ export type OnDeleteWorkflowModelSubscription = {
     name?: string | null,
     notes?: string | null,
     duration?: number | null,
-    checklists?:  {
+    checklistModels?:  {
       __typename: "ModelWorkflowChecklistsConnection",
       items:  Array< {
         __typename: "WorkflowChecklists",
@@ -6605,7 +6605,7 @@ export type OnCreateChecklistActionsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6677,7 +6677,7 @@ export type OnUpdateChecklistActionsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6749,7 +6749,7 @@ export type OnDeleteChecklistActionsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6799,7 +6799,7 @@ export type OnCreateWorkflowChecklistsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6833,7 +6833,7 @@ export type OnCreateWorkflowChecklistsSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -6871,7 +6871,7 @@ export type OnUpdateWorkflowChecklistsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6905,7 +6905,7 @@ export type OnUpdateWorkflowChecklistsSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",
@@ -6943,7 +6943,7 @@ export type OnDeleteWorkflowChecklistsSubscription = {
       notes?: string | null,
       duration?: number | null,
       preCharter?: boolean | null,
-      actions?:  {
+      actionModels?:  {
         __typename: "ModelChecklistActionsConnection",
         items:  Array< {
           __typename: "ChecklistActions",
@@ -6977,7 +6977,7 @@ export type OnDeleteWorkflowChecklistsSubscription = {
       name?: string | null,
       notes?: string | null,
       duration?: number | null,
-      checklists?:  {
+      checklistModels?:  {
         __typename: "ModelWorkflowChecklistsConnection",
         items:  Array< {
           __typename: "WorkflowChecklists",

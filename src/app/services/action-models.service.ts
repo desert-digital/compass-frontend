@@ -4,18 +4,11 @@ import { Injectable } from '@angular/core';
 
 // Amplify
 
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
+import { generateClient } from 'aws-amplify/api';
 
-import { GraphQLQuery } from '@aws-amplify/api';
-import {
-  ListActionModelsQuery,
-  GetActionModelQuery,
-  DeleteActionModelMutation,
-  CreateActionModelMutation,
-  UpdateActionModelMutation
-} from '../API.service';
+import { listActionModels, getActionModel } from '../../graphql/queries';
+import { createActionModel, updateActionModel, deleteActionModel } from 'src/graphql/mutations';
+
 
 // Local
 
@@ -26,63 +19,63 @@ import { ActionModel } from '../API.service';
 })
 export class ActionModelsService {
 
+  client = generateClient();
+
   constructor() { }
 
   async getActionModels(): Promise<ActionModel[]> {
-    const actionModels = await API.graphql<GraphQLQuery<ListActionModelsQuery>>(
-      graphqlOperation(queries.listActionModels)
-    );
-    return actionModels.data.listActionModels.items as ActionModel[];
+    const actionModels = await this.client.graphql({ query: listActionModels })
+    return actionModels.data.listActionModels.items as ActionModel[]
   }
 
   async getActionModelFromId(id: string): Promise<ActionModel> {
-    const actionModel = await API.graphql<GraphQLQuery<GetActionModelQuery>>(
-      graphqlOperation(queries.getActionModel, { id: id })
-    );
+    const actionModel = await this.client.graphql({
+      query: getActionModel,
+      variables: {
+        id: id
+      }
+    })
     return actionModel.data.getActionModel;
   }
 
   async createActionModel(model: ActionModel) {
-    const actionModelDetails = {
-      input: {
-        company: 'seaforth', // eventually this will be provided as part of the account information
-        name: model.name,
-        duration: model.duration,
-        notes: model.notes
+    await this.client.graphql({
+      query: createActionModel,
+      variables: {
+        input: {
+          company: 'seaforth', // eventually this will be provided as part of the account information
+          name: model.name,
+          duration: model.duration,
+          notes: model.notes
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<CreateActionModelMutation>>(
-      graphqlOperation(mutations.createActionModel, actionModelDetails)
-    );
+    })
   }
 
   async updateModel(actionModel: ActionModel) {
-    const actionModelDetails = {
-      input: {
-        id: actionModel.id,
-        company: actionModel.company,
-        name: actionModel.name,
-        duration: actionModel.duration,
-        notes: actionModel.notes
+    await this.client.graphql({
+      query: updateActionModel,
+      variables: {
+        input: {
+          id: actionModel.id,
+          company: actionModel.company,
+          name: actionModel.name,
+          duration: actionModel.duration,
+          notes: actionModel.notes
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<UpdateActionModelMutation>>(
-      graphqlOperation(mutations.updateActionModel, actionModelDetails)
-    );
+    });
   }
 
   async deleteModel(action: ActionModel) {
-    const actionModelDetails = {
-      input: {
-        id: action.id
+    await this.client.graphql({
+      query: deleteActionModel,
+      variables: {
+        input: {
+          id: action.id
+        }
       }
-    }
-
-    await API.graphql<GraphQLQuery<DeleteActionModelMutation>>(
-      graphqlOperation(mutations.deleteActionModel, actionModelDetails)
-    );
+    })
 
     // TO DO: should also delete the _actions_ that use this model, and 
     // then the checklist models that use the _action_

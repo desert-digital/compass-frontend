@@ -233,7 +233,7 @@ export const onCreateServiceOrder = /* GraphQL */ `subscription OnCreateServiceO
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -275,7 +275,7 @@ export const onUpdateServiceOrder = /* GraphQL */ `subscription OnUpdateServiceO
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -317,7 +317,7 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
         name
         notes
         duration
-        checklists {
+        checklistModels {
           nextToken
           __typename
         }
@@ -408,7 +408,7 @@ export const onCreateVessel = /* GraphQL */ `subscription OnCreateVessel($filter
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -448,7 +448,7 @@ export const onUpdateVessel = /* GraphQL */ `subscription OnUpdateVessel($filter
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -488,7 +488,7 @@ export const onDeleteVessel = /* GraphQL */ `subscription OnDeleteVessel($filter
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -852,7 +852,7 @@ export const onCreateChecklistModel = /* GraphQL */ `subscription OnCreateCheckl
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -937,7 +937,7 @@ export const onUpdateChecklistModel = /* GraphQL */ `subscription OnUpdateCheckl
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -1022,7 +1022,7 @@ export const onDeleteChecklistModel = /* GraphQL */ `subscription OnDeleteCheckl
     notes
     duration
     preCharter
-    actions {
+    actionModels {
       items {
         id
         actionModelId
@@ -1106,7 +1106,7 @@ export const onCreateWorkflowModel = /* GraphQL */ `subscription OnCreateWorkflo
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1157,7 +1157,7 @@ export const onUpdateWorkflowModel = /* GraphQL */ `subscription OnUpdateWorkflo
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1208,7 +1208,7 @@ export const onDeleteWorkflowModel = /* GraphQL */ `subscription OnDeleteWorkflo
     name
     notes
     duration
-    checklists {
+    checklistModels {
       items {
         id
         checklistModelId
@@ -1643,7 +1643,7 @@ export const onCreateChecklistActions = /* GraphQL */ `subscription OnCreateChec
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1716,7 +1716,7 @@ export const onUpdateChecklistActions = /* GraphQL */ `subscription OnUpdateChec
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1789,7 +1789,7 @@ export const onDeleteChecklistActions = /* GraphQL */ `subscription OnDeleteChec
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1840,7 +1840,7 @@ export const onCreateWorkflowChecklists = /* GraphQL */ `subscription OnCreateWo
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1874,7 +1874,7 @@ export const onCreateWorkflowChecklists = /* GraphQL */ `subscription OnCreateWo
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -1913,7 +1913,7 @@ export const onUpdateWorkflowChecklists = /* GraphQL */ `subscription OnUpdateWo
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -1947,7 +1947,7 @@ export const onUpdateWorkflowChecklists = /* GraphQL */ `subscription OnUpdateWo
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId
@@ -1986,7 +1986,7 @@ export const onDeleteWorkflowChecklists = /* GraphQL */ `subscription OnDeleteWo
       notes
       duration
       preCharter
-      actions {
+      actionModels {
         items {
           id
           actionModelId
@@ -2020,7 +2020,7 @@ export const onDeleteWorkflowChecklists = /* GraphQL */ `subscription OnDeleteWo
       name
       notes
       duration
-      checklists {
+      checklistModels {
         items {
           id
           checklistModelId

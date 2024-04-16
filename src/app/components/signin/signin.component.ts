@@ -1,6 +1,6 @@
 // Core
 
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Material
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { Auth } from 'aws-amplify';
+import { signIn, resetPassword, type ResetPasswordOutput } from 'aws-amplify/auth';
 
 // Local
 
@@ -53,21 +53,15 @@ export class SigninComponent implements OnInit {
     this.hidePassword = true;
 
     const userNameFromRoute = this.route.snapshot.paramMap.get('username')
-    if ( userNameFromRoute !== '') {
+    if (userNameFromRoute !== '') {
       this.userName = userNameFromRoute;
     }
   }
 
   async onLogin() {
     try {
-      const user = await Auth.signIn(this.userName, this.password);
-      if (user.challengeName) {
-        // this.changePassword(user)
-        this._snackBar.open('Add Later: Change Password', 'OK', {duration: 10000})
-      }
-      else {
-        this.router.navigate(['login/loading']);
-      }
+      await signIn({ username: this.userName, password: this.password });
+      this.router.navigate(['login/loading']);
     } catch (error) {
       if (error.code === 'UserNotFoundException') {
         this._snackBar.open('User Not Found', 'OK', { duration: 3000 });
@@ -81,18 +75,6 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  // changePassword(user: any) {
-  //   const dialogReference = this._dialog.open(NewpasswordComponent);
-  //   dialogReference.afterClosed().subscribe(result => {
-  //     Auth.completeNewPassword(user, result).then(() => {
-  //       this.accountService.connect(user, 'USER');
-  //       this.router.navigate(['/loading']);
-  //     }).catch(error => {
-  //       this._snackBar.open(error.messages, 'OK');
-  //     });
-  //   });
-  // }
-
   onForgotPassword() {
     this.lostPasswordEvent.emit(null);
     this.state = "passwordLost";
@@ -104,23 +86,27 @@ export class SigninComponent implements OnInit {
 
   async onRequestCode() {
     this.state = "codeSent";
-    await Auth.forgotPassword(this.userName).then(() => {
-      this._snackBar.open('A Code has been Sent', 'OK', { duration: 3000 });
-    }).catch(error => {
-      this._snackBar.open(error.message, 'OK', { duration: 5000 });
-    });
+    try {
+      const output = await resetPassword({ username: this.userName });
+      this.handleResetPasswordNextSteps(output);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  async onSendCode() {
-    try {
-      await Auth.forgotPasswordSubmit(this.userName, this.recoveryCode, this.password).then(() => {
-        this._snackBar.open('Your Password has been Update. Login with the New Password', 'OK', { duration: 3000 })
-        this.state = "normal";
-        this.router.navigate(['/login/signin']);
-      });
-    } catch (error) {
-      this._snackBar.open(error.messages, 'OK', { duration: 3000 });
-      this.state = "passwordLost";
+  handleResetPasswordNextSteps(output: ResetPasswordOutput) {
+    const { nextStep } = output;
+    switch (nextStep.resetPasswordStep) {
+      case 'CONFIRM_RESET_PASSWORD_WITH_CODE':
+        const codeDeliveryDetails = nextStep.codeDeliveryDetails;
+        console.log(
+          `Confirmation code was sent to ${codeDeliveryDetails.deliveryMedium}`
+        );
+        // Collect the confirmation code from the user and pass to confirmResetPassword.
+        break;
+      case 'DONE':
+        console.log('Successfully reset password.');
+        break;
     }
   }
 }
