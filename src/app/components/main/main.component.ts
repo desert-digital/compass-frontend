@@ -40,7 +40,7 @@ export class MainComponent {
 
     this._pendingService.getPendingItems();
     
-    this._pendingService.numberOfPendingEvents$.subscribe((number : any) => 
+    this._pendingService.numberOfPendingEvents$.subscribe((number : number) => 
       this.pendingItems = number);
   }
 

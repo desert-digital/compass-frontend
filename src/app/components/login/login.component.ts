@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     history.pushState(null, null, location.href);
 
-    fromEvent(window, 'popstate').subscribe(_ => {
+    fromEvent(window, 'popstate').subscribe(() => {
        history.pushState(null, null, location.href);
     });
 

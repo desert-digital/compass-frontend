@@ -72,7 +72,7 @@ export class AddWorkflowComponent {
 
   onAddWorkflowPressed(model: WorkflowModel, formDirective: FormGroupDirective) {
     try {
-      this._workflowModelsService.createWorkflowModel(model, this.workflow).then(_ => {
+      this._workflowModelsService.createWorkflowModel(model, this.workflow).then(() => {
         this._snackBar.open('Created a new workflow', 'OK', { duration: 3000 });
         this.workflowForm.reset();
         formDirective.resetForm();

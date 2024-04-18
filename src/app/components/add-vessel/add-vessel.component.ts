@@ -14,6 +14,7 @@ import { Owner, WorkflowModel } from '../../API.service';
 import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 import { OwnersService } from 'src/app/services/owners.service';
 import { FleetService } from 'src/app/services/fleet.service'
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-vessel',
@@ -64,22 +65,19 @@ export class AddVesselComponent {
     this.owners = await this._ownersService.getOwners();
   }
 
-  ngAfterViewInit() {
-  }
-
-  onVesselTypeChanged(event: any) {
+  onVesselTypeChanged(event: MatSelectChange) {
     this.compositeForm.patchValue({ vesselForm: { vesselType: event.value }} );
   }
 
-  onWorkflowChanged(event: any) {
+  onWorkflowChanged(event: MatSelectChange) {
     this.defaultWorkflow = event.value;
   }
 
-  onOwnerChanged(event: any) {
+  onOwnerChanged(event: MatSelectChange) {
     this.owner = event.value;
   }
 
-  onOwnerTypeChanged(event: any) {
+  onOwnerTypeChanged(event: MatSelectChange) {
     this.ownerType = event.value;
   }
 

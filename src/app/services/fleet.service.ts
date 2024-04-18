@@ -36,11 +36,6 @@ export class FleetService {
     return vesselResult.data.getVessel as Vessel;
   }
 
-
-  async getVesselByOwner(owner: Owner): Promise<any> {
-    console.log(owner);
-  }
-
   async createVessel(vessel: Vessel, ownerId: string, workflowId: string) {
     await this.client.graphql({
       query: createVessel,

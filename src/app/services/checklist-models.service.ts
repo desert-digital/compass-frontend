@@ -19,7 +19,7 @@ import {
 
 // Local
 
-import { ChecklistModel, ActionModel, ChecklistActions } from '../API.service';
+import { ChecklistModel, ActionModel } from '../API.service';
 import { ActionsService } from './actions.service';
 
 @Injectable({
@@ -43,16 +43,6 @@ export class ChecklistModelsService {
       variables: { id: id }
     })
     return checklistResult.data.getChecklistModel as ChecklistModel;
-  }
-
-  async getChecklistModelActionsFromId(id: string): Promise<ChecklistActions[]> {
-    const checklistResult = await this.client.graphql({
-      query: getChecklistModel,
-      variables: {
-        id: id
-      }
-    })
-    return checklistResult.data.getChecklistModel.actionModels.items as ChecklistActions[];
   }
 
   async createChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {
@@ -119,18 +109,9 @@ export class ChecklistModelsService {
   }
 
   async deleteModel(checklistModel: ChecklistModel) {
-    const checklistActionsResult = await this.client.graphql({
-      query: deleteChecklistModel,
-      variables: {
-        input: {
-          id: checklistModel.id
-        }
-      }
-    })
+    const checklistActionModels = checklistModel.actionModels.items;
 
-    const checklistActions = checklistActionsResult.data.deleteChecklistModel.actionModels.items;
-
-    for (const checkListAction of checklistActions) {
+    for (const checkListAction of checklistActionModels) {
       await this.client.graphql({
         query: deleteChecklistActions,
         variables: {

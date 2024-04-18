@@ -23,7 +23,7 @@ import { ShowChecklistNotesDialogComponent } from '../show-checklist-notes-dialo
 export class ManageChecklistsComponent {
 
   checklists: ChecklistModel[] = [];
-  selectedChecklist: any;
+  selectedChecklist: ChecklistModel;
 
   constructor(private router: Router,
     private _dialog: MatDialog,

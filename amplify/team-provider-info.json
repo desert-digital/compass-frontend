@@ -12,12 +12,6 @@
       "AmplifyAppId": "d1xwyhfkpkz4y2"
     },
     "categories": {
-      "auth": {
-        "compassfrontend5960eb69": {}
-      },
-      "api": {
-        "compassfrontend": {}
-      },
       "function": {
         "startworkflow": {
           "deploymentBucketName": "amplify-compassfrontend-dev-155547-deployment",

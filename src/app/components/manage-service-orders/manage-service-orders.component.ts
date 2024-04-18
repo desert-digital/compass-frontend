@@ -1,6 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
+import { ServiceOrder } from 'src/API';
 
 // Local
 
@@ -12,7 +13,7 @@ import { Component } from '@angular/core';
 })
 export class ManageServiceOrdersComponent {
 
-  orders: any[] = [];
+  orders: ServiceOrder[];
 
   onAddNewServiceOrderPressed() {}
 

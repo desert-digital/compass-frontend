@@ -1,6 +1,6 @@
 <div class="form-container">
     <div *ngIf="state === 'normal'">
-      <form action="#" #loginForm="ngForm" (keyup.enter)="onLogin()">
+      <form tabindex="0" action="#" #loginForm="ngForm" (keyup.enter)="onLogin()">
         <div>
           <mat-form-field appearance="fill">
             <mat-label>User ID</mat-label>

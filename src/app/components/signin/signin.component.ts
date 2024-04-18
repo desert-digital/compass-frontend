@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { signIn, resetPassword, type ResetPasswordOutput } from 'aws-amplify/auth';
+import { signIn, resetPassword, type ResetPasswordOutput, confirmResetPassword } from 'aws-amplify/auth';
 
 // Local
 
@@ -98,15 +98,27 @@ export class SigninComponent implements OnInit {
     const { nextStep } = output;
     switch (nextStep.resetPasswordStep) {
       case 'CONFIRM_RESET_PASSWORD_WITH_CODE':
-        const codeDeliveryDetails = nextStep.codeDeliveryDetails;
         console.log(
-          `Confirmation code was sent to ${codeDeliveryDetails.deliveryMedium}`
+          `Confirmation code was sent to ${nextStep.codeDeliveryDetails.deliveryMedium}`
         );
         // Collect the confirmation code from the user and pass to confirmResetPassword.
         break;
       case 'DONE':
         console.log('Successfully reset password.');
         break;
+    }
+  }
+
+  async onSendCode() {
+    try {
+      await confirmResetPassword({
+        username: this.userName, confirmationCode:
+          this.recoveryCode, newPassword:
+          this.password
+      })
+
+    } catch (error) {
+      console.log(error);
     }
   }
 }

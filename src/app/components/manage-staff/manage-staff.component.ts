@@ -19,7 +19,7 @@ import { StaffService } from 'src/app/services/staff.service';
 })
 export class ManageStaffComponent {
 
-  staff: any[] = [];
+  staff: Staff[];
 
   constructor(private _snackBar: MatSnackBar,
     private _staffService: StaffService,

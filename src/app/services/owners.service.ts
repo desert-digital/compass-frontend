@@ -34,7 +34,7 @@ export class OwnersService {
 
   async getVesselsForOwner(id: string): Promise<Vessel[]> {
     const ownerResult = await this.client.graphql({ query: getOwner, variables: { id: id } })
-    const ownerWithVessels = ownerResult.data.getOwner;
+    const ownerWithVessels = ownerResult.data.getOwner as Owner;
     return ownerWithVessels.boats.items as Vessel[];
   }
 

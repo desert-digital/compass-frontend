@@ -35,7 +35,7 @@ export class ActionModelsService {
         id: id
       }
     })
-    return actionModel.data.getActionModel;
+    return actionModel.data.getActionModel as ActionModel;
   }
 
   async createActionModel(model: ActionModel) {

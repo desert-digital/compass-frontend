@@ -1,6 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 // Local
 
@@ -24,8 +25,8 @@ export class ChecklistComponent {
     this.checklistCompleted = false;
   }
 
-  onItemChecked(item: any) {
-    item.selected = !item.selected;
+  onItemChecked(item: MatCheckbox) {
+    item.checked = !item.checked;
     this.checklistCompleted = true;
     // this.steps.forEach( item => {
     //   this.checklistCompleted = this.checklistCompleted && item.selected;

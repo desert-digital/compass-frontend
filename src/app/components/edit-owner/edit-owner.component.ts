@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Material
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectChange } from '@angular/material/select';
 
 // Amplify
 
@@ -69,7 +70,7 @@ export class EditOwnerComponent {
     return o1 && o2 ? o1 == o2.id : false;
   }
 
-  onVesselChanged(event: any) {
+  onVesselChanged(event: MatSelectChange) {
     if (event.source.selected) {
       const newVessel = this.vesselList.find(item => item.id === event.source.value);
       const newVesselIndex = this.ownerForm.value.vessels.findIndex(item => item.id === newVessel.id);

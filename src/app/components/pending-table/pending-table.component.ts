@@ -8,6 +8,7 @@ import { Router} from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { MatInput } from '@angular/material/input';
 
 // Local
 

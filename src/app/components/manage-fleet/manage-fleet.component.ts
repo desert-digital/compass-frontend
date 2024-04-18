@@ -15,6 +15,7 @@ import { MatTable } from '@angular/material/table';
 import { Vessel } from '../../API.service';
 import { FleetService } from 'src/app/services/fleet.service';
 import { FleetTableDataSource } from './manage-fleet-datasource';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-manage-fleet',
@@ -49,9 +50,9 @@ export class ManageFleetComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
 
-  async onFileSelected(event: any) {
+  async onFileSelected(event: MatInput) {
     try {
-      console.log('Uploading the file');
+      console.log(`Uploading the file ${event.value}`);
     }
     catch (e: any) {
       this._snackBar.open(`An error occured ${e.message} saving the vessel. Please contact support`, 'OK');
@@ -67,7 +68,7 @@ export class ManageFleetComponent implements AfterViewInit {
   }
 
   async onDeleteVesselPressed(vessel: Vessel) {
-    await this._fleetService.deleteVessel(vessel.id).then(_ => {
+    await this._fleetService.deleteVessel(vessel.id).then(() => {
       this._snackBar.open(`Deleted ${vessel.name}`, 'OK', {duration: 3000});
     });
     this._setup();

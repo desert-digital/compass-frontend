@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./workflow-overview.component.scss']
 })
 export class WorkflowOverviewComponent {
-  items: any = [{
+  items = [{
     name: 'Charter 1',
     status: 'On time'
   },

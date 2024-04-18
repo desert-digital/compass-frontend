@@ -52,8 +52,8 @@ export class ChecklistsService {
       }
     }
     );
-    const newChecklist = newChecklistMutationResult.data.createChecklist;
-    const checklistActionModels = await this._checklistModelService.getChecklistModelActionsFromId(checklistModel.id);
+    const newChecklist: Checklist = newChecklistMutationResult.data.createChecklist as Checklist;
+    const checklistActionModels = checklistModel.actionModels.items;
 
     // For each Action Model in the Checklist create an Action
     // Push the checklist into an array and add all the Checklists to 
@@ -66,7 +66,7 @@ export class ChecklistsService {
       actions.push(newAction);
     }
 
-    newChecklist.steps.items = actions;
+    // newChecklist.steps = actions;
     console.log(newChecklist);
     return newChecklist as Checklist;
   }

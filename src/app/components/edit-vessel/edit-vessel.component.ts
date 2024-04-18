@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 // Material
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 // Local
 
@@ -70,15 +71,15 @@ export class EditVesselComponent {
     }); 
   }
  
-  onVesselTypeChanged(event: any) {
+  onVesselTypeChanged(event: MatCheckbox) {
     this.vesselForm.patchValue({ vesselForm: { vesselType: event.value }} );
   }
 
-  onWorkflowChanged(event: any) {
+  onWorkflowChanged(event: MatCheckbox) {
     this.vesselForm.patchValue({ vesselForm: { defaultVesselWorkflow: event.value }} );
   }
 
-  onOwnerChanged(event: any) {
+  onOwnerChanged(event: MatCheckbox) {
     this.vesselForm.patchValue({ vesselForm: { ownerBoatsId: event.value }} );
   }
 
