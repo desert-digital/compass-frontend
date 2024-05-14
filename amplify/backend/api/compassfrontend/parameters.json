@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "compassfrontend",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authcompassfrontend4a0940c4",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2024-04-30T23:14:14.782Z"
+}

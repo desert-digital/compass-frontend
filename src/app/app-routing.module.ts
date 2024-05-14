@@ -31,6 +31,7 @@ import { ManageStaffComponent } from './components/manage-staff/manage-staff.com
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -113,6 +114,10 @@ const routes: Routes = [
       {
         path: 'signin',
         component: SigninComponent
+      },
+      {
+        path: 'signup',
+        component: SignupComponent
       },
       {
         path: 'loading',

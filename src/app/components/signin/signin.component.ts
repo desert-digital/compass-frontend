@@ -70,6 +70,7 @@ export class SigninComponent implements OnInit {
         this._snackBar.open('Wrong Password', 'OK', { duration: 3000 });
       }
       else {
+        console.log(JSON.stringify(error))
         this._snackBar.open('A Signin Error Occurred, please try again', 'OK', { duration: 3000 });
       }
     }

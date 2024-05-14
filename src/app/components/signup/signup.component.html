@@ -1,0 +1,84 @@
+    <div class="form-container">
+      <div *ngIf="signingUp">
+        <form action="#" [formGroup]="signupForm">
+          <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+            <mat-label>User ID</mat-label>
+            <input matInput type="text" required name="userName" formControlName="userName">
+            <button mat-icon-button matSuffix tabindex="2">
+              <mat-icon matSuffix>perm_identity</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" required name="password"
+              formControlName="password" #password>
+            <button mat-icon-button matSuffix tabindex="2" (click)="hidePassword = !hidePassword">
+              <mat-icon class="material-icons-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-password-strength #passwordComponent [enableSpecialCharRule]="true" [warnThreshold]="80"
+              [password]="password.value">
+            </mat-password-strength>
+            <mat-password-strength-info [enableScoreInfo]="false" [passwordComponent]="passwordComponent">
+            </mat-password-strength-info>
+          </mat-form-field>
+          <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" required formControlName="email">
+            <button mat-icon-button matSuffix tabindex="2">
+              <mat-icon class="material-icons-outlined">email</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="text-danger">
+            <small *ngIf="signupForm.get('email').hasError('email')">
+              Please enter a valid email address.
+            </small>
+          </div>
+          <div class="two-wide-container">
+            <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="phone" name="phoneNumber" autocomplete="false"
+                formControlName="phoneNumber">
+              <button mat-icon-button matSuffix tabindex="2">
+                <mat-icon class="material-icons-outlined">phone</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-checkbox name="agree" [(checked)]="agree" (change)="agree = !agree">I agree to the terms &
+                conditions</mat-checkbox>
+          </div>
+          <div>
+            <div>
+            <button id="register-button" class="form-button" mat-raised-button color="accent" [disabled]="signupForm.invalid || !agree"
+              (click)="onRegisterPressed()">Next</button>
+              </div><div>
+            <button mat-button color="primary" (click)="onHaveCodePressed()">Have a Code or Need a New Code?</button>
+                </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!signingUp">
+        <form action="#" [formGroup]="verifyForm">
+          <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" required name="userName" formControlName="userNameWithCode">
+            <button mat-icon-button matSuffix tabindex="2">
+              <mat-icon class="material-icons-outlined">perm_identity</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field class="wide-form-field" appearance="fill" tabindex="1">
+            <mat-label>Verification Code</mat-label>
+            <input matInput type="text" required name="code" formControlName="code">
+            <button mat-icon-button matSuffix tabindex="2">
+              <mat-icon class="material-icons-outlined">verified_user</mat-icon>
+            </button>
+          </mat-form-field>
+          <div>
+            <button class="form-button" mat-raised-button color="accent" [disabled]="!verifyForm.valid"
+              (click)="onVerifyCodePressed()">Sign Up!</button>
+            <button class="form-button" mat-button color="primary"
+              (click)="onResendCodePressed()">Resend Code</button>
+          </div>
+        </form>
+      </div>
+    </div>

@@ -17,6 +17,12 @@
           "deploymentBucketName": "amplify-compassfrontend-dev-155547-deployment",
           "s3Key": "amplify-builds/startworkflow-76754f73525971723347-build.zip"
         }
+      },
+      "auth": {
+        "compassfrontend4a0940c4": {}
+      },
+      "api": {
+        "compassfrontend": {}
       }
     }
   }

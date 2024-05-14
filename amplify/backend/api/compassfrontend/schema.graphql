@@ -1,0 +1,138 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type CompassUser @model @auth(rules: [{allow: private}]) {
+  id: ID! 
+  company: String
+  userName: String
+  roles: [CompassUserRole] @hasMany
+}
+
+type CompassUserRole @model @auth(rules: [{allow: private}]) {
+  id: ID! 
+  company: String
+  roleName: String
+}
+
+type PendingEvent @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String
+  start: String 
+  end: String
+  item: String
+  item_id: String
+  status: String,
+  contactEmail: String,
+  contactName: String,
+  contactPhone: String
+}
+
+type ServiceOrder @model @auth(rules: [{ allow: private}]){
+  id: ID!
+  company: String
+  boat: Vessel
+  items: [String]
+}
+
+type InventoryItem @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  location: String 
+  description: String 
+  leadTime: Int
+  quantity: Int
+}
+
+type Vessel @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  vesselType: String
+  documentNumber: String
+  defaultWorkflow: WorkflowModel @hasOne
+}
+
+type Staff @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  email: String
+  phone: String
+}
+
+type Owner @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  email: String
+  phone: String
+  boats: [Vessel] @hasMany
+}
+
+type ActionModel @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  notes: String 
+  duration: Int
+  checklists: [ChecklistModel] @manyToMany(relationName: "ChecklistActions")
+}
+
+type ChecklistModel @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  notes: String
+  duration: Int
+  preCharter: Boolean
+  actionModels: [ActionModel] @manyToMany(relationName: "ChecklistActions")
+  workflows: [WorkflowModel] @manyToMany(relationName: "WorkflowChecklists") 
+}
+
+type WorkflowModel @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  company: String!
+  name: String
+  notes: String
+  duration: Int
+  checklistModels: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
+}
+
+type Action @model @auth(rules: [{allow: private}]){
+  id: ID!
+  company: String
+  status: Boolean
+  name: String
+  duration: Int
+  actualStart: String
+  actualEnd: String
+}
+
+type Checklist @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  duration: Int
+  owner: Staff @hasOne
+  steps: [Action] @hasMany
+  mustStart: String
+  mustEnd: String 
+  actualStart: String
+  actualEnd: String 
+}
+
+type Workflow @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  company: String!
+  name: String
+  duration: Int
+  steps: [Checklist] @hasMany
+  mustStart: String
+  mustEnd: String 
+  actualStart: String
+  actualEnd: String 
+}
+
+type Mutation {
+  startWorkflow(workflowId: String!): String @function(name: "startworkflow-${env}")
+}
