@@ -48,6 +48,10 @@ export class MainComponent {
     this._router.navigate(['main/home']);
   }
 
+  onTopPressed() {
+    this._router.navigate(['main/top']);
+  }
+
   onFleetPressed() {
     this._router.navigate(['main/fleet']);
   }

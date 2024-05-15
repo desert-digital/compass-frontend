@@ -17,6 +17,7 @@ export class AvailableFleetComponent {
 
   ngOnInit(): void {
     this.createChart();
+    this.chart.resize();
   }
 
   createChart() {

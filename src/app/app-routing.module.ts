@@ -32,6 +32,7 @@ import { ManageOwnersComponent } from './components/manage-owners/manage-owners.
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { TopComponent } from './components/top/top.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,9 @@ const routes: Routes = [
     }, {
       path: 'services',
       component: ManageServiceOrdersComponent
+    }, {
+      path: 'top',
+      component: TopComponent
     }],
   },
   {

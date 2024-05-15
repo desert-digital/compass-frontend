@@ -1,7 +1,6 @@
 <div class="workflow-list-container">
-  <h3>Active Workflows</h3>
   <mat-list class="tight">
-    <cdk-virtual-scroll-viewport [itemSize]="30" class="workflow-list-viewport">
+    <cdk-virtual-scroll-viewport [itemSize]="15" class="workflow-list-viewport">
       <div *cdkVirtualFor="let item of items">
         <h4>Charter: {{ item.name }}</h4>
         <p><b>Location:</b> Coronado, CA <b>Start:</b> 18 March 2023 at 1000</p>
