@@ -26,6 +26,7 @@ export class PendingTableComponent implements AfterViewInit {
   @ViewChild('pendingTable') pendingTable!: MatTable<any>;
   
   dataSource: PendingTableDataSource;
+  pageSize: number = 9;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['item', 'start', 'end', 'status', 'actions'];

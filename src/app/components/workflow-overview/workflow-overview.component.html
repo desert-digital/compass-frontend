@@ -2,8 +2,8 @@
   <mat-list class="tight">
     <cdk-virtual-scroll-viewport [itemSize]="15" class="workflow-list-viewport">
       <div *cdkVirtualFor="let item of items">
-        <h4>Charter: {{ item.name }}</h4>
-        <p><b>Location:</b> Coronado, CA <b>Start:</b> 18 March 2023 at 1000</p>
+        <b>Charter: {{ item.name }}</b>
+        <p>Location:Coronado, CA <b>Start:</b> 18 September 2024 at 1000</p>
         <p [ngClass]="{'late-item' : checkLateStatus(item.status)}">Status: <b>{{ item.status }}</b></p>
         <mat-divider></mat-divider>
       </div>

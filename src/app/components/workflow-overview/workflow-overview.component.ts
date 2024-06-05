@@ -17,7 +17,19 @@ export class WorkflowOverviewComponent {
   {
     name: 'Charter 3',
     status: 'Late'
-  }];
+  }, {
+    name: 'Charter 4',
+    status: 'On time'
+  },
+  {
+    name: 'Charter 5',
+    status: 'On time'
+  },
+  {
+    name: 'Charter 6',
+    status: 'Late'
+  }
+  ];
 
   checkLateStatus(item: string): boolean {
     if (item === 'Late') {

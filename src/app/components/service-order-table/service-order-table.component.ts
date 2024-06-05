@@ -17,6 +17,7 @@ export class ServiceOrderTableComponent implements AfterViewInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['boat', 'date', 'repair'];
+  pageSize: number = 9;
 
   constructor() {
     this.dataSource = new ServiceOrderTableDataSource();

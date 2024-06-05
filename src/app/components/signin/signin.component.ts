@@ -63,10 +63,12 @@ export class SigninComponent implements OnInit {
       await signIn({ username: this.userName, password: this.password });
       this.router.navigate(['login/loading']);
     } catch (error) {
-      if (error.code === 'UserNotFoundException') {
+      if (error.name === 'UserAlreadyAuthenticatedException') {
+        this.router.navigate(['login/loading']);
+      } if (error.name === 'UserNotFoundException') {
         this._snackBar.open('User Not Found', 'OK', { duration: 3000 });
       }
-      else if (error.code === 'NotAuthorizedException') {
+      else if (error.name === 'NotAuthorizedException') {
         this._snackBar.open('Wrong Password', 'OK', { duration: 3000 });
       }
       else {

@@ -25,11 +25,11 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
-import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
+import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TopComponent } from './components/top/top.component';
@@ -105,7 +105,7 @@ const routes: Routes = [
       component: ManageActionsComponent
     }, {
       path: 'services',
-      component: ManageServiceOrdersComponent
+      component: ServiceOrderTableComponent
     }, {
       path: 'top',
       component: TopComponent

@@ -19,6 +19,7 @@ export class CharterChartComponent {
 
   ngOnInit(): void {
     this.createChart();
+    this.chart.resize(200,400);
   }
 
   createChart() {

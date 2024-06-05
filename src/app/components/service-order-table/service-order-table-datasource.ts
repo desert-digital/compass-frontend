@@ -30,6 +30,7 @@ const EXAMPLE_DATA: ServiceOrderTableItem[] = [
  */
 export class ServiceOrderTableDataSource extends DataSource<ServiceOrderTableItem> {
   data: ServiceOrderTableItem[] = EXAMPLE_DATA;
+  public numberOfOrders: number = 0;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
@@ -48,6 +49,7 @@ export class ServiceOrderTableDataSource extends DataSource<ServiceOrderTableIte
       // stream for the data-table to consume.
       return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
         .pipe(map(() => {
+          this.numberOfOrders = this.data.length;
           return this.getPagedData(this.getSortedData([...this.data ]));
         }));
     } else {

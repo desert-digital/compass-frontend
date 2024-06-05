@@ -13,6 +13,6 @@ export class LoadingComponent {
   constructor(private _router: Router) {}
 
   ngOnInit( ) {
-    this._router.navigate(['main/home']);
+    this._router.navigate(['main/top']);
   }
 }

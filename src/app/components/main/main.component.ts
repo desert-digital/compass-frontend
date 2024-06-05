@@ -36,18 +36,14 @@ export class MainComponent {
 
 
   async ngOnInit() {
-    this.onHomePressed();
+    this.onTopPressed();
 
     this._pendingService.getPendingItems();
     
     this._pendingService.numberOfPendingEvents$.subscribe((number : number) => 
       this.pendingItems = number);
   }
-
-  onHomePressed() {
-    this._router.navigate(['main/home']);
-  }
-
+  
   onTopPressed() {
     this._router.navigate(['main/top']);
   }
@@ -86,6 +82,10 @@ export class MainComponent {
 
   onActionsPressed() {
     this._router.navigate(['main/manage-actions']);
+  }
+
+  onInventoryPressed() {
+    this._router.navigate(['main/inventory']);
   }
 
   async onLogoutPressed() {

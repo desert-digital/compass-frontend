@@ -15,6 +15,8 @@ $textFont: 'Lato';
 $borderWidth: 2px;
 $borderRadius: 5px;
 
+$viewPortHeight: 560px;
+
 body {
   background-color: $backgroundColor;
 }
@@ -137,9 +139,10 @@ h4 {
 }
 
 @mixin viewport {
-  height: 400px;
+  height: $viewPortHeight;
   width: 95%;
   margin: 10px;
+  text-align: left;
 }
 
 .list-container {

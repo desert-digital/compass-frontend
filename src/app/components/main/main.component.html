@@ -3,15 +3,11 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <div class="sidenav-buttons">
-      <button mat-button color="primary" (click)="onHomePressed()">
-        <mat-icon class="double-sized">home</mat-icon>
-        <span class="sidenav-button-text">Home</span>
-      </button>
       <button mat-button color="primary" (click)="onTopPressed()">
         <mat-icon class="double-sized">language</mat-icon>
         <span class="sidenav-button-text">Top</span>
       </button>
-      <button [matBadge]="pendingItems" matBadgeSize="large" mat-button color="primary" (click)="onPendingPressed()">
+      <button [matBadge]="pendingItems" matBadgeSize="medium" mat-button color="primary" (click)="onPendingPressed()">
         <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
         <span class="sidenav-button-text">Pending</span>
       </button>
@@ -43,7 +39,7 @@
         <mat-icon class="double-sized">check_circle</mat-icon>
         <span class="sidenav-button-text">Action Admin</span>
       </button>
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="onInventoryPressed()">
         <mat-icon class="double-sized">forklift</mat-icon>
         <span class="sidenav-button-text">Inventory</span>
       </button>
