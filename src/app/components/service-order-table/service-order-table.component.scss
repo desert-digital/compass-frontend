@@ -13,3 +13,23 @@ h4 {
   margin-top: 15px;
   width: 80%;
 }
+
+.mat-column-id {
+  flex: 0 0 10% !important;
+  width: 10%;
+}
+
+.mat-column-boat {
+  flex: 0 0 20% !important;
+  width: 20%;
+}
+
+.mat-column-date {
+  flex: 0 0 10% !important;
+  width: 10%;
+}
+
+.mat-column-repair {
+  flex: 0 0 50% !important;
+  width: 50%;
+}

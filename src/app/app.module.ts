@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -63,13 +64,13 @@ import { EditOwnerComponent } from './components/edit-owner/edit-owner.component
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { EditVesselComponent } from './components/edit-vessel/edit-vessel.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
-import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
-import { HomeComponent } from './components/home/home.component';
+import { InventoryTableComponent } from './components/inventory-table/inventory-table.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
+import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
@@ -92,46 +93,47 @@ import { TopComponent } from './components/top/top.component';
   declarations: [
     AppComponent,
     MainComponent,
-    HomeComponent,
-    AssignWorkflowComponent,
-    ManageStaffComponent,
-    ChecklistComponent,
-    WorkflowOverviewComponent,
-    AvailableFleetComponent,
-    ServiceOrderTableComponent,
-    CharterChartComponent,
-    LoginComponent,
-    LogoutComponent,
-    PendingTableComponent,
-    ManageChecklistsComponent,
-    ManageWorkflowsComponent,
-    ManageServiceOrdersComponent,
-    AddChecklistComponent,
-    AddWorkflowComponent,
     AddActionComponent,
-    ManageActionsComponent,
+    AddChecklistComponent,
+    AddStaffComponent, 
+    AddOwnerComponent,
+    AddVesselComponent,
+    AddWorkflowComponent,
+    AssignWorkflowComponent,
+    AvailableFleetComponent,
+    CharterChartComponent,
+    ChecklistComponent,
     DeleteActionDialogComponent,
     DeleteChecklistDialogComponent,
     EditActionComponent,
+    EditChecklistComponent,
+    EditOwnerComponent,
+    EditStaffComponent,
+    EditVesselComponent,
+    EditWorkflowComponent,
+    InventoryTableComponent,
+    LoadingComponent,
+    LoginComponent,
+    LogoutComponent,
+    ManageActionsComponent,
+    ManageChecklistsComponent,
+    ManageFleetComponent,
+    ManageOwnersComponent,
+    ManageWorkflowsComponent,
+    ManageServiceOrdersComponent,
+    ManageStaffComponent,
+    OwnerNamePipe,
+    PendingTableComponent,
+    ServiceOrderTableComponent,
     ShowActionNotesDialogComponent,
     ShowChecklistNotesDialogComponent,
-    EditChecklistComponent,
     ShowWorkflowNotesDialogComponent,
-    ManageFleetComponent,
-    EditWorkflowComponent,
-    AddVesselComponent,
-    AddOwnerComponent,
-    ManageOwnersComponent,
-    EditOwnerComponent,
-    OwnerNamePipe,
-    EditVesselComponent,
-    AddStaffComponent,
-    EditStaffComponent,
     SigninComponent,
-    LoadingComponent,
     StaffNamePipe,
     SignupComponent,
-    TopComponent
+    TopComponent,
+    WorkflowOverviewComponent,
+    InventoryTableComponent,
   ],
   imports: [
     AmplifyAuthenticatorModule,
@@ -149,6 +151,7 @@ import { TopComponent } from './components/top/top.component';
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -169,7 +172,5 @@ import { TopComponent } from './components/top/top.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-
-
 
 export class AppModule { }

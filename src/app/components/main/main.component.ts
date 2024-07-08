@@ -53,7 +53,7 @@ export class MainComponent {
   }
 
   onPendingPressed() {
-    this._router.navigate(['main/pending']);
+    this._router.navigate(['main/pending', 15]);
   }
 
   onChecklistPressed() {
@@ -76,16 +76,16 @@ export class MainComponent {
     this._router.navigate(['main/manage-workflows']);
   }
 
-  onServicesPressed() {
-    this._router.navigate(['main/services']);
-  }
-
   onActionsPressed() {
     this._router.navigate(['main/manage-actions']);
   }
 
+  onServicesPressed() {
+    this._router.navigate(['main/services', 15]);
+  }
+
   onInventoryPressed() {
-    this._router.navigate(['main/inventory']);
+    this._router.navigate(['main/inventory', 15]);
   }
 
   async onLogoutPressed() {

@@ -1,7 +1,7 @@
 // Core
 
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Material
 
@@ -26,14 +26,21 @@ export class PendingTableComponent implements AfterViewInit {
   @ViewChild('pendingTable') pendingTable!: MatTable<any>;
   
   dataSource: PendingTableDataSource;
-  pageSize: number = 9;
+  pageSize: number = 7;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['item', 'start', 'end', 'status', 'actions'];
 
   constructor(private router: Router, 
+    private route: ActivatedRoute,
     private _pendingService: PendingService) {
     this.dataSource = new PendingTableDataSource(_pendingService);
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.pageSize = +params['size'] || 7;
+    });
   }
 
   ngAfterViewInit(): void {

@@ -1,29 +1,40 @@
-// Core
-
-import { map, startWith, switchMap } from 'rxjs/operators';
-import { Observable, merge } from 'rxjs';
-
-// Material
-
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { map } from 'rxjs/operators';
+import { Observable, of as observableOf, merge } from 'rxjs';
 
-// Local
+// TODO: Replace this with your own data model type
+export interface InventoryTableItem {
+  id: string;
+  partNumber: string;
+  description: string;
+  location: string;
+  count: number
+}
 
-import { FleetService } from 'src/app/services/fleet.service';
+// TODO: replace this with real data from your application
+const EXAMPLE_DATA: InventoryTableItem[] = [
+  {id: 'SEA-001', partNumber: 'AXR2-53', description: 'La Barca', location: 'Fix it', count: 5},
+  {id: 'SEA-002', partNumber: 'AXR2-53', description: 'Velero', location: 'New rudder', count: 3},
+  {id: 'SEA-003', partNumber: 'AXR2-53', description: 'Speedy', location: 'Thru-hulls need work', count: 10},
+  {id: 'SEA-004', partNumber: 'AXR2-53', description: 'Courageous', location: 'Engine Maintenance', count: 8},
+  {id: 'SEA-005', partNumber: 'AXR2-53', description: 'Bruja', location: 'Gelcoat touch-up', count: 2},
+  {id: 'SEA-006', partNumber: 'AXR2-53', description: 'Hexe', location: 'Mainsail repair', count: 1},
+  {id: 'SEA-007', partNumber: 'AXR2-53', description: 'Maggie', location: 'Install Electronics', count: 5}
+];
 
 /**
- * Data source for the FleetTable view. This class should
+ * Data source for the InventoryTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class FleetTableDataSource extends DataSource<any> {
-  public numberOfBoats: number = 0;
+export class InventoryTableDataSource extends DataSource<InventoryTableItem> {
+  data: InventoryTableItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor(private _fleetService: FleetService) {
+  constructor() {
     super();
   }
 
@@ -32,18 +43,14 @@ export class FleetTableDataSource extends DataSource<any> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<any[]> {
+  connect(): Observable<InventoryTableItem[]> {
     if (this.paginator && this.sort) {
-      return merge(this.sort.sortChange, this.paginator.page)
-        .pipe(
-          startWith({}),
-          switchMap(() => {
-            return this._fleetService.getVessels();
-          }),
-          map(data => {
-            this.numberOfBoats = data.length;
-            return this.getPagedData(this.getSortedData(data));
-          }));
+      // Combine everything that affects the rendered data into one update
+      // stream for the data-table to consume.
+      return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
+        .pipe(map(() => {
+          return this.getPagedData(this.getSortedData([...this.data ]));
+        }));
     } else {
       throw Error('Please set the paginator and sort on the data source before connecting.');
     }
@@ -59,7 +66,7 @@ export class FleetTableDataSource extends DataSource<any> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: any[]): any[] {
+  private getPagedData(data: InventoryTableItem[]): InventoryTableItem[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -72,7 +79,7 @@ export class FleetTableDataSource extends DataSource<any> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: any[]): any[] {
+  private getSortedData(data: InventoryTableItem[]): InventoryTableItem[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -80,7 +87,7 @@ export class FleetTableDataSource extends DataSource<any> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        case 'description': return compare(a.description, b.description, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }

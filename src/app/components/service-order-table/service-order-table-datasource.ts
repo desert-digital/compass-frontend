@@ -6,6 +6,7 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface ServiceOrderTableItem {
+  id: string,
   repair: string;
   date: string;
   boat: string;
@@ -14,13 +15,13 @@ export interface ServiceOrderTableItem {
 // TODO: replace this with real data from your application
 const todaysDate = new Date();
 const EXAMPLE_DATA: ServiceOrderTableItem[] = [
-  {boat: 'La Barca', date: todaysDate.toDateString(), repair: 'Fix it'},
-  {boat: 'Velero', date: todaysDate.toDateString(), repair: 'New rudder'},
-  {boat: 'Speedy', date: todaysDate.toDateString(), repair: 'Thru-hulls need work'},
-  {boat: 'Courageous', date: todaysDate.toDateString(), repair: 'Engine Maintenance'},
-  {boat: 'Bruja', date: todaysDate.toDateString(), repair: 'Gelcoat touch-up'},
-  {boat: 'Hexe', date: todaysDate.toDateString(), repair: 'Mainsail repair'},
-  {boat: 'Maggie', date: todaysDate.toDateString(), repair: 'Install Electronics'}
+  {id: 'SEA-001', boat: 'La Barca', date: todaysDate.toDateString(), repair: 'Fix it'},
+  {id: 'SEA-002', boat: 'Velero', date: todaysDate.toDateString(), repair: 'New rudder'},
+  {id: 'SEA-003', boat: 'Speedy', date: todaysDate.toDateString(), repair: 'Thru-hulls need work'},
+  {id: 'SEA-004', boat: 'Courageous', date: todaysDate.toDateString(), repair: 'Engine Maintenance'},
+  {id: 'SEA-005', boat: 'Bruja', date: todaysDate.toDateString(), repair: 'Gelcoat touch-up'},
+  {id: 'SEA-006', boat: 'Hexe', date: todaysDate.toDateString(), repair: 'Mainsail repair'},
+  {id: 'SEA-007', boat: 'Maggie', date: todaysDate.toDateString(), repair: 'Install Electronics'}
 ];
 
 /**

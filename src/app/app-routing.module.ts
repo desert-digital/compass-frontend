@@ -18,7 +18,7 @@ import { EditVesselComponent } from './components/edit-vessel/edit-vessel.compon
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
 import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
-import { HomeComponent } from './components/home/home.component';
+import { InventoryTableComponent } from './components/inventory-table/inventory-table.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -38,9 +38,6 @@ const routes: Routes = [
   {
     path: 'main', component: MainComponent,
     children: [{
-      path: 'home',
-      component: HomeComponent
-    }, {
       path: 'add-vessel',
       component: AddVesselComponent
     }, {
@@ -68,7 +65,7 @@ const routes: Routes = [
       path: 'owners',
       component: ManageOwnersComponent
     }, {
-      path: 'pending',
+      path: 'pending/:size',
       component: PendingTableComponent
     }, {
       path: 'checklist',
@@ -104,8 +101,11 @@ const routes: Routes = [
       path: 'manage-actions',
       component: ManageActionsComponent
     }, {
-      path: 'services',
+      path: 'services/:size',
       component: ServiceOrderTableComponent
+    }, {
+      path: 'inventory/:size',
+      component: InventoryTableComponent
     }, {
       path: 'top',
       component: TopComponent
