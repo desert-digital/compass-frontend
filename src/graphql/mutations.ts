@@ -226,6 +226,7 @@ export const createServiceOrder = /* GraphQL */ `mutation CreateServiceOrder(
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -255,6 +256,7 @@ export const updateServiceOrder = /* GraphQL */ `mutation UpdateServiceOrder(
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -284,6 +286,7 @@ export const deleteServiceOrder = /* GraphQL */ `mutation DeleteServiceOrder(
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -1046,6 +1049,57 @@ export const deleteWorkflow = /* GraphQL */ `mutation DeleteWorkflow(
 ` as GeneratedMutation<
   APITypes.DeleteWorkflowMutationVariables,
   APITypes.DeleteWorkflowMutation
+>;
+export const createAppFlag = /* GraphQL */ `mutation CreateAppFlag(
+  $input: CreateAppFlagInput!
+  $condition: ModelAppFlagConditionInput
+) {
+  createAppFlag(input: $input, condition: $condition) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateAppFlagMutationVariables,
+  APITypes.CreateAppFlagMutation
+>;
+export const updateAppFlag = /* GraphQL */ `mutation UpdateAppFlag(
+  $input: UpdateAppFlagInput!
+  $condition: ModelAppFlagConditionInput
+) {
+  updateAppFlag(input: $input, condition: $condition) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateAppFlagMutationVariables,
+  APITypes.UpdateAppFlagMutation
+>;
+export const deleteAppFlag = /* GraphQL */ `mutation DeleteAppFlag(
+  $input: DeleteAppFlagInput!
+  $condition: ModelAppFlagConditionInput
+) {
+  deleteAppFlag(input: $input, condition: $condition) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteAppFlagMutationVariables,
+  APITypes.DeleteAppFlagMutation
 >;
 export const createChecklistActions = /* GraphQL */ `mutation CreateChecklistActions(
   $input: CreateChecklistActionsInput!

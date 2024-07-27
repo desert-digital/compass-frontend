@@ -155,6 +155,7 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -174,6 +175,7 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
       items
       createdAt
       updatedAt
+      serviceOrderBoatId
       __typename
     }
     nextToken
@@ -644,6 +646,42 @@ export const listWorkflows = /* GraphQL */ `query ListWorkflows(
 ` as GeneratedQuery<
   APITypes.ListWorkflowsQueryVariables,
   APITypes.ListWorkflowsQuery
+>;
+export const getAppFlag = /* GraphQL */ `query GetAppFlag($id: ID!) {
+  getAppFlag(id: $id) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetAppFlagQueryVariables,
+  APITypes.GetAppFlagQuery
+>;
+export const listAppFlags = /* GraphQL */ `query ListAppFlags(
+  $filter: ModelAppFlagFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAppFlags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      flag
+      value
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListAppFlagsQueryVariables,
+  APITypes.ListAppFlagsQuery
 >;
 export const getChecklistActions = /* GraphQL */ `query GetChecklistActions($id: ID!) {
   getChecklistActions(id: $id) {

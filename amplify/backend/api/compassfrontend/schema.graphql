@@ -31,7 +31,7 @@ type PendingEvent @model @auth(rules: [{ allow: private }]){
 type ServiceOrder @model @auth(rules: [{ allow: private}]){
   id: ID!
   company: String
-  boat: Vessel
+  boat: Vessel @hasOne
   items: [String]
 }
 
@@ -131,6 +131,12 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   mustEnd: String 
   actualStart: String
   actualEnd: String 
+}
+
+type AppFlag @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  flag: String!
+  value: String!
 }
 
 type Mutation {

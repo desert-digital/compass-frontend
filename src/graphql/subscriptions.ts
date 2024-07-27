@@ -209,6 +209,7 @@ export const onCreateServiceOrder = /* GraphQL */ `subscription OnCreateServiceO
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -237,6 +238,7 @@ export const onUpdateServiceOrder = /* GraphQL */ `subscription OnUpdateServiceO
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -265,6 +267,7 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
     items
     createdAt
     updatedAt
+    serviceOrderBoatId
     __typename
   }
 }
@@ -961,6 +964,48 @@ export const onDeleteWorkflow = /* GraphQL */ `subscription OnDeleteWorkflow($fi
 ` as GeneratedSubscription<
   APITypes.OnDeleteWorkflowSubscriptionVariables,
   APITypes.OnDeleteWorkflowSubscription
+>;
+export const onCreateAppFlag = /* GraphQL */ `subscription OnCreateAppFlag($filter: ModelSubscriptionAppFlagFilterInput) {
+  onCreateAppFlag(filter: $filter) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateAppFlagSubscriptionVariables,
+  APITypes.OnCreateAppFlagSubscription
+>;
+export const onUpdateAppFlag = /* GraphQL */ `subscription OnUpdateAppFlag($filter: ModelSubscriptionAppFlagFilterInput) {
+  onUpdateAppFlag(filter: $filter) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateAppFlagSubscriptionVariables,
+  APITypes.OnUpdateAppFlagSubscription
+>;
+export const onDeleteAppFlag = /* GraphQL */ `subscription OnDeleteAppFlag($filter: ModelSubscriptionAppFlagFilterInput) {
+  onDeleteAppFlag(filter: $filter) {
+    id
+    flag
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteAppFlagSubscriptionVariables,
+  APITypes.OnDeleteAppFlagSubscription
 >;
 export const onCreateChecklistActions = /* GraphQL */ `subscription OnCreateChecklistActions(
   $filter: ModelSubscriptionChecklistActionsFilterInput

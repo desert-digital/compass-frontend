@@ -206,6 +206,7 @@ export type CreateServiceOrderInput = {
   id?: string | null,
   company?: string | null,
   items?: Array< string | null > | null,
+  serviceOrderBoatId?: string | null,
 };
 
 export type ModelServiceOrderConditionInput = {
@@ -216,6 +217,7 @@ export type ModelServiceOrderConditionInput = {
   not?: ModelServiceOrderConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+  serviceOrderBoatId?: ModelIDInput | null,
 };
 
 export type ServiceOrder = {
@@ -226,6 +228,7 @@ export type ServiceOrder = {
   items?: Array< string | null > | null,
   createdAt: string,
   updatedAt: string,
+  serviceOrderBoatId?: string | null,
 };
 
 export type Vessel = {
@@ -318,6 +321,7 @@ export type UpdateServiceOrderInput = {
   id: string,
   company?: string | null,
   items?: Array< string | null > | null,
+  serviceOrderBoatId?: string | null,
 };
 
 export type DeleteServiceOrderInput = {
@@ -804,6 +808,41 @@ export type DeleteWorkflowInput = {
   id: string,
 };
 
+export type CreateAppFlagInput = {
+  id?: string | null,
+  flag: string,
+  value: string,
+};
+
+export type ModelAppFlagConditionInput = {
+  flag?: ModelStringInput | null,
+  value?: ModelStringInput | null,
+  and?: Array< ModelAppFlagConditionInput | null > | null,
+  or?: Array< ModelAppFlagConditionInput | null > | null,
+  not?: ModelAppFlagConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type AppFlag = {
+  __typename: "AppFlag",
+  id: string,
+  flag: string,
+  value: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateAppFlagInput = {
+  id: string,
+  flag?: string | null,
+  value?: string | null,
+};
+
+export type DeleteAppFlagInput = {
+  id: string,
+};
+
 export type CreateChecklistActionsInput = {
   id?: string | null,
   actionModelId: string,
@@ -918,6 +957,7 @@ export type ModelServiceOrderFilterInput = {
   and?: Array< ModelServiceOrderFilterInput | null > | null,
   or?: Array< ModelServiceOrderFilterInput | null > | null,
   not?: ModelServiceOrderFilterInput | null,
+  serviceOrderBoatId?: ModelIDInput | null,
 };
 
 export type ModelServiceOrderConnection = {
@@ -1112,6 +1152,23 @@ export type ModelWorkflowConnection = {
   nextToken?: string | null,
 };
 
+export type ModelAppFlagFilterInput = {
+  id?: ModelIDInput | null,
+  flag?: ModelStringInput | null,
+  value?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelAppFlagFilterInput | null > | null,
+  or?: Array< ModelAppFlagFilterInput | null > | null,
+  not?: ModelAppFlagFilterInput | null,
+};
+
+export type ModelAppFlagConnection = {
+  __typename: "ModelAppFlagConnection",
+  items:  Array<AppFlag | null >,
+  nextToken?: string | null,
+};
+
 export type ModelChecklistActionsFilterInput = {
   id?: ModelIDInput | null,
   actionModelId?: ModelIDInput | null,
@@ -1216,6 +1273,7 @@ export type ModelSubscriptionServiceOrderFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionServiceOrderFilterInput | null > | null,
   or?: Array< ModelSubscriptionServiceOrderFilterInput | null > | null,
+  serviceOrderBoatId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionInventoryItemFilterInput = {
@@ -1367,6 +1425,16 @@ export type ModelSubscriptionWorkflowFilterInput = {
   and?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   workflowStepsId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionAppFlagFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  flag?: ModelSubscriptionStringInput | null,
+  value?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionAppFlagFilterInput | null > | null,
+  or?: Array< ModelSubscriptionAppFlagFilterInput | null > | null,
 };
 
 export type ModelSubscriptionChecklistActionsFilterInput = {
@@ -1602,6 +1670,7 @@ export type CreateServiceOrderMutation = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -1630,6 +1699,7 @@ export type UpdateServiceOrderMutation = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -1658,6 +1728,7 @@ export type DeleteServiceOrderMutation = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -2387,6 +2458,54 @@ export type DeleteWorkflowMutation = {
   } | null,
 };
 
+export type CreateAppFlagMutationVariables = {
+  input: CreateAppFlagInput,
+  condition?: ModelAppFlagConditionInput | null,
+};
+
+export type CreateAppFlagMutation = {
+  createAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateAppFlagMutationVariables = {
+  input: UpdateAppFlagInput,
+  condition?: ModelAppFlagConditionInput | null,
+};
+
+export type UpdateAppFlagMutation = {
+  updateAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteAppFlagMutationVariables = {
+  input: DeleteAppFlagInput,
+  condition?: ModelAppFlagConditionInput | null,
+};
+
+export type DeleteAppFlagMutation = {
+  deleteAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateChecklistActionsMutationVariables = {
   input: CreateChecklistActionsInput,
   condition?: ModelChecklistActionsConditionInput | null,
@@ -2761,6 +2880,7 @@ export type GetServiceOrderQuery = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -2780,6 +2900,7 @@ export type ListServiceOrdersQuery = {
       items?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
+      serviceOrderBoatId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3261,6 +3382,42 @@ export type ListWorkflowsQuery = {
   } | null,
 };
 
+export type GetAppFlagQueryVariables = {
+  id: string,
+};
+
+export type GetAppFlagQuery = {
+  getAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListAppFlagsQueryVariables = {
+  filter?: ModelAppFlagFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAppFlagsQuery = {
+  listAppFlags?:  {
+    __typename: "ModelAppFlagConnection",
+    items:  Array< {
+      __typename: "AppFlag",
+      id: string,
+      flag: string,
+      value: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetChecklistActionsQueryVariables = {
   id: string,
 };
@@ -3662,6 +3819,7 @@ export type OnCreateServiceOrderSubscription = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -3689,6 +3847,7 @@ export type OnUpdateServiceOrderSubscription = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -3716,6 +3875,7 @@ export type OnDeleteServiceOrderSubscription = {
     items?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
+    serviceOrderBoatId?: string | null,
   } | null,
 };
 
@@ -4410,6 +4570,51 @@ export type OnDeleteWorkflowSubscription = {
     mustEnd?: string | null,
     actualStart?: string | null,
     actualEnd?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateAppFlagSubscriptionVariables = {
+  filter?: ModelSubscriptionAppFlagFilterInput | null,
+};
+
+export type OnCreateAppFlagSubscription = {
+  onCreateAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateAppFlagSubscriptionVariables = {
+  filter?: ModelSubscriptionAppFlagFilterInput | null,
+};
+
+export type OnUpdateAppFlagSubscription = {
+  onUpdateAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteAppFlagSubscriptionVariables = {
+  filter?: ModelSubscriptionAppFlagFilterInput | null,
+};
+
+export type OnDeleteAppFlagSubscription = {
+  onDeleteAppFlag?:  {
+    __typename: "AppFlag",
+    id: string,
+    flag: string,
+    value: string,
     createdAt: string,
     updatedAt: string,
   } | null,
