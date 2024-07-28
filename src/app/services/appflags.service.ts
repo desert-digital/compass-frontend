@@ -18,22 +18,18 @@ export class AppflagsService {
 
   client = generateClient();
 
+  private flags: AppFlag[] = [];
+
   constructor() { }
 
-  async getAppFlags(): Promise<AppFlag[]> {
+  async getAppFlags() {
     const flags = await this.client.graphql({
       query: listAppFlags,
     });
-    return flags.data.listAppFlags.items as AppFlag[];
+    this.flags = flags.data.listAppFlags.items;
   }
 
-  async getFlagValueByName(flagName: string): Promise<string> {
-    const flag = await this.client.graphql({
-      query: getAppFlag,
-      variables: {
-        id: flagName
-      }
-    });
-    return flag.data.getAppFlag.value as string;
+  getFlagValueByName(flagName: string): string {
+    return (this.flags.find((item) => item.flag = flagName)).value;
   }
 }
