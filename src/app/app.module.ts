@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -58,6 +59,7 @@ import { CharterChartComponent } from './components/charter-chart/charter-chart.
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { DeleteActionDialogComponent } from './components/delete-action-dialog/delete-action-dialog.component';
 import { DeleteChecklistDialogComponent } from './components/delete-checklist-dialog/delete-checklist-dialog.component';
+import { DemoComponent } from './components/demo/demo.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
@@ -105,6 +107,7 @@ import { TopComponent } from './components/top/top.component';
     ChecklistComponent,
     DeleteActionDialogComponent,
     DeleteChecklistDialogComponent,
+    DemoComponent,
     EditActionComponent,
     EditChecklistComponent,
     EditOwnerComponent,
@@ -150,6 +153,7 @@ import { TopComponent } from './components/top/top.component';
     MatChipsModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatExpansionModule,
     MatIconModule,

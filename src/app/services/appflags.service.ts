@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 // Amplify
 
-import { listAppFlags, getAppFlag } from '../../graphql/queries';
+import { listAppFlags } from '../../graphql/queries';
 import { generateClient } from '@aws-amplify/api';
 
 // Local

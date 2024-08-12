@@ -88,6 +88,10 @@ export class MainComponent {
     this._router.navigate(['main/inventory', 15]);
   }
 
+  onDemoPressed() {
+    this._router.navigate(['main/demo']);
+  }
+
   async onLogoutPressed() {
     try {
       await signOut();

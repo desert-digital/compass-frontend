@@ -1,10 +1,15 @@
 <div class="container">
-  <h3>Active Checklists</h3>
-  <mat-selection-list>
-    <mat-list-option *ngFor="let checklist of checklists" (click)="onItemChecked(checklist)">
-      <div>{{ checklist.name }}</div>
-      <div>{{ checklist.checklistOwnerId }}</div>
-    </mat-list-option>
-  </mat-selection-list>
-  <div class="completed" *ngIf="checklistCompleted"><b>Completed!</b></div>
+  <div *ngIf="checklists.length > 0; else noChecklists">
+    <h3>Active Checklists</h3>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let checklist of checklists" (click)="onItemChecked(checklist)">
+        <div>{{ checklist.name }}</div>
+        <div>{{ checklist.checklistOwnerId }}</div>
+      </mat-list-option>
+    </mat-selection-list>
+    <div class="completed" *ngIf="checklistCompleted"><b>Completed!</b></div>
+  </div>
+  <ng-template #noChecklists>
+    <h3>No Active Checklists Found</h3>
+  </ng-template>
 </div>

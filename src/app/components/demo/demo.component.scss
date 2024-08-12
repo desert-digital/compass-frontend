@@ -1,0 +1,28 @@
+@import 'src/compass-theme';
+
+button {
+    @include buttons;
+    width: 50%;
+}
+
+.container {
+    @include containers;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.file-upload {
+    @include text-fonts;
+    font-size: 20px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-progress {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

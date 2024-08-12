@@ -11,6 +11,7 @@ import { AddOwnerComponent } from './components/add-owner/add-owner.component';
 import { AddStaffComponent } from './components/add-staff/add-staff.component';
 import { AssignWorkflowComponent } from './components/assign-workflow/assign-workflow.component';
 import { ChecklistComponent } from './components/checklist/checklist.component';
+import { DemoComponent } from './components/demo/demo.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { EditChecklistComponent } from './components/edit-checklist/edit-checklist.component';
 import { EditOwnerComponent } from './components/edit-owner/edit-owner.component';
@@ -109,7 +110,11 @@ const routes: Routes = [
     }, {
       path: 'top',
       component: TopComponent
-    }],
+    },
+    {
+      path: 'demo',
+      component: DemoComponent
+  }],
   },
   {
     path: 'login',
