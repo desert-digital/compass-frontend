@@ -72,4 +72,31 @@ export class StaffService {
       }
     });
   }
+
+  async createDemoStaff() {
+    let _staff =
+      {
+        company: 'seaforth',
+        name: 'Demo Staff #1',
+        email: 'compass_demo_staff@gmail.com',
+        phone: '000000000000'
+      } as Staff;
+    this.createStaff(_staff);
+    _staff =
+      {
+        company: 'seaforth',
+        name: 'Demo Staff #2',
+        email: 'compass_demo_staff@gmail.com',
+        phone: '000000000000'
+      } as Staff;
+    this.createStaff(_staff);
+    _staff =
+    {
+      company: 'seaforth',
+      name: 'Demo Staff #3',
+      email: 'compass_demo_staff@gmail.com',
+      phone: '000000000000'
+    } as Staff;
+  this.createStaff(_staff);
+  }
 }

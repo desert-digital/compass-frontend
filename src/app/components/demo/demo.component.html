@@ -1,8 +1,28 @@
 <div class="grid-container">
     <mat-grid-list cols="2" rowHeight="200px">
-        <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoFleet()">Add Fleet</button></mat-grid-tile>
-        <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoStaff()"> Add Staff</button></mat-grid-tile>
-        <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoOwners()">Add Owners</button></mat-grid-tile>
-        <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoActions()">Add Actions</button></mat-grid-tile>
+        @if (vessels.length > 0) {
+        <mat-grid-tile><button disabled mat-flat-button color="primary" (click)="addDemoFleet()">Add Fleet</button></mat-grid-tile>
+        }
+        @else {
+            <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoFleet()">Add Fleet</button></mat-grid-tile>
+        }
+        @if (staff.length > 0) {
+            <mat-grid-tile><button disabled mat-flat-button color="primary" (click)="addDemoStaff()"> Add Staff</button></mat-grid-tile>
+        }
+        @else {
+            <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoStaff()"> Add Staff</button></mat-grid-tile>
+        }
+        @if (owners.length > 0) {
+            <mat-grid-tile><button disabled mat-flat-button color="primary" (click)="addDemoOwners()">Add Owners</button></mat-grid-tile>
+        }
+        @else {
+            <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoOwners()">Add Owners</button></mat-grid-tile>
+        }
+        @if (actions.length > 0) {
+            <mat-grid-tile><button disabled mat-flat-button color="primary" (click)="addDemoActions()">Add Actions</button></mat-grid-tile>
+        }
+        @else {
+            <mat-grid-tile><button mat-flat-button color="primary" (click)="addDemoActions()">Add Actions</button></mat-grid-tile>
+        }
     </mat-grid-list>
 </div>

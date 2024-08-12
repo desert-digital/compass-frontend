@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Action, Owner, Staff, Vessel } from 'src/API';
+import { ActionsService } from 'src/app/services/actions.service';
+import { FleetService } from 'src/app/services/fleet.service';
+import { OwnersService } from 'src/app/services/owners.service';
+import { StaffService } from 'src/app/services/staff.service';
 
 @Component({
   selector: 'app-demo',
@@ -7,19 +12,54 @@ import { Component } from '@angular/core';
 })
 export class DemoComponent {
 
+  vessels: Vessel[] = [];
+  owners: Owner[] = [];
+  staff: Staff[] = [];
+  actions: Action[] = [];
+
+  constructor(private _fleetService: FleetService,
+    private _staffService: StaffService,
+    private _ownersService: OwnersService,
+    private _actionsService: ActionsService
+  ) {}
+
+  async _getFleet() {
+    this.vessels = await this._fleetService.getVessels();
+  }
+
+  async _getStaff() {
+    this.staff = await this._staffService.getStaff();
+  }
+
+  async _getOwners() {
+    this.owners = await this._ownersService.getOwners();
+  }
+
+  async _getActions() {
+    this.actions = await this._actionsService.getActions();
+  }
+
+  async onNgInit() {
+    await this._getFleet();
+    await this._getStaff();
+    await this._getOwners();
+    await this._getActions();
+  }
+
   addDemoFleet() {
     alert("To Do: Add Demo Fleet");
   }
 
   addDemoStaff() {
-    alert("To Do: Add Demo Fleet");
+    this._staffService.createDemoStaff();
+    this._getStaff();
   }
 
   addDemoOwners() {
-    alert("To Do: Add Demo Fleet");
+    alert("To Do: Add Demo Owners");
   }
 
   addDemoActions() {
-    alert("To Do: Add Demo Fleet");
+    alert("To Do: Add Demo Actions");
   }
 }
