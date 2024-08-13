@@ -83,4 +83,31 @@ export class OwnersService {
       }
     })
   }
+
+  async createDemoOwners() {
+    let _owner =
+      {
+        company: 'seaforth',
+        name: 'Bob McGrath',
+        email: 'compass_demo_owner@gmail.com',
+        phone: '+1 (856) 867-5309'
+      } as Owner;
+    this.createOwner(_owner);
+    _owner =
+      {
+        company: 'seaforth',
+        name: 'Wendy Meer',
+        email: 'compass_demo_owner@gmail.com',
+        phone: '+1 (856) 865-5309'
+      } as Owner;
+    this.createOwner(_owner);
+    _owner =
+    {
+      company: 'seaforth',
+      name: 'Casey Smith',
+      email: 'compass_demo_owner@gmail.com',
+      phone: '+1 (856) 867-5311'
+    } as Owner;
+  this.createOwner(_owner);
+  }
 }

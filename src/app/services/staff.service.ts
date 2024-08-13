@@ -77,25 +77,25 @@ export class StaffService {
     let _staff =
       {
         company: 'seaforth',
-        name: 'Demo Staff #1',
+        name: 'Jenny Spain',
         email: 'compass_demo_staff@gmail.com',
-        phone: '000000000000'
+        phone: '+1 (856) 867-5309'
       } as Staff;
     this.createStaff(_staff);
     _staff =
       {
         company: 'seaforth',
-        name: 'Demo Staff #2',
+        name: 'Davey Jones',
         email: 'compass_demo_staff@gmail.com',
-        phone: '000000000000'
+        phone: '+1 (856) 555-1313',
       } as Staff;
     this.createStaff(_staff);
     _staff =
     {
       company: 'seaforth',
-      name: 'Demo Staff #3',
+      name: 'Paolo Jorge',
       email: 'compass_demo_staff@gmail.com',
-      phone: '000000000000'
+      phone: '+1 (856) 942-5311'
     } as Staff;
   this.createStaff(_staff);
   }
