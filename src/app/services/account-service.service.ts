@@ -16,9 +16,10 @@ export class AccountService {
   private applicationUserName = new BehaviorSubject<string>(null);
   private applicationGroup = new BehaviorSubject<string>(null);
 
-  currentState: string
-  currentUserName: string
-  currentGroup: string
+  currentState: string;
+  currentUserName: string;
+  currentGroup: string;
+  currentRoles: [string];
 
   constructor() { }
 

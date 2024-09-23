@@ -284,6 +284,8 @@ export const getStaff = /* GraphQL */ `query GetStaff($id: ID!) {
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -302,6 +304,8 @@ export const listStaff = /* GraphQL */ `query ListStaff(
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -545,6 +549,8 @@ export const getChecklist = /* GraphQL */ `query GetChecklist($id: ID!) {
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -647,6 +653,61 @@ export const listWorkflows = /* GraphQL */ `query ListWorkflows(
   APITypes.ListWorkflowsQueryVariables,
   APITypes.ListWorkflowsQuery
 >;
+export const getMessage = /* GraphQL */ `query GetMessage($id: ID!) {
+  getMessage(id: $id) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetMessageQueryVariables,
+  APITypes.GetMessageQuery
+>;
+export const listMessages = /* GraphQL */ `query ListMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      toAddress
+      fromAddress
+      message
+      createdAt
+      updatedAt
+      messageMessageChecklistId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListMessagesQueryVariables,
+  APITypes.ListMessagesQuery
+>;
 export const getAppFlag = /* GraphQL */ `query GetAppFlag($id: ID!) {
   getAppFlag(id: $id) {
     id
@@ -740,6 +801,66 @@ export const listChecklistActions = /* GraphQL */ `query ListChecklistActions(
   APITypes.ListChecklistActionsQueryVariables,
   APITypes.ListChecklistActionsQuery
 >;
+export const checklistActionsByActionModelId = /* GraphQL */ `query ChecklistActionsByActionModelId(
+  $actionModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelChecklistActionsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  checklistActionsByActionModelId(
+    actionModelId: $actionModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      actionModelId
+      checklistModelId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ChecklistActionsByActionModelIdQueryVariables,
+  APITypes.ChecklistActionsByActionModelIdQuery
+>;
+export const checklistActionsByChecklistModelId = /* GraphQL */ `query ChecklistActionsByChecklistModelId(
+  $checklistModelId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelChecklistActionsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  checklistActionsByChecklistModelId(
+    checklistModelId: $checklistModelId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      actionModelId
+      checklistModelId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ChecklistActionsByChecklistModelIdQueryVariables,
+  APITypes.ChecklistActionsByChecklistModelIdQuery
+>;
 export const getWorkflowChecklists = /* GraphQL */ `query GetWorkflowChecklists($id: ID!) {
   getWorkflowChecklists(id: $id) {
     id
@@ -800,66 +921,6 @@ export const listWorkflowChecklists = /* GraphQL */ `query ListWorkflowChecklist
 ` as GeneratedQuery<
   APITypes.ListWorkflowChecklistsQueryVariables,
   APITypes.ListWorkflowChecklistsQuery
->;
-export const checklistActionsByActionModelId = /* GraphQL */ `query ChecklistActionsByActionModelId(
-  $actionModelId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelChecklistActionsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  checklistActionsByActionModelId(
-    actionModelId: $actionModelId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      actionModelId
-      checklistModelId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ChecklistActionsByActionModelIdQueryVariables,
-  APITypes.ChecklistActionsByActionModelIdQuery
->;
-export const checklistActionsByChecklistModelId = /* GraphQL */ `query ChecklistActionsByChecklistModelId(
-  $checklistModelId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelChecklistActionsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  checklistActionsByChecklistModelId(
-    checklistModelId: $checklistModelId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      actionModelId
-      checklistModelId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ChecklistActionsByChecklistModelIdQueryVariables,
-  APITypes.ChecklistActionsByChecklistModelIdQuery
 >;
 export const workflowChecklistsByChecklistModelId = /* GraphQL */ `query WorkflowChecklistsByChecklistModelId(
   $checklistModelId: ID!

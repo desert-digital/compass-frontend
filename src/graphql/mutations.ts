@@ -454,6 +454,8 @@ export const createStaff = /* GraphQL */ `mutation CreateStaff(
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -473,6 +475,8 @@ export const updateStaff = /* GraphQL */ `mutation UpdateStaff(
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -492,6 +496,8 @@ export const deleteStaff = /* GraphQL */ `mutation DeleteStaff(
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -873,6 +879,8 @@ export const createChecklist = /* GraphQL */ `mutation CreateChecklist(
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -911,6 +919,8 @@ export const updateChecklist = /* GraphQL */ `mutation UpdateChecklist(
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -949,6 +959,8 @@ export const deleteChecklist = /* GraphQL */ `mutation DeleteChecklist(
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -1049,6 +1061,108 @@ export const deleteWorkflow = /* GraphQL */ `mutation DeleteWorkflow(
 ` as GeneratedMutation<
   APITypes.DeleteWorkflowMutationVariables,
   APITypes.DeleteWorkflowMutation
+>;
+export const createMessage = /* GraphQL */ `mutation CreateMessage(
+  $input: CreateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  createMessage(input: $input, condition: $condition) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateMessageMutationVariables,
+  APITypes.CreateMessageMutation
+>;
+export const updateMessage = /* GraphQL */ `mutation UpdateMessage(
+  $input: UpdateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  updateMessage(input: $input, condition: $condition) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateMessageMutationVariables,
+  APITypes.UpdateMessageMutation
+>;
+export const deleteMessage = /* GraphQL */ `mutation DeleteMessage(
+  $input: DeleteMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  deleteMessage(input: $input, condition: $condition) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteMessageMutationVariables,
+  APITypes.DeleteMessageMutation
 >;
 export const createAppFlag = /* GraphQL */ `mutation CreateAppFlag(
   $input: CreateAppFlagInput!

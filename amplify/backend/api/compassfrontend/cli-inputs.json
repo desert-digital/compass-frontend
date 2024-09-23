@@ -4,16 +4,15 @@
     "apiName": "compassfrontend",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authcompassfrontend4a0940c4"
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2025-09-19T19:32:38.239Z",
+      "keyDescription": "compass API key"
     },
-    "conflictResolution": {},
     "additionalAuthTypes": [
       {
-        "mode": "API_KEY",
-        "expirationTime": 365,
-        "apiKeyExpirationDate": "2025-04-30T23:14:52.462Z",
-        "keyDescription": "compass-dev-key"
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authcompassfrontendd1f3f1a9"
       }
     ]
   }

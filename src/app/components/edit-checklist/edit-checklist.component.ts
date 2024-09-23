@@ -60,8 +60,8 @@ export class EditChecklistComponent {
     this.actions = await this._actionModelsService.getActionModels();
   }
 
-  onCancelEdit() {
-    this.router.navigate(['main/checklists']);
+  onCancelPressed() {
+    this.router.navigate(['main/manage-checklists']);
   }
 
   drop(e: CdkDragDrop<ActionModel[]>) {

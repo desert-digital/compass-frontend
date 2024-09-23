@@ -72,6 +72,8 @@ export class ChecklistModelsService {
         }
       });
     }
+    const updatedChecklist = await this.getChecklistModelFromId(checklist.id);
+    console.log(updatedChecklist.actionModels);
   }
 
   async updateChecklistModel(checklistModel: ChecklistModel, actions: ActionModel[]) {

@@ -87,6 +87,6 @@ export class AddChecklistComponent {
   }
 
   onCancelPressed() {
-    this.router.navigate(['main/checklists']);
+    this.router.navigate(['main/manage-checklists']);
   }
 }

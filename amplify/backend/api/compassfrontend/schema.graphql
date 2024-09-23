@@ -58,6 +58,8 @@ type Staff @model @auth(rules: [{ allow: private }]){
   name: String
   email: String
   phone: String
+  username: String
+  roles: [String]
 }
 
 type Owner @model @auth(rules: [{ allow: private }]){
@@ -131,6 +133,14 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   mustEnd: String 
   actualStart: String
   actualEnd: String 
+}
+
+type Message @model @auth(rules: [{ allow: private }]){
+  id: ID!
+  toAddress: String! 
+  fromAddress: String! 
+  message: String!
+  messageChecklist: Checklist @hasOne
 }
 
 type AppFlag @model @auth(rules: [{ allow: private }]){

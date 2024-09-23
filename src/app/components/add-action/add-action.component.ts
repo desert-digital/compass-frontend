@@ -54,7 +54,7 @@ export class AddActionComponent {
   }
 
   onCancelPressed() {
-    this.router.navigate(['main/actions']);
+    this.router.navigate(['main/manage-actions']);
   }
 }
 

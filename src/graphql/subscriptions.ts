@@ -420,6 +420,8 @@ export const onCreateStaff = /* GraphQL */ `subscription OnCreateStaff($filter: 
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -436,6 +438,8 @@ export const onUpdateStaff = /* GraphQL */ `subscription OnUpdateStaff($filter: 
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -452,6 +456,8 @@ export const onDeleteStaff = /* GraphQL */ `subscription OnDeleteStaff($filter: 
     name
     email
     phone
+    username
+    roles
     createdAt
     updatedAt
     __typename
@@ -803,6 +809,8 @@ export const onCreateChecklist = /* GraphQL */ `subscription OnCreateChecklist($
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -838,6 +846,8 @@ export const onUpdateChecklist = /* GraphQL */ `subscription OnUpdateChecklist($
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -873,6 +883,8 @@ export const onDeleteChecklist = /* GraphQL */ `subscription OnDeleteChecklist($
       name
       email
       phone
+      username
+      roles
       createdAt
       updatedAt
       __typename
@@ -964,6 +976,99 @@ export const onDeleteWorkflow = /* GraphQL */ `subscription OnDeleteWorkflow($fi
 ` as GeneratedSubscription<
   APITypes.OnDeleteWorkflowSubscriptionVariables,
   APITypes.OnDeleteWorkflowSubscription
+>;
+export const onCreateMessage = /* GraphQL */ `subscription OnCreateMessage($filter: ModelSubscriptionMessageFilterInput) {
+  onCreateMessage(filter: $filter) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateMessageSubscriptionVariables,
+  APITypes.OnCreateMessageSubscription
+>;
+export const onUpdateMessage = /* GraphQL */ `subscription OnUpdateMessage($filter: ModelSubscriptionMessageFilterInput) {
+  onUpdateMessage(filter: $filter) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateMessageSubscriptionVariables,
+  APITypes.OnUpdateMessageSubscription
+>;
+export const onDeleteMessage = /* GraphQL */ `subscription OnDeleteMessage($filter: ModelSubscriptionMessageFilterInput) {
+  onDeleteMessage(filter: $filter) {
+    id
+    toAddress
+    fromAddress
+    message
+    messageChecklist {
+      id
+      company
+      name
+      duration
+      mustStart
+      mustEnd
+      actualStart
+      actualEnd
+      createdAt
+      updatedAt
+      workflowStepsId
+      checklistOwnerId
+      __typename
+    }
+    createdAt
+    updatedAt
+    messageMessageChecklistId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteMessageSubscriptionVariables,
+  APITypes.OnDeleteMessageSubscription
 >;
 export const onCreateAppFlag = /* GraphQL */ `subscription OnCreateAppFlag($filter: ModelSubscriptionAppFlagFilterInput) {
   onCreateAppFlag(filter: $filter) {

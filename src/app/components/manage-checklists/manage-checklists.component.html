@@ -1,7 +1,7 @@
 <div class="container">
     <button mat-flat-button color="primary" (click)="onAddNewChecklistPressed()">Add a New Checklist</button>
     <div *ngIf="checklists.length > 0; else noChecklists">
-        <h3>Avilable Checklists</h3>
+        <h3>Availlable Checklists</h3>
         <mat-list role="list">
             <cdk-virtual-scroll-viewport [itemSize]="100" class="action-list-viewport">
                 <div *cdkVirtualFor="let checklist of checklists" class="spread">

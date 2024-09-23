@@ -1,95 +1,103 @@
 <div class="form-container">
-    <div *ngIf="state === 'normal'">
-      <form tabindex="0" action="#" #loginForm="ngForm" (keyup.enter)="onLogin()">
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>User ID</mat-label>
-            <input matInput tabindex="1" type="text" required name="userName" [(ngModel)]="userName" #name="ngModel"
-              autocomplete="off">
-            <button mat-icon-button tabindex="5" matSuffix>
-              <mat-icon class="material-icons-outlined" matSuffix>perm_identity</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput tabindex="1" [type]="hidePassword ? 'password' : 'text'" required name="password"
-              [(ngModel)]="password" #name="ngModel" autocomplete="off">
-            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="2">
-              <mat-icon class="material-icons-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div>
-          <button id="login" class="login-button" [disabled]="!loginForm.form.valid" mat-raised-button color="accent"
-            (click)="onLogin()" tabindex="2">Login</button>
-        </div>
-        <div>
-          <button id="password" mat-button color="accent" (click)="onForgotPassword()" tabindex="1">Need to Update your
-            Password?</button>
-        </div>
-        <div>
-        </div>
-      </form>
-    </div>
-    <div *ngIf="state === 'passwordLost'">
-      <form action="#" #getCodeForm="ngForm">
+  <div *ngIf="state === 'normal'">
+    <form tabindex="0" action="#" #loginForm="ngForm" (keyup.enter)="onLogin()">
+      <div>
         <mat-form-field appearance="fill">
           <mat-label>User ID</mat-label>
-          <input matInput type="text" required name="userName" [(ngModel)]="userName" #name="ngModel">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Code</mat-label>
-          <input matInput type="text" disabled name="code" [(ngModel)]="recoveryCode" #name="ngModel">
-          <button mat-icon-button matSuffix tabindex="2">
-            <mat-icon class="material-icons-outlined">vpn_key</mat-icon>
+          <input matInput tabindex="1" type="text" required name="userName" [(ngModel)]="userName" #name="ngModel"
+            autocomplete="off">
+          <button mat-icon-button tabindex="5" matSuffix>
+            <mat-icon class="material-icons-outlined" matSuffix>perm_identity</mat-icon>
           </button>
         </mat-form-field>
+      </div>
+      <div>
         <mat-form-field appearance="fill">
-          <mat-label>New Password</mat-label>
-          <input matInput tabindex="1" disabled type="text" name="password" [(ngModel)]="password" #name="ngModel">
-          <button mat-icon-button matSuffix tabindex="2">
-            <mat-icon class="material-icons-outlined">visibility</mat-icon>
-          </button>
-        </mat-form-field>
-        <div>
-          <button class="login-button" [disabled]="!getCodeForm.form.valid" mat-raised-button color="accent"
-            (click)="onRequestCode()">Request Code</button>
-        </div>
-        <div>
-          <button mat-button (click)="onCancelForgotPassword()" tabindex="1">Back to Login</button>
-        </div>
-      </form>
-    </div>
-    <div *ngIf="state === 'codeSent'">
-      <form action="#" #sendCodeForm="ngForm">
-        <mat-form-field appearance="fill">
-          <mat-label>User ID</mat-label>
-          <input matInput type="text" disabled name="userName" [(ngModel)]="userName" #name="ngModel">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Code</mat-label>
-          <input matInput type="text" required name="code" [(ngModel)]="recoveryCode" #name="ngModel">
-          <button mat-icon-button matSuffix tabindex="2">
-            <mat-icon class="material-icons-outlined">vpn_key</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>New Password</mat-label>
+          <mat-label>Password</mat-label>
           <input matInput tabindex="1" [type]="hidePassword ? 'password' : 'text'" required name="password"
-            [(ngModel)]="password" #name="ngModel">
+            [(ngModel)]="password" #name="ngModel" autocomplete="off">
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="2">
             <mat-icon class="material-icons-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <div>
-          <button class="login-button" [disabled]="!sendCodeForm.form.valid" mat-raised-button color="accent"
-            (click)="onSendCode()">Submit Code and New Password</button>
+        <div><mat-form-field>
+            <mat-label>Company</mat-label>
+            <mat-select>
+              <mat-option [value]="seaforth">Acme</mat-option>
+              <mat-option [value]="seaforth">Seaforth</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div>
-          <button mat-button (click)="onCancelForgotPassword()" tabindex="1">Back to Login</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div>
+        <button id="login" class="login-button" [disabled]="!loginForm.form.valid" mat-raised-button color="accent"
+          (click)="onLogin()" tabindex="2">Login</button>
+      </div>
+      <div>
+        <button id="password" mat-button color="accent" (click)="onForgotPassword()" tabindex="1">Need to Update your
+          Password?</button>
+      </div>
+      <div>
+      </div>
+    </form>
   </div>
+  <div *ngIf="state === 'passwordLost'">
+    <form action="#" #getCodeForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>User ID</mat-label>
+        <input matInput type="text" required name="userName" [(ngModel)]="userName" #name="ngModel">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Code</mat-label>
+        <input matInput type="text" disabled name="code" [(ngModel)]="recoveryCode" #name="ngModel">
+        <button mat-icon-button matSuffix tabindex="2">
+          <mat-icon class="material-icons-outlined">vpn_key</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>New Password</mat-label>
+        <input matInput tabindex="1" disabled type="text" name="password" [(ngModel)]="password" #name="ngModel">
+        <button mat-icon-button matSuffix tabindex="2">
+          <mat-icon class="material-icons-outlined">visibility</mat-icon>
+        </button>
+      </mat-form-field>
+      <div>
+        <button class="login-button" [disabled]="!getCodeForm.form.valid" mat-raised-button color="accent"
+          (click)="onRequestCode()">Request Code</button>
+      </div>
+      <div>
+        <button mat-button (click)="onCancelForgotPassword()" tabindex="1">Back to Login</button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="state === 'codeSent'">
+    <form action="#" #sendCodeForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>User ID</mat-label>
+        <input matInput type="text" disabled name="userName" [(ngModel)]="userName" #name="ngModel">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Code</mat-label>
+        <input matInput type="text" required name="code" [(ngModel)]="recoveryCode" #name="ngModel">
+        <button mat-icon-button matSuffix tabindex="2">
+          <mat-icon class="material-icons-outlined">vpn_key</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>New Password</mat-label>
+        <input matInput tabindex="1" [type]="hidePassword ? 'password' : 'text'" required name="password"
+          [(ngModel)]="password" #name="ngModel">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="2">
+          <mat-icon class="material-icons-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <div>
+        <button class="login-button" [disabled]="!sendCodeForm.form.valid" mat-raised-button color="accent"
+          (click)="onSendCode()">Submit Code and New Password</button>
+      </div>
+      <div>
+        <button mat-button (click)="onCancelForgotPassword()" tabindex="1">Back to Login</button>
+      </div>
+    </form>
+  </div>
+</div>

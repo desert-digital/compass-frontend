@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "compassfrontend4a0940c4_identitypool_4a0940c4",
+    "identityPoolName": "compassfrontendd1f3f1a9_identitypool_d1f3f1a9",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "compas4a0940c4",
-    "userPoolName": "compassfrontend4a0940c4_userpool_4a0940c4",
+    "resourceNameTruncated": "compasd1f3f1a9",
+    "userPoolName": "compassfrontendd1f3f1a9_userpool_d1f3f1a9",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,15 +31,37 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "compas4a0940c4_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "compasd1f3f1a9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "4a0940c4",
-    "resourceName": "compassfrontend4a0940c4",
+    "sharedId": "d1f3f1a9",
+    "resourceName": "compassfrontendd1f3f1a9",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
-    "userPoolGroupList": [],
+    "triggers": {},
+    "userPoolGroupList": [
+      "admin",
+      "acme"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": []
   }
 }

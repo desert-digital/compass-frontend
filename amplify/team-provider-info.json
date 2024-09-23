@@ -19,7 +19,8 @@
         }
       },
       "auth": {
-        "compassfrontend4a0940c4": {}
+        "compassfrontendd1f3f1a9": {},
+        "userPoolGroups": {}
       },
       "api": {
         "compassfrontend": {}

@@ -427,6 +427,8 @@ export type CreateStaffInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  username?: string | null,
+  roles?: Array< string | null > | null,
 };
 
 export type ModelStaffConditionInput = {
@@ -434,6 +436,8 @@ export type ModelStaffConditionInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  roles?: ModelStringInput | null,
   and?: Array< ModelStaffConditionInput | null > | null,
   or?: Array< ModelStaffConditionInput | null > | null,
   not?: ModelStaffConditionInput | null,
@@ -448,6 +452,8 @@ export type Staff = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  username?: string | null,
+  roles?: Array< string | null > | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -458,6 +464,8 @@ export type UpdateStaffInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  username?: string | null,
+  roles?: Array< string | null > | null,
 };
 
 export type DeleteStaffInput = {
@@ -808,6 +816,50 @@ export type DeleteWorkflowInput = {
   id: string,
 };
 
+export type CreateMessageInput = {
+  id?: string | null,
+  toAddress: string,
+  fromAddress: string,
+  message: string,
+  messageMessageChecklistId?: string | null,
+};
+
+export type ModelMessageConditionInput = {
+  toAddress?: ModelStringInput | null,
+  fromAddress?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  and?: Array< ModelMessageConditionInput | null > | null,
+  or?: Array< ModelMessageConditionInput | null > | null,
+  not?: ModelMessageConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  messageMessageChecklistId?: ModelIDInput | null,
+};
+
+export type Message = {
+  __typename: "Message",
+  id: string,
+  toAddress: string,
+  fromAddress: string,
+  message: string,
+  messageChecklist?: Checklist | null,
+  createdAt: string,
+  updatedAt: string,
+  messageMessageChecklistId?: string | null,
+};
+
+export type UpdateMessageInput = {
+  id: string,
+  toAddress?: string | null,
+  fromAddress?: string | null,
+  message?: string | null,
+  messageMessageChecklistId?: string | null,
+};
+
+export type DeleteMessageInput = {
+  id: string,
+};
+
 export type CreateAppFlagInput = {
   id?: string | null,
   flag: string,
@@ -1006,6 +1058,8 @@ export type ModelStaffFilterInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  roles?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelStaffFilterInput | null > | null,
@@ -1152,6 +1206,25 @@ export type ModelWorkflowConnection = {
   nextToken?: string | null,
 };
 
+export type ModelMessageFilterInput = {
+  id?: ModelIDInput | null,
+  toAddress?: ModelStringInput | null,
+  fromAddress?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelMessageFilterInput | null > | null,
+  or?: Array< ModelMessageFilterInput | null > | null,
+  not?: ModelMessageFilterInput | null,
+  messageMessageChecklistId?: ModelIDInput | null,
+};
+
+export type ModelMessageConnection = {
+  __typename: "ModelMessageConnection",
+  items:  Array<Message | null >,
+  nextToken?: string | null,
+};
+
 export type ModelAppFlagFilterInput = {
   id?: ModelIDInput | null,
   flag?: ModelStringInput | null,
@@ -1180,6 +1253,12 @@ export type ModelChecklistActionsFilterInput = {
   not?: ModelChecklistActionsFilterInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelWorkflowChecklistsFilterInput = {
   id?: ModelIDInput | null,
   checklistModelId?: ModelIDInput | null,
@@ -1190,12 +1269,6 @@ export type ModelWorkflowChecklistsFilterInput = {
   or?: Array< ModelWorkflowChecklistsFilterInput | null > | null,
   not?: ModelWorkflowChecklistsFilterInput | null,
 };
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelSubscriptionCompassUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -1319,6 +1392,8 @@ export type ModelSubscriptionStaffFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
+  username?: ModelSubscriptionStringInput | null,
+  roles?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionStaffFilterInput | null > | null,
@@ -1425,6 +1500,18 @@ export type ModelSubscriptionWorkflowFilterInput = {
   and?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   or?: Array< ModelSubscriptionWorkflowFilterInput | null > | null,
   workflowStepsId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionMessageFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  toAddress?: ModelSubscriptionStringInput | null,
+  fromAddress?: ModelSubscriptionStringInput | null,
+  message?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionMessageFilterInput | null > | null,
+  or?: Array< ModelSubscriptionMessageFilterInput | null > | null,
+  messageMessageChecklistId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionAppFlagFilterInput = {
@@ -1889,6 +1976,8 @@ export type CreateStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1907,6 +1996,8 @@ export type UpdateStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1925,6 +2016,8 @@ export type DeleteStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2291,6 +2384,8 @@ export type CreateChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2328,6 +2423,8 @@ export type UpdateChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2365,6 +2462,8 @@ export type DeleteChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2455,6 +2554,105 @@ export type DeleteWorkflowMutation = {
     actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type CreateMessageMutationVariables = {
+  input: CreateMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type CreateMessageMutation = {
+  createMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
+  } | null,
+};
+
+export type UpdateMessageMutationVariables = {
+  input: UpdateMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type UpdateMessageMutation = {
+  updateMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
+  } | null,
+};
+
+export type DeleteMessageMutationVariables = {
+  input: DeleteMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type DeleteMessageMutation = {
+  deleteMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
   } | null,
 };
 
@@ -3012,6 +3210,8 @@ export type GetStaffQuery = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3033,6 +3233,8 @@ export type ListStaffQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3286,6 +3488,8 @@ export type GetChecklistQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3377,6 +3581,61 @@ export type ListWorkflowsQuery = {
       actualEnd?: string | null,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetMessageQueryVariables = {
+  id: string,
+};
+
+export type GetMessageQuery = {
+  getMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
+  } | null,
+};
+
+export type ListMessagesQueryVariables = {
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMessagesQuery = {
+  listMessages?:  {
+    __typename: "ModelMessageConnection",
+    items:  Array< {
+      __typename: "Message",
+      id: string,
+      toAddress: string,
+      fromAddress: string,
+      message: string,
+      createdAt: string,
+      updatedAt: string,
+      messageMessageChecklistId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3475,6 +3734,52 @@ export type ListChecklistActionsQuery = {
   } | null,
 };
 
+export type ChecklistActionsByActionModelIdQueryVariables = {
+  actionModelId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelChecklistActionsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ChecklistActionsByActionModelIdQuery = {
+  checklistActionsByActionModelId?:  {
+    __typename: "ModelChecklistActionsConnection",
+    items:  Array< {
+      __typename: "ChecklistActions",
+      id: string,
+      actionModelId: string,
+      checklistModelId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ChecklistActionsByChecklistModelIdQueryVariables = {
+  checklistModelId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelChecklistActionsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ChecklistActionsByChecklistModelIdQuery = {
+  checklistActionsByChecklistModelId?:  {
+    __typename: "ModelChecklistActionsConnection",
+    items:  Array< {
+      __typename: "ChecklistActions",
+      id: string,
+      actionModelId: string,
+      checklistModelId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetWorkflowChecklistsQueryVariables = {
   id: string,
 };
@@ -3525,52 +3830,6 @@ export type ListWorkflowChecklistsQuery = {
       id: string,
       checklistModelId: string,
       workflowModelId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ChecklistActionsByActionModelIdQueryVariables = {
-  actionModelId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelChecklistActionsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ChecklistActionsByActionModelIdQuery = {
-  checklistActionsByActionModelId?:  {
-    __typename: "ModelChecklistActionsConnection",
-    items:  Array< {
-      __typename: "ChecklistActions",
-      id: string,
-      actionModelId: string,
-      checklistModelId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ChecklistActionsByChecklistModelIdQueryVariables = {
-  checklistModelId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelChecklistActionsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ChecklistActionsByChecklistModelIdQuery = {
-  checklistActionsByChecklistModelId?:  {
-    __typename: "ModelChecklistActionsConnection",
-    items:  Array< {
-      __typename: "ChecklistActions",
-      id: string,
-      actionModelId: string,
-      checklistModelId: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -4029,6 +4288,8 @@ export type OnCreateStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4046,6 +4307,8 @@ export type OnUpdateStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4063,6 +4326,8 @@ export type OnDeleteStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    username?: string | null,
+    roles?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4413,6 +4678,8 @@ export type OnCreateChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4449,6 +4716,8 @@ export type OnUpdateChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4485,6 +4754,8 @@ export type OnDeleteChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      username?: string | null,
+      roles?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4572,6 +4843,102 @@ export type OnDeleteWorkflowSubscription = {
     actualEnd?: string | null,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateMessageSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageFilterInput | null,
+};
+
+export type OnCreateMessageSubscription = {
+  onCreateMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
+  } | null,
+};
+
+export type OnUpdateMessageSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageFilterInput | null,
+};
+
+export type OnUpdateMessageSubscription = {
+  onUpdateMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
+  } | null,
+};
+
+export type OnDeleteMessageSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageFilterInput | null,
+};
+
+export type OnDeleteMessageSubscription = {
+  onDeleteMessage?:  {
+    __typename: "Message",
+    id: string,
+    toAddress: string,
+    fromAddress: string,
+    message: string,
+    messageChecklist?:  {
+      __typename: "Checklist",
+      id: string,
+      company: string,
+      name?: string | null,
+      duration?: number | null,
+      mustStart?: string | null,
+      mustEnd?: string | null,
+      actualStart?: string | null,
+      actualEnd?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      workflowStepsId?: string | null,
+      checklistOwnerId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    messageMessageChecklistId?: string | null,
   } | null,
 };
 

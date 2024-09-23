@@ -15,13 +15,13 @@ export interface InventoryTableItem {
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: InventoryTableItem[] = [
-  {id: 'SEA-001', partNumber: 'AXR2-53', description: 'La Barca', location: 'Fix it', count: 5},
-  {id: 'SEA-002', partNumber: 'AXR2-53', description: 'Velero', location: 'New rudder', count: 3},
-  {id: 'SEA-003', partNumber: 'AXR2-53', description: 'Speedy', location: 'Thru-hulls need work', count: 10},
-  {id: 'SEA-004', partNumber: 'AXR2-53', description: 'Courageous', location: 'Engine Maintenance', count: 8},
-  {id: 'SEA-005', partNumber: 'AXR2-53', description: 'Bruja', location: 'Gelcoat touch-up', count: 2},
-  {id: 'SEA-006', partNumber: 'AXR2-53', description: 'Hexe', location: 'Mainsail repair', count: 1},
-  {id: 'SEA-007', partNumber: 'AXR2-53', description: 'Maggie', location: 'Install Electronics', count: 5}
+  {id: 'SEA-001', partNumber: 'AXR2-53', description: 'Impeller', location: 'Main Location', count: 5},
+  {id: 'SEA-002', partNumber: 'AXR2-53', description: 'Fan Belt', location: 'Main Location', count: 3},
+  {id: 'SEA-003', partNumber: 'AXR2-53', description: '100 ft of Line', location: 'Second Location', count: 10},
+  {id: 'SEA-004', partNumber: 'AXR2-53', description: 'Fenders', location: 'Warehouse', count: 8},
+  {id: 'SEA-005', partNumber: 'AXR2-53', description: 'Oil Filter', location: 'Main Location', count: 2},
+  {id: 'SEA-006', partNumber: 'AXR2-53', description: 'Catalina 270 Mainail', location: 'Second Location', count: 1},
+  {id: 'SEA-007', partNumber: 'AXR2-53', description: 'D-509 Transducer', location: 'Warehouse', count: 5}
 ];
 
 /**
