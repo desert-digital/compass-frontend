@@ -2,20 +2,20 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type CompassUser @model @auth(rules: [{allow: private}]) {
+type CompassUser @model @auth(rules: [{allow: public}]) {
   id: ID! 
   company: String
   userName: String
   roles: [CompassUserRole] @hasMany
 }
 
-type CompassUserRole @model @auth(rules: [{allow: private}]) {
+type CompassUserRole @model @auth(rules: [{allow: public}]) {
   id: ID! 
   company: String
   roleName: String
 }
 
-type PendingEvent @model @auth(rules: [{ allow: private }]){
+type PendingEvent @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String
   start: String 
@@ -28,14 +28,14 @@ type PendingEvent @model @auth(rules: [{ allow: private }]){
   contactPhone: String
 }
 
-type ServiceOrder @model @auth(rules: [{ allow: private}]){
+type ServiceOrder @model @auth(rules: [{ allow: public}]){
   id: ID!
   company: String
   boat: Vessel @hasOne
   items: [String]
 }
 
-type InventoryItem @model @auth(rules: [{allow: private}]) {
+type InventoryItem @model @auth(rules: [{allow: public}]) {
   id: ID!
   location: String 
   description: String 
@@ -43,7 +43,7 @@ type InventoryItem @model @auth(rules: [{allow: private}]) {
   quantity: Int
 }
 
-type Vessel @model @auth(rules: [{ allow: private }]){
+type Vessel @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -52,7 +52,7 @@ type Vessel @model @auth(rules: [{ allow: private }]){
   defaultWorkflow: WorkflowModel @hasOne
 }
 
-type Staff @model @auth(rules: [{ allow: private }]){
+type Staff @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -62,7 +62,7 @@ type Staff @model @auth(rules: [{ allow: private }]){
   roles: [String]
 }
 
-type Owner @model @auth(rules: [{ allow: private }]){
+type Owner @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -71,7 +71,7 @@ type Owner @model @auth(rules: [{ allow: private }]){
   boats: [Vessel] @hasMany
 }
 
-type ActionModel @model @auth(rules: [{ allow: private }]){
+type ActionModel @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -80,7 +80,7 @@ type ActionModel @model @auth(rules: [{ allow: private }]){
   checklists: [ChecklistModel] @manyToMany(relationName: "ChecklistActions")
 }
 
-type ChecklistModel @model @auth(rules: [{ allow: private }]){
+type ChecklistModel @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -91,7 +91,7 @@ type ChecklistModel @model @auth(rules: [{ allow: private }]){
   workflows: [WorkflowModel] @manyToMany(relationName: "WorkflowChecklists") 
 }
 
-type WorkflowModel @model @auth(rules: [{allow: private}]) {
+type WorkflowModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   company: String!
   name: String
@@ -100,7 +100,7 @@ type WorkflowModel @model @auth(rules: [{allow: private}]) {
   checklistModels: [ChecklistModel] @manyToMany(relationName: "WorkflowChecklists")
 }
 
-type Action @model @auth(rules: [{allow: private}]){
+type Action @model @auth(rules: [{allow: public}]){
   id: ID!
   company: String
   status: Boolean
@@ -110,7 +110,7 @@ type Action @model @auth(rules: [{allow: private}]){
   actualEnd: String
 }
 
-type Checklist @model @auth(rules: [{ allow: private }]){
+type Checklist @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -123,7 +123,7 @@ type Checklist @model @auth(rules: [{ allow: private }]){
   actualEnd: String 
 }
 
-type Workflow @model @auth(rules: [{ allow: private }]){
+type Workflow @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
   name: String
@@ -135,7 +135,7 @@ type Workflow @model @auth(rules: [{ allow: private }]){
   actualEnd: String 
 }
 
-type Message @model @auth(rules: [{ allow: private }]){
+type Message @model @auth(rules: [{ allow: public }]){
   id: ID!
   toAddress: String! 
   fromAddress: String! 
@@ -143,7 +143,7 @@ type Message @model @auth(rules: [{ allow: private }]){
   messageChecklist: Checklist @hasOne
 }
 
-type AppFlag @model @auth(rules: [{ allow: private }]){
+type AppFlag @model @auth(rules: [{ allow: public }]){
   id: ID!
   flag: String!
   value: String!
