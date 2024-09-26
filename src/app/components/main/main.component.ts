@@ -95,6 +95,7 @@ export class MainComponent {
   async onLogoutPressed() {
     try {
       await signOut();
+      this._router.navigate(['login/signin']);
       // add code to disable navigation
     }
     catch (e) {

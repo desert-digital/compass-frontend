@@ -1253,12 +1253,6 @@ export type ModelChecklistActionsFilterInput = {
   not?: ModelChecklistActionsFilterInput | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelWorkflowChecklistsFilterInput = {
   id?: ModelIDInput | null,
   checklistModelId?: ModelIDInput | null,
@@ -1269,6 +1263,12 @@ export type ModelWorkflowChecklistsFilterInput = {
   or?: Array< ModelWorkflowChecklistsFilterInput | null > | null,
   not?: ModelWorkflowChecklistsFilterInput | null,
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelSubscriptionCompassUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -3734,52 +3734,6 @@ export type ListChecklistActionsQuery = {
   } | null,
 };
 
-export type ChecklistActionsByActionModelIdQueryVariables = {
-  actionModelId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelChecklistActionsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ChecklistActionsByActionModelIdQuery = {
-  checklistActionsByActionModelId?:  {
-    __typename: "ModelChecklistActionsConnection",
-    items:  Array< {
-      __typename: "ChecklistActions",
-      id: string,
-      actionModelId: string,
-      checklistModelId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ChecklistActionsByChecklistModelIdQueryVariables = {
-  checklistModelId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelChecklistActionsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ChecklistActionsByChecklistModelIdQuery = {
-  checklistActionsByChecklistModelId?:  {
-    __typename: "ModelChecklistActionsConnection",
-    items:  Array< {
-      __typename: "ChecklistActions",
-      id: string,
-      actionModelId: string,
-      checklistModelId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetWorkflowChecklistsQueryVariables = {
   id: string,
 };
@@ -3830,6 +3784,52 @@ export type ListWorkflowChecklistsQuery = {
       id: string,
       checklistModelId: string,
       workflowModelId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ChecklistActionsByActionModelIdQueryVariables = {
+  actionModelId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelChecklistActionsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ChecklistActionsByActionModelIdQuery = {
+  checklistActionsByActionModelId?:  {
+    __typename: "ModelChecklistActionsConnection",
+    items:  Array< {
+      __typename: "ChecklistActions",
+      id: string,
+      actionModelId: string,
+      checklistModelId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ChecklistActionsByChecklistModelIdQueryVariables = {
+  checklistModelId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelChecklistActionsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ChecklistActionsByChecklistModelIdQuery = {
+  checklistActionsByChecklistModelId?:  {
+    __typename: "ModelChecklistActionsConnection",
+    items:  Array< {
+      __typename: "ChecklistActions",
+      id: string,
+      actionModelId: string,
+      checklistModelId: string,
       createdAt: string,
       updatedAt: string,
     } | null >,

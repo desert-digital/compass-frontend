@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     userName: ['', [Validators.required]],
     password: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    phoneNumber: ['', [Validators.required]]
+    phoneNumber: ['', []]
   });
 
   verifyForm = this.formBuilder.group({

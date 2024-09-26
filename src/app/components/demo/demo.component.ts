@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Local
 
-import { Action, Owner, Staff, Vessel } from 'src/API';
-import { ActionsService } from 'src/app/services/actions.service';
+import { ActionModel, Owner, Staff, Vessel } from 'src/API';
+import { ActionModelsService } from 'src/app/services/action-models.service';
 import { FleetService } from 'src/app/services/fleet.service';
 import { OwnersService } from 'src/app/services/owners.service';
 import { StaffService } from 'src/app/services/staff.service';
@@ -21,12 +21,12 @@ export class DemoComponent implements AfterViewInit {
   vessels: Vessel[] = [];
   owners: Owner[] = [];
   staff: Staff[] = [];
-  actions: Action[] = [];
+  actions: ActionModel[] = [];
 
   constructor(private _fleetService: FleetService,
     private _staffService: StaffService,
     private _ownersService: OwnersService,
-    private _actionsService: ActionsService,
+    private _actionsService: ActionModelsService,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -59,7 +59,7 @@ export class DemoComponent implements AfterViewInit {
   }
 
   async _getActions() {
-    this.actions = await this._actionsService.getActions();
+    this.actions = await this._actionsService.getActionModels();
   }
 
   addDemoFleet() {
@@ -79,6 +79,8 @@ export class DemoComponent implements AfterViewInit {
   }
 
   addDemoActions() {
-    alert("To Do: Add Demo Actions");
+    this._actionsService.createDemoActions();
+    this._getActions();
+    this._snackBar.open("Added Demo Actions", "OK", {duration: 50000});
   }
 }

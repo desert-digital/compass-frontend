@@ -80,4 +80,31 @@ export class ActionModelsService {
     // TO DO: should also delete the _actions_ that use this model, and 
     // then the checklist models that use the _action_
   }
+
+  async createDemoActions() {
+    let _action =
+      {
+        company: 'seaforth',
+        name: 'Raise sails and unfurl the jib',
+        notes: 'Inspect the sails and hull',
+        duration: 10
+      } as ActionModel;
+    this.createActionModel(_action);
+    _action =
+      {
+        company: 'seaforth',
+        name: 'Inventory safety equipment',
+        notes: 'Ensure the required safety equipment is on board',
+        duration: 10
+      } as ActionModel;
+    this.createActionModel(_action);
+    _action =
+    {
+      company: 'seaforth',
+      name: 'Inspect rigging - standing and running',
+      notes: 'Ensure the rigging is not broken and the lines are not worn',
+      duration: 10
+    } as ActionModel;
+  this.createActionModel(_action);
+  }
 }
