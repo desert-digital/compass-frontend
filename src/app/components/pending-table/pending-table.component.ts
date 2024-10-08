@@ -26,7 +26,7 @@ export class PendingTableComponent implements AfterViewInit {
   @ViewChild('pendingTable') pendingTable!: MatTable<any>;
   
   dataSource: PendingTableDataSource;
-  pageSize: number = 7;
+  pageSize: number = 6;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['item', 'start', 'end', 'status', 'actions'];
@@ -39,7 +39,7 @@ export class PendingTableComponent implements AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.pageSize = +params['size'] || 7;
+      this.pageSize = +params['size'] || 6;
     });
   }
 

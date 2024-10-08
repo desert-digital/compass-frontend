@@ -10,7 +10,7 @@ import { createStaff, updateStaff, deleteStaff } from '../../graphql/mutations';
 
 // Local
 
-import { Staff } from '../API.service';
+import { Staff } from 'src/API';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,7 @@ export class StaffService {
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
+          role: staff.role
         }
       }
     });
@@ -55,7 +56,8 @@ export class StaffService {
           company: 'seaforth',
           name: staff.name,
           email: staff.email,
-          phone: staff.phone
+          phone: staff.phone,
+          role: staff.role
         }
       }
     });
@@ -79,7 +81,8 @@ export class StaffService {
         company: 'seaforth',
         name: 'Jenny Spain',
         email: 'compass_demo_staff@gmail.com',
-        phone: '+1 (856) 867-5309'
+        phone: '+1 (856) 867-5309',
+        role: 'Crew'
       } as Staff;
     this.createStaff(_staff);
     _staff =
@@ -88,6 +91,7 @@ export class StaffService {
         name: 'Davey Jones',
         email: 'compass_demo_staff@gmail.com',
         phone: '+1 (856) 555-1313',
+        role: 'OpsManager'
       } as Staff;
     this.createStaff(_staff);
     _staff =
@@ -95,7 +99,8 @@ export class StaffService {
       company: 'seaforth',
       name: 'Paolo Jorge',
       email: 'compass_demo_staff@gmail.com',
-      phone: '+1 (856) 942-5311'
+      phone: '+1 (856) 942-5311',
+      role: 'ServiceManager'
     } as Staff;
   this.createStaff(_staff);
   }

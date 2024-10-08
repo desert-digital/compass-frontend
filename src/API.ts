@@ -2,18 +2,32 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateCompassUserInput = {
+export type CreatePendingEventInput = {
   id?: string | null,
   company?: string | null,
-  userName?: string | null,
+  start?: string | null,
+  end?: string | null,
+  item?: string | null,
+  item_id?: string | null,
+  status?: string | null,
+  contactEmail?: string | null,
+  contactName?: string | null,
+  contactPhone?: string | null,
 };
 
-export type ModelCompassUserConditionInput = {
+export type ModelPendingEventConditionInput = {
   company?: ModelStringInput | null,
-  userName?: ModelStringInput | null,
-  and?: Array< ModelCompassUserConditionInput | null > | null,
-  or?: Array< ModelCompassUserConditionInput | null > | null,
-  not?: ModelCompassUserConditionInput | null,
+  start?: ModelStringInput | null,
+  end?: ModelStringInput | null,
+  item?: ModelStringInput | null,
+  item_id?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  contactName?: ModelStringInput | null,
+  contactPhone?: ModelStringInput | null,
+  and?: Array< ModelPendingEventConditionInput | null > | null,
+  or?: Array< ModelPendingEventConditionInput | null > | null,
+  not?: ModelPendingEventConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -56,117 +70,6 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
-};
-
-export type CompassUser = {
-  __typename: "CompassUser",
-  id: string,
-  company?: string | null,
-  userName?: string | null,
-  roles?: ModelCompassUserRoleConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type ModelCompassUserRoleConnection = {
-  __typename: "ModelCompassUserRoleConnection",
-  items:  Array<CompassUserRole | null >,
-  nextToken?: string | null,
-};
-
-export type CompassUserRole = {
-  __typename: "CompassUserRole",
-  id: string,
-  company?: string | null,
-  roleName?: string | null,
-  createdAt: string,
-  updatedAt: string,
-  compassUserRolesId?: string | null,
-};
-
-export type UpdateCompassUserInput = {
-  id: string,
-  company?: string | null,
-  userName?: string | null,
-};
-
-export type DeleteCompassUserInput = {
-  id: string,
-};
-
-export type CreateCompassUserRoleInput = {
-  id?: string | null,
-  company?: string | null,
-  roleName?: string | null,
-  compassUserRolesId?: string | null,
-};
-
-export type ModelCompassUserRoleConditionInput = {
-  company?: ModelStringInput | null,
-  roleName?: ModelStringInput | null,
-  and?: Array< ModelCompassUserRoleConditionInput | null > | null,
-  or?: Array< ModelCompassUserRoleConditionInput | null > | null,
-  not?: ModelCompassUserRoleConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  compassUserRolesId?: ModelIDInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type UpdateCompassUserRoleInput = {
-  id: string,
-  company?: string | null,
-  roleName?: string | null,
-  compassUserRolesId?: string | null,
-};
-
-export type DeleteCompassUserRoleInput = {
-  id: string,
-};
-
-export type CreatePendingEventInput = {
-  id?: string | null,
-  company?: string | null,
-  start?: string | null,
-  end?: string | null,
-  item?: string | null,
-  item_id?: string | null,
-  status?: string | null,
-  contactEmail?: string | null,
-  contactName?: string | null,
-  contactPhone?: string | null,
-};
-
-export type ModelPendingEventConditionInput = {
-  company?: ModelStringInput | null,
-  start?: ModelStringInput | null,
-  end?: ModelStringInput | null,
-  item?: ModelStringInput | null,
-  item_id?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  contactEmail?: ModelStringInput | null,
-  contactName?: ModelStringInput | null,
-  contactPhone?: ModelStringInput | null,
-  and?: Array< ModelPendingEventConditionInput | null > | null,
-  or?: Array< ModelPendingEventConditionInput | null > | null,
-  not?: ModelPendingEventConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
 };
 
 export type PendingEvent = {
@@ -218,6 +121,22 @@ export type ModelServiceOrderConditionInput = {
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   serviceOrderBoatId?: ModelIDInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ServiceOrder = {
@@ -428,8 +347,16 @@ export type CreateStaffInput = {
   email?: string | null,
   phone?: string | null,
   username?: string | null,
-  roles?: Array< string | null > | null,
+  role?: CompassUserRole | null,
 };
+
+export enum CompassUserRole {
+  Admin = "Admin",
+  OpsManager = "OpsManager",
+  ServiceManager = "ServiceManager",
+  Crew = "Crew",
+}
+
 
 export type ModelStaffConditionInput = {
   company?: ModelStringInput | null,
@@ -437,12 +364,17 @@ export type ModelStaffConditionInput = {
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
   username?: ModelStringInput | null,
-  roles?: ModelStringInput | null,
+  role?: ModelCompassUserRoleInput | null,
   and?: Array< ModelStaffConditionInput | null > | null,
   or?: Array< ModelStaffConditionInput | null > | null,
   not?: ModelStaffConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+};
+
+export type ModelCompassUserRoleInput = {
+  eq?: CompassUserRole | null,
+  ne?: CompassUserRole | null,
 };
 
 export type Staff = {
@@ -453,7 +385,7 @@ export type Staff = {
   email?: string | null,
   phone?: string | null,
   username?: string | null,
-  roles?: Array< string | null > | null,
+  role?: CompassUserRole | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -465,7 +397,7 @@ export type UpdateStaffInput = {
   email?: string | null,
   phone?: string | null,
   username?: string | null,
-  roles?: Array< string | null > | null,
+  role?: CompassUserRole | null,
 };
 
 export type DeleteStaffInput = {
@@ -947,35 +879,6 @@ export type DeleteWorkflowChecklistsInput = {
   id: string,
 };
 
-export type ModelCompassUserFilterInput = {
-  id?: ModelIDInput | null,
-  company?: ModelStringInput | null,
-  userName?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelCompassUserFilterInput | null > | null,
-  or?: Array< ModelCompassUserFilterInput | null > | null,
-  not?: ModelCompassUserFilterInput | null,
-};
-
-export type ModelCompassUserConnection = {
-  __typename: "ModelCompassUserConnection",
-  items:  Array<CompassUser | null >,
-  nextToken?: string | null,
-};
-
-export type ModelCompassUserRoleFilterInput = {
-  id?: ModelIDInput | null,
-  company?: ModelStringInput | null,
-  roleName?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelCompassUserRoleFilterInput | null > | null,
-  or?: Array< ModelCompassUserRoleFilterInput | null > | null,
-  not?: ModelCompassUserRoleFilterInput | null,
-  compassUserRolesId?: ModelIDInput | null,
-};
-
 export type ModelPendingEventFilterInput = {
   id?: ModelIDInput | null,
   company?: ModelStringInput | null,
@@ -1059,7 +962,7 @@ export type ModelStaffFilterInput = {
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
   username?: ModelStringInput | null,
-  roles?: ModelStringInput | null,
+  role?: ModelCompassUserRoleInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelStaffFilterInput | null > | null,
@@ -1270,15 +1173,21 @@ export enum ModelSortDirection {
 }
 
 
-export type ModelSubscriptionCompassUserFilterInput = {
+export type ModelSubscriptionPendingEventFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   company?: ModelSubscriptionStringInput | null,
-  userName?: ModelSubscriptionStringInput | null,
+  start?: ModelSubscriptionStringInput | null,
+  end?: ModelSubscriptionStringInput | null,
+  item?: ModelSubscriptionStringInput | null,
+  item_id?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  contactEmail?: ModelSubscriptionStringInput | null,
+  contactName?: ModelSubscriptionStringInput | null,
+  contactPhone?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionCompassUserFilterInput | null > | null,
-  or?: Array< ModelSubscriptionCompassUserFilterInput | null > | null,
-  compassUserRolesId?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -1309,33 +1218,6 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionCompassUserRoleFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  roleName?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionCompassUserRoleFilterInput | null > | null,
-  or?: Array< ModelSubscriptionCompassUserRoleFilterInput | null > | null,
-};
-
-export type ModelSubscriptionPendingEventFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  company?: ModelSubscriptionStringInput | null,
-  start?: ModelSubscriptionStringInput | null,
-  end?: ModelSubscriptionStringInput | null,
-  item?: ModelSubscriptionStringInput | null,
-  item_id?: ModelSubscriptionStringInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  contactEmail?: ModelSubscriptionStringInput | null,
-  contactName?: ModelSubscriptionStringInput | null,
-  contactPhone?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPendingEventFilterInput | null > | null,
 };
 
 export type ModelSubscriptionServiceOrderFilterInput = {
@@ -1393,7 +1275,7 @@ export type ModelSubscriptionStaffFilterInput = {
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
   username?: ModelSubscriptionStringInput | null,
-  roles?: ModelSubscriptionStringInput | null,
+  role?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionStaffFilterInput | null > | null,
@@ -1550,117 +1432,6 @@ export type StartWorkflowMutationVariables = {
 
 export type StartWorkflowMutation = {
   startWorkflow?: string | null,
-};
-
-export type CreateCompassUserMutationVariables = {
-  input: CreateCompassUserInput,
-  condition?: ModelCompassUserConditionInput | null,
-};
-
-export type CreateCompassUserMutation = {
-  createCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateCompassUserMutationVariables = {
-  input: UpdateCompassUserInput,
-  condition?: ModelCompassUserConditionInput | null,
-};
-
-export type UpdateCompassUserMutation = {
-  updateCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteCompassUserMutationVariables = {
-  input: DeleteCompassUserInput,
-  condition?: ModelCompassUserConditionInput | null,
-};
-
-export type DeleteCompassUserMutation = {
-  deleteCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateCompassUserRoleMutationVariables = {
-  input: CreateCompassUserRoleInput,
-  condition?: ModelCompassUserRoleConditionInput | null,
-};
-
-export type CreateCompassUserRoleMutation = {
-  createCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
-export type UpdateCompassUserRoleMutationVariables = {
-  input: UpdateCompassUserRoleInput,
-  condition?: ModelCompassUserRoleConditionInput | null,
-};
-
-export type UpdateCompassUserRoleMutation = {
-  updateCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
-export type DeleteCompassUserRoleMutationVariables = {
-  input: DeleteCompassUserRoleInput,
-  condition?: ModelCompassUserRoleConditionInput | null,
-};
-
-export type DeleteCompassUserRoleMutation = {
-  deleteCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
 };
 
 export type CreatePendingEventMutationVariables = {
@@ -1977,7 +1748,7 @@ export type CreateStaffMutation = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1997,7 +1768,7 @@ export type UpdateStaffMutation = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2017,7 +1788,7 @@ export type DeleteStaffMutation = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2385,7 +2156,7 @@ export type CreateChecklistMutation = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2424,7 +2195,7 @@ export type UpdateChecklistMutation = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2463,7 +2234,7 @@ export type DeleteChecklistMutation = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2926,84 +2697,6 @@ export type DeleteWorkflowChecklistsMutation = {
   } | null,
 };
 
-export type GetCompassUserQueryVariables = {
-  id: string,
-};
-
-export type GetCompassUserQuery = {
-  getCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListCompassUsersQueryVariables = {
-  filter?: ModelCompassUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCompassUsersQuery = {
-  listCompassUsers?:  {
-    __typename: "ModelCompassUserConnection",
-    items:  Array< {
-      __typename: "CompassUser",
-      id: string,
-      company?: string | null,
-      userName?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetCompassUserRoleQueryVariables = {
-  id: string,
-};
-
-export type GetCompassUserRoleQuery = {
-  getCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
-export type ListCompassUserRolesQueryVariables = {
-  filter?: ModelCompassUserRoleFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCompassUserRolesQuery = {
-  listCompassUserRoles?:  {
-    __typename: "ModelCompassUserRoleConnection",
-    items:  Array< {
-      __typename: "CompassUserRole",
-      id: string,
-      company?: string | null,
-      roleName?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      compassUserRolesId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetPendingEventQueryVariables = {
   id: string,
 };
@@ -3211,7 +2904,7 @@ export type GetStaffQuery = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3234,7 +2927,7 @@ export type ListStaffQuery = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3489,7 +3182,7 @@ export type GetChecklistQuery = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3883,111 +3576,6 @@ export type WorkflowChecklistsByWorkflowModelIdQuery = {
   } | null,
 };
 
-export type OnCreateCompassUserSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserFilterInput | null,
-};
-
-export type OnCreateCompassUserSubscription = {
-  onCreateCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateCompassUserSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserFilterInput | null,
-};
-
-export type OnUpdateCompassUserSubscription = {
-  onUpdateCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteCompassUserSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserFilterInput | null,
-};
-
-export type OnDeleteCompassUserSubscription = {
-  onDeleteCompassUser?:  {
-    __typename: "CompassUser",
-    id: string,
-    company?: string | null,
-    userName?: string | null,
-    roles?:  {
-      __typename: "ModelCompassUserRoleConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateCompassUserRoleSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserRoleFilterInput | null,
-};
-
-export type OnCreateCompassUserRoleSubscription = {
-  onCreateCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
-export type OnUpdateCompassUserRoleSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserRoleFilterInput | null,
-};
-
-export type OnUpdateCompassUserRoleSubscription = {
-  onUpdateCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
-export type OnDeleteCompassUserRoleSubscriptionVariables = {
-  filter?: ModelSubscriptionCompassUserRoleFilterInput | null,
-};
-
-export type OnDeleteCompassUserRoleSubscription = {
-  onDeleteCompassUserRole?:  {
-    __typename: "CompassUserRole",
-    id: string,
-    company?: string | null,
-    roleName?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    compassUserRolesId?: string | null,
-  } | null,
-};
-
 export type OnCreatePendingEventSubscriptionVariables = {
   filter?: ModelSubscriptionPendingEventFilterInput | null,
 };
@@ -4289,7 +3877,7 @@ export type OnCreateStaffSubscription = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4308,7 +3896,7 @@ export type OnUpdateStaffSubscription = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4327,7 +3915,7 @@ export type OnDeleteStaffSubscription = {
     email?: string | null,
     phone?: string | null,
     username?: string | null,
-    roles?: Array< string | null > | null,
+    role?: CompassUserRole | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4679,7 +4267,7 @@ export type OnCreateChecklistSubscription = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4717,7 +4305,7 @@ export type OnUpdateChecklistSubscription = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4755,7 +4343,7 @@ export type OnDeleteChecklistSubscription = {
       email?: string | null,
       phone?: string | null,
       username?: string | null,
-      roles?: Array< string | null > | null,
+      role?: CompassUserRole | null,
       createdAt: string,
       updatedAt: string,
     } | null,

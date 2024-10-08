@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Local
 
-import { ChecklistModel } from 'src/app/API.service';
+import { ChecklistModel } from 'src/API';
 
 @Component({
   selector: 'app-show-checklist-notes-dialog',

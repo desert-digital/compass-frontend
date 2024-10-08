@@ -2,9 +2,9 @@
     <div class="row">
         <button mat-flat-button color="primary" (click)="onAddStaffPressed()">Add a New Staff Member</button>
     </div>
-    <div class="row" *ngIf="staff.length > 0; else noStaff">
+    <div class="card-container" *ngIf="staff.length > 0; else noStaff">
         <div *ngFor="let person of staff">
-            <mat-card class="example-card">
+            <mat-card class="staff-card">
                 <mat-card-header>
                     <mat-card-subtitle>
                         <h4>{{ person.name }}</h4>
@@ -14,17 +14,17 @@
                     <div>{{ person.phone }}</div>
                     <div>{{ person.email }}</div>
                     <mat-divider></mat-divider>
-                    <!--
                     <div class="chips">
                         <mat-chip-set>
-                            <mat-chip *ngFor="let boat of boats.get(owner.id)">{{ boat.name }}</mat-chip>
+                            <mat-chip>{{person.role}}</mat-chip>
                         </mat-chip-set>
                     </div>
-                    -->
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-flat-button color="primary" (click)="onEditStaffPressed(person)">Edit</button>
-                    <button mat-flat-button color="warn" (click)="onDeleteStaffPressed(person)">Delete</button>
+                    <span class="button-container">
+                        <button mat-flat-button color="primary" (click)="onEditStaffPressed(person)">Edit</button>
+                        <button mat-flat-button color="warn" (click)="onDeleteStaffPressed(person)">Delete</button>
+                    </span>
                 </mat-card-actions>
             </mat-card>
         </div>

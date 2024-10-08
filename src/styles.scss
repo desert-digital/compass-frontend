@@ -4,14 +4,14 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$compass-frontend-primary: mat.define-palette(mat.$indigo-palette);
-$compass-frontend-accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
+$compass-frontend-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$compass-frontend-accent: mat.m2-define-palette(mat.$m2-teal-palette, A200, A100, A400);
 
-$compass-frontend-warn: mat.define-palette(mat.$red-palette);
+$compass-frontend-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$compass-frontend-theme: mat.define-light-theme((
+$compass-frontend-theme: mat.m2-define-light-theme((
   color: (
     primary: $compass-frontend-primary,
     accent: $compass-frontend-accent,
@@ -27,7 +27,7 @@ $compass-frontend-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* @import '~@aws-amplify/ui-angular/theme.css'; */
+/* @import '@aws-amplify/ui-angular/theme.css'; */
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 
 :root {

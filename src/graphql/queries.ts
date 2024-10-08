@@ -8,84 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getCompassUser = /* GraphQL */ `query GetCompassUser($id: ID!) {
-  getCompassUser(id: $id) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetCompassUserQueryVariables,
-  APITypes.GetCompassUserQuery
->;
-export const listCompassUsers = /* GraphQL */ `query ListCompassUsers(
-  $filter: ModelCompassUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCompassUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      company
-      userName
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListCompassUsersQueryVariables,
-  APITypes.ListCompassUsersQuery
->;
-export const getCompassUserRole = /* GraphQL */ `query GetCompassUserRole($id: ID!) {
-  getCompassUserRole(id: $id) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetCompassUserRoleQueryVariables,
-  APITypes.GetCompassUserRoleQuery
->;
-export const listCompassUserRoles = /* GraphQL */ `query ListCompassUserRoles(
-  $filter: ModelCompassUserRoleFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCompassUserRoles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      company
-      roleName
-      createdAt
-      updatedAt
-      compassUserRolesId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListCompassUserRolesQueryVariables,
-  APITypes.ListCompassUserRolesQuery
->;
 export const getPendingEvent = /* GraphQL */ `query GetPendingEvent($id: ID!) {
   getPendingEvent(id: $id) {
     id
@@ -285,7 +207,7 @@ export const getStaff = /* GraphQL */ `query GetStaff($id: ID!) {
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -305,7 +227,7 @@ export const listStaff = /* GraphQL */ `query ListStaff(
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename
@@ -550,7 +472,7 @@ export const getChecklist = /* GraphQL */ `query GetChecklist($id: ID!) {
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename

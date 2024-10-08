@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Local
 
-import { WorkflowModel } from 'src/app/API.service';
+import { WorkflowModel } from 'src/API';
 
 
 @Component({

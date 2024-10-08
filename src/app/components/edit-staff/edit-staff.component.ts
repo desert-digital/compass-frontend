@@ -8,8 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { Staff } from 'src/app/API.service';
 import { StaffService } from 'src/app/services/staff.service';
+import { Staff, CompassUserRole } from 'src/API';
 
 @Component({
   selector: 'app-edit-staff',
@@ -21,6 +21,8 @@ export class EditStaffComponent {
   staffName: string = '';
   staffPhone: number = 0;
   staffEmail: string = '';
+
+  roleNames = CompassUserRole;
 
   staffForm: FormGroup;
 
@@ -35,9 +37,11 @@ export class EditStaffComponent {
       id: ['', Validators.required],
       name: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      role: ['', []]
     });
   }
+  
   async ngOnInit() {
     await this._setUp();
   }
@@ -51,10 +55,12 @@ export class EditStaffComponent {
       name: this.staff.name,
       phone: this.staff.phone,
       email: this.staff.email,
+      role: this.staff.role
     });
   }
 
   async onUpdateStaffPressed(staff: Staff) {
+    console.log(staff);
     try {
       await this._staffService.updateStaff(staff).then(() => {
         this._snackBar.open(`Updated ${staff.name}`, 'OK', { duration: 3000 })
@@ -64,5 +70,9 @@ export class EditStaffComponent {
       console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', { duration: 3000 })
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/staff']);
   }
 }

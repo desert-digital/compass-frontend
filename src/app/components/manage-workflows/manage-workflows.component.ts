@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 // Local
 
-import { WorkflowModel } from 'src/app/API.service';
+import { WorkflowModel } from 'src/API';
 import { WorkflowModelsService } from 'src/app/services/workflow-models.service';
 import { ShowWorkflowNotesDialogComponent } from '../show-workflow-notes-dialog/show-workflow-notes-dialog.component';
 

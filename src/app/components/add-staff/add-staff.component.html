@@ -15,6 +15,14 @@
                 <mat-label>Email</mat-label>
                 <input matInput id="email" type="email" formControlName="email">
             </mat-form-field>
+            <mat-form-field>
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option *ngFor="let role of roleNames | keyvalue" [value]="role.key.toLowerCase()">
+                        {{role.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </form>
 </div>

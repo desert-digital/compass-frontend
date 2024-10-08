@@ -21,7 +21,7 @@ import { WorkflowModelsService } from 'src/app/services/workflow-models.service'
 import { WorkflowService } from 'src/app/services/workflow.service';
 
 import { startWorkflow } from 'src/graphql/mutations';
-import { PendingEvent, Vessel, Staff, WorkflowModel } from 'src/app/API.service';
+import { PendingEvent, Vessel, Staff, WorkflowModel } from 'src/API';
 
 
 @Component({

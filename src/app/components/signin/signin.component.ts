@@ -14,7 +14,6 @@ import { signIn, resetPassword, type ResetPasswordOutput, confirmResetPassword }
 
 // Local
 
-import { CompassUser } from 'src/app/API.service';
 import { AccountService } from 'src/app/services/account-service.service';
 
 @Component({
@@ -24,8 +23,6 @@ import { AccountService } from 'src/app/services/account-service.service';
 })
 export class SigninComponent implements OnInit {
   hidePassword: boolean;
-
-  user: CompassUser;
 
   connection: string;
   userName: string;

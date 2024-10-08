@@ -17,6 +17,8 @@ $borderRadius: 5px;
 
 $viewPortHeight: 500px;
 
+$cardWidth: 300px;
+
 body {
   background-color: $backgroundColor;
 }
@@ -152,17 +154,28 @@ h4 {
   border-radius: $borderRadius;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .button-container {
   @media screen and (max-width: 420px) {
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    gap: 5px;
   }
 
   @media screen and (min-width: 421px) {
+    width: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 10px;
+    gap: 5px;
+    justify-content: space-between;
   }
 }
 

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify 
 
-import { ActionModel } from 'src/app/API.service';
+import { ActionModel } from 'src/API';
 
 // Local
 

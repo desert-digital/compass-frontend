@@ -2,17 +2,11 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type CompassUser @model @auth(rules: [{allow: public}]) {
-  id: ID! 
-  company: String
-  userName: String
-  roles: [CompassUserRole] @hasMany
-}
-
-type CompassUserRole @model @auth(rules: [{allow: public}]) {
-  id: ID! 
-  company: String
-  roleName: String
+enum CompassUserRole {
+  Admin
+  OpsManager,
+  ServiceManager,
+  Crew
 }
 
 type PendingEvent @model @auth(rules: [{ allow: public }]){
@@ -59,7 +53,7 @@ type Staff @model @auth(rules: [{ allow: public }]){
   email: String
   phone: String
   username: String
-  roles: [String]
+  role: CompassUserRole
 }
 
 type Owner @model @auth(rules: [{ allow: public }]){

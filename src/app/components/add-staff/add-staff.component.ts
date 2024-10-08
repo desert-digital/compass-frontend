@@ -8,8 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { Staff } from 'src/app/API.service';
+import { Staff } from 'src/API';
 import { StaffService } from 'src/app/services/staff.service';
+import { CompassUserRole } from 'src/API';
 
 @Component({
   selector: 'app-add-staff',
@@ -22,6 +23,8 @@ export class AddStaffComponent {
   ownerPhone: number = 0;
   ownerEmail: string = '';
 
+  roleNames = CompassUserRole;
+
   staffForm: FormGroup;
 
   constructor(private router: Router,
@@ -32,6 +35,7 @@ export class AddStaffComponent {
       name: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      role: ['', []]
     });
   }
 
@@ -48,6 +52,6 @@ export class AddStaffComponent {
   }
 
   onCancelPressed() {
-    this.router.navigate(['main/owners']);
+    this.router.navigate(['main/staff']);
   }
 }

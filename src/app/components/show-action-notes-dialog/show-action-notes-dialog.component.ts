@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Local
 
-import { ActionModel } from 'src/app/API.service';
+import { ActionModel } from 'src/API';
 
 @Component({
   selector: 'app-show-action-notes-dialog',

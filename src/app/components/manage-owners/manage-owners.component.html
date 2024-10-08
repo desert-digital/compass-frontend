@@ -2,7 +2,7 @@
     <div class="row">
         <button mat-flat-button color="primary" (click)="onAddOwnerPressed()">Add a New Owner</button>
     </div>
-    <div class="row" *ngIf="owners.length > 0; else noOwners">
+    <div class="card-container" *ngIf="owners.length > 0; else noOwners">
         <div *ngFor="let owner of owners">
             <mat-card class="example-card">
                 <mat-card-header>
@@ -21,12 +21,13 @@
                     </div>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-flat-button color="primary" (click)="onEditOwnerPressed(owner)">Edit</button>
-                    <button mat-flat-button color="warn" (click)="onDeleteOwnerPressed(owner)">Delete</button>
-                </mat-card-actions>
+                    <span class="button-container">
+                        <button mat-flat-button color="primary" (click)="onEditOwnerPressed(owner)">Edit</button>
+                        <button mat-flat-button color="warn" (click)="onDeleteOwnerPressed(owner)">Delete</button>
+                    </span></mat-card-actions>
             </mat-card>
         </div>
-    </div>    
+    </div>
     <ng-template #noOwners class="row">
         <h3>No Owners Found</h3>
     </ng-template>

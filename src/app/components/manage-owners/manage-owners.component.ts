@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Local
 
-import { Owner, Vessel } from 'src/app/API.service';
+import { Owner, Vessel } from 'src/API';
 import { OwnersService } from 'src/app/services/owners.service';
 
 @Component({

@@ -5,7 +5,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 
 // Local
 
-import { Checklist } from 'src/app/API.service';
+import { Checklist } from 'src/API';
 import { ChecklistsService } from 'src/app/services/checklists.service';
 
 @Component({

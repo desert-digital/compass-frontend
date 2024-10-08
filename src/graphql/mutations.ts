@@ -15,123 +15,6 @@ export const startWorkflow = /* GraphQL */ `mutation StartWorkflow($workflowId: 
   APITypes.StartWorkflowMutationVariables,
   APITypes.StartWorkflowMutation
 >;
-export const createCompassUser = /* GraphQL */ `mutation CreateCompassUser(
-  $input: CreateCompassUserInput!
-  $condition: ModelCompassUserConditionInput
-) {
-  createCompassUser(input: $input, condition: $condition) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateCompassUserMutationVariables,
-  APITypes.CreateCompassUserMutation
->;
-export const updateCompassUser = /* GraphQL */ `mutation UpdateCompassUser(
-  $input: UpdateCompassUserInput!
-  $condition: ModelCompassUserConditionInput
-) {
-  updateCompassUser(input: $input, condition: $condition) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateCompassUserMutationVariables,
-  APITypes.UpdateCompassUserMutation
->;
-export const deleteCompassUser = /* GraphQL */ `mutation DeleteCompassUser(
-  $input: DeleteCompassUserInput!
-  $condition: ModelCompassUserConditionInput
-) {
-  deleteCompassUser(input: $input, condition: $condition) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteCompassUserMutationVariables,
-  APITypes.DeleteCompassUserMutation
->;
-export const createCompassUserRole = /* GraphQL */ `mutation CreateCompassUserRole(
-  $input: CreateCompassUserRoleInput!
-  $condition: ModelCompassUserRoleConditionInput
-) {
-  createCompassUserRole(input: $input, condition: $condition) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateCompassUserRoleMutationVariables,
-  APITypes.CreateCompassUserRoleMutation
->;
-export const updateCompassUserRole = /* GraphQL */ `mutation UpdateCompassUserRole(
-  $input: UpdateCompassUserRoleInput!
-  $condition: ModelCompassUserRoleConditionInput
-) {
-  updateCompassUserRole(input: $input, condition: $condition) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateCompassUserRoleMutationVariables,
-  APITypes.UpdateCompassUserRoleMutation
->;
-export const deleteCompassUserRole = /* GraphQL */ `mutation DeleteCompassUserRole(
-  $input: DeleteCompassUserRoleInput!
-  $condition: ModelCompassUserRoleConditionInput
-) {
-  deleteCompassUserRole(input: $input, condition: $condition) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteCompassUserRoleMutationVariables,
-  APITypes.DeleteCompassUserRoleMutation
->;
 export const createPendingEvent = /* GraphQL */ `mutation CreatePendingEvent(
   $input: CreatePendingEventInput!
   $condition: ModelPendingEventConditionInput
@@ -455,7 +338,7 @@ export const createStaff = /* GraphQL */ `mutation CreateStaff(
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -476,7 +359,7 @@ export const updateStaff = /* GraphQL */ `mutation UpdateStaff(
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -497,7 +380,7 @@ export const deleteStaff = /* GraphQL */ `mutation DeleteStaff(
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -880,7 +763,7 @@ export const createChecklist = /* GraphQL */ `mutation CreateChecklist(
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename
@@ -920,7 +803,7 @@ export const updateChecklist = /* GraphQL */ `mutation UpdateChecklist(
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename
@@ -960,7 +843,7 @@ export const deleteChecklist = /* GraphQL */ `mutation DeleteChecklist(
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename

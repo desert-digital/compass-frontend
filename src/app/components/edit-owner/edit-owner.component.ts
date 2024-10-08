@@ -9,7 +9,7 @@ import { MatSelectChange } from '@angular/material/select';
 
 // Amplify
 
-import { Owner, Vessel } from 'src/app/API.service';
+import { Owner, Vessel } from 'src/API';
 import { OwnersService } from 'src/app/services/owners.service';
 import { FleetService } from 'src/app/services/fleet.service';
 
@@ -99,5 +99,9 @@ export class EditOwnerComponent {
       console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', { duration: 3000 })
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['/main/owners']);
   }
 }

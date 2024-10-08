@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Local
 
-import { Staff } from 'src/app/API.service';
+import { Staff } from 'src/API';
 import { StaffService } from 'src/app/services/staff.service';
 
 @Component({

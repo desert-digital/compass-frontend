@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Amplify
 
-import { Owner } from 'src/app/API.service';
+import { Owner } from 'src/API';
 import { OwnersService } from 'src/app/services/owners.service';
 
 @Component({

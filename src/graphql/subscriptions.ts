@@ -8,117 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateCompassUser = /* GraphQL */ `subscription OnCreateCompassUser(
-  $filter: ModelSubscriptionCompassUserFilterInput
-) {
-  onCreateCompassUser(filter: $filter) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateCompassUserSubscriptionVariables,
-  APITypes.OnCreateCompassUserSubscription
->;
-export const onUpdateCompassUser = /* GraphQL */ `subscription OnUpdateCompassUser(
-  $filter: ModelSubscriptionCompassUserFilterInput
-) {
-  onUpdateCompassUser(filter: $filter) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateCompassUserSubscriptionVariables,
-  APITypes.OnUpdateCompassUserSubscription
->;
-export const onDeleteCompassUser = /* GraphQL */ `subscription OnDeleteCompassUser(
-  $filter: ModelSubscriptionCompassUserFilterInput
-) {
-  onDeleteCompassUser(filter: $filter) {
-    id
-    company
-    userName
-    roles {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteCompassUserSubscriptionVariables,
-  APITypes.OnDeleteCompassUserSubscription
->;
-export const onCreateCompassUserRole = /* GraphQL */ `subscription OnCreateCompassUserRole(
-  $filter: ModelSubscriptionCompassUserRoleFilterInput
-) {
-  onCreateCompassUserRole(filter: $filter) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateCompassUserRoleSubscriptionVariables,
-  APITypes.OnCreateCompassUserRoleSubscription
->;
-export const onUpdateCompassUserRole = /* GraphQL */ `subscription OnUpdateCompassUserRole(
-  $filter: ModelSubscriptionCompassUserRoleFilterInput
-) {
-  onUpdateCompassUserRole(filter: $filter) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateCompassUserRoleSubscriptionVariables,
-  APITypes.OnUpdateCompassUserRoleSubscription
->;
-export const onDeleteCompassUserRole = /* GraphQL */ `subscription OnDeleteCompassUserRole(
-  $filter: ModelSubscriptionCompassUserRoleFilterInput
-) {
-  onDeleteCompassUserRole(filter: $filter) {
-    id
-    company
-    roleName
-    createdAt
-    updatedAt
-    compassUserRolesId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteCompassUserRoleSubscriptionVariables,
-  APITypes.OnDeleteCompassUserRoleSubscription
->;
 export const onCreatePendingEvent = /* GraphQL */ `subscription OnCreatePendingEvent(
   $filter: ModelSubscriptionPendingEventFilterInput
 ) {
@@ -421,7 +310,7 @@ export const onCreateStaff = /* GraphQL */ `subscription OnCreateStaff($filter: 
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -439,7 +328,7 @@ export const onUpdateStaff = /* GraphQL */ `subscription OnUpdateStaff($filter: 
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -457,7 +346,7 @@ export const onDeleteStaff = /* GraphQL */ `subscription OnDeleteStaff($filter: 
     email
     phone
     username
-    roles
+    role
     createdAt
     updatedAt
     __typename
@@ -810,7 +699,7 @@ export const onCreateChecklist = /* GraphQL */ `subscription OnCreateChecklist($
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename
@@ -847,7 +736,7 @@ export const onUpdateChecklist = /* GraphQL */ `subscription OnUpdateChecklist($
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename
@@ -884,7 +773,7 @@ export const onDeleteChecklist = /* GraphQL */ `subscription OnDeleteChecklist($
       email
       phone
       username
-      roles
+      role
       createdAt
       updatedAt
       __typename

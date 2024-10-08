@@ -2,7 +2,8 @@
     <h3>Edit the Owner</h3>
     <form [formGroup]="ownerForm" #formDirective="ngForm"
         (ngSubmit)="onUpdateOwnerPressed(ownerForm.value)">
-        <button mat-flat-button type="submit" color="primary">Update the Staff Member</button>
+        <button mat-flat-button type="submit" color="primary">Update the Owner</button>
+        <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
         <div action="#" class="column">
             <div *ngIf="false">
                 <mat-form-field>
