@@ -59,12 +59,9 @@ export class SignupComponent implements OnInit {
   async ngOnInit() {
     this.signingUp = true;
     this.agree = false;
-
-    // this.userNames = await DataStore.query(Account);
   }
 
   async onRegisterPressed() {
-
     try {
       await signUp({
         username: this.signupForm.value.userName,

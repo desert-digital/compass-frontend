@@ -116,7 +116,8 @@ export class SigninComponent implements OnInit {
           this.recoveryCode, newPassword:
           this.password
       })
-
+      this._snackBar.open('Password reset successfully', 'OK', { duration: 3000 });
+      this.state = "normal";
     } catch (error) {
       console.log(error);
     }

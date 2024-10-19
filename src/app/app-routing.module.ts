@@ -114,7 +114,7 @@ const routes: Routes = [
     {
       path: 'demo',
       component: DemoComponent
-  }],
+    }],
   },
   {
     path: 'login',
@@ -122,6 +122,10 @@ const routes: Routes = [
     children: [
       {
         path: 'signin',
+        component: SigninComponent
+      }, 
+      {
+        path: 'signin/:username',
         component: SigninComponent
       },
       {
