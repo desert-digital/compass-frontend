@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 // Amplify 
 
 import { generateClient } from '@aws-amplify/api';
-import { listStaff, getStaff } from '../../graphql/queries';
+import { listStaff, getStaff, getStaffByUserName } from '../../graphql/queries';
 import { createStaff, updateStaff, deleteStaff } from '../../graphql/mutations';
 
 // Local
@@ -40,6 +40,7 @@ export class StaffService {
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
+          username: staff.username,
           role: staff.role
         }
       }
@@ -75,33 +76,51 @@ export class StaffService {
     });
   }
 
+  async getStaffByUsername(username: string): Promise<Staff | null> {
+    const staffResult = await this.client.graphql({
+      query: getStaffByUserName,
+      variables: { username: username }
+    });
+
+    const staffItems = staffResult.data.getStaffByUserName.items;
+    return staffItems.length > 0 ? staffItems[0] as Staff : null;
+  }
+
+  async getRoleForStaff(username: string):  Promise<string | null> {
+    const user = await this.getStaffByUsername(username);
+    return user?.role;
+  }
+
   async createDemoStaff() {
     let _staff =
       {
-        company: 'seaforth',
+        company: 'acme',
         name: 'Jenny Spain',
-        email: 'compass_demo_staff@gmail.com',
+        email: 'desert.digital.us@gmail.com',
         phone: '+1 (856) 867-5309',
+        username: 'acme-crew',
         role: 'Crew'
       } as Staff;
     this.createStaff(_staff);
     _staff =
       {
-        company: 'seaforth',
+        company: 'acme',
         name: 'Davey Jones',
-        email: 'compass_demo_staff@gmail.com',
+        email: 'desert.digital.us@gmail.com',
         phone: '+1 (856) 555-1313',
+        username: 'acme-ops',
         role: 'OpsManager'
       } as Staff;
     this.createStaff(_staff);
     _staff =
-    {
-      company: 'seaforth',
-      name: 'Paolo Jorge',
-      email: 'compass_demo_staff@gmail.com',
-      phone: '+1 (856) 942-5311',
-      role: 'ServiceManager'
-    } as Staff;
-  this.createStaff(_staff);
+      {
+        company: 'compass',
+        name: 'Paolo Jorge',
+        email: 'desert.digital.us@gmail.com',
+        phone: '+1 (856) 942-5311',
+        username: 'compass-ops',
+        role: 'OpsManager'
+      } as Staff;
+    this.createStaff(_staff);
   }
 }

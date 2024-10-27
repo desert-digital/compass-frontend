@@ -784,6 +784,40 @@ export const listWorkflowChecklists = /* GraphQL */ `query ListWorkflowChecklist
   APITypes.ListWorkflowChecklistsQueryVariables,
   APITypes.ListWorkflowChecklistsQuery
 >;
+export const getStaffByUserName = /* GraphQL */ `query GetStaffByUserName(
+  $username: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelStaffFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  getStaffByUserName(
+    username: $username
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      company
+      name
+      email
+      phone
+      username
+      role
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetStaffByUserNameQueryVariables,
+  APITypes.GetStaffByUserNameQuery
+>;
 export const checklistActionsByActionModelId = /* GraphQL */ `query ChecklistActionsByActionModelId(
   $actionModelId: ID!
   $sortDirection: ModelSortDirection

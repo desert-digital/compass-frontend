@@ -1,55 +1,53 @@
 // Core
 
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
-import { BehaviorSubject } from 'rxjs';
 
+// Amplify 
 
 // Local
+
+import { StaffService } from './staff.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  private applicationState = new BehaviorSubject<string>(null);
-  private applicationUserName = new BehaviorSubject<string>(null);
-  private applicationGroup = new BehaviorSubject<string>(null);
+  public currentState = signal('');
+  public currentUserName = signal(' ');
+  public currentGroup = signal(' ');
+  public currentRoles = signal(' ');
 
-  currentState: string;
-  currentUserName: string;
-  currentGroup: string;
-  currentRoles: [string];
+  constructor(private _staffService: StaffService) {}
 
-  constructor() { }
-
-  connect(user: string, group: string): void {
-    this.changeConnectedStatus("connected");
-    this.changeConnectedAccount(user);
-    this.changeConnectedGroup(group);
+  connect(role: string): void {
+    this.getConnectedUserName();
+    this.getConnectedGroup();
+    this.changeConnectedRole(role);
   }
 
+  // Maybe use this to check for existing user names?
+
   register(user: string): void {
-    this.changeConnectedStatus("registering");
     this.changeConnectedAccount(user);
   }
 
   disconnect(): void {
-    this.changeConnectedStatus("disconnected");
-    this.changeConnectedAccount(null);
-  }
-
-  changeConnectedStatus(newStatus: string) {
-    this.currentState = newStatus;
+    this.currentUserName.set(' ');
+    this.currentGroup.set(' ');
   }
 
   changeConnectedAccount(newUser: string) {
-    this.currentUserName = newUser;
+    this.currentUserName.set(newUser);
   }
 
   changeConnectedGroup(newGroup: string) {
-    localStorage.setItem('GROUP', newGroup);
-    this.currentGroup = newGroup;
+    this.currentGroup.set(newGroup);
+  }
+
+  changeConnectedRole(newRole: string) {
+    this.currentRoles.set(newRole);
   }
 
   async getConnectedStatus() {
@@ -63,14 +61,41 @@ export class AccountService {
   }
 
   async getConnectedUserName() {
-    return this.currentUserName;
+    await getCurrentUser().then((user) => {
+      this.currentUserName.set(user.username);
+    })
+    return this.currentUserName();
   }
 
-  //TODO: Update to v6
+  async getConnectedGroup(): Promise<string | null> {
+    try {
+      const { tokens } = await fetchAuthSession();
 
-  async getConnectedGroup() {
-    await fetchAuthSession();
+      if (tokens?.accessToken?.payload['cognito:groups']) {
+        const groups = tokens.accessToken.payload['cognito:groups'];
+        if (Array.isArray(groups) && groups.length > 0) {
+          const firstGroup = groups[0].toString();
+          this.currentGroup.set(firstGroup);
+          return firstGroup;
+        }
+        else {
+          this.currentGroup.set(null);
+          return null;
+        }
+      }
+      else {
+        this.currentGroup.set(null);
+        return null
+      }
+    } catch (error) {
+      console.error('Error getting user group:', error);
+      this.currentGroup.set(null);
+      return null;
+    }
+  }
 
-    return 'ADMIN';
+  async getConnectedRole() {
+    const role = await this._staffService.getRoleForStaff(this.currentUserName().valueOf());
+    this.currentRoles.set(role);
   }
 }

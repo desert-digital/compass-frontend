@@ -3484,6 +3484,33 @@ export type ListWorkflowChecklistsQuery = {
   } | null,
 };
 
+export type GetStaffByUserNameQueryVariables = {
+  username: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelStaffFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GetStaffByUserNameQuery = {
+  getStaffByUserName?:  {
+    __typename: "ModelStaffConnection",
+    items:  Array< {
+      __typename: "Staff",
+      id: string,
+      company: string,
+      name?: string | null,
+      email?: string | null,
+      phone?: string | null,
+      username?: string | null,
+      role?: CompassUserRole | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ChecklistActionsByActionModelIdQueryVariables = {
   actionModelId: string,
   sortDirection?: ModelSortDirection | null,
