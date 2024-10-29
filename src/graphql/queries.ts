@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from "../API.service";
 type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryInput: InputType;
   __generatedQueryOutput: OutputType;
@@ -68,6 +68,20 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
       name
       vesselType
       documentNumber
+      defaultWorkflow {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       ownerBoatsId
@@ -94,6 +108,28 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
     items {
       id
       company
+      boat {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
       items
       createdAt
       updatedAt
@@ -161,6 +197,18 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -185,6 +233,20 @@ export const listVessels = /* GraphQL */ `query ListVessels(
       name
       vesselType
       documentNumber
+      defaultWorkflow {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       ownerBoatsId
@@ -245,6 +307,28 @@ export const getOwner = /* GraphQL */ `query GetOwner($id: ID!) {
     email
     phone
     boats {
+      items {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -266,6 +350,22 @@ export const listOwners = /* GraphQL */ `query ListOwners(
       name
       email
       phone
+      boats {
+        items {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -286,6 +386,35 @@ export const getActionModel = /* GraphQL */ `query GetActionModel($id: ID!) {
     notes
     duration
     checklists {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -310,6 +439,18 @@ export const listActionModels = /* GraphQL */ `query ListActionModels(
       name
       notes
       duration
+      checklists {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -331,10 +472,68 @@ export const getChecklistModel = /* GraphQL */ `query GetChecklistModel($id: ID!
     duration
     preCharter
     actionModels {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     workflows {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -360,6 +559,30 @@ export const listChecklistModels = /* GraphQL */ `query ListChecklistModels(
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -380,6 +603,35 @@ export const getWorkflowModel = /* GraphQL */ `query GetWorkflowModel($id: ID!) 
     notes
     duration
     checklistModels {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -404,6 +656,18 @@ export const listWorkflowModels = /* GraphQL */ `query ListWorkflowModels(
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -478,6 +742,19 @@ export const getChecklist = /* GraphQL */ `query GetChecklist($id: ID!) {
       __typename
     }
     steps {
+      items {
+        id
+        company
+        status
+        name
+        duration
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        checklistStepsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -507,6 +784,35 @@ export const listChecklists = /* GraphQL */ `query ListChecklists(
       company
       name
       duration
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        username
+        role
+        createdAt
+        updatedAt
+        __typename
+      }
+      steps {
+        items {
+          id
+          company
+          status
+          name
+          duration
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -532,6 +838,37 @@ export const getWorkflow = /* GraphQL */ `query GetWorkflow($id: ID!) {
     name
     duration
     steps {
+      items {
+        id
+        company
+        name
+        duration
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          username
+          role
+          createdAt
+          updatedAt
+          __typename
+        }
+        steps {
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        workflowStepsId
+        checklistOwnerId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -559,6 +896,25 @@ export const listWorkflows = /* GraphQL */ `query ListWorkflows(
       company
       name
       duration
+      steps {
+        items {
+          id
+          company
+          name
+          duration
+          mustStart
+          mustEnd
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          workflowStepsId
+          checklistOwnerId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -586,6 +942,35 @@ export const getMessage = /* GraphQL */ `query GetMessage($id: ID!) {
       company
       name
       duration
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        username
+        role
+        createdAt
+        updatedAt
+        __typename
+      }
+      steps {
+        items {
+          id
+          company
+          status
+          name
+          duration
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -617,6 +1002,37 @@ export const listMessages = /* GraphQL */ `query ListMessages(
       toAddress
       fromAddress
       message
+      messageChecklist {
+        id
+        company
+        name
+        duration
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          username
+          role
+          createdAt
+          updatedAt
+          __typename
+        }
+        steps {
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        workflowStepsId
+        checklistOwnerId
+        __typename
+      }
       createdAt
       updatedAt
       messageMessageChecklistId
@@ -677,6 +1093,18 @@ export const getChecklistActions = /* GraphQL */ `query GetChecklistActions($id:
       name
       notes
       duration
+      checklists {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -688,6 +1116,30 @@ export const getChecklistActions = /* GraphQL */ `query GetChecklistActions($id:
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -711,6 +1163,39 @@ export const listChecklistActions = /* GraphQL */ `query ListChecklistActions(
       id
       actionModelId
       checklistModelId
+      actionModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklists {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -735,6 +1220,30 @@ export const getWorkflowChecklists = /* GraphQL */ `query GetWorkflowChecklists(
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -745,6 +1254,18 @@ export const getWorkflowChecklists = /* GraphQL */ `query GetWorkflowChecklists(
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -772,6 +1293,39 @@ export const listWorkflowChecklists = /* GraphQL */ `query ListWorkflowChecklist
       id
       checklistModelId
       workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -836,6 +1390,39 @@ export const checklistActionsByActionModelId = /* GraphQL */ `query ChecklistAct
       id
       actionModelId
       checklistModelId
+      actionModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklists {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -866,6 +1453,39 @@ export const checklistActionsByChecklistModelId = /* GraphQL */ `query Checklist
       id
       actionModelId
       checklistModelId
+      actionModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklists {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -896,6 +1516,39 @@ export const workflowChecklistsByChecklistModelId = /* GraphQL */ `query Workflo
       id
       checklistModelId
       workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -926,6 +1579,39 @@ export const workflowChecklistsByWorkflowModelId = /* GraphQL */ `query Workflow
       id
       checklistModelId
       workflowModelId
+      checklistModel {
+        id
+        company
+        name
+        notes
+        duration
+        preCharter
+        actionModels {
+          nextToken
+          __typename
+        }
+        workflows {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      workflowModel {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename

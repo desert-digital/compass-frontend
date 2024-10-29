@@ -1,8 +1,12 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
+// Material 
+
+import { MatSidenav } from '@angular/material/sidenav';
 
 // Amplify
 
@@ -11,8 +15,7 @@ import { signOut } from 'aws-amplify/auth';
 // Local
 
 import { PendingService } from 'src/app/services/pending.service';
-
-
+import { AccountService } from 'src/app/services/account-service.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -20,8 +23,10 @@ import { PendingService } from 'src/app/services/pending.service';
 })
 export class MainComponent {
 
-  @Output() logoutEvent = new EventEmitter();
+  @ViewChild('drawer', {static: true}) sideNavDrawer: MatSidenav;
 
+  userName: string = '';
+  userRole: string = '';
   pendingItems: number = 0;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -31,19 +36,28 @@ export class MainComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
+    private _accountService: AccountService,
     private _pendingService: PendingService,
     private _router: Router) { }
 
-
   async ngOnInit() {
-    this.onTopPressed();
+    this.onMessagesPressed();
 
     this._pendingService.getPendingItems();
     
     this._pendingService.numberOfPendingEvents$.subscribe((number : number) => 
       this.pendingItems = number);
+
+    this.userName = this._accountService.currentUserName();
+    this.userRole = this._accountService.currentRole();
   }
   
+  async ngAfterViewInit() {
+    if (this.userRole === 'Crew') {
+      await this.sideNavDrawer.close();
+    }
+  }
+
   onTopPressed() {
     this._router.navigate(['main/top']);
   }
@@ -54,6 +68,10 @@ export class MainComponent {
 
   onPendingPressed() {
     this._router.navigate(['main/pending', 15]);
+  }
+
+  onMessagesPressed() {
+    this._router.navigate(['main/messages']);
   }
 
   onChecklistPressed() {

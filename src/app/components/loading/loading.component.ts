@@ -22,9 +22,6 @@ export class LoadingComponent {
     await this._accountService.getConnectedGroup();
     await this._accountService.getConnectedRole()
 
-    console.log(this._accountService.currentUserName());
-    console.log(this._accountService.currentGroup());
-    console.log(this._accountService.currentRoles());
-    this._router.navigate(['main/top']);
+    this._router.navigate(['main/checklist']);
   }
 }

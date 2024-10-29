@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from "../API.service";
 type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionInput: InputType;
   __generatedSubscriptionOutput: OutputType;
@@ -89,6 +89,20 @@ export const onCreateServiceOrder = /* GraphQL */ `subscription OnCreateServiceO
       name
       vesselType
       documentNumber
+      defaultWorkflow {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       ownerBoatsId
@@ -118,6 +132,20 @@ export const onUpdateServiceOrder = /* GraphQL */ `subscription OnUpdateServiceO
       name
       vesselType
       documentNumber
+      defaultWorkflow {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       ownerBoatsId
@@ -147,6 +175,20 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
       name
       vesselType
       documentNumber
+      defaultWorkflow {
+        id
+        company
+        name
+        notes
+        duration
+        checklistModels {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       ownerBoatsId
@@ -231,6 +273,18 @@ export const onCreateVessel = /* GraphQL */ `subscription OnCreateVessel($filter
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -259,6 +313,18 @@ export const onUpdateVessel = /* GraphQL */ `subscription OnUpdateVessel($filter
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -287,6 +353,18 @@ export const onDeleteVessel = /* GraphQL */ `subscription OnDeleteVessel($filter
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -364,6 +442,28 @@ export const onCreateOwner = /* GraphQL */ `subscription OnCreateOwner($filter: 
     email
     phone
     boats {
+      items {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -384,6 +484,28 @@ export const onUpdateOwner = /* GraphQL */ `subscription OnUpdateOwner($filter: 
     email
     phone
     boats {
+      items {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -404,6 +526,28 @@ export const onDeleteOwner = /* GraphQL */ `subscription OnDeleteOwner($filter: 
     email
     phone
     boats {
+      items {
+        id
+        company
+        name
+        vesselType
+        documentNumber
+        defaultWorkflow {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        ownerBoatsId
+        vesselDefaultWorkflowId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -426,6 +570,35 @@ export const onCreateActionModel = /* GraphQL */ `subscription OnCreateActionMod
     notes
     duration
     checklists {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -448,6 +621,35 @@ export const onUpdateActionModel = /* GraphQL */ `subscription OnUpdateActionMod
     notes
     duration
     checklists {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -470,6 +672,35 @@ export const onDeleteActionModel = /* GraphQL */ `subscription OnDeleteActionMod
     notes
     duration
     checklists {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -493,10 +724,68 @@ export const onCreateChecklistModel = /* GraphQL */ `subscription OnCreateCheckl
     duration
     preCharter
     actionModels {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     workflows {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -520,10 +809,68 @@ export const onUpdateChecklistModel = /* GraphQL */ `subscription OnUpdateCheckl
     duration
     preCharter
     actionModels {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     workflows {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -547,10 +894,68 @@ export const onDeleteChecklistModel = /* GraphQL */ `subscription OnDeleteCheckl
     duration
     preCharter
     actionModels {
+      items {
+        id
+        actionModelId
+        checklistModelId
+        actionModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     workflows {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -573,6 +978,35 @@ export const onCreateWorkflowModel = /* GraphQL */ `subscription OnCreateWorkflo
     notes
     duration
     checklistModels {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -595,6 +1029,35 @@ export const onUpdateWorkflowModel = /* GraphQL */ `subscription OnUpdateWorkflo
     notes
     duration
     checklistModels {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -617,6 +1080,35 @@ export const onDeleteWorkflowModel = /* GraphQL */ `subscription OnDeleteWorkflo
     notes
     duration
     checklistModels {
+      items {
+        id
+        checklistModelId
+        workflowModelId
+        checklistModel {
+          id
+          company
+          name
+          notes
+          duration
+          preCharter
+          createdAt
+          updatedAt
+          __typename
+        }
+        workflowModel {
+          id
+          company
+          name
+          notes
+          duration
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -705,6 +1197,19 @@ export const onCreateChecklist = /* GraphQL */ `subscription OnCreateChecklist($
       __typename
     }
     steps {
+      items {
+        id
+        company
+        status
+        name
+        duration
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        checklistStepsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -742,6 +1247,19 @@ export const onUpdateChecklist = /* GraphQL */ `subscription OnUpdateChecklist($
       __typename
     }
     steps {
+      items {
+        id
+        company
+        status
+        name
+        duration
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        checklistStepsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -779,6 +1297,19 @@ export const onDeleteChecklist = /* GraphQL */ `subscription OnDeleteChecklist($
       __typename
     }
     steps {
+      items {
+        id
+        company
+        status
+        name
+        duration
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        checklistStepsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -804,6 +1335,37 @@ export const onCreateWorkflow = /* GraphQL */ `subscription OnCreateWorkflow($fi
     name
     duration
     steps {
+      items {
+        id
+        company
+        name
+        duration
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          username
+          role
+          createdAt
+          updatedAt
+          __typename
+        }
+        steps {
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        workflowStepsId
+        checklistOwnerId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -827,6 +1389,37 @@ export const onUpdateWorkflow = /* GraphQL */ `subscription OnUpdateWorkflow($fi
     name
     duration
     steps {
+      items {
+        id
+        company
+        name
+        duration
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          username
+          role
+          createdAt
+          updatedAt
+          __typename
+        }
+        steps {
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        workflowStepsId
+        checklistOwnerId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -850,6 +1443,37 @@ export const onDeleteWorkflow = /* GraphQL */ `subscription OnDeleteWorkflow($fi
     name
     duration
     steps {
+      items {
+        id
+        company
+        name
+        duration
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          username
+          role
+          createdAt
+          updatedAt
+          __typename
+        }
+        steps {
+          nextToken
+          __typename
+        }
+        mustStart
+        mustEnd
+        actualStart
+        actualEnd
+        createdAt
+        updatedAt
+        workflowStepsId
+        checklistOwnerId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -877,6 +1501,35 @@ export const onCreateMessage = /* GraphQL */ `subscription OnCreateMessage($filt
       company
       name
       duration
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        username
+        role
+        createdAt
+        updatedAt
+        __typename
+      }
+      steps {
+        items {
+          id
+          company
+          status
+          name
+          duration
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -908,6 +1561,35 @@ export const onUpdateMessage = /* GraphQL */ `subscription OnUpdateMessage($filt
       company
       name
       duration
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        username
+        role
+        createdAt
+        updatedAt
+        __typename
+      }
+      steps {
+        items {
+          id
+          company
+          status
+          name
+          duration
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -939,6 +1621,35 @@ export const onDeleteMessage = /* GraphQL */ `subscription OnDeleteMessage($filt
       company
       name
       duration
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        username
+        role
+        createdAt
+        updatedAt
+        __typename
+      }
+      steps {
+        items {
+          id
+          company
+          status
+          name
+          duration
+          actualStart
+          actualEnd
+          createdAt
+          updatedAt
+          checklistStepsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       mustStart
       mustEnd
       actualStart
@@ -1014,6 +1725,18 @@ export const onCreateChecklistActions = /* GraphQL */ `subscription OnCreateChec
       name
       notes
       duration
+      checklists {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1025,6 +1748,30 @@ export const onCreateChecklistActions = /* GraphQL */ `subscription OnCreateChec
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1051,6 +1798,18 @@ export const onUpdateChecklistActions = /* GraphQL */ `subscription OnUpdateChec
       name
       notes
       duration
+      checklists {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1062,6 +1821,30 @@ export const onUpdateChecklistActions = /* GraphQL */ `subscription OnUpdateChec
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1088,6 +1871,18 @@ export const onDeleteChecklistActions = /* GraphQL */ `subscription OnDeleteChec
       name
       notes
       duration
+      checklists {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1099,6 +1894,30 @@ export const onDeleteChecklistActions = /* GraphQL */ `subscription OnDeleteChec
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1126,6 +1945,30 @@ export const onCreateWorkflowChecklists = /* GraphQL */ `subscription OnCreateWo
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1136,6 +1979,18 @@ export const onCreateWorkflowChecklists = /* GraphQL */ `subscription OnCreateWo
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1163,6 +2018,30 @@ export const onUpdateWorkflowChecklists = /* GraphQL */ `subscription OnUpdateWo
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1173,6 +2052,18 @@ export const onUpdateWorkflowChecklists = /* GraphQL */ `subscription OnUpdateWo
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1200,6 +2091,30 @@ export const onDeleteWorkflowChecklists = /* GraphQL */ `subscription OnDeleteWo
       notes
       duration
       preCharter
+      actionModels {
+        items {
+          id
+          actionModelId
+          checklistModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      workflows {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1210,6 +2125,18 @@ export const onDeleteWorkflowChecklists = /* GraphQL */ `subscription OnDeleteWo
       name
       notes
       duration
+      checklistModels {
+        items {
+          id
+          checklistModelId
+          workflowModelId
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

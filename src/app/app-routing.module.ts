@@ -24,6 +24,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
+import { MessagesComponent } from './components/messages/messages.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
@@ -68,6 +69,9 @@ const routes: Routes = [
     }, {
       path: 'pending/:size',
       component: PendingTableComponent
+    }, {
+      path: 'messages',
+      component: MessagesComponent
     }, {
       path: 'checklist',
       component: ChecklistComponent

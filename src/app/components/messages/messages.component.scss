@@ -1,0 +1,6 @@
+@import 'src/compass-theme';
+
+h4 {
+    @include sub-header;
+    margin: 10px;
+}

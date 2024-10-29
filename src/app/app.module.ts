@@ -77,6 +77,7 @@ import { ManageOwnersComponent } from './components/manage-owners/manage-owners.
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
 import { ManageActionsComponent } from './components/manage-actions/manage-actions.component';
+import { MessagesComponent } from './components/messages/messages.component';
 import { OwnerNamePipe } from './pipes/owner-name.pipe';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
@@ -125,6 +126,7 @@ import { TopComponent } from './components/top/top.component';
     ManageWorkflowsComponent,
     ManageServiceOrdersComponent,
     ManageStaffComponent,
+    MessagesComponent,
     OwnerNamePipe,
     PendingTableComponent,
     ServiceOrderTableComponent,

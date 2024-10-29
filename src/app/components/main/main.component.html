@@ -3,9 +3,20 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <div class="sidenav-buttons">
+      @if (userRole === 'Crew') {
+      <button mat-button color="primary" enabled="false" (click)="onMessagesPressed()">
+        <mat-icon class="double-sized">chat</mat-icon>
+        <span class="sidenav-button-text">Messages</span>
+      </button>
+      }
+      @if (userRole === 'OpsManager') {
       <button mat-button color="primary" (click)="onTopPressed()">
         <mat-icon class="double-sized">language</mat-icon>
         <span class="sidenav-button-text">Top</span>
+      </button>
+      <button mat-button color="primary" (click)="onMessagesPressed()">
+        <mat-icon class="double-sized">chat</mat-icon>
+        <span class="sidenav-button-text">Messages</span>
       </button>
       <button [matBadge]="pendingItems" matBadgeSize="medium" mat-button color="primary" (click)="onPendingPressed()">
         <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
@@ -22,10 +33,6 @@
       <button mat-button color="primary" (click)="onOwnersPressed()">
         <mat-icon class="double-sized">person</mat-icon>
         <span class="sidenav-button-text">Owners</span>
-      </button>
-      <button mat-button color="primary" (click)="onChecklistPressed()">
-        <mat-icon class="double-sized">chat</mat-icon>
-        <span class="sidenav-button-text">Messages</span>
       </button>
       <button mat-button color="primary" (click)="onWorkflowPressed()">
         <mat-icon class="double-sized">schema</mat-icon>
@@ -54,7 +61,36 @@
           <span class="sidenav-button-text">Add Demo Data</span>
         </button>
       </div>
+      }
+      @if (userRole === 'ServiceManager') {
+      <button mat-button color="primary" (click)="onTopPressed()">
+        <mat-icon class="double-sized">language</mat-icon>
+        <span class="sidenav-button-text">Top</span>
+      </button>
+      <button mat-button color="primary" (click)="onMessagesPressed()">
+        <mat-icon class="double-sized">chat</mat-icon>
+        <span class="sidenav-button-text">Messages</span>
+      </button>
+      <button [matBadge]="pendingItems" matBadgeSize="medium" mat-button color="primary" (click)="onPendingPressed()">
+        <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
+        <span class="sidenav-button-text">Pending</span>
+      </button>
+      <button mat-button color="primary" (click)="onFleetPressed()">
+        <mat-icon class="double-sized">sailing</mat-icon>
+        <span class="sidenav-button-text">Fleet</span>
+      </button>
+      <button mat-button color="primary" (click)="onInventoryPressed()">
+        <mat-icon class="double-sized">pallet</mat-icon>
+        <span class="sidenav-button-text">Inventory</span>
+      </button>
+      <button mat-button color="primary" (click)="onServicesPressed()">
+        <mat-icon class="double-sized">home_repair_service</mat-icon>
+        <span class="sidenav-button-text">Service Orders</span>
+      </button>
+      <mat-divider></mat-divider>
+      }
     </div>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -62,7 +98,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span class="title">Compass Operations</span>
+      <span class="title">Compass Operations, Welcome {{ userName }} ({{ userRole }})</span>
       <span class="spacer"></span>
       <button (click)="onLogoutPressed()" mat-button color="primary">
         <mat-icon class="double-sized">logout</mat-icon>

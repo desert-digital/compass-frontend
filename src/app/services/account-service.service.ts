@@ -17,7 +17,7 @@ export class AccountService {
   public currentState = signal('');
   public currentUserName = signal(' ');
   public currentGroup = signal(' ');
-  public currentRoles = signal(' ');
+  public currentRole = signal(' ');
 
   constructor(private _staffService: StaffService) {}
 
@@ -47,7 +47,7 @@ export class AccountService {
   }
 
   changeConnectedRole(newRole: string) {
-    this.currentRoles.set(newRole);
+    this.currentRole.set(newRole);
   }
 
   async getConnectedStatus() {
@@ -96,6 +96,6 @@ export class AccountService {
 
   async getConnectedRole() {
     const role = await this._staffService.getRoleForStaff(this.currentUserName().valueOf());
-    this.currentRoles.set(role);
+    this.currentRole.set(role);
   }
 }
