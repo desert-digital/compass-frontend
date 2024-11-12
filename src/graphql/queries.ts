@@ -68,6 +68,21 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
       name
       vesselType
       documentNumber
+      status
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        boats {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         company
@@ -85,6 +100,7 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
       createdAt
       updatedAt
       ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -114,6 +130,17 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
         name
         vesselType
         documentNumber
+        status
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
+          __typename
+        }
         defaultWorkflow {
           id
           company
@@ -127,6 +154,7 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
         createdAt
         updatedAt
         ownerBoatsId
+        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -191,6 +219,35 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
     name
     vesselType
     documentNumber
+    status
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        items {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          status
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselOwnerId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       company
@@ -216,6 +273,7 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
     createdAt
     updatedAt
     ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -233,6 +291,21 @@ export const listVessels = /* GraphQL */ `query ListVessels(
       name
       vesselType
       documentNumber
+      status
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        boats {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         company
@@ -250,6 +323,7 @@ export const listVessels = /* GraphQL */ `query ListVessels(
       createdAt
       updatedAt
       ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -313,6 +387,17 @@ export const getOwner = /* GraphQL */ `query GetOwner($id: ID!) {
         name
         vesselType
         documentNumber
+        status
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
+          __typename
+        }
         defaultWorkflow {
           id
           company
@@ -326,6 +411,7 @@ export const getOwner = /* GraphQL */ `query GetOwner($id: ID!) {
         createdAt
         updatedAt
         ownerBoatsId
+        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -357,9 +443,11 @@ export const listOwners = /* GraphQL */ `query ListOwners(
           name
           vesselType
           documentNumber
+          status
           createdAt
           updatedAt
           ownerBoatsId
+          vesselOwnerId
           vesselDefaultWorkflowId
           __typename
         }

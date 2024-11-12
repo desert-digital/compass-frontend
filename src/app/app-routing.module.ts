@@ -18,7 +18,6 @@ import { EditOwnerComponent } from './components/edit-owner/edit-owner.component
 import { EditVesselComponent } from './components/edit-vessel/edit-vessel.component';
 import { EditStaffComponent } from './components/edit-staff/edit-staff.component';
 import { EditWorkflowComponent } from './components/edit-workflow/edit-workflow.component';
-import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { InventoryTableComponent } from './components/inventory-table/inventory-table.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';

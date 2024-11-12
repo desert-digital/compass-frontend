@@ -89,6 +89,21 @@ export const onCreateServiceOrder = /* GraphQL */ `subscription OnCreateServiceO
       name
       vesselType
       documentNumber
+      status
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        boats {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         company
@@ -106,6 +121,7 @@ export const onCreateServiceOrder = /* GraphQL */ `subscription OnCreateServiceO
       createdAt
       updatedAt
       ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -132,6 +148,21 @@ export const onUpdateServiceOrder = /* GraphQL */ `subscription OnUpdateServiceO
       name
       vesselType
       documentNumber
+      status
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        boats {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         company
@@ -149,6 +180,7 @@ export const onUpdateServiceOrder = /* GraphQL */ `subscription OnUpdateServiceO
       createdAt
       updatedAt
       ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -175,6 +207,21 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
       name
       vesselType
       documentNumber
+      status
+      owner {
+        id
+        company
+        name
+        email
+        phone
+        boats {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
       defaultWorkflow {
         id
         company
@@ -192,6 +239,7 @@ export const onDeleteServiceOrder = /* GraphQL */ `subscription OnDeleteServiceO
       createdAt
       updatedAt
       ownerBoatsId
+      vesselOwnerId
       vesselDefaultWorkflowId
       __typename
     }
@@ -267,6 +315,35 @@ export const onCreateVessel = /* GraphQL */ `subscription OnCreateVessel($filter
     name
     vesselType
     documentNumber
+    status
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        items {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          status
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselOwnerId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       company
@@ -292,6 +369,7 @@ export const onCreateVessel = /* GraphQL */ `subscription OnCreateVessel($filter
     createdAt
     updatedAt
     ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -307,6 +385,35 @@ export const onUpdateVessel = /* GraphQL */ `subscription OnUpdateVessel($filter
     name
     vesselType
     documentNumber
+    status
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        items {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          status
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselOwnerId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       company
@@ -332,6 +439,7 @@ export const onUpdateVessel = /* GraphQL */ `subscription OnUpdateVessel($filter
     createdAt
     updatedAt
     ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -347,6 +455,35 @@ export const onDeleteVessel = /* GraphQL */ `subscription OnDeleteVessel($filter
     name
     vesselType
     documentNumber
+    status
+    owner {
+      id
+      company
+      name
+      email
+      phone
+      boats {
+        items {
+          id
+          company
+          name
+          vesselType
+          documentNumber
+          status
+          createdAt
+          updatedAt
+          ownerBoatsId
+          vesselOwnerId
+          vesselDefaultWorkflowId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
     defaultWorkflow {
       id
       company
@@ -372,6 +509,7 @@ export const onDeleteVessel = /* GraphQL */ `subscription OnDeleteVessel($filter
     createdAt
     updatedAt
     ownerBoatsId
+    vesselOwnerId
     vesselDefaultWorkflowId
     __typename
   }
@@ -448,6 +586,17 @@ export const onCreateOwner = /* GraphQL */ `subscription OnCreateOwner($filter: 
         name
         vesselType
         documentNumber
+        status
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
+          __typename
+        }
         defaultWorkflow {
           id
           company
@@ -461,6 +610,7 @@ export const onCreateOwner = /* GraphQL */ `subscription OnCreateOwner($filter: 
         createdAt
         updatedAt
         ownerBoatsId
+        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -490,6 +640,17 @@ export const onUpdateOwner = /* GraphQL */ `subscription OnUpdateOwner($filter: 
         name
         vesselType
         documentNumber
+        status
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
+          __typename
+        }
         defaultWorkflow {
           id
           company
@@ -503,6 +664,7 @@ export const onUpdateOwner = /* GraphQL */ `subscription OnUpdateOwner($filter: 
         createdAt
         updatedAt
         ownerBoatsId
+        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }
@@ -532,6 +694,17 @@ export const onDeleteOwner = /* GraphQL */ `subscription OnDeleteOwner($filter: 
         name
         vesselType
         documentNumber
+        status
+        owner {
+          id
+          company
+          name
+          email
+          phone
+          createdAt
+          updatedAt
+          __typename
+        }
         defaultWorkflow {
           id
           company
@@ -545,6 +718,7 @@ export const onDeleteOwner = /* GraphQL */ `subscription OnDeleteOwner($filter: 
         createdAt
         updatedAt
         ownerBoatsId
+        vesselOwnerId
         vesselDefaultWorkflowId
         __typename
       }

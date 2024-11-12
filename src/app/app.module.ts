@@ -72,7 +72,6 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MainComponent } from './components/main/main.component';
 import { ManageChecklistsComponent } from './components/manage-checklists/manage-checklists.component';
-import { ManageFleetComponent } from './components/manage-fleet/manage-fleet.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageServiceOrdersComponent } from './components/manage-service-orders/manage-service-orders.component';
@@ -91,7 +90,6 @@ import { ShowChecklistNotesDialogComponent } from './components/show-checklist-n
 import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-notes-dialog/show-workflow-notes-dialog.component';
 import { TopComponent } from './components/top/top.component';
 import { ManageVesselsComponent } from './components/manage-vessels/manage-vessels.component';
-
 
 @NgModule({
   declarations: [
@@ -122,7 +120,6 @@ import { ManageVesselsComponent } from './components/manage-vessels/manage-vesse
     LogoutComponent,
     ManageActionsComponent,
     ManageChecklistsComponent,
-    ManageFleetComponent,
     ManageOwnersComponent,
     ManageWorkflowsComponent,
     ManageServiceOrdersComponent,
