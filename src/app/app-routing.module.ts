@@ -30,6 +30,7 @@ import { ManageChecklistsComponent } from './components/manage-checklists/manage
 import { ManageWorkflowsComponent } from './components/manage-workflows/manage-workflows.component';
 import { ManageStaffComponent } from './components/manage-staff/manage-staff.component';
 import { ManageOwnersComponent } from './components/manage-owners/manage-owners.component';
+import { ManageVesselsComponent } from './components/manage-vessels/manage-vessels.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
 import { ServiceOrderTableComponent } from './components/service-order-table/service-order-table.component';
 import { SigninComponent } from './components/signin/signin.component';
@@ -47,7 +48,7 @@ const routes: Routes = [
       component: EditVesselComponent
     }, {
       path: 'fleet',
-      component: ManageFleetComponent
+      component: ManageVesselsComponent
     }, {
       path: 'staff',
       component: ManageStaffComponent

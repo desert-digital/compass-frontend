@@ -66,9 +66,7 @@ export class OwnersService {
         }
       }
     })
-
-    console.log(ownerResult);
-
+    
     for (const boat of boats) {
       this._fleetService.updateVesselWithOwner(boat, owner);
     }

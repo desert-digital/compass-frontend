@@ -34,7 +34,7 @@ export class ServiceOrderTableComponent implements AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.pageSize = +params['size'] || 7;
+      this.pageSize = +params['size'] || 6;
     });
   }
 

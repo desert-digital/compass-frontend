@@ -9,13 +9,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
+import { MatInput } from '@angular/material/input';
 
 // Local
 
 import { Vessel } from '../../API.service';
 import { FleetService } from 'src/app/services/fleet.service';
 import { FleetTableDataSource } from './manage-fleet-datasource';
-import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-manage-fleet',
@@ -25,8 +25,9 @@ import { MatInput } from '@angular/material/input';
 export class ManageFleetComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<Vessel>;
-  dataSource: FleetTableDataSource;
+  @ViewChild(MatTable) table: MatTable<Vessel> = null;
+
+  dataTableSource: FleetTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'type', 'documentNumber', 'owner', 'actions'];
@@ -37,7 +38,7 @@ export class ManageFleetComponent implements AfterViewInit {
   constructor(private router: Router,
     private _snackBar: MatSnackBar,
     private _fleetService: FleetService) {
-    this.dataSource = new FleetTableDataSource(_fleetService);
+    this.dataTableSource = new FleetTableDataSource(_fleetService);
   }
 
   ngAfterViewInit(): void {
@@ -45,9 +46,8 @@ export class ManageFleetComponent implements AfterViewInit {
   }
 
   _setup() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    this.dataTableSource.sort = this.sort;
+    this.dataTableSource.paginator = this.paginator;
   }
 
   async onFileSelected(event: MatInput) {

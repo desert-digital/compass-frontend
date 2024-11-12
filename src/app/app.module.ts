@@ -90,6 +90,7 @@ import { ShowActionNotesDialogComponent } from './components/show-action-notes-d
 import { ShowChecklistNotesDialogComponent } from './components/show-checklist-notes-dialog/show-checklist-notes-dialog.component';
 import { ShowWorkflowNotesDialogComponent } from './components/show-workflow-notes-dialog/show-workflow-notes-dialog.component';
 import { TopComponent } from './components/top/top.component';
+import { ManageVesselsComponent } from './components/manage-vessels/manage-vessels.component';
 
 
 @NgModule({
@@ -139,6 +140,7 @@ import { TopComponent } from './components/top/top.component';
     TopComponent,
     WorkflowOverviewComponent,
     InventoryTableComponent,
+    ManageVesselsComponent,
   ],
   imports: [
     AmplifyAuthenticatorModule,

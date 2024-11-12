@@ -2,7 +2,7 @@
     <div class="row">
         <button mat-flat-button color="primary" (click)="onAddStaffPressed()">Add a New Staff Member</button>
     </div>
-    <div class="card-container" *ngIf="staff.length > 0; else noStaff">
+    <div class="card-container" *ngIf="staff?.length > 0; else noStaff">
         <div *ngFor="let person of staff">
             <mat-card class="staff-card">
                 <mat-card-header>
