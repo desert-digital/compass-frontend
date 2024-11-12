@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Local
 
-import { ManageVesselsDataSource, ManageVesselsItem } from './manage-vessels-datasource';
+import { ManageVesselsDataSource } from './manage-vessels-datasource';
 import { FleetService } from 'src/app/services/fleet.service';
 import { Vessel } from '../../API.service';
 
@@ -24,8 +24,8 @@ import { Vessel } from '../../API.service';
 export class ManageVesselsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<ManageVesselsItem>;
-  dataSource = new ManageVesselsDataSource();
+  @ViewChild(MatTable) table!: MatTable<Vessel>;
+  dataSource: ManageVesselsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'type', 'documentNumber', 'status', 'owner', 'actions'];
@@ -33,6 +33,7 @@ export class ManageVesselsComponent implements AfterViewInit {
   constructor(private _router: Router,
     private _snackBar: MatSnackBar,
     private _fleetService: FleetService) {
+      this.dataSource = new ManageVesselsDataSource(_fleetService);
   }
 
   ngAfterViewInit(): void {
