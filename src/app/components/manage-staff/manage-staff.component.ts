@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 // Material 
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 // Local
 
@@ -19,6 +20,7 @@ import { StaffService } from 'src/app/services/staff.service';
 })
 export class ManageStaffComponent {
 
+  selectedStatus: string = 'Active';
   staff: Staff[];
 
   constructor(private _snackBar: MatSnackBar,
@@ -27,11 +29,15 @@ export class ManageStaffComponent {
   }
 
   async ngOnInit() {
-    await this._getStaff();
+    await this._getStaff(this.selectedStatus);
   }
 
-  async _getStaff() {
-    this.staff = await this._staffService.getStaff();
+  async _getStaff(status?: string) {
+    if (typeof status === 'undefined') {
+      this.staff = await this._staffService.getStaff();
+    } else {
+      this.staff = await this._staffService.getStaff(status);
+    }
   }
 
   onAddStaffPressed() {
@@ -44,7 +50,24 @@ export class ManageStaffComponent {
 
   async onDeleteStaffPressed(staff: Staff) {
     await this._staffService.deleteStaff(staff);
-    this._snackBar.open(`Deleted ${staff.name}`, 'OK', {duration: 3000});
-    this._getStaff();
+    this._snackBar.open(`Deleted ${staff.name}`, 'OK', { duration: 3000 });
+    this._getStaff(this.selectedStatus);
+  }
+
+  async toggleActivate(staff: Staff) {
+    await this._staffService.deactivateStaff(staff);
+    this._snackBar.open(`Deactivated ${staff.name}`, 'OK', { duration: 3000 });
+    this._getStaff(this.selectedStatus);
+  }
+
+  async onStatusChanged(status: MatButtonToggleChange) {
+    this.selectedStatus = status.value
+    if (this.selectedStatus === 'All') {
+      await this._getStaff();
+    }
+    else {
+      await this._getStaff(this.selectedStatus);
+    }
+    console.log(status.value);
   }
 }

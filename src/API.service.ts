@@ -157,8 +157,8 @@ export type Vessel = {
   name?: string | null,
   vesselType?: string | null,
   documentNumber?: string | null,
-  status?: string | null,
   owner?: Owner | null,
+  status?: string | null,
   defaultWorkflow?: WorkflowModel | null,
   createdAt: string,
   updatedAt: string,
@@ -174,6 +174,7 @@ export type Owner = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
   boats?: ModelVesselConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -373,6 +374,7 @@ export type CreateStaffInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
   username?: string | null,
   role?: CompassUserRole | null,
 };
@@ -390,6 +392,7 @@ export type ModelStaffConditionInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  status?: ModelStringInput | null,
   username?: ModelStringInput | null,
   role?: ModelCompassUserRoleInput | null,
   and?: Array< ModelStaffConditionInput | null > | null,
@@ -411,6 +414,7 @@ export type Staff = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
   username?: string | null,
   role?: CompassUserRole | null,
   createdAt: string,
@@ -423,6 +427,7 @@ export type UpdateStaffInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
   username?: string | null,
   role?: CompassUserRole | null,
 };
@@ -437,6 +442,7 @@ export type CreateOwnerInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
 };
 
 export type ModelOwnerConditionInput = {
@@ -444,6 +450,7 @@ export type ModelOwnerConditionInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  status?: ModelStringInput | null,
   and?: Array< ModelOwnerConditionInput | null > | null,
   or?: Array< ModelOwnerConditionInput | null > | null,
   not?: ModelOwnerConditionInput | null,
@@ -457,6 +464,7 @@ export type UpdateOwnerInput = {
   name?: string | null,
   email?: string | null,
   phone?: string | null,
+  status?: string | null,
 };
 
 export type DeleteOwnerInput = {
@@ -972,6 +980,7 @@ export type ModelStaffFilterInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  status?: ModelStringInput | null,
   username?: ModelStringInput | null,
   role?: ModelCompassUserRoleInput | null,
   createdAt?: ModelStringInput | null,
@@ -993,6 +1002,7 @@ export type ModelOwnerFilterInput = {
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
+  status?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelOwnerFilterInput | null > | null,
@@ -1287,6 +1297,7 @@ export type ModelSubscriptionStaffFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
   username?: ModelSubscriptionStringInput | null,
   role?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
@@ -1301,6 +1312,7 @@ export type ModelSubscriptionOwnerFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionOwnerFilterInput | null > | null,
@@ -1533,7 +1545,6 @@ export type CreateServiceOrderMutation = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -1541,6 +1552,7 @@ export type CreateServiceOrderMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -1548,6 +1560,7 @@ export type CreateServiceOrderMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -1592,7 +1605,6 @@ export type UpdateServiceOrderMutation = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -1600,6 +1612,7 @@ export type UpdateServiceOrderMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -1607,6 +1620,7 @@ export type UpdateServiceOrderMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -1651,7 +1665,6 @@ export type DeleteServiceOrderMutation = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -1659,6 +1672,7 @@ export type DeleteServiceOrderMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -1666,6 +1680,7 @@ export type DeleteServiceOrderMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -1760,7 +1775,6 @@ export type CreateVesselMutation = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -1768,6 +1782,7 @@ export type CreateVesselMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -1789,6 +1804,7 @@ export type CreateVesselMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -1832,7 +1848,6 @@ export type UpdateVesselMutation = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -1840,6 +1855,7 @@ export type UpdateVesselMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -1861,6 +1877,7 @@ export type UpdateVesselMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -1904,7 +1921,6 @@ export type DeleteVesselMutation = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -1912,6 +1928,7 @@ export type DeleteVesselMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -1933,6 +1950,7 @@ export type DeleteVesselMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -1976,6 +1994,7 @@ export type CreateStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -1996,6 +2015,7 @@ export type UpdateStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -2016,6 +2036,7 @@ export type DeleteStaffMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -2036,6 +2057,7 @@ export type CreateOwnerMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -2045,7 +2067,6 @@ export type CreateOwnerMutation = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -2053,9 +2074,11 @@ export type CreateOwnerMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -2092,6 +2115,7 @@ export type UpdateOwnerMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -2101,7 +2125,6 @@ export type UpdateOwnerMutation = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -2109,9 +2132,11 @@ export type UpdateOwnerMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -2148,6 +2173,7 @@ export type DeleteOwnerMutation = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -2157,7 +2183,6 @@ export type DeleteOwnerMutation = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -2165,9 +2190,11 @@ export type DeleteOwnerMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -2834,6 +2861,7 @@ export type CreateChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -2886,6 +2914,7 @@ export type UpdateChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -2938,6 +2967,7 @@ export type DeleteChecklistMutation = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -2998,6 +3028,7 @@ export type CreateWorkflowMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -3054,6 +3085,7 @@ export type UpdateWorkflowMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -3110,6 +3142,7 @@ export type DeleteWorkflowMutation = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -3164,6 +3197,7 @@ export type CreateMessageMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -3226,6 +3260,7 @@ export type UpdateMessageMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -3288,6 +3323,7 @@ export type DeleteMessageMutation = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -3877,7 +3913,6 @@ export type GetServiceOrderQuery = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -3885,6 +3920,7 @@ export type GetServiceOrderQuery = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -3892,6 +3928,7 @@ export type GetServiceOrderQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -3939,7 +3976,6 @@ export type ListServiceOrdersQuery = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -3947,9 +3983,11 @@ export type ListServiceOrdersQuery = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -4027,7 +4065,6 @@ export type GetVesselQuery = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -4035,6 +4072,7 @@ export type GetVesselQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -4056,6 +4094,7 @@ export type GetVesselQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -4102,7 +4141,6 @@ export type ListVesselsQuery = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -4110,6 +4148,7 @@ export type ListVesselsQuery = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -4117,6 +4156,7 @@ export type ListVesselsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -4153,6 +4193,7 @@ export type GetStaffQuery = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -4176,6 +4217,7 @@ export type ListStaffQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -4197,6 +4239,7 @@ export type GetOwnerQuery = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -4206,7 +4249,6 @@ export type GetOwnerQuery = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -4214,9 +4256,11 @@ export type GetOwnerQuery = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -4256,6 +4300,7 @@ export type ListOwnersQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -4647,6 +4692,7 @@ export type GetChecklistQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -4702,6 +4748,7 @@ export type ListChecklistsQuery = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -4763,6 +4810,7 @@ export type GetWorkflowQuery = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -4861,6 +4909,7 @@ export type GetMessageQuery = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -4926,6 +4975,7 @@ export type ListMessagesQuery = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -5258,6 +5308,7 @@ export type GetStaffByUserNameQuery = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -5573,7 +5624,6 @@ export type OnCreateServiceOrderSubscription = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -5581,6 +5631,7 @@ export type OnCreateServiceOrderSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -5588,6 +5639,7 @@ export type OnCreateServiceOrderSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -5631,7 +5683,6 @@ export type OnUpdateServiceOrderSubscription = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -5639,6 +5690,7 @@ export type OnUpdateServiceOrderSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -5646,6 +5698,7 @@ export type OnUpdateServiceOrderSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -5689,7 +5742,6 @@ export type OnDeleteServiceOrderSubscription = {
       name?: string | null,
       vesselType?: string | null,
       documentNumber?: string | null,
-      status?: string | null,
       owner?:  {
         __typename: "Owner",
         id: string,
@@ -5697,6 +5749,7 @@ export type OnDeleteServiceOrderSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         boats?:  {
           __typename: "ModelVesselConnection",
           nextToken?: string | null,
@@ -5704,6 +5757,7 @@ export type OnDeleteServiceOrderSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      status?: string | null,
       defaultWorkflow?:  {
         __typename: "WorkflowModel",
         id: string,
@@ -5794,7 +5848,6 @@ export type OnCreateVesselSubscription = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -5802,6 +5855,7 @@ export type OnCreateVesselSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -5823,6 +5877,7 @@ export type OnCreateVesselSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -5865,7 +5920,6 @@ export type OnUpdateVesselSubscription = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -5873,6 +5927,7 @@ export type OnUpdateVesselSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -5894,6 +5949,7 @@ export type OnUpdateVesselSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -5936,7 +5992,6 @@ export type OnDeleteVesselSubscription = {
     name?: string | null,
     vesselType?: string | null,
     documentNumber?: string | null,
-    status?: string | null,
     owner?:  {
       __typename: "Owner",
       id: string,
@@ -5944,6 +5999,7 @@ export type OnDeleteVesselSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       boats?:  {
         __typename: "ModelVesselConnection",
         items:  Array< {
@@ -5965,6 +6021,7 @@ export type OnDeleteVesselSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    status?: string | null,
     defaultWorkflow?:  {
       __typename: "WorkflowModel",
       id: string,
@@ -6007,6 +6064,7 @@ export type OnCreateStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -6026,6 +6084,7 @@ export type OnUpdateStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -6045,6 +6104,7 @@ export type OnDeleteStaffSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     username?: string | null,
     role?: CompassUserRole | null,
     createdAt: string,
@@ -6064,6 +6124,7 @@ export type OnCreateOwnerSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -6073,7 +6134,6 @@ export type OnCreateOwnerSubscription = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -6081,9 +6141,11 @@ export type OnCreateOwnerSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -6119,6 +6181,7 @@ export type OnUpdateOwnerSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -6128,7 +6191,6 @@ export type OnUpdateOwnerSubscription = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -6136,9 +6198,11 @@ export type OnUpdateOwnerSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -6174,6 +6238,7 @@ export type OnDeleteOwnerSubscription = {
     name?: string | null,
     email?: string | null,
     phone?: string | null,
+    status?: string | null,
     boats?:  {
       __typename: "ModelVesselConnection",
       items:  Array< {
@@ -6183,7 +6248,6 @@ export type OnDeleteOwnerSubscription = {
         name?: string | null,
         vesselType?: string | null,
         documentNumber?: string | null,
-        status?: string | null,
         owner?:  {
           __typename: "Owner",
           id: string,
@@ -6191,9 +6255,11 @@ export type OnDeleteOwnerSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
+        status?: string | null,
         defaultWorkflow?:  {
           __typename: "WorkflowModel",
           id: string,
@@ -6847,6 +6913,7 @@ export type OnCreateChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -6898,6 +6965,7 @@ export type OnUpdateChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -6949,6 +7017,7 @@ export type OnDeleteChecklistSubscription = {
       name?: string | null,
       email?: string | null,
       phone?: string | null,
+      status?: string | null,
       username?: string | null,
       role?: CompassUserRole | null,
       createdAt: string,
@@ -7008,6 +7077,7 @@ export type OnCreateWorkflowSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -7063,6 +7133,7 @@ export type OnUpdateWorkflowSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -7118,6 +7189,7 @@ export type OnDeleteWorkflowSubscription = {
           name?: string | null,
           email?: string | null,
           phone?: string | null,
+          status?: string | null,
           username?: string | null,
           role?: CompassUserRole | null,
           createdAt: string,
@@ -7171,6 +7243,7 @@ export type OnCreateMessageSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -7232,6 +7305,7 @@ export type OnUpdateMessageSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,
@@ -7293,6 +7367,7 @@ export type OnDeleteMessageSubscription = {
         name?: string | null,
         email?: string | null,
         phone?: string | null,
+        status?: string | null,
         username?: string | null,
         role?: CompassUserRole | null,
         createdAt: string,

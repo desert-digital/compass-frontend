@@ -10,7 +10,7 @@ import { createStaff, updateStaff, deleteStaff } from '../../graphql/mutations';
 
 // Local
 
-import { Staff } from 'src/API';
+import { Staff } from 'src/API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,17 @@ export class StaffService {
 
   constructor() { }
 
-  async getStaff(): Promise<Staff[]> {
-    const staffResult = await this.client.graphql({ query: listStaff })
-    return staffResult.data.listStaff.items as Staff[];
+  async getStaff(status?: string): Promise<Staff[]> {
+    if (typeof status === 'undefined') {
+      const staffResult = await this.client.graphql({ query: listStaff })
+      return staffResult.data.listStaff.items as Staff[];
+    } else {
+      const staffResult = await this.client.graphql({
+        query: listStaff, variables:
+          { filter: { status: { eq: status } } }
+      })
+      return staffResult.data.listStaff.items as Staff[];
+    }
   }
 
   async getStaffFromId(id: string): Promise<Staff> {
@@ -36,12 +44,13 @@ export class StaffService {
       query: createStaff, variables: {
         input:
         {
-          company: 'seaforth',
+          company: 'compass',
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
           username: staff.username,
-          role: staff.role
+          role: staff.role,
+          status: 'Active'
         }
       }
     });
@@ -54,15 +63,15 @@ export class StaffService {
       variables: {
         input: {
           id: staff.id,
-          company: 'seaforth',
+          company: 'compass',
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
-          role: staff.role
+          role: staff.role,
+          status: staff.status
         }
       }
     });
-    console.log(staffResult);
   }
 
   async deleteStaff(staff: Staff) {
@@ -71,6 +80,23 @@ export class StaffService {
       variables: {
         input: {
           id: staff.id
+        }
+      }
+    });
+  }
+
+  async deactivateStaff(staff: Staff) {
+    const staffResult = await this.client.graphql({
+      query: updateStaff,
+      variables: {
+        input: {
+          id: staff.id,
+          company: 'compass',
+          name: staff.name,
+          email: staff.email,
+          phone: staff.phone,
+          role: staff.role,
+          status: 'Inactive'
         }
       }
     });
@@ -86,7 +112,7 @@ export class StaffService {
     return staffItems.length > 0 ? staffItems[0] as Staff : null;
   }
 
-  async getRoleForStaff(username: string):  Promise<string | null> {
+  async getRoleForStaff(username: string): Promise<string | null> {
     const user = await this.getStaffByUsername(username);
     return user?.role;
   }
@@ -99,7 +125,7 @@ export class StaffService {
         email: 'desert.digital.us@gmail.com',
         phone: '+1 (856) 867-5309',
         username: 'acme-crew',
-        role: 'Crew'
+        role: 'Crew',
       } as Staff;
     this.createStaff(_staff);
     _staff =

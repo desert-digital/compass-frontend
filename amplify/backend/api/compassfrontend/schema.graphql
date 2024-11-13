@@ -43,8 +43,8 @@ type Vessel @model @auth(rules: [{ allow: public }]){
   name: String
   vesselType: String
   documentNumber: String
-  status: String
   owner: Owner @hasOne
+  status: String
   defaultWorkflow: WorkflowModel @hasOne
 }
 
@@ -54,6 +54,7 @@ type Staff @model @auth(rules: [{ allow: public }]){
   name: String
   email: String
   phone: String
+  status: String
   username: String @index(name: "byUserName", queryField: "getStaffByUserName")
   role: CompassUserRole
 }
@@ -64,6 +65,7 @@ type Owner @model @auth(rules: [{ allow: public }]){
   name: String
   email: String
   phone: String
+  status: String
   boats: [Vessel] @hasMany
 }
 

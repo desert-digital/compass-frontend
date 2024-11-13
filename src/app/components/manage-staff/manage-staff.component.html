@@ -2,13 +2,27 @@
     <div class="row">
         <button mat-flat-button color="primary" (click)="onAddStaffPressed()">Add a New Staff Member</button>
     </div>
+    <div class="row">
+        <mat-button-toggle-group aria-label="Favorite Color" (change)="onStatusChanged($event)" [(ngModel)]="selectedStatus">
+            <mat-button-toggle value="Active">Active</mat-button-toggle>
+            <mat-button-toggle value="Inactive">Inactive</mat-button-toggle>
+            <mat-button-toggle value="All">All</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
     <div class="card-container" *ngIf="staff?.length > 0; else noStaff">
         <div *ngFor="let person of staff">
             <mat-card class="staff-card">
                 <mat-card-header>
-                    <mat-card-subtitle>
-                        <h4>{{ person.name }}</h4>
-                    </mat-card-subtitle>
+                    <h4>{{ person.name }}</h4>
+                    @if (person.status === 'Active') {
+                    <button class="more-button" mat-icon-button aria-label="Activate/Deactivate"
+                        (click)="toggleActivate(person)">
+                        <mat-icon class="double-sized">toggle_on</mat-icon></button>
+                    }
+                    @else {
+                    <button class="more-button" mat-icon-button aria-label="Activate/Deactivate">
+                        <mat-icon color="warn" class="double-sized">toggle_off</mat-icon></button>
+                    }
                 </mat-card-header>
                 <mat-card-content>
                     <div>{{ person.phone }}</div>
@@ -23,7 +37,6 @@
                 <mat-card-actions>
                     <span class="button-container">
                         <button mat-flat-button color="primary" (click)="onEditStaffPressed(person)">Edit</button>
-                        <button mat-flat-button color="warn" (click)="onDeleteStaffPressed(person)">Delete</button>
                     </span>
                 </mat-card-actions>
             </mat-card>

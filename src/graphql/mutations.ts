@@ -100,13 +100,13 @@ export const createServiceOrder = /* GraphQL */ `mutation CreateServiceOrder(
       name
       vesselType
       documentNumber
-      status
       owner {
         id
         company
         name
         email
         phone
+        status
         boats {
           nextToken
           __typename
@@ -115,6 +115,7 @@ export const createServiceOrder = /* GraphQL */ `mutation CreateServiceOrder(
         updatedAt
         __typename
       }
+      status
       defaultWorkflow {
         id
         company
@@ -160,13 +161,13 @@ export const updateServiceOrder = /* GraphQL */ `mutation UpdateServiceOrder(
       name
       vesselType
       documentNumber
-      status
       owner {
         id
         company
         name
         email
         phone
+        status
         boats {
           nextToken
           __typename
@@ -175,6 +176,7 @@ export const updateServiceOrder = /* GraphQL */ `mutation UpdateServiceOrder(
         updatedAt
         __typename
       }
+      status
       defaultWorkflow {
         id
         company
@@ -220,13 +222,13 @@ export const deleteServiceOrder = /* GraphQL */ `mutation DeleteServiceOrder(
       name
       vesselType
       documentNumber
-      status
       owner {
         id
         company
         name
         email
         phone
+        status
         boats {
           nextToken
           __typename
@@ -235,6 +237,7 @@ export const deleteServiceOrder = /* GraphQL */ `mutation DeleteServiceOrder(
         updatedAt
         __typename
       }
+      status
       defaultWorkflow {
         id
         company
@@ -334,13 +337,13 @@ export const createVessel = /* GraphQL */ `mutation CreateVessel(
     name
     vesselType
     documentNumber
-    status
     owner {
       id
       company
       name
       email
       phone
+      status
       boats {
         items {
           id
@@ -363,6 +366,7 @@ export const createVessel = /* GraphQL */ `mutation CreateVessel(
       updatedAt
       __typename
     }
+    status
     defaultWorkflow {
       id
       company
@@ -407,13 +411,13 @@ export const updateVessel = /* GraphQL */ `mutation UpdateVessel(
     name
     vesselType
     documentNumber
-    status
     owner {
       id
       company
       name
       email
       phone
+      status
       boats {
         items {
           id
@@ -436,6 +440,7 @@ export const updateVessel = /* GraphQL */ `mutation UpdateVessel(
       updatedAt
       __typename
     }
+    status
     defaultWorkflow {
       id
       company
@@ -480,13 +485,13 @@ export const deleteVessel = /* GraphQL */ `mutation DeleteVessel(
     name
     vesselType
     documentNumber
-    status
     owner {
       id
       company
       name
       email
       phone
+      status
       boats {
         items {
           id
@@ -509,6 +514,7 @@ export const deleteVessel = /* GraphQL */ `mutation DeleteVessel(
       updatedAt
       __typename
     }
+    status
     defaultWorkflow {
       id
       company
@@ -553,6 +559,7 @@ export const createStaff = /* GraphQL */ `mutation CreateStaff(
     name
     email
     phone
+    status
     username
     role
     createdAt
@@ -574,6 +581,7 @@ export const updateStaff = /* GraphQL */ `mutation UpdateStaff(
     name
     email
     phone
+    status
     username
     role
     createdAt
@@ -595,6 +603,7 @@ export const deleteStaff = /* GraphQL */ `mutation DeleteStaff(
     name
     email
     phone
+    status
     username
     role
     createdAt
@@ -616,6 +625,7 @@ export const createOwner = /* GraphQL */ `mutation CreateOwner(
     name
     email
     phone
+    status
     boats {
       items {
         id
@@ -623,17 +633,18 @@ export const createOwner = /* GraphQL */ `mutation CreateOwner(
         name
         vesselType
         documentNumber
-        status
         owner {
           id
           company
           name
           email
           phone
+          status
           createdAt
           updatedAt
           __typename
         }
+        status
         defaultWorkflow {
           id
           company
@@ -673,6 +684,7 @@ export const updateOwner = /* GraphQL */ `mutation UpdateOwner(
     name
     email
     phone
+    status
     boats {
       items {
         id
@@ -680,17 +692,18 @@ export const updateOwner = /* GraphQL */ `mutation UpdateOwner(
         name
         vesselType
         documentNumber
-        status
         owner {
           id
           company
           name
           email
           phone
+          status
           createdAt
           updatedAt
           __typename
         }
+        status
         defaultWorkflow {
           id
           company
@@ -730,6 +743,7 @@ export const deleteOwner = /* GraphQL */ `mutation DeleteOwner(
     name
     email
     phone
+    status
     boats {
       items {
         id
@@ -737,17 +751,18 @@ export const deleteOwner = /* GraphQL */ `mutation DeleteOwner(
         name
         vesselType
         documentNumber
-        status
         owner {
           id
           company
           name
           email
           phone
+          status
           createdAt
           updatedAt
           __typename
         }
+        status
         defaultWorkflow {
           id
           company
@@ -1428,6 +1443,7 @@ export const createChecklist = /* GraphQL */ `mutation CreateChecklist(
       name
       email
       phone
+      status
       username
       role
       createdAt
@@ -1481,6 +1497,7 @@ export const updateChecklist = /* GraphQL */ `mutation UpdateChecklist(
       name
       email
       phone
+      status
       username
       role
       createdAt
@@ -1534,6 +1551,7 @@ export const deleteChecklist = /* GraphQL */ `mutation DeleteChecklist(
       name
       email
       phone
+      status
       username
       role
       createdAt
@@ -1593,6 +1611,7 @@ export const createWorkflow = /* GraphQL */ `mutation CreateWorkflow(
           name
           email
           phone
+          status
           username
           role
           createdAt
@@ -1650,6 +1669,7 @@ export const updateWorkflow = /* GraphQL */ `mutation UpdateWorkflow(
           name
           email
           phone
+          status
           username
           role
           createdAt
@@ -1707,6 +1727,7 @@ export const deleteWorkflow = /* GraphQL */ `mutation DeleteWorkflow(
           name
           email
           phone
+          status
           username
           role
           createdAt
@@ -1763,6 +1784,7 @@ export const createMessage = /* GraphQL */ `mutation CreateMessage(
         name
         email
         phone
+        status
         username
         role
         createdAt
@@ -1826,6 +1848,7 @@ export const updateMessage = /* GraphQL */ `mutation UpdateMessage(
         name
         email
         phone
+        status
         username
         role
         createdAt
@@ -1889,6 +1912,7 @@ export const deleteMessage = /* GraphQL */ `mutation DeleteMessage(
         name
         email
         phone
+        status
         username
         role
         createdAt

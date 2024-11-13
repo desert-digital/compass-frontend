@@ -43,7 +43,7 @@ export class ActionModelsService {
       query: createActionModel,
       variables: {
         input: {
-          company: 'seaforth', // eventually this will be provided as part of the account information
+          company: 'compass', // eventually this will be provided as part of the account information
           name: model.name,
           duration: model.duration,
           notes: model.notes
@@ -84,7 +84,7 @@ export class ActionModelsService {
   async createDemoActions() {
     let _action =
       {
-        company: 'seaforth',
+        company: 'compass',
         name: 'Raise sails and unfurl the jib',
         notes: 'Inspect the sails and hull',
         duration: 10
@@ -92,7 +92,7 @@ export class ActionModelsService {
     this.createActionModel(_action);
     _action =
       {
-        company: 'seaforth',
+        company: 'compass',
         name: 'Inventory safety equipment',
         notes: 'Ensure the required safety equipment is on board',
         duration: 10
@@ -100,7 +100,7 @@ export class ActionModelsService {
     this.createActionModel(_action);
     _action =
     {
-      company: 'seaforth',
+      company: 'compass',
       name: 'Inspect rigging - standing and running',
       notes: 'Ensure the rigging is not broken and the lines are not worn',
       duration: 10

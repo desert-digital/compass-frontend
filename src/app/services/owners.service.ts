@@ -44,7 +44,7 @@ export class OwnersService {
       variables: {
         input:
         {
-          company: 'seaforth',
+          company: 'compass',
           name: owner.name,
           email: owner.email,
           phone: owner.phone,
@@ -59,7 +59,7 @@ export class OwnersService {
       query: updateOwner, variables: {
         input: {
           id: owner.id,
-          company: 'seaforth',
+          company: 'compass',
           name: owner.name,
           email: owner.email,
           phone: owner.phone
@@ -85,7 +85,7 @@ export class OwnersService {
   async createDemoOwners() {
     let _owner =
       {
-        company: 'seaforth',
+        company: 'compass',
         name: 'Bob McGrath',
         email: 'compass_demo_owner@gmail.com',
         phone: '+1 (856) 867-5309'
@@ -93,7 +93,7 @@ export class OwnersService {
     this.createOwner(_owner);
     _owner =
       {
-        company: 'seaforth',
+        company: 'compass',
         name: 'Wendy Meer',
         email: 'compass_demo_owner@gmail.com',
         phone: '+1 (856) 865-5309'
@@ -101,7 +101,7 @@ export class OwnersService {
     this.createOwner(_owner);
     _owner =
     {
-      company: 'seaforth',
+      company: 'compass',
       name: 'Casey Smith',
       email: 'compass_demo_owner@gmail.com',
       phone: '+1 (856) 867-5311'

@@ -14,6 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from'@angular/material/button-toggle'; 
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
@@ -150,6 +151,7 @@ import { ManageVesselsComponent } from './components/manage-vessels/manage-vesse
     LayoutModule,
     MatBadgeModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,

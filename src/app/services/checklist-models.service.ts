@@ -51,7 +51,7 @@ export class ChecklistModelsService {
       query: createChecklistModel,
       variables: {
         input: {
-          company: 'seaforth',
+          company: 'compass',
           name: checklistModel.name,
           duration: checklistModel.duration,
           notes: checklistModel.notes,

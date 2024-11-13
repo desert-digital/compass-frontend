@@ -45,7 +45,7 @@ export class WorkflowModelsService {
     const workflowMutationResult = await this.client.graphql({
       query: createWorkflowModel, variables: {
         input: {
-          company: 'seaforth',
+          company: 'compass',
           name: workflowModel.name,
           duration: workflowModel.duration,
           notes: workflowModel.notes

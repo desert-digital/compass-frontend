@@ -41,7 +41,7 @@ export class FleetService {
       query: createVessel,
       variables: {
         input: {
-          company: 'seaforth',
+          company: 'compass',
           name: vessel.name,
           vesselType: vessel.vesselType,
           documentNumber: vessel.documentNumber,

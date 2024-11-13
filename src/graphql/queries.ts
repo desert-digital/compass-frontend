@@ -68,13 +68,13 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
       name
       vesselType
       documentNumber
-      status
       owner {
         id
         company
         name
         email
         phone
+        status
         boats {
           nextToken
           __typename
@@ -83,6 +83,7 @@ export const getServiceOrder = /* GraphQL */ `query GetServiceOrder($id: ID!) {
         updatedAt
         __typename
       }
+      status
       defaultWorkflow {
         id
         company
@@ -130,17 +131,18 @@ export const listServiceOrders = /* GraphQL */ `query ListServiceOrders(
         name
         vesselType
         documentNumber
-        status
         owner {
           id
           company
           name
           email
           phone
+          status
           createdAt
           updatedAt
           __typename
         }
+        status
         defaultWorkflow {
           id
           company
@@ -219,13 +221,13 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
     name
     vesselType
     documentNumber
-    status
     owner {
       id
       company
       name
       email
       phone
+      status
       boats {
         items {
           id
@@ -248,6 +250,7 @@ export const getVessel = /* GraphQL */ `query GetVessel($id: ID!) {
       updatedAt
       __typename
     }
+    status
     defaultWorkflow {
       id
       company
@@ -291,13 +294,13 @@ export const listVessels = /* GraphQL */ `query ListVessels(
       name
       vesselType
       documentNumber
-      status
       owner {
         id
         company
         name
         email
         phone
+        status
         boats {
           nextToken
           __typename
@@ -306,6 +309,7 @@ export const listVessels = /* GraphQL */ `query ListVessels(
         updatedAt
         __typename
       }
+      status
       defaultWorkflow {
         id
         company
@@ -342,6 +346,7 @@ export const getStaff = /* GraphQL */ `query GetStaff($id: ID!) {
     name
     email
     phone
+    status
     username
     role
     createdAt
@@ -362,6 +367,7 @@ export const listStaff = /* GraphQL */ `query ListStaff(
       name
       email
       phone
+      status
       username
       role
       createdAt
@@ -380,6 +386,7 @@ export const getOwner = /* GraphQL */ `query GetOwner($id: ID!) {
     name
     email
     phone
+    status
     boats {
       items {
         id
@@ -387,17 +394,18 @@ export const getOwner = /* GraphQL */ `query GetOwner($id: ID!) {
         name
         vesselType
         documentNumber
-        status
         owner {
           id
           company
           name
           email
           phone
+          status
           createdAt
           updatedAt
           __typename
         }
+        status
         defaultWorkflow {
           id
           company
@@ -436,6 +444,7 @@ export const listOwners = /* GraphQL */ `query ListOwners(
       name
       email
       phone
+      status
       boats {
         items {
           id
@@ -823,6 +832,7 @@ export const getChecklist = /* GraphQL */ `query GetChecklist($id: ID!) {
       name
       email
       phone
+      status
       username
       role
       createdAt
@@ -878,6 +888,7 @@ export const listChecklists = /* GraphQL */ `query ListChecklists(
         name
         email
         phone
+        status
         username
         role
         createdAt
@@ -937,6 +948,7 @@ export const getWorkflow = /* GraphQL */ `query GetWorkflow($id: ID!) {
           name
           email
           phone
+          status
           username
           role
           createdAt
@@ -1036,6 +1048,7 @@ export const getMessage = /* GraphQL */ `query GetMessage($id: ID!) {
         name
         email
         phone
+        status
         username
         role
         createdAt
@@ -1101,6 +1114,7 @@ export const listMessages = /* GraphQL */ `query ListMessages(
           name
           email
           phone
+          status
           username
           role
           createdAt
@@ -1446,6 +1460,7 @@ export const getStaffByUserName = /* GraphQL */ `query GetStaffByUserName(
       name
       email
       phone
+      status
       username
       role
       createdAt

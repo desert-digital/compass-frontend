@@ -42,7 +42,7 @@ export class ChecklistsService {
       query: createChecklist,
       variables: {
         input: {
-          company: 'seaforth',
+          company: 'compass',
           name: checklistModel.name,
           actualStart: now,
           checklistOwnerId: assigneeId,
