@@ -10,7 +10,7 @@ import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 
 // Local
 
-import { Owner, Vessel } from '../API.service';
+import { Owner, Vessel } from 'src/API.service';
 import { FleetService } from './fleet.service';
 
 @Injectable({
@@ -22,9 +22,18 @@ export class OwnersService {
 
   constructor(private _fleetService: FleetService) { }
 
-  async getOwners(): Promise<Owner[]> {
-    const ownersResult = await this.client.graphql({ query: listOwners });
-    return ownersResult.data.listOwners.items as Owner[];
+  async getOwners(status?: string): Promise<Owner[]> {
+    if (typeof status === 'undefined') {
+      const ownersResult = await this.client.graphql({ query: listOwners });
+      return ownersResult.data.listOwners.items as Owner[];
+    }
+    else {
+      const staffResult = await this.client.graphql({
+        query: listOwners, variables:
+          { filter: { status: { eq: status } } }
+      })
+      return staffResult.data.listOwners.items as Owner[];
+    }
   }
 
   async getOwnerFromId(id: string): Promise<Owner> {
@@ -48,6 +57,7 @@ export class OwnersService {
           name: owner.name,
           email: owner.email,
           phone: owner.phone,
+          status: 'Active'
         }
       }
     });
@@ -62,11 +72,12 @@ export class OwnersService {
           company: 'compass',
           name: owner.name,
           email: owner.email,
-          phone: owner.phone
+          phone: owner.phone,
+          status: owner.status
         }
       }
     })
-    
+
     for (const boat of boats) {
       this._fleetService.updateVesselWithOwner(boat, owner);
     }
@@ -77,6 +88,17 @@ export class OwnersService {
       query: deleteOwner, variables: {
         input: {
           id: owner.id
+        }
+      }
+    })
+  }
+
+  async deactivateOwner(owner: Owner) {
+    const ownerResult = await this.client.graphql({
+      query: updateOwner, variables: {
+        input: {
+          id: owner.id,
+          status: 'Inactive'
         }
       }
     })
@@ -100,12 +122,12 @@ export class OwnersService {
       } as Owner;
     this.createOwner(_owner);
     _owner =
-    {
-      company: 'compass',
-      name: 'Casey Smith',
-      email: 'compass_demo_owner@gmail.com',
-      phone: '+1 (856) 867-5311'
-    } as Owner;
-  this.createOwner(_owner);
+      {
+        company: 'compass',
+        name: 'Casey Smith',
+        email: 'compass_demo_owner@gmail.com',
+        phone: '+1 (856) 867-5311'
+      } as Owner;
+    this.createOwner(_owner);
   }
 }
