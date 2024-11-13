@@ -31,7 +31,7 @@ export class ManageOwnersComponent {
     private router: Router) { }
 
   async ngOnInit() {
-    await this._getOwners();
+    await this._getOwners('Active');
   }
 
   async _getOwners(status?: string) {

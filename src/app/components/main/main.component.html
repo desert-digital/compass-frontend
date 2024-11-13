@@ -62,6 +62,42 @@
         </button>
       </div>
       }
+      @if (userRole === 'Admin') {
+      <button mat-button color="primary" (click)="onMessagesPressed()">
+        <mat-icon class="double-sized">chat</mat-icon>
+        <span class="sidenav-button-text">Messages</span>
+      </button>
+      <button mat-button color="primary" (click)="onFleetPressed()">
+        <mat-icon class="double-sized">sailing</mat-icon>
+        <span class="sidenav-button-text">Fleet</span>
+      </button>
+      <button mat-button color="primary" (click)="onStaffPressed()">
+        <mat-icon class="double-sized">badge</mat-icon>
+        <span class="sidenav-button-text">Staff</span>
+      </button>
+      <button mat-button color="primary" (click)="onOwnersPressed()">
+        <mat-icon class="double-sized">person</mat-icon>
+        <span class="sidenav-button-text">Owners</span>
+      </button>
+      <button mat-button color="primary" (click)="onWorkflowPressed()">
+        <mat-icon class="double-sized">schema</mat-icon>
+        <span class="sidenav-button-text">Workflow Admin</span>
+      </button>
+      <button mat-button color="primary" (click)="onChecklistAdminPressed()">
+        <mat-icon class="double-sized">fact_check</mat-icon>
+        <span class="sidenav-button-text">Checklist Admin</span>
+      </button>
+      <button mat-button color="primary" (click)="onActionsPressed()">
+        <mat-icon class="double-sized">check_circle</mat-icon>
+        <span class="sidenav-button-text">Action Admin</span>
+      </button>
+      <div>
+        <button mat-button color="primary" (click)="onDemoPressed()">
+          <mat-icon class="double-sized">add_to_queue</mat-icon>
+          <span class="sidenav-button-text">Add Demo Data</span>
+        </button>
+      </div>
+      }
       @if (userRole === 'ServiceManager') {
       <button mat-button color="primary" (click)="onTopPressed()">
         <mat-icon class="double-sized">language</mat-icon>
