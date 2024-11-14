@@ -35,7 +35,7 @@ mat-input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .list-container {
@@ -159,12 +159,6 @@ h4 {
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: $borderRadius;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .button-container {

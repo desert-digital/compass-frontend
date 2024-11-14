@@ -12,37 +12,37 @@
     </div>
     @if (staff?.length > 0) {
     <div class="card-container">
-        <div *ngFor="let person of staff">
-            <mat-card class="staff-card">
-                <mat-card-header>
-                    <h4>{{ person.name }}</h4>
-                    @if (person.status === 'Active') {
-                    <button class="more-button" mat-icon-button aria-label="Activate/Deactivate"
-                        (click)="toggleActivate(person)">
-                        <mat-icon class="double-sized">toggle_on</mat-icon></button>
-                    }
-                    @else {
-                    <button class="more-button" mat-icon-button aria-label="Activate/Deactivate">
-                        <mat-icon color="warn" class="double-sized">toggle_off</mat-icon></button>
-                    }
-                </mat-card-header>
-                <mat-card-content>
-                    <div>{{ person.phone }}</div>
-                    <div>{{ person.email }}</div>
-                    <mat-divider></mat-divider>
-                    <div class="chips">
-                        <mat-chip-set>
-                            <mat-chip>{{person.role}}</mat-chip>
-                        </mat-chip-set>
-                    </div>
-                </mat-card-content>
-                <mat-card-actions>
-                    <span class="button-container">
-                        <button mat-flat-button color="primary" (click)="onEditStaffPressed(person)">Edit</button>
-                    </span>
-                </mat-card-actions>
-            </mat-card>
-        </div>
+        @for (person of staff; track person.id) {
+        <mat-card class="staff-card">
+            <mat-card-header>
+                <h4>{{ person.name }}</h4>
+                @if (person.status === 'Active') {
+                <button class="more-button" mat-icon-button aria-label="Activate/Deactivate"
+                    (click)="toggleActivate(person)">
+                    <mat-icon class="double-sized">toggle_on</mat-icon></button>
+                }
+                @else {
+                <button class="more-button" mat-icon-button aria-label="Activate/Deactivate">
+                    <mat-icon color="warn" class="double-sized">toggle_off</mat-icon></button>
+                }
+            </mat-card-header>
+            <mat-card-content>
+                <div>{{ person.phone }}</div>
+                <div>{{ person.email }}</div>
+                <mat-divider></mat-divider>
+                <div class="chips">
+                    <mat-chip-set>
+                        <mat-chip>{{person.role}}</mat-chip>
+                    </mat-chip-set>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <span class="button-container">
+                    <button mat-flat-button color="primary" (click)="onEditStaffPressed(person)">Edit</button>
+                </span>
+            </mat-card-actions>
+        </mat-card>
+        }
     </div>
     } @else {
     <ng-template #noStaff class="row">
