@@ -2,6 +2,7 @@
 
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 // Material
 
@@ -21,7 +22,8 @@ import { Vessel } from '../../API.service';
  */
 export class ManageVesselsDataSource extends DataSource<Vessel> {
   public numberOfBoats: number = 0;
-  
+  textFilter: FormControl<string | null> | undefined;
+
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
@@ -34,12 +36,12 @@ export class ManageVesselsDataSource extends DataSource<Vessel> {
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<Vessel[]> {
-    if (this.paginator && this.sort) {
-      return merge(this.sort.sortChange, this.paginator.page)
+    if (this.paginator && this.sort && this.textFilter) {
+      return merge(this.sort.sortChange, this.paginator.page, this.textFilter.valueChanges)
         .pipe(
           startWith({}),
           switchMap(() => {
-            return this._fleetService.getVessels();
+            return this._fleetService.getVessels(this.textFilter.value);
           }),
           map(data => {
             this.numberOfBoats = data.length;

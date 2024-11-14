@@ -21,9 +21,26 @@ export class FleetService {
 
   constructor() { }
 
-  async getVessels(): Promise<Vessel[]> {
-    const vesselResult = await this.client.graphql({ query: listVessels });
-    return vesselResult.data.listVessels.items as Vessel[];
+  async getVessels(status?: string): Promise<Vessel[]> {
+    if ((typeof status === 'undefined') ||
+      (status === '')) {
+      const vesselResult = await this.client.graphql({ query: listVessels });
+      return vesselResult.data.listVessels.items as Vessel[];
+    }
+    else {
+      const vesselResult = await this.client.graphql({
+        query: listVessels,
+        variables: {
+          filter: {
+            status: {
+              eq: status
+
+            }
+          }
+        }
+      });
+      return vesselResult.data.listVessels.items as Vessel[];
+    }
   }
 
   async getVesselById(id: string): Promise<Vessel> {
@@ -112,5 +129,23 @@ export class FleetService {
         }
       }
     });
+  }
+
+  async deactivateVessel(vessel: Vessel) {
+    await this.client.graphql({
+      query: updateVessel,
+      variables: {
+        input: {
+          id: vessel.id,
+          company: vessel.company,
+          name: vessel.name,
+          vesselType: vessel.vesselType,
+          documentNumber: vessel.documentNumber,
+          vesselDefaultWorkflowId: vessel.vesselDefaultWorkflowId,
+          ownerBoatsId: vessel.ownerBoatsId,
+          status: 'Inactive'
+        }
+      }
+    })
   }
 }

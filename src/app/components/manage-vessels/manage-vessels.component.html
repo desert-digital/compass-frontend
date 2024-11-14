@@ -6,48 +6,89 @@
     <input required #fileUpload type="file" class="file-input" (change)="onFileSelected($event)"> 
     -->
   </form>
+  <div class="row">
+    <form [formGroup]="formGroup">
+    <mat-button-toggle-group formControlName="status" aria-label="Favorite Color" (change)="onStatusChanged($event)"
+        [(ngModel)]="selectedStatus">
+        <mat-button-toggle value="Active">Active</mat-button-toggle>
+        <mat-button-toggle value="Inactive">Inactive</mat-button-toggle>
+        <mat-button-toggle value="">All</mat-button-toggle>
+    </mat-button-toggle-group>
+  </form>
+</div>
   <div class="mat-elevation-z2">
     <table mat-table class="full-width-table" matSort aria-label="Elements">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{
+          'active-row': row.status === 'Active',
+          'inactive-row': row.status === 'Inactive'
+        }">{{row.name}}</td>
       </ng-container>
+
 
       <!-- Type Column -->
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-        <td mat-cell *matCellDef="let row">{{row.vesselType}}</td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{
+          'active-row': row.status === 'Active',
+          'inactive-row': row.status === 'Inactive'
+        }">{{row.vesselType}}</td>
       </ng-container>
 
       <!-- Document Number Column -->
       <ng-container matColumnDef="documentNumber">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Document #</th>
-        <td mat-cell *matCellDef="let row">{{row.documentNumber}}</td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{
+          'active-row': row.status === 'Active',
+          'inactive-row': row.status === 'Inactive'
+        }">{{row.documentNumber}}</td>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th> 
-        <td mat-cell *matCellDef="let row">Active</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-form-field appearance="fill">
+            @if (row.status === 'Active') {
+            <mat-select [(ngModel)]="row.status" (selectionChange)="onStatusChange(row)">
+              <mat-option value="Active">Active</mat-option>
+              <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+            } @else {
+            <mat-select disabled="true" [(ngModel)]="row.status">
+              <mat-option value="Active">Active</mat-option>
+              <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+            }
+          </mat-form-field>
+        </td>
       </ng-container>
 
       <!-- Owner Column -->
       <ng-container matColumnDef="owner">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
-        <td mat-cell *matCellDef="let row">{{row.ownerBoatsId | ownerName | async}}</td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{
+          'active-row': row.status === 'Active',
+          'inactive-row': row.status === 'Inactive'
+        }">{{row.ownerBoatsId | ownerName | async}}</td>
       </ng-container>
 
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let row">
+          @if (row.status === 'Active') {
           <button mat-icon-button (click)="onEditVesselPressed(row)">
             <mat-icon class="material-icons-outlined" color="primary">edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="onDeleteVesselPressed(row)">
-            <mat-icon class="material-icons-outlined" color="warn">cancel</mat-icon>
+          }
+          @else {
+          <button mat-icon-button disabled="true">
+            <mat-icon class="material-icons-outlined">edit</mat-icon>
           </button>
+          }
         </td>
       </ng-container>
 

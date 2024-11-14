@@ -31,7 +31,6 @@ button {
     margin: 10px;
 }
 
-
 .dashboard-card {
     position: absolute;
     top: 15px;
@@ -52,5 +51,5 @@ button {
 
 mat-button-toggle-group {
     margin-left: 12px;
-    border-radius: 5px;
+    border-radius: $borderRadius;
 }
