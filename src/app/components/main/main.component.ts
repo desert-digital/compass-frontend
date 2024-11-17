@@ -29,6 +29,9 @@ export class MainComponent {
   userRole: string = '';
   pendingItems: number = 0;
 
+  activeButton: string = 'top';
+  badgeColor: string = 'primary';
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -59,54 +62,79 @@ export class MainComponent {
   }
 
   onTopPressed() {
+    this.activeButton = 'top';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/top']);
   }
 
   onFleetPressed() {
+    this.activeButton = 'fleet';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/fleet']);
   }
 
   onPendingPressed() {
+    this.activeButton = 'pending';
+    this.badgeColor = 'warn';
     this._router.navigate(['main/pending', 15]);
   }
 
   onMessagesPressed() {
+    this.activeButton = 'messages';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/messages']);
   }
 
   onChecklistPressed() {
+    this.badgeColor = 'primary';
     this._router.navigate(['main/checklist']);
   }
 
   onStaffPressed() {
+    this.activeButton = 'staff';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/staff']);
   }
 
   onOwnersPressed() {
+    this.activeButton = 'owners';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/owners']);
   }
 
   onChecklistAdminPressed() {
+    this.activeButton = 'checklistAdmin';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/manage-checklists']);
   }
 
-  onWorkflowPressed() {
+  onWorkflowAdminPressed() {
+    this.activeButton = 'workflowAdmin';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/manage-workflows']);
   }
 
-  onActionsPressed() {
+  onActionAdminPressed() {
+    this.activeButton = 'actionAdmin';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/manage-actions']);
   }
 
   onServicesPressed() {
+    this.activeButton = 'services';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/services', 15]);
   }
 
   onInventoryPressed() {
+    this.activeButton = 'inventory';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/inventory', 15]);
   }
 
   onDemoPressed() {
+    this.activeButton = 'demo';
+    this.badgeColor = 'primary';
     this._router.navigate(['main/demo']);
   }
 

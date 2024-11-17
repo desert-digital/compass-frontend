@@ -30,6 +30,11 @@ button {
   margin: 10px;
 }
 
+.active-button {
+  background-color: var(--mat-accent-500) !important;
+  color: var(--mat-accent-contrast-500) !important;
+}
+
 .double-sized {
   transform: scale(2.0);
 }
@@ -98,4 +103,9 @@ button {
   @media screen and (min-width: 1000px) {
     display: none;
   }
+}
+
+.custom-badge .mat-badge-content {
+  align-items: center;
+  justify-content: center;
 }

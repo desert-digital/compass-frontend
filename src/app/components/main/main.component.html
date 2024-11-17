@@ -3,127 +3,71 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <div class="sidenav-buttons">
-      @if (userRole === 'Crew') {
-      <button mat-button color="primary" enabled="false" (click)="onMessagesPressed()">
-        <mat-icon class="double-sized">chat</mat-icon>
-        <span class="sidenav-button-text">Messages</span>
-      </button>
-      }
       @if (userRole === 'OpsManager') {
-      <button mat-button color="primary" (click)="onTopPressed()">
+      <button mat-button [color]="activeButton === 'top' ? 'accent' : 'primary'" (click)="onTopPressed()">
         <mat-icon class="double-sized">language</mat-icon>
         <span class="sidenav-button-text">Top</span>
       </button>
-      <button mat-button color="primary" (click)="onMessagesPressed()">
+      }
+      <!-- @if (userRole === 'Any') -->
+      <button mat-button [color]="activeButton === 'messages' ? 'accent' : 'primary'" (click)="onMessagesPressed()">
         <mat-icon class="double-sized">chat</mat-icon>
         <span class="sidenav-button-text">Messages</span>
       </button>
-      <button [matBadge]="pendingItems" matBadgeSize="medium" mat-button color="primary" (click)="onPendingPressed()">
+      @if (userRole === 'OpsManager') {
+      <button mat-button 
+        [color]="activeButton === 'pending' ? 'accent' : 'primary'" (click)="onPendingPressed()">
         <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
-        <span class="sidenav-button-text">Pending</span>
+        <span class="sidenav-button-text">Pending ({{pendingItems}})</span>
       </button>
-      <button mat-button color="primary" (click)="onFleetPressed()">
+      }
+      @if ((userRole === 'OpsManager') || (userRole === 'Admin')) {
+      <button mat-button [color]="activeButton === 'fleet' ? 'accent' : 'primary'" (click)="onFleetPressed()">
         <mat-icon class="double-sized">sailing</mat-icon>
         <span class="sidenav-button-text">Fleet</span>
       </button>
-      <button mat-button color="primary" (click)="onStaffPressed()">
+      <button mat-button [color]="activeButton === 'staff' ? 'accent' : 'primary'" (click)="onStaffPressed()">
         <mat-icon class="double-sized">badge</mat-icon>
         <span class="sidenav-button-text">Staff</span>
       </button>
-      <button mat-button color="primary" (click)="onOwnersPressed()">
+      <button mat-button [color]="activeButton === 'owners' ? 'accent' : 'primary'" (click)="onOwnersPressed()">
         <mat-icon class="double-sized">person</mat-icon>
         <span class="sidenav-button-text">Owners</span>
       </button>
-      <button mat-button color="primary" (click)="onWorkflowPressed()">
+      <button mat-button [color]="activeButton === 'workflowAdmin' ? 'accent' : 'primary'"
+        (click)="onWorkflowAdminPressed()">
         <mat-icon class="double-sized">schema</mat-icon>
         <span class="sidenav-button-text">Workflow Admin</span>
       </button>
-      <button mat-button color="primary" (click)="onChecklistAdminPressed()">
+      <button mat-button [color]="activeButton === 'checklistAdmin' ? 'accent' : 'primary'"
+        (click)="onChecklistAdminPressed()">
         <mat-icon class="double-sized">fact_check</mat-icon>
         <span class="sidenav-button-text">Checklist Admin</span>
       </button>
-      <button mat-button color="primary" (click)="onActionsPressed()">
+      <button mat-button [color]="activeButton === 'actionAdmin' ? 'accent' : 'primary'"
+        (click)="onActionAdminPressed()">
         <mat-icon class="double-sized">check_circle</mat-icon>
         <span class="sidenav-button-text">Action Admin</span>
       </button>
-      <button mat-button color="primary" (click)="onInventoryPressed()">
+      }
+      @if ((userRole === 'OpsManager') || (userRole === 'ServiceManager')) {
+      <button mat-button [color]="activeButton === 'inventory' ? 'accent' : 'primary'" (click)="onInventoryPressed()">
         <mat-icon class="double-sized">pallet</mat-icon>
         <span class="sidenav-button-text">Inventory</span>
       </button>
-      <button mat-button color="primary" (click)="onServicesPressed()">
+      <button mat-button [color]="activeButton === 'services' ? 'accent' : 'primary'" (click)="onServicesPressed()">
         <mat-icon class="double-sized">home_repair_service</mat-icon>
         <span class="sidenav-button-text">Service Orders</span>
       </button>
+      }
       <mat-divider></mat-divider>
+      @if ((userRole === 'OpsManager') || (userRole === 'Admin')) {
       <div>
-        <button mat-button color="primary" (click)="onDemoPressed()">
+        <button mat-button [color]="activeButton === 'demo' ? 'accent' : 'primary'" (click)="onDemoPressed()">
           <mat-icon class="double-sized">add_to_queue</mat-icon>
           <span class="sidenav-button-text">Add Demo Data</span>
         </button>
       </div>
-      }
-      @if (userRole === 'Admin') {
-      <button mat-button color="primary" (click)="onMessagesPressed()">
-        <mat-icon class="double-sized">chat</mat-icon>
-        <span class="sidenav-button-text">Messages</span>
-      </button>
-      <button mat-button color="primary" (click)="onFleetPressed()">
-        <mat-icon class="double-sized">sailing</mat-icon>
-        <span class="sidenav-button-text">Fleet</span>
-      </button>
-      <button mat-button color="primary" (click)="onStaffPressed()">
-        <mat-icon class="double-sized">badge</mat-icon>
-        <span class="sidenav-button-text">Staff</span>
-      </button>
-      <button mat-button color="primary" (click)="onOwnersPressed()">
-        <mat-icon class="double-sized">person</mat-icon>
-        <span class="sidenav-button-text">Owners</span>
-      </button>
-      <button mat-button color="primary" (click)="onWorkflowPressed()">
-        <mat-icon class="double-sized">schema</mat-icon>
-        <span class="sidenav-button-text">Workflow Admin</span>
-      </button>
-      <button mat-button color="primary" (click)="onChecklistAdminPressed()">
-        <mat-icon class="double-sized">fact_check</mat-icon>
-        <span class="sidenav-button-text">Checklist Admin</span>
-      </button>
-      <button mat-button color="primary" (click)="onActionsPressed()">
-        <mat-icon class="double-sized">check_circle</mat-icon>
-        <span class="sidenav-button-text">Action Admin</span>
-      </button>
-      <div>
-        <button mat-button color="primary" (click)="onDemoPressed()">
-          <mat-icon class="double-sized">add_to_queue</mat-icon>
-          <span class="sidenav-button-text">Add Demo Data</span>
-        </button>
-      </div>
-      }
-      @if (userRole === 'ServiceManager') {
-      <button mat-button color="primary" (click)="onTopPressed()">
-        <mat-icon class="double-sized">language</mat-icon>
-        <span class="sidenav-button-text">Top</span>
-      </button>
-      <button mat-button color="primary" (click)="onMessagesPressed()">
-        <mat-icon class="double-sized">chat</mat-icon>
-        <span class="sidenav-button-text">Messages</span>
-      </button>
-      <button [matBadge]="pendingItems" matBadgeSize="medium" mat-button color="primary" (click)="onPendingPressed()">
-        <mat-icon class="material-symbols-outlined double-sized">check_box</mat-icon>
-        <span class="sidenav-button-text">Pending</span>
-      </button>
-      <button mat-button color="primary" (click)="onFleetPressed()">
-        <mat-icon class="double-sized">sailing</mat-icon>
-        <span class="sidenav-button-text">Fleet</span>
-      </button>
-      <button mat-button color="primary" (click)="onInventoryPressed()">
-        <mat-icon class="double-sized">pallet</mat-icon>
-        <span class="sidenav-button-text">Inventory</span>
-      </button>
-      <button mat-button color="primary" (click)="onServicesPressed()">
-        <mat-icon class="double-sized">home_repair_service</mat-icon>
-        <span class="sidenav-button-text">Service Orders</span>
-      </button>
-      <mat-divider></mat-divider>
       }
     </div>
 

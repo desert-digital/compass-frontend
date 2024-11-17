@@ -37,6 +37,22 @@ mat-input {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+.card-container .card:not(.highlight-card) {
+  cursor: pointer;
+}
+
+.card-container .card:not(.highlight-card):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+}
+
+.card-container .card:not(.highlight-card):hover .material-icons path {
+  fill: rgb(105, 103, 103);
+}
+
+.card-container .card:not(:last-child) {
+  margin-right: 0;
+}
 
 .list-container {
   background-color: white;
