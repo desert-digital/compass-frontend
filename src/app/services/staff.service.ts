@@ -67,6 +67,7 @@ export class StaffService {
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
+          username: staff.username,
           role: staff.role,
           status: staff.status
         }
@@ -95,6 +96,7 @@ export class StaffService {
           name: staff.name,
           email: staff.email,
           phone: staff.phone,
+          username: staff.username,
           role: staff.role,
           status: 'Inactive'
         }
