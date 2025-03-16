@@ -147,6 +147,12 @@ type AppFlag @model @auth(rules: [{ allow: public }]){
   value: String!
 }
 
+type UserNameList {
+  names: [String]
+}
+
 type Mutation {
   startWorkflow(workflowId: String!): String @function(name: "startworkflow-${env}")
 }
+
+

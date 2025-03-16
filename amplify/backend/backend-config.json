@@ -78,6 +78,11 @@
   },
   "custom": {},
   "function": {
+    "getCognitoUsers": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "startworkflow": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -85,6 +90,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_getCognitoUsers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCognitoUsers"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCognitoUsers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCognitoUsers"
+        }
+      ]
+    },
     "AMPLIFY_function_startworkflow_deploymentBucketName": {
       "usedBy": [
         {

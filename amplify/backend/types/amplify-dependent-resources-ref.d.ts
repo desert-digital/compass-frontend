@@ -22,6 +22,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "getCognitoUsers": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "startworkflow": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
