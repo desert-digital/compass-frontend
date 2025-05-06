@@ -6,13 +6,14 @@ import { Injectable } from '@angular/core';
 
 import { generateClient } from '@aws-amplify/api';
 import { createChecklist } from '../../graphql/mutations';
-import { listChecklists } from '../../graphql/queries';
+import { getStaff, listChecklists } from '../../graphql/queries';
 
 // Local
 
-import { Checklist, ChecklistModel } from '../API.service';
+import { Checklist, ChecklistModel, Action } from '../API.service';
 import { ChecklistModelsService } from './checklist-models.service';
 import { ActionsService } from './actions.service';
+import { StaffService } from './staff.service';
 
 
 @Injectable({
@@ -23,21 +24,21 @@ export class ChecklistsService {
   client = generateClient();
 
   constructor(private _checklistModelService: ChecklistModelsService,
-    private _actionsService: ActionsService) { }
+    private _actionsService: ActionsService,
+    private _staffService: StaffService) { }
 
   async getChecklists(): Promise<Checklist[]> {
     const checklists = await this.client.graphql({ query: listChecklists });
     return checklists.data.listChecklists.items as Checklist[];
   }
 
-  async createChecklist() {
-    // await this.api.CreateChecklist(item);
-  }
-
-  async createChecklistFromModel(checklistModel: ChecklistModel, assigneeId: string, mustEnd: string): Promise<Checklist> {
+  async createChecklistFromModel(checklistModel: ChecklistModel, assigneeId: any, mustEnd: string): Promise<Checklist> {
     const now = new Date().toISOString();
     const mustEndTime = new Date(mustEnd);
     const mustStartTime = new Date(mustEndTime.getTime() - (checklistModel.duration * 60 * 1000));
+
+    console.log('Staff ID:', assigneeId, 'Type:', typeof assigneeId);
+
     const newChecklistMutationResult = await this.client.graphql({
       query: createChecklist,
       variables: {
@@ -45,7 +46,7 @@ export class ChecklistsService {
           company: 'compass',
           name: checklistModel.name,
           actualStart: now,
-          checklistOwnerId: assigneeId,
+          checklistOwnerId: assigneeId.assignee,
           mustStart: mustStartTime.toISOString(),
           mustEnd: mustEndTime.toISOString()
         }
@@ -53,22 +54,41 @@ export class ChecklistsService {
     }
     );
     const newChecklist: Checklist = newChecklistMutationResult.data.createChecklist as Checklist;
-    const checklistActionModels = checklistModel.actionModels.items;
 
-    // For each Action Model in the Checklist create an Action
-    // Push the checklist into an array and add all the Checklists to 
-    // the Workflow
+    // Safely access the action models with null checking
+    const checklistActionModels = checklistModel?.actionModels?.items || [];
+    const actions: Action[] = [];
 
-    const actions = [];
-
-    for (const checklistActionModel of checklistActionModels) {
-      const newAction = await this._actionsService.createActionFromModel(newChecklist, checklistActionModel.actionModel);
-      actions.push(newAction);
+    // Create actions for each action model
+    if (checklistActionModels.length > 0) {
+      for (const checklistActionModel of checklistActionModels) {
+        if (checklistActionModel?.actionModel) {
+          try {
+            const newAction = await this._actionsService.createActionFromModel(
+              newChecklist,
+              checklistActionModel.actionModel
+            );
+            actions.push(newAction);
+          } catch (error) {
+            console.error('Error creating action:', error);
+            // You might want to handle this error according to your needs
+          }
+        }
+      }
     }
 
-    // newChecklist.steps = actions;
-    console.log(newChecklist);
-    return newChecklist as Checklist;
+    // Update the checklist with the created actions
+    const updatedChecklist = {
+      ...newChecklist,
+      actions: actions
+    };
+
+    console.log('Created checklist with actions:', updatedChecklist);
+    return updatedChecklist;
+
+  } catch(error) {
+    console.error('Error creating checklist:', error);
+    throw new Error('Failed to create checklist: ' + error.message);
   }
 }
 

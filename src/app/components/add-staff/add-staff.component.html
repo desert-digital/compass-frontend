@@ -2,8 +2,12 @@
     <form [formGroup]="staffForm" #formDirective="ngForm"
         (ngSubmit)="onAddNewStaffPressed(staffForm.value, formDirective)">
         <div action="#" class="column">
-            <button mat-flat-button type="submit" color="primary">Add a new Staff Member</button>
-            <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
+            <button mat-flat-button type="submit" color="primary">
+                <mat-icon>check_circle</mat-icon>
+                Add a new Staff Member</button>
+            <button mat-flat-button color="warn" (click)="onCancelPressed()">
+                <mat-icon>cancel</mat-icon>
+                Cancel</button>
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input matInput id="name" type="text" formControlName="name">

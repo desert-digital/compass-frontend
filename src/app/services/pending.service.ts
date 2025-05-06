@@ -61,7 +61,6 @@ export class PendingService {
         input: { id: item.id }
       }
     });
-    console.log(events);
   }
 
   createSubscription() {

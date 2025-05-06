@@ -6,7 +6,7 @@ import { FormArray } from '@angular/forms';
 // Amplify
 
 import { generateClient } from '@aws-amplify/api';
-import { listWorkflows } from '../../graphql/queries';
+import { listWorkflows, getWorkflow } from '../../graphql/queries';
 import { createWorkflow } from '../../graphql/mutations';
 
 import { PendingEvent, Workflow, WorkflowModel } from '../API.service';
@@ -72,5 +72,29 @@ export class WorkflowService {
     }
 
     return newWorkflow.data.createWorkflow as Workflow;
+  }
+
+  async getWorkflowById(workflowId: string): Promise<Workflow> {
+    if (!workflowId) {
+      throw new Error('Workflow ID is required');
+    }
+
+    try {
+      const response = await this.client.graphql({
+        query: getWorkflow,
+        variables: {
+          id: workflowId
+        }
+      });
+
+      if (!response.data?.getWorkflow) {
+        throw new Error(`Workflow with ID ${workflowId} not found`);
+      }
+
+      return response.data.getWorkflow as Workflow;
+    } catch (error) {
+      console.error(`Error fetching workflow ${workflowId}:`, error);
+      throw new Error(`Failed to fetch workflow: ${error.message}`);
+    }
   }
 }

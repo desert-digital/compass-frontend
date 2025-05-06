@@ -95,7 +95,7 @@ export class AddVesselComponent {
             formDirective.resetForm();
           });
       } catch (error) {
-        console.log(JSON.stringify(error));
+        // console.log(JSON.stringify(error));
         this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
       }
     }
@@ -110,7 +110,7 @@ export class AddVesselComponent {
             formDirective.resetForm();
           });
       } catch (error) {
-        console.log(JSON.stringify(error));
+        // console.log(JSON.stringify(error));
         this._snackBar.open('Error creating the vessel', 'OK', { duration: 3000 });
       }
     }

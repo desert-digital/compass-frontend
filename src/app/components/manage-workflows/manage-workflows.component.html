@@ -1,5 +1,5 @@
 <div class="container">
-    <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()">Add a New Workflow</button>
+    <button mat-flat-button color="primary" (click)="onAddNewWorkflowPressed()"><mat-icon>check_circle</mat-icon>Add a New Workflow</button>
     <div *ngIf="workflows.length > 0; else noWorkflows">
         <h3>Available Workflows</h3>
         <mat-list role="list">

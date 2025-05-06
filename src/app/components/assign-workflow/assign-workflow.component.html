@@ -1,40 +1,87 @@
 <div class="container">
   <h4>Assign The Workflow</h4>
-  <h4 class="tight">Charter: {{ event?.item }}</h4>
-  <p class="tight">Charter starting on: {{ event?.start | date: 'short' }}</p>
+  <h4>Charter: {{ event?.item }}</h4>
+  <p>Charter starting on: {{ event?.start | date: 'short' }}</p>
   <form [formGroup]="workflowForm">
-    <mat-form-field>
-      <mat-label>Vessels</mat-label>
-      <mat-select id="vessels" formControlName="vessels">
-        <mat-option *ngFor="let vessel of vesselList" [value]="vessel.id"
-          (onSelectionChange)="onVesselChanged($event)">{{
-          vessel.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div *ngIf="boatSelected">
-      <ng-container formArrayName="steps">
-        <mat-stepper orientation="vertical">
-          <ng-container *ngFor="let stepForm of steps.controls; let index = index">
-            <mat-step>
-              <ng-template matStepLabel>Checklist: <b>{{ workflowModel.checklists.items[index].checklistModel.name }}</b></ng-template>
-              <div [formGroupName]="index">
-                <mat-form-field appearance="fill">
-                  <mat-label>Assign to:</mat-label>
-                  <mat-select formControlName="assignee">
-                    <mat-option *ngFor="let person of staff" [value]="person.id">{{ person.name }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div *ngIf="index < steps.controls.length-1">
-                <button mat-raised-button matStepperNext>Next</button>
-              </div>
-              <div *ngIf="index === steps.controls.length-1">
-                <button mat-raised-button (click)="onStartWorkflowPressed()">Submit</button>
-              </div>
-            </mat-step>
-          </ng-container>
-        </mat-stepper>
-      </ng-container>
+    <mat-stepper [linear]="isLinear" orientation="vertical">
+      <!-- Vessel Selection -->
+      <mat-step>
+        <ng-template matStepLabel>Select Vessel</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Select a Vessel</mat-label>
+          <mat-select formControlName="vessels" (selectionChange)="onVesselChanged($event)">
+            @for (vessel of vesselList; track vessel.id) {
+            <mat-option [value]="vessel.id">
+              {{ vessel.name }}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" matStepperNext [disabled]="!workflowForm.get('vessels')?.touched">
+          <mat-icon>arrow_forward</mat-icon>
+          Next Step
+        </button>
+      </mat-step>
+
+      <!-- Dynamic Checklist Steps -->
+      @for (stepForm of steps.controls; track stepForm; let index = $index) {
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="step-label" [class.error-step]="!getAssignee(index)?.value && getAssignee(index)?.touched">
+            <span>{{ workflowModel.checklistModels.items[index].checklistModel.name }}</span>
+          </div>
+        </ng-template>
+
+        <div class="step-content" [formGroup]="steps.at(index)">
+          <mat-form-field appearance="outline">
+            <mat-label>
+              @if (!getAssignee(index)?.value) {
+              <span class="error-text">Assign Staff Member</span>
+              } @else {
+              <span>Assign Staff Member</span>
+              }
+            </mat-label>
+            <mat-select formControlName="assignee">
+              @for (person of staff; track person.id) {
+              <mat-option [value]="person.id">
+                {{ person.name }}
+              </mat-option>
+              }
+            </mat-select>
+            @if (!getAssignee(index)?.value && getAssignee(index)?.touched) {
+            <mat-error>Please assign a staff member</mat-error>
+            }
+            <mat-hint>Select staff member responsible for this checklist</mat-hint>
+          </mat-form-field>
+
+          <!-- Step Navigation -->
+          <div class="step-actions">
+            <!-- Back button -->
+            <button mat-flat-button color="primary" matStepperPrevious>
+              <mat-icon>arrow_back</mat-icon>
+              Back
+            </button>
+            
+            <!-- Next button -->
+            @if (index < steps.controls.length - 1) {
+              <button mat-flat-button color="primary" matStepperNext [disabled]="!getAssignee(index)?.touched">
+                <mat-icon>arrow_forward</mat-icon>
+                Next Step
+              </button>
+            }
+          </div>
+        </div>
+      </mat-step>
+      }
+    </mat-stepper>
+
+    @if (boatSelected) {
+    <div class="submit-container">
+      <button mat-flat-button color="primary" (click)="onStartWorkflowPressed()" [disabled]="!workflowForm.valid">
+        <mat-icon>check_circle</mat-icon>
+        Start Workflow
+      </button>
     </div>
+    }
   </form>
 </div>

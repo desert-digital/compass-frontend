@@ -79,6 +79,5 @@ export class ManageOwnersComponent {
     else {
       await this._getOwners(this.selectedStatus);
     }
-    console.log(status.value);
   }
 }

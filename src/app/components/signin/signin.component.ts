@@ -104,7 +104,6 @@ export class SigninComponent implements OnInit {
         // Collect the confirmation code from the user and pass to confirmResetPassword.
         break;
       case 'DONE':
-        console.log('Successfully reset password.');
         break;
     }
   }

@@ -60,7 +60,7 @@ export class AssignWorkflowComponent {
 
   async ngOnInit() {
     this.vesselList = await this._fleetService.getVessels();
-    this.staff = await this._staffService.getStaff();
+    this.staff = await this._staffService.listStaffByStatus();
     this.activatedRoute.paramMap.subscribe(async (params) => {
       const eventId = params.get('eventId');
       if (eventId) {
@@ -73,48 +73,76 @@ export class AssignWorkflowComponent {
   }
 
   get vessels() {
-    return this.workflowForm.controls['vessels'] as FormControl;
+    return this.workflowForm.get('vessels') as FormControl;
   }
 
+  // Getter for the steps FormArray
   get steps() {
-    return this.workflowForm.controls['steps'] as FormArray;
+    return this.workflowForm.get('steps') as FormArray;
+  }
+
+  getAssignee(index: number) {
+    return this.steps.at(index).get('assignee');;
   }
 
   async onVesselChanged(event: any) {
     const vessel = await this._fleetService.getVesselById(event.source.value);
     this.workflowModel = await this._workflowModelService.getWorkflowModelById(vessel.vesselDefaultWorkflowId);
 
-    for (let i=0; i < this.workflowModel.checklistModels.items.length; i++) {
-      const stepForm: FormGroup = this._formBuilder.group({
-        assignee: new FormControl(['', Validators.required])
-      });
-      stepForm.setValue({ assignee: this.staff });
-      this.steps.push(stepForm);
-    }
+    this.initializeSteps();
     this.boatSelected = true;
   }
 
-  async onStartWorkflowPressed() {
-
-    // create the Workflow
-    const workflow = await this._workflowService.createWorkflowFromModel(
-      this.event,
-      this.workflowModel,
-      this.steps
-    );
-
-    try {
-      await this.client.graphql({
-        query: startWorkflow,
-        variables: {
-          workflowId: workflow.id
-
-        }
-      });
-      this._snackBar.open('Created the Workflow', 'OK', { duration: 3000 });
+  // Initialize the form with steps based on your workflow model
+  initializeSteps() {
+    // Clear existing steps first
+    while (this.steps.length) {
+      this.steps.removeAt(0);
     }
-    catch {
-      this._snackBar.open('An Error Occured', 'OK', { duration: 3000 });
+
+    // Add a form group for each checklist item
+    this.workflowModel.checklistModels.items.forEach(() => {
+      this.addStep();
+    });
+  }
+
+  // Method to add a step to the form
+  addStep() {
+    const stepForm = this._formBuilder.group({
+      assignee: ['', Validators.required]
+    });
+    this.steps.push(stepForm);
+  }
+
+  async onStartWorkflowPressed() {
+    if (this.workflowForm.valid) {
+      try {
+        // create the Workflow
+        const workflow = await this._workflowService.createWorkflowFromModel(
+          this.event,
+          this.workflowModel,
+          this.steps
+        );
+
+        // start the workflow
+        await this.client.graphql({
+          query: startWorkflow,
+          variables: {
+            workflowId: workflow.id
+          }
+        });
+
+        this._snackBar.open('Created the Workflow', 'OK', { duration: 3000 });
+      } catch (error) {
+        console.error('Error creating workflow:', error);
+        this._snackBar.open('An Error Occurred', 'OK', { duration: 3000 });
+      }
+    } else {
+      // Mark all fields as touched to trigger validation messages
+      Object.keys(this.workflowForm.controls).forEach(key => {
+        const control = this.workflowForm.get(key);
+        control?.markAsTouched();
+      });
     }
   }
 }

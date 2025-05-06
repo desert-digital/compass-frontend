@@ -84,6 +84,12 @@ export class EditWorkflowComponent {
     });
   }
 
+  async onDeleteChecklist(item: any) {
+    const itemToRemove = this.workflow.findIndex(element => element.id === item.id);
+    this.workflow.splice(itemToRemove, 1);
+    this._updateDuration();
+  }
+
   async onUpdateWorkflowPressed(model: WorkflowModel) {
     try {
       this._workflowModelsService.updateWorkflowModel(model, this.workflow).then(() => {
@@ -101,6 +107,10 @@ export class EditWorkflowComponent {
     this.workflowForm.patchValue({
       duration: newDuration
     });
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/manage-workflows']);
   }
 }
 

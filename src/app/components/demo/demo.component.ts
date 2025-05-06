@@ -51,7 +51,7 @@ export class DemoComponent implements AfterViewInit {
   }
 
   async _getStaff() {
-    this.staff = await this._staffService.getStaff();
+    this.staff = await this._staffService.listStaffByStatus();
   }
 
   async _getOwners() {

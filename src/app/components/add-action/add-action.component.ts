@@ -48,7 +48,7 @@ export class AddActionComponent {
         formDirective.resetForm();
       });
     } catch (error) {
-      console.log(JSON.stringify(error.errors));
+      // console.log(JSON.stringify(error.errors));
       this._snackBar.open('Error creating the action', 'OK', { duration: 3000 });
     }
   }

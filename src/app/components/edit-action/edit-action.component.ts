@@ -1,7 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -30,6 +30,7 @@ export class EditActionComponent {
 
   actionForm: FormGroup;
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
     private _actionModelService: ActionModelsService,
     private _snackBar: MatSnackBar) {
@@ -63,8 +64,12 @@ export class EditActionComponent {
         formDirective.resetForm();
       })
     } catch (error) {
-      console.log(JSON.stringify(error.errors));
+      // console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', {duration: 3000})
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/manage-actions']);
   }
 }

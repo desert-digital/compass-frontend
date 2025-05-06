@@ -13,7 +13,6 @@ import { StaffService } from 'src/app/services/staff.service';
 import { CompassUserRole } from 'src/API';
 
 import { generateClient } from '@aws-amplify/api';
-import { getCognitoUsers } from 'src/graphql/mutations';
 
 @Component({
   selector: 'app-add-staff',
@@ -46,11 +45,11 @@ export class AddStaffComponent {
   }
 
   async ngInit() {
-    console.log("in ngInit");
+    // console.log("in ngInit");
   }
 
   async ngAfterViewInit() {
-    console.log("in ngAfterViewInit");
+    // console.log("in ngAfterViewInit");
   }
 
   async onAddNewStaffPressed(staff: Staff, formDirective: FormGroupDirective) {

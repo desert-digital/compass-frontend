@@ -4,8 +4,8 @@
         <div class="one-wide">
             <form [formGroup]="checklistForm" #formDirective="ngForm"
                 (ngSubmit)="onUpdateChecklistPressed(checklistForm.value)">
-                <button mat-flat-button type="submit" color="primary">Update the Checklist</button>
-                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
+                <button mat-flat-button type="submit" color="primary"><mat-icon>refresh</mat-icon>Update the Checklist</button>
+                <button mat-flat-button color="warn" (click)="onCancelPressed()"><mat-icon>cancel</mat-icon>Cancel</button>
                 <div class="row" *ngIf="false">
                     <mat-form-field>
                         <mat-label>ID</mat-label>

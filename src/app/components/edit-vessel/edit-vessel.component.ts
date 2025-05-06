@@ -1,7 +1,7 @@
 // Core
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Material
@@ -36,7 +36,8 @@ export class EditVesselComponent {
   ownerType: string = 'new';
   
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute, //,
+    private route: ActivatedRoute, 
+    private router: Router,
     private _workflowModelService: WorkflowModelsService,
     private _ownersService: OwnersService, 
     private _fleetService: FleetService, 
@@ -94,5 +95,9 @@ export class EditVesselComponent {
       console.log(JSON.stringify(error.errors));
       this._snackBar.open('An error occured when updating the action', 'OK', {duration: 3000})
     }
+  }
+
+  onCancelPressed() {
+    this.router.navigate(['main/fleet']);
   }
 }

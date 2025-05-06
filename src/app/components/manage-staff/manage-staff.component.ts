@@ -29,14 +29,14 @@ export class ManageStaffComponent {
   }
 
   async ngOnInit() {
-    await this._getStaff(this.selectedStatus);
+    await this._listStaff(this.selectedStatus);
   }
 
-  async _getStaff(status?: string) {
+  async _listStaff(status?: string) {
     if (typeof status === 'undefined') {
-      this.staff = await this._staffService.getStaff();
+      this.staff = await this._staffService.listStaffByStatus();
     } else {
-      this.staff = await this._staffService.getStaff(status);
+      this.staff = await this._staffService.listStaffByStatus(status);
     }
   }
 
@@ -51,22 +51,22 @@ export class ManageStaffComponent {
   async onDeleteStaffPressed(staff: Staff) {
     await this._staffService.deleteStaff(staff);
     this._snackBar.open(`Deleted ${staff.name}`, 'OK', { duration: 3000 });
-    this._getStaff(this.selectedStatus);
+    this._listStaff(this.selectedStatus);
   }
 
   async toggleActivate(staff: Staff) {
     await this._staffService.deactivateStaff(staff);
     this._snackBar.open(`Deactivated ${staff.name}`, 'OK', { duration: 3000 });
-    this._getStaff(this.selectedStatus);
+    this._listStaff(this.selectedStatus);
   }
 
   async onStatusChanged(status: MatButtonToggleChange) {
     this.selectedStatus = status.value
     if (this.selectedStatus === 'All') {
-      await this._getStaff();
+      await this._listStaff();
     }
     else {
-      await this._getStaff(this.selectedStatus);
+      await this._listStaff(this.selectedStatus);
     }
     console.log(status.value);
   }

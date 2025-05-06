@@ -4,7 +4,8 @@
         <div class="one-wide">
             <form [formGroup]="workflowForm" #formDirective="ngForm"
                 (ngSubmit)="onUpdateWorkflowPressed(workflowForm.value)">
-                <button mat-flat-button type="submit" color="primary">Update the Checklist</button>
+                <button mat-flat-button type="submit" color="primary"><mat-icon>refresh</mat-icon>Update the Checklist</button>
+                <button mat-flat-button color="warn" (click)="onCancelPressed()"><mat-icon>cancel</mat-icon>Cancel</button>
                 <div class="row">
                     <mat-form-field>
                         <mat-label>Workflow name</mat-label>
@@ -29,12 +30,16 @@
                 <div cdkDropList [cdkDropListData]="workflow" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of workflow"> <mat-icon
                             class="material-symbols-outlined">drag_handle</mat-icon>
-                        {{item.name}}</div>
+                        {{item.name}}
+                        <button mat-icon-button (click)="onDeleteChecklist(item)"><mat-icon
+                                class="material-symbols-outlined" color="warn">close</mat-icon></button>
+                    </div>
                 </div>
             </div>
             <div class="example-container two-wide">
                 <h4>All Checklists</h4>
-                <div cdkDropList [cdkDropListData]="checklists" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div cdkDropList [cdkDropListData]="checklists" class="example-list"
+                    (cdkDropListDropped)="drop($event)">
                     <div cdkDrag class="example-box" *ngFor="let item of checklists"> <mat-icon
                             class="material-symbols-outlined">drag_handle</mat-icon>
                         {{item.name}}</div>

@@ -21,7 +21,7 @@ export class StaffService {
 
   constructor() { }
 
-  async getStaff(status?: string): Promise<Staff[]> {
+  async listStaffByStatus(status?: string): Promise<Staff[]> {
     if (typeof status === 'undefined') {
       const staffResult = await this.client.graphql({ query: listStaff })
       return staffResult.data.listStaff.items as Staff[];
@@ -34,8 +34,13 @@ export class StaffService {
     }
   }
 
-  async getStaffFromId(id: string): Promise<Staff> {
-    const staffResult = await this.client.graphql({ query: getStaff, variables: { id: id } });
+  async getStaffFromId(staffId: string): Promise<Staff> {
+    const staffResult = await this.client.graphql({
+      query: getStaff,
+      variables: {
+        id: staffId
+      }
+    });
     return staffResult.data.getStaff as Staff;
   }
 

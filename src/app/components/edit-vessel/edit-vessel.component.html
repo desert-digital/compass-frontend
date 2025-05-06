@@ -2,7 +2,8 @@
   <h3>Edit the Vessel</h3>
   <form [formGroup]="vesselForm" action="#" #formDirective="ngForm"
     (ngSubmit)="onUpdateVesselPressed(vesselForm.value, formDirective)">
-    <button mat-flat-button type="submit" color="primary">Update the Vessel</button>
+    <button mat-flat-button type="submit" color="primary"><mat-icon>refresh</mat-icon>Update the Vessel</button>
+    <button mat-flat-button color="warn" (click)="onCancelPressed()"><mat-icon>cancel</mat-icon>Cancel</button>
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput id="name" type="text" formControlName="name">

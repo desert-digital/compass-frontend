@@ -4,10 +4,101 @@
     margin: 2px;
 }
 
-.mat-stepper-vertical {
-    margin-top: 8px;
+mat-card {
+    padding: 0;
+
+    mat-card-header {
+        padding: 16px 24px;
+        background: #f5f5f5;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+        mat-card-title {
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        mat-card-subtitle {
+            margin-bottom: 4px;
+        }
+    }
+
+    mat-card-content {
+        padding: 24px;
+    }
 }
 
-.mat-mdc-form-field {
-    margin-top: 16px;
+.workflow-stepper {
+    .step-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &.error-step {
+            color: #f44336;
+        }
+
+        mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.step-content {
+    padding: 24px 0;
+
+    mat-form-field {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+.step-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+
+.submit-container {
+    margin-top: 5px;
+}
+
+button {
+    @include buttons;
+    width: 100%
+}
+
+.error-text {
+    color: #f44336;
+}
+
+::ng-deep {
+    .mat-vertical-stepper-content {
+        margin-left: 24px;
+    }
+
+    .mat-vertical-content-container {
+        margin-left: 36px;
+    }
+
+    .mat-step-header {
+        &.mat-step-header-invalid {
+            .mat-step-label {
+                color: #f44336;
+            }
+        }
+    }
 }

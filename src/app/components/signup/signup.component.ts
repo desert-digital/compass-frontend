@@ -74,7 +74,6 @@ export class SignupComponent implements OnInit {
         }
       }).then(() => {
         this.signingUp = false;
-        console.log('Changed signingUp');
         this.verifyForm.patchValue({
           userNameWithCode: this.signupForm.value.userName
         });

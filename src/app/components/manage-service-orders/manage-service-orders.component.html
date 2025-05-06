@@ -1,5 +1,5 @@
 <div class="container">
-    <button mat-flat-button color="primary" (click)="onAddNewServiceOrderPressed()">Add a New Service Order</button>
+    <button mat-flat-button color="primary" (click)="onAddNewServiceOrderPressed()"><mat-icon>check_circle</mat-icon>Add a New Service Order</button>
     <div *ngIf="orders.length > 0; else noActions">
         <h3>Services Orders</h3>
         <mat-list role="list">

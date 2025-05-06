@@ -3,8 +3,13 @@
         <div class="one-wide">
             <form [formGroup]="checklistForm" #formDirective="ngForm"
                 (ngSubmit)="onAddChecklistPressed(checklistForm.value, formDirective)">
-                <button mat-flat-button type="submit" color="primary">Add the new Checklist</button>
-                <button mat-flat-button color="warn" (click)="onCancelPressed()">Cancel</button>
+                <button mat-flat-button type="submit" color="primary">
+                    <mat-icon>check_circle</mat-icon>
+                    Add the new Checklist</button>
+                <button mat-flat-button color="warn"
+                    (click)="onCancelPressed()">
+                    <mat-icon>cancel</mat-icon>
+                    Cancel</button>
                 <div class="row">
                     <mat-form-field>
                         <mat-label>Checklist name</mat-label>

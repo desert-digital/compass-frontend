@@ -1,5 +1,5 @@
 <div class="container">
-    <button mat-flat-button color="primary" (click)="onAddNewActionPressed()">Add a New Action</button>
+    <button mat-flat-button color="primary" (click)="onAddNewActionPressed()"><mat-icon>check_circle</mat-icon>Add a New Action</button>
     <div *ngIf="actions.length > 0; else noActions">
         <h3>Available Actions</h3>
         <mat-list role="list">

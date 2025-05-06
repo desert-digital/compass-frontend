@@ -60,7 +60,6 @@ export class EditStaffComponent {
   }
 
   async onUpdateStaffPressed(staff: Staff) {
-    console.log(staff);
     try {
       await this._staffService.updateStaff(staff).then(() => {
         this._snackBar.open(`Updated ${staff.name}`, 'OK', { duration: 3000 })
