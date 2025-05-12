@@ -10,3 +10,25 @@
 | US027 | Build dashboard view of in-flight workflows with status | 2 | 2025-05-18 | 2025-05-19 | To Do |
 | US027 | Add sorting and filtering to workflow view | 1.5 | 2025-05-20 | 2025-05-21 | To Do |
 | US027 | Highlight delayed workflows in the dashboard | 1 | 2025-05-22 | 2025-05-22 | To Do |
+
+## To Do
+
+**Persona**: Ops Manager
+
+**Story**:  
+As the Ops Manager, I want to be able to log in to the application and see the pending charters so I can assign a workflow to the charter
+
+**Acceptance Criteria**:  
+* correct user id/password goes to home page, the messages menu item is show 
+* on the home page, the pending item is shown, the number of pending charters is shown in the text or as a badge
+* a table of the all pending charters is shown
+* each table row includes a menu to assign or delete (?) the pending charter
+* if a workflow is assigned, it becomes visible under the assigned charters list
+* assignment includes timestamp and user reference
+
+### Tasks
+- [ ] Build feature components
+- [ ] Implement backend logic if needed
+- [ ] Integrate with frontend UI
+- [ ] ✅ **Write unit tests**
+- [ ] ✅ **Write integration tests**
