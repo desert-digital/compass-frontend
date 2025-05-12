@@ -41,17 +41,15 @@ This guide helps you manage your yacht maintenance workflow app efficiently usin
 
 ---
 
-## 📋 Current Kanban Board
-
-- [Sprint 6 Kanban](sprint_6_kanban_board_export.md)
-
 ## 🧩 Your DevOps Flow
 
 ### 1. 🧠 Plan the Sprint
 
 - Open the next file in `/sprints/` (e.g., `sprint-9.md`).
 - Choose 1–3 user stories you can realistically complete in 5–7 work sessions.
-- Update `kanban.md`:
+- Update the Current Kanban Board: 
+
+- [Sprint 6 Kanban](sprint_6_kanban_board_export.md)
 
   ```markdown
   ## To Do
