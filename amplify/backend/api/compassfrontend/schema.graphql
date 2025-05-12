@@ -9,14 +9,34 @@ enum CompassUserRole {
   Crew
 }
 
+enum ItemStatus {
+  active
+  inactive
+}
+
+enum ActionChecklistWorkflowStatus {
+  blocked
+  waiting
+  in_progress
+  completed
+  cancelled
+}
+
+enum PendingEventStatus {
+  pending
+  completed
+  cancelled
+}å
+
 type PendingEvent @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String
+  status: PendingEventStatus
   start: String 
   end: String
   item: String
   item_id: String
-  status: String,
+  status: TaskStatus,
   contactEmail: String,
   contactName: String,
   contactPhone: String
@@ -40,21 +60,23 @@ type InventoryItem @model @auth(rules: [{allow: public}]) {
 type Vessel @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
+  status: ItemStatus
   name: String
   vesselType: String
   documentNumber: String
   owner: Owner @hasOne
-  status: String
+  status: TaskStatus
   defaultWorkflow: WorkflowModel @hasOne
 }
 
 type Staff @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
+  status: ItemStatus
   name: String
   email: String
   phone: String
-  status: String
+  status: TaskStatus
   username: String @index(name: "byUserName", queryField: "getStaffByUserName")
   role: CompassUserRole
 }
@@ -62,10 +84,11 @@ type Staff @model @auth(rules: [{ allow: public }]){
 type Owner @model @auth(rules: [{ allow: public }]){
   id: ID!
   company: String!
+  status: ItemStatus
   name: String
   email: String
   phone: String
-  status: String
+  status: TaskStatus
   boats: [Vessel] @hasMany
 }
 
@@ -101,7 +124,7 @@ type WorkflowModel @model @auth(rules: [{allow: public}]) {
 type Action @model @auth(rules: [{allow: public}]){
   id: ID!
   company: String
-  status: Boolean
+  status: ActionChecklistWorkflowStatus
   name: String
   duration: Int
   actualStart: String
@@ -113,6 +136,7 @@ type Checklist @model @auth(rules: [{ allow: public }]){
   company: String!
   name: String
   duration: Int
+  status: ActionChecklistWorkflowStatus
   owner: Staff @hasOne
   steps: [Action] @hasMany
   mustStart: String
@@ -126,6 +150,7 @@ type Workflow @model @auth(rules: [{ allow: public }]){
   company: String!
   name: String
   duration: Int
+  status: ActionChecklistWorkflowStatus
   steps: [Checklist] @hasMany
   mustStart: String
   mustEnd: String 
