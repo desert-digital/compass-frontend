@@ -18,7 +18,23 @@ As the Ops Manager, I want to be able to log in to the application and see the s
 
 ---
 
-## User Story: US031
+
+
+### Tasks
+- [ ] correct user id/password goes to home page, the messages menu item is show
+- [ ] ✅ Test: correct user id/password goes to home page, the messages menu item is show
+- [ ] on the home page, the manage service orders menu item is shown
+- [ ] ✅ Test: on the home page, the manage service orders menu item is shown
+- [ ] a button to add new service orders is shown
+- [ ] ✅ Test: a button to add new service orders is shown
+- [ ] a button to filter active/complete service orders is shown (default: active)
+- [ ] ✅ Test: a button to filter active/complete service orders is shown (default: active)
+- [ ] a table of the all service orders is shown
+- [ ] ✅ Test: a table of the all service orders is shown
+- [ ] newly created service orders are marked with status 'New'
+- [ ] ✅ Test: newly created service orders are marked with status 'New'
+- [ ] filters allow toggling between All, Active, Completed service orders
+- [ ] ✅ Test: filters allow toggling between All, Active, Completed service orders## User Story: US031
 
 **Persona**: Ops Manager
 
@@ -33,7 +49,17 @@ As the Ops Manager, I want to log into the application so I can review the statu
 
 ---
 
-## User Story: US015
+
+
+### Tasks
+- [ ] landing page shows a dashboard of current workflows
+- [ ] ✅ Test: landing page shows a dashboard of current workflows
+- [ ] status includes checklist progress bar
+- [ ] ✅ Test: status includes checklist progress bar
+- [ ] vessel ID and assigned technician are shown for each workflow
+- [ ] ✅ Test: vessel ID and assigned technician are shown for each workflow
+- [ ] delayed workflows are visually highlighted
+- [ ] ✅ Test: delayed workflows are visually highlighted## User Story: US015
 
 **Persona**: Service Manager
 
@@ -48,3 +74,20 @@ As the Service Manager, I want to be able to log in to the application and see t
 * a table of the all service orders is shown
 * each service order shows assigned checklist and due date
 * filters update the table view in real time
+
+
+### Tasks
+- [ ] correct user id/password goes to home page, the messages menu item is show
+- [ ] ✅ Test: correct user id/password goes to home page, the messages menu item is show
+- [ ] on the home page, the manage service orders menu item is shown
+- [ ] ✅ Test: on the home page, the manage service orders menu item is shown
+- [ ] a button to add new service orders is shown
+- [ ] ✅ Test: a button to add new service orders is shown
+- [ ] a button to filter active/complete service orders is shown (default: active)
+- [ ] ✅ Test: a button to filter active/complete service orders is shown (default: active)
+- [ ] a table of the all service orders is shown
+- [ ] ✅ Test: a table of the all service orders is shown
+- [ ] each service order shows assigned checklist and due date
+- [ ] ✅ Test: each service order shows assigned checklist and due date
+- [ ] filters update the table view in real time
+- [ ] ✅ Test: filters update the table view in real time

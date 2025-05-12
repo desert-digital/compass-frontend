@@ -22,3 +22,6 @@
 - **Success Criteria**:
   - UI disables out-of-order actions.
   - API validates sequential completion.
+
+
+### Tasks

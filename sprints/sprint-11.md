@@ -15,6 +15,12 @@
 - **Success Criteria**:
   - Analytics report highlights top delays and their causes.
 
+
+
+### Tasks
 #### 4. As a **site_admin**, I want all maintenance data to be logged for retraining ML models, so predictions stay accurate over time.
 - **Success Criteria**:
   - Logs are stored in a consistent format, and retraining can be triggered on demand.
+
+
+### Tasks

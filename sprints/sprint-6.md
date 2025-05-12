@@ -17,7 +17,21 @@ As the Ops Manager, I want to be able to log in to the application and see the p
 
 ---
 
-## User Story: US027
+
+
+### Tasks
+- [ ] correct user id/password goes to home page, the messages menu item is show
+- [ ] ✅ Test: correct user id/password goes to home page, the messages menu item is show
+- [ ] on the home page, the pending item is shown, the number of pending charters is shown in the text or as a badge
+- [ ] ✅ Test: on the home page, the pending item is shown, the number of pending charters is shown in the text or as a badge
+- [ ] a table of the all pending charters is shown
+- [ ] ✅ Test: a table of the all pending charters is shown
+- [ ] each table row includes a menu to assign or delete (?) the pending charter
+- [ ] ✅ Test: each table row includes a menu to assign or delete (?) the pending charter
+- [ ] if a workflow is assigned, it becomes visible under the assigned charters list
+- [ ] ✅ Test: if a workflow is assigned, it becomes visible under the assigned charters list
+- [ ] assignment includes timestamp and user reference
+- [ ] ✅ Test: assignment includes timestamp and user reference## User Story: US027
 
 **Persona**: Admin
 
@@ -30,3 +44,16 @@ As the Admin, I want to log into the application so I can review the status of a
 * each entry includes vessel, checklist, and assigned crew
 * ability to sort/filter by vessel, owner, and date
 * errors or delays in workflows are highlighted
+
+
+### Tasks
+- [ ] login success leads to dashboard with in-flight workflows panel
+- [ ] ✅ Test: login success leads to dashboard with in-flight workflows panel
+- [ ] workflows show status: not started, in progress, completed
+- [ ] ✅ Test: workflows show status: not started, in progress, completed
+- [ ] each entry includes vessel, checklist, and assigned crew
+- [ ] ✅ Test: each entry includes vessel, checklist, and assigned crew
+- [ ] ability to sort/filter by vessel, owner, and date
+- [ ] ✅ Test: ability to sort/filter by vessel, owner, and date
+- [ ] errors or delays in workflows are highlighted
+- [ ] ✅ Test: errors or delays in workflows are highlighted
