@@ -15,12 +15,6 @@
 - **Success Criteria**:
   - SageMaker model is trained, deployed, and responds to input with predictions.
 
-
-
-### Tasks
 #### 4. As a **service_manager**, I want to compare predicted vs actual completion times, so I can evaluate system performance and adjust expectations.
 - **Success Criteria**:
   - Both values (predicted, actual) are logged and visualized or exportable.
-
-
-### Tasks

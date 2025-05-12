@@ -12,22 +12,19 @@ This guide helps you manage your yacht maintenance workflow app efficiently usin
 
 ---
 
-## 📁 Repository Structure (Quick Recap)
-
 ## 📁 Full Repository Structure (Clickable)
 
 ```bash
 your-project/
 ├── [README.md](README.md)
 ├── [COMPASS_DEVOPS_GUIDE.md](COMPASS_DEVOPS_GUIDE.md)
-├── [kanban.md](kanban.md)
 ├── sprints/
-│   ├── [sprint-6.md](sprints/sprint-6.md)
-│   ├── [sprint-7.md](sprints/sprint-7.md)
-│   ├── [sprint-8.md](sprints/sprint-8.md)
-│   ├── [sprint-9.md](sprints/sprint-9.md)
-│   ├── [sprint-10.md](sprints/sprint-10.md)
-│   └── [sprint-11.md](sprints/sprint-11.md)
+│   ├── [sprint-6.md](sprint_6_user_stories_with_criteria.md)
+│   ├── [sprint-7.md](sprint_7_user_stories_with_criteria.md)
+│   ├── [sprint-8.md](sprint_8_user_stories_with_criteria.md)
+│   ├── [sprint-9.md](sprint_9_user_stories_with_criteria.md)
+│   ├── [sprint-10.md](sprint_10_user_stories_with_criteria.md)
+│   └── [sprint-11.md](sprint_11_user_stories_with_criteria.md)
 ├── design-docs/
 │   ├── [compass_design.md](design-docs/compass_design.md)
 │   └── personas/
@@ -46,19 +43,11 @@ your-project/
         └── [user_story.md](.github/ISSUE_TEMPLATE/user_story.md)
 ```
 
-
-```
-your-project/
-├── README.md                      ← Project overview and setup
-├── sprints/                       ← Sprint plans with user stories + criteria
-├── design-docs/                   ← Architecture, workflow diagrams, personas
-│   └── personas/                  ← Individual persona files
-├── kanban.md                      ← Markdown-based task board (To Do/In Progress/Done)
-├── test-plan/                     ← Testing strategy and module test specs
-└── .github/ISSUE_TEMPLATE/        ← (Optional) GitHub issue templates
-```
-
 ---
+
+## Current Kanban Board
+
+[sprint-6](sprint_6_kanban_board_export.md)
 
 ## 🧩 Your DevOps Flow
 
