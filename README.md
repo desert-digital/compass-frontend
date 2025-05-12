@@ -1,10 +1,9 @@
-
 # 🧭 Compass – Your Guide to More Availability and Revenue
 
 **Compass** is a solo-built maintenance management system for yacht charter companies.  
 It increases operational **availability** and **revenue** by coordinating workflows, checklists, and actions — ensuring maintenance is never a bottleneck.
 
-This guide helps you manage and evolve Compass using a lightweight but powerful Agile and DevOps structure tailored for solo development.)
+This guide helps you manage and evolve Compass using a lightweight but powerful Agile and DevOps structure tailored for solo development.
 
 ## 🎯 Overview
 
@@ -14,40 +13,37 @@ This guide helps you manage your yacht maintenance workflow app efficiently usin
 
 ## 📁 Full Repository Structure (Clickable)
 
-```bash
-your-project/
-├── [README.md](README.md)
-├── [COMPASS_DEVOPS_GUIDE.md](COMPASS_DEVOPS_GUIDE.md)
-├── sprints/
-│   ├── [sprint-6.md](sprint_6_user_stories_with_criteria.md)
-│   ├── [sprint-7.md](sprint_7_user_stories_with_criteria.md)
-│   ├── [sprint-8.md](sprint_8_user_stories_with_criteria.md)
-│   ├── [sprint-9.md](sprint_9_user_stories_with_criteria.md)
-│   ├── [sprint-10.md](sprint_10_user_stories_with_criteria.md)
-│   └── [sprint-11.md](sprint_11_user_stories_with_criteria.md)
-├── design-docs/
-│   ├── [compass_design.md](design-docs/compass_design.md)
-│   └── personas/
-│       ├── [admin.md](design-docs/personas/admin.md)
-│       ├── [crew.md](design-docs/personas/crew.md)
-│       ├── [ops_manager.md](design-docs/personas/ops_manager.md)
-│       ├── [service_manager.md](design-docs/personas/service_manager.md)
-│       └── [site_admin.md](design-docs/personas/site_admin.md)
-├── test-plan/
-│   ├── [angular-components.md](test-plan/angular-components.md)
-│   ├── [api-services.md](test-plan/api-services.md)
-│   ├── [lambda-functions.md](test-plan/lambda-functions.md)
-│   └── [tdd-strategy.md](test-plan/tdd-strategy.md)
-└── .github/
-    └── ISSUE_TEMPLATE/
-        └── [user_story.md](.github/ISSUE_TEMPLATE/user_story.md)
-```
+- [README.md](README.md)
+- [COMPASS_DEVOPS_GUIDE.md](COMPASS_DEVOPS_GUIDE.md)
+- `sprints/`
+  - [sprint-6.md](sprint_6_user_stories_with_criteria.md)
+  - [sprint-7.md](sprint_7_user_stories_with_criteria.md)
+  - [sprint-8.md](sprint_8_user_stories_with_criteria.md)
+  - [sprint-9.md](sprint_9_user_stories_with_criteria.md)
+  - [sprint-10.md](sprint_10_user_stories_with_criteria.md)
+  - [sprint-11.md](sprint_11_user_stories_with_criteria.md)
+- `design-docs/`
+  - [compass_design.md](design-docs/compass_design.md)
+  - `personas/`
+    - [admin.md](design-docs/personas/admin.md)
+    - [crew.md](design-docs/personas/crew.md)
+    - [ops_manager.md](design-docs/personas/ops_manager.md)
+    - [service_manager.md](design-docs/personas/service_manager.md)
+    - [site_admin.md](design-docs/personas/site_admin.md)
+- `test-plan/`
+  - [angular-components.md](test-plan/angular-components.md)
+  - [api-services.md](test-plan/api-services.md)
+  - [lambda-functions.md](test-plan/lambda-functions.md)
+  - [tdd-strategy.md](test-plan/tdd-strategy.md)
+- `.github/`
+  - `ISSUE_TEMPLATE/`
+    - [user_story.md](.github/ISSUE_TEMPLATE/user_story.md)
 
 ---
 
-## Current Kanban Board
+## 📋 Current Kanban Board
 
-[sprint-6](sprint_6_kanban_board_export.md)
+- [Sprint 6 Kanban](sprint_6_kanban_board_export.md)
 
 ## 🧩 Your DevOps Flow
 
@@ -61,11 +57,6 @@ your-project/
   ## To Do
   - [ ] US019: Create login and dashboard for Admin
   - [ ] US027: Highlight delayed workflows
-  ```
-
-> 💡 *Limit yourself to 1–2 features or flows at a time to stay focused.*
-
----
 
 ### 2. 🛠 Start the Work
 
