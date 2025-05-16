@@ -14,7 +14,6 @@ This guide helps you manage your yacht maintenance workflow app efficiently usin
 ## 📁 Full Repository Structure (Clickable)
 
 - [README.md](README.md)
-- [COMPASS_DEVOPS_GUIDE.md](COMPASS_DEVOPS_GUIDE.md)
 - `sprints/`
   - [sprint-6.md](sprint_6_user_stories_with_criteria.md)
   - [sprint-7.md](sprint_7_user_stories_with_criteria.md)
